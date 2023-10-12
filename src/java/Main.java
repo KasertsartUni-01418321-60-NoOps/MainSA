@@ -44,7 +44,7 @@ public class Main {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)  {
                 try {
-                java.awt.Desktop.getDesktop().browse( new java.net.URI("https://www.youtube.com/watch?v=dQw4w9WgXcQ") );
+                java.awt.Desktop.getDesktop().browse( new java.net.URI("https://www.youtube.com/watch?v=oHg5SJYRHA0") );
                 } catch (Throwable e1) {}
             }
         });
