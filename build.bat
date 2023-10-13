@@ -16,6 +16,6 @@ mkdir build\final\lib
 copy .\src\lib\sqlite-jdbc-3.43.0.0.jar .\build\final\lib\sqlite-jdbc-3.43.0.0.jar
 copy .\src\lib\FXRouter.jar .\build\final\lib\FXRouter.jar
 :: [END]
-:: check if we have to include another folder/file...
+:: check if we have to include another folder/file... also put your lib into manifest.mf too!
 @echo [SCRIPT] (Process ended)
 @pause
