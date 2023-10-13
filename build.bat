@@ -5,12 +5,17 @@ set "PATH=%JAVA_HOME%\bin;%PATH%"
 rmdir /S /Q build
 mkdir build
 mkdir build\java
-javac.exe -cp '.\src\lib\sqlite-jdbc-3.43.0.0.jar' .\src\java\Main.java
+:: put your lib/code here!!
+javac.exe -cp '.;.\src\lib\FXRouter.jar;.\src\lib\sqlite-jdbc-3.43.0.0.jar' .\src\java\Main.java
 move .\src\java\*.class .\build\java\
 mkdir build\final
 mkdir build\final\data
-jar.exe cvfm .\build\final\App.jar .\src\MANIFEST.MF -C .\build\java\ Main.class -C .\build\java\ Main$1.class
+jar.exe cvfm .\build\final\App.jar .\src\MANIFEST.MF -C .\build\java\ . -C .\src\ res
 mkdir build\final\lib
+:: [put your lib here!!]
 copy .\src\lib\sqlite-jdbc-3.43.0.0.jar .\build\final\lib\sqlite-jdbc-3.43.0.0.jar
+copy .\src\lib\FXRouter.jar .\build\final\lib\FXRouter.jar
+:: [END]
+:: check if we have to include another folder/file...
 @echo [SCRIPT] (Process ended)
 @pause
