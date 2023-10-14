@@ -1,0 +1,40 @@
+/* Define the background color for the entire scene */
+.root {
+	-fx-background-color: #f0f0f0;
+	/* Light gray */
+}
+
+/* Style the title label */
+.title-label {
+	-fx-font-size: 24px;
+	-fx-text-fill: #333;
+	/* Dark gray text color */
+}
+
+/* Style the exit button */
+.exit-button {
+	-fx-background-color: #E57373;
+	/* Red */
+	-fx-text-fill: white;
+}
+
+/* Style the sidebar buttons */
+.sidebar-button {
+	-fx-background-color: #64B5F6;
+	/* Blue */
+	-fx-text-fill: white;
+}
+
+/* Style the content label */
+.content-label {
+	-fx-font-size: 18px;
+	-fx-text-fill: #444;
+	/* Dark gray text color */
+}
+
+/* Style the main button */
+.main-button {
+	-fx-background-color: #4CAF50;
+	/* Green */
+	-fx-text-fill: white;
+}

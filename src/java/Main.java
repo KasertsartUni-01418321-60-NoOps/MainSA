@@ -43,6 +43,9 @@ public class Main extends javafx.application.Application {
         try {
             // TODO: Exception System
             try {
+                MainAlt1.primaryStage = primaryStage;
+                primaryStage.setResizable(false);
+                primaryStage.setMaximized(false);
                 com.github.saacsos.FXRouter.bind(this, primaryStage, "<AppName>", 800, 600);
                 com.github.saacsos.FXRouter.when("main", "res/Main.fxml");
                 com.github.saacsos.FXRouter.when("test", "res/Test.fxml");
@@ -100,20 +103,24 @@ public class Main extends javafx.application.Application {
     }
 
     @javafx.fxml.FXML
-    private void tempRickroll() throws Throwable {
-        // Add code here to open a web browser or a media player to play the Rickroll
-        // video
-        // You can use Java's Desktop class or external library to open a URL.
-        // For simplicity, you can use the default web browser to open the Rickroll URL.
-        try {
-            java.awt.Desktop.getDesktop().browse(new java.net.URI("https://www.youtube.com/watch?v=oHg5SJYRHA0"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public static void tempSwitchToTestPage() throws Throwable {
+        com.github.saacsos.FXRouter.goTo("test");
+        tempChangeCSS("Test");
     }
 
     @javafx.fxml.FXML
-    private void tempSwitchToTestPage() throws Throwable {
-        com.github.saacsos.FXRouter.goTo("test");
+    public static void tempChangeCSS(String cssName) throws Throwable {
+        javafx.scene.Scene temp = MainAlt1.primaryStage.getScene();
+        temp.getStylesheets().clear();
+        temp.getStylesheets().add(Main.class.getResource("res/" + cssName + ".css").toExternalForm());
+        temp.getRoot().applyCss();
     }
+
+    public static javafx.stage.Stage tempGetPrimaryStage() throws Throwable {
+        return MainAlt1.primaryStage;
+    }
+}
+
+class MainAlt1 {
+    public static javafx.stage.Stage primaryStage = null;
 }
