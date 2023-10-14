@@ -1,7 +1,15 @@
 public class UICtrl_Test {
+	private boolean isDarkMode = false;
+
 	@javafx.fxml.FXML
 	private void onMainButtonPressed() throws Throwable {
-		Main.tempChangeCSS("Test_1");
+		if (isDarkMode) {
+			Main.tempChangeCSS("Test");
+			isDarkMode = false;
+		} else {
+			Main.tempChangeCSS("Test_1");
+			isDarkMode = true;
+		}
 	}
 
 	@javafx.fxml.FXML
