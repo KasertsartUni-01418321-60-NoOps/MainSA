@@ -1,8 +1,3 @@
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class MyExceptionHandling {
 	public static final String appFatalHeader = "Application has fatal exception below:";
 	public static boolean isFatal = false;
@@ -32,9 +27,9 @@ public class MyExceptionHandling {
 	}
 
 	private static String getStackTraceAsString(Throwable e) {
-		StringWriter sw = new StringWriter();
-		e.printStackTrace(new PrintWriter(sw));
-		return sw.toString();
+		java.io.StringWriter sw = new java.io.StringWriter();
+		e.printStackTrace(new java.io.PrintWriter(sw));
+		return sw.toString().replace("\t", "    ");
 	}
 
 	private static void reportFatalExceptionInGUI(Throwable e) {
@@ -55,6 +50,6 @@ public class MyExceptionHandling {
 	}
 
 	private static String getISODateTimeString() {
-		return LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+		return java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 	}
 }
