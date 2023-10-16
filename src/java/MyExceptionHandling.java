@@ -37,7 +37,6 @@ public class MyExceptionHandling {
 		try {
 			// Create a frame for the GUI
 			javax.swing.JFrame frame = new javax.swing.JFrame("Application Fatal (at " + getISODateTimeString() + ")");
-			frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
 			frame.setSize(800, 600);
 			// Create a panel for the components
 			javax.swing.JPanel panel = new javax.swing.JPanel();
@@ -68,7 +67,7 @@ public class MyExceptionHandling {
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException ex) {
-					// Handle interruption if needed
+					throw ex;
 				}
 			}
 		} catch (Throwable e1) {
