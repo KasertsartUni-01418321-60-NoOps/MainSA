@@ -1,3 +1,4 @@
+
 public class MyExceptionHandling {
 	public static final String appFatalHeader = "Application has fatal exception below:";
 	public static boolean isFatal = false;
@@ -34,11 +35,43 @@ public class MyExceptionHandling {
 
 	private static void reportFatalExceptionInGUI(Throwable e) {
 		try {
-			javax.swing.JOptionPane.showMessageDialog(null,
-					appFatalHeader + "\n\n" + getStackTraceAsString(e),
-					"Application Fatal (at " + getISODateTimeString() + ")",
-					javax.swing.JOptionPane.ERROR_MESSAGE);
-		} catch (Exception e1) {
+			// Create a frame for the GUI
+			javax.swing.JFrame frame = new javax.swing.JFrame("Application Fatal (at " + getISODateTimeString() + ")");
+			frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+			frame.setSize(800, 600);
+			// Create a panel for the components
+			javax.swing.JPanel panel = new javax.swing.JPanel();
+			panel.setLayout(new java.awt.BorderLayout());
+			// Create a custom panel for icon and message
+			javax.swing.JPanel messagePanel = new javax.swing.JPanel();
+			messagePanel.setLayout(new java.awt.BorderLayout());
+			// Load an error logo (replace "path/to/error-logo.png" with the actual path)
+			javax.swing.Icon errorIcon = javax.swing.UIManager.getIcon("OptionPane.errorIcon");
+			javax.swing.JLabel errorIconLabel = new javax.swing.JLabel(errorIcon);
+			messagePanel.add(errorIconLabel, java.awt.BorderLayout.WEST);
+			// Create a label for the introduction text
+			javax.swing.JLabel introLabel = new javax.swing.JLabel(appFatalHeader);
+			messagePanel.add(introLabel, java.awt.BorderLayout.CENTER);
+			// Add the custom message panel to the main panel
+			panel.add(messagePanel, java.awt.BorderLayout.NORTH);
+			// Create a non-editable text area for the stack trace
+			javax.swing.JTextArea stackTraceTextArea = new javax.swing.JTextArea();
+			stackTraceTextArea.setText(getStackTraceAsString(e));
+			stackTraceTextArea.setEditable(false);
+			panel.add(new javax.swing.JScrollPane(stackTraceTextArea), java.awt.BorderLayout.CENTER);
+			// Add the panel to the frame and make it visible
+			frame.add(panel);
+			frame.setVisible(true);
+			// Wait for the frame to be closed
+			while (frame.isVisible()) {
+				// Sleep for a short duration
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException ex) {
+					// Handle interruption if needed
+				}
+			}
+		} catch (Throwable e1) {
 			System.out.println("[" + getISODateTimeString() + "|App|Err] GUI exception reporting has exception below:");
 			e1.printStackTrace();
 		}
