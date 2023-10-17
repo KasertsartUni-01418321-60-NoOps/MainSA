@@ -6,8 +6,8 @@ public class MyExceptionHandling {
 	public static void handleFatalException(Throwable e) throws Throwable {
 		try {
 			MyExceptionHandling.isFatal = true;
-			MyExceptionHandling.reportFatalExceptionInGUI(e);
 			MyExceptionHandling.reportFatalExceptionInCUI(e);
+			MyExceptionHandling.reportFatalExceptionInGUI(e);
 		} catch (Throwable e1) {
 			throw e1;
 		} finally {
