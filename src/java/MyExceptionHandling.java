@@ -63,12 +63,7 @@ public class MyExceptionHandling {
 			frame.setVisible(true);
 			// Wait for the frame to be closed
 			while (frame.isVisible()) {
-				// Sleep for a short duration
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException ex) {
-					throw ex;
-				}
+				Thread.sleep(100);
 			}
 		} catch (Throwable e1) {
 			System.out.println("[" + getISODateTimeString() + "|App|Err] GUI exception reporting has exception below:");

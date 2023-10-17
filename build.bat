@@ -6,7 +6,7 @@ rmdir /S /Q build
 mkdir build
 mkdir build\java
 :: put your lib/code here!!
-javac.exe -cp '.;.\src\lib\FXRouter.jar;.\src\lib\sqlite-jdbc-3.43.0.0.jar' .\src\java\*.java
+javac.exe -cp '.;.\src\java\;.\src\lib\FXRouter.jar;.\src\lib\sqlite-jdbc-3.43.0.0.jar' .\src\java\*.java
 move .\src\java\*.class .\build\java\
 mkdir build\final
 mkdir build\final\data

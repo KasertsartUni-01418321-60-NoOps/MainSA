@@ -1,5 +1,7 @@
+
+// TODO: on non-temp check if we need to change from throw e? 
+// TODO: Exception handling on tempDatabase
 public class Main extends javafx.application.Application {
-    private static boolean isFatal = false;
 
     public static void main(String[] args) throws Throwable {
         try {
@@ -20,7 +22,12 @@ public class Main extends javafx.application.Application {
             com.github.saacsos.FXRouter.bind(this, primaryStage, "<AppName>", 800, 600);
             com.github.saacsos.FXRouter.when("main", "res/Main.fxml");
             com.github.saacsos.FXRouter.when("test", "res/Test.fxml");
-            com.github.saacsos.FXRouter.goTo("main");
+            try {
+                com.github.saacsos.FXRouter.goTo("main");
+            } catch (java.io.IOException e) {
+                throw e;
+            }
+            java.awt.Toolkit.getDefaultToolkit().beep(); // เสียงเพื่อสิริมงคล55
         } catch (Throwable e) {
             try {
                 MyExceptionHandling.handleFatalException(e);
@@ -31,73 +38,73 @@ public class Main extends javafx.application.Application {
 
     private static void tempDatabase() throws Throwable {
         try {
-            // Connect to the SQLite database or create it if it doesn't exist
-            Class.forName("org.sqlite.JDBC");
-            java.sql.Connection mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:./data/main.db");
-            // Create a table and insert sample data
-            java.sql.Statement mainDbConnStm1 = mainDbConn.createStatement();
-            int colCount = 0;
-            String[] sqlStms = null;
-            sqlStms = new String[] {
+            String[] sqlStms = new String[] {
                     "CREATE TABLE IF NOT EXISTS CUSTOMER (Customer_Full_Name TEXT PRIMARY KEY, Customer_Shipping_Address TEXT, Customer_Telephone_Number TEXT, Customer_Credit_Amount INTEGER);",
                     "CREATE TABLE IF NOT EXISTS SELLING_REQUEST (Selling_Request_ID INTEGER PRIMARY KEY, Customer_Full_Name TEXT, Selling_Request_Product_Looks TEXT, Selling_Request_Meet_Date INTEGER, Selling_Request_Paid_Amount REAL, Selling_Request_Meet_Location TEXT, Selling_Request_Status TEXT, Selling_Request_Model TEXT, Selling_Request_Brand TEXT, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name));",
                     "CREATE TABLE IF NOT EXISTS PRODUCT (Product_ID INTEGER PRIMARY KEY, Selling_Request_ID INTEGER, Repairment_ID INTEGER, Product_Price REAL, Product_Arrive_Date INTEGER, Product_Status TEXT, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID), FOREIGN KEY (Repairment_ID) REFERENCES REPAIRMENT(Repairment_ID));",
                     "CREATE TABLE IF NOT EXISTS USER (Username TEXT PRIMARY KEY, Password TEXT, Role INTEGER);",
                     "CREATE TABLE IF NOT EXISTS REPAIRMENT (Repairment_ID INTEGER PRIMARY KEY, Selling_Request_ID INTEGER, Repairment_Description TEXT, Repairment_Date INTEGER, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID));",
-                    "CREATE TABLE IF NOT EXISTS BUY_REQUEST (Customer_Full_Name TEXT, Product_ID INTEGER, Buy_Request_Transportation_Start_Date INTEGER, Buy_Request_Transportation_Finished_Date INTEGER, Buy_Request_Transportation_Price REAL, Buy_Request_Product_Look_After_Cleaning TEXT, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID));"
-            };
-            for (String sqlStm : sqlStms) {
-                mainDbConnStm1.execute(sqlStm);
-            }
-            sqlStms = new String[] {
+                    "CREATE TABLE IF NOT EXISTS BUY_REQUEST (Customer_Full_Name TEXT, Product_ID INTEGER, Buy_Request_Transportation_Start_Date INTEGER, Buy_Request_Transportation_Finished_Date INTEGER, Buy_Request_Transportation_Price REAL, Buy_Request_Product_Look_After_Cleaning TEXT, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID));",
                     "INSERT INTO CUSTOMER SELECT 'John Doe', '123 Main St', '555-123-4567', 1000 " +
                             "WHERE NOT EXISTS (SELECT 1 FROM CUSTOMER WHERE Customer_Full_Name = 'John Doe');",
-
                     "INSERT INTO SELLING_REQUEST SELECT 1, 'John Doe', 'Sample Product Looks', 1634196000, 500.00, 'Sample Location', 'Pending', 'Sample Model', 'Sample Brand' "
                             +
                             "WHERE NOT EXISTS (SELECT 1 FROM SELLING_REQUEST WHERE Selling_Request_ID = 1);",
-
                     "INSERT INTO PRODUCT SELECT 1, 1, NULL, 250.00, 1634196000, 'Available' " +
                             "WHERE NOT EXISTS (SELECT 1 FROM PRODUCT WHERE Product_ID = 1);",
-
                     "INSERT INTO USER SELECT 'user1', 'password1', 1 " +
                             "WHERE NOT EXISTS (SELECT 1 FROM USER WHERE Username = 'user1');",
-
                     "INSERT INTO REPAIRMENT SELECT 1, 1, 'Sample Repairment Description', 1634196000 " +
                             "WHERE NOT EXISTS (SELECT 1 FROM REPAIRMENT WHERE Repairment_ID = 1);",
-
                     "INSERT INTO BUY_REQUEST SELECT 'John Doe', 1, 1634196000, 1634200000, 50.00, 'Product looks good after cleaning' "
                             +
                             "WHERE NOT EXISTS (SELECT 1 FROM BUY_REQUEST WHERE Customer_Full_Name = 'John Doe' AND Product_ID = 1);"
             };
+            java.sql.Connection mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:./data/main.db");
+            // SQL ERR
+            java.sql.Statement mainDbConnStm1 = mainDbConn.createStatement();
             for (String sqlStm : sqlStms) {
+                // SQL ERR
                 mainDbConnStm1.execute(sqlStm);
             }
-            // Query the data and display it
-            if (true) {
-                java.sql.ResultSet tablesRS = mainDbConn.getMetaData().getTables(null, null, null,
-                        new String[] { "TABLE" });
-                while (tablesRS.next()) {
-                    String tableName = tablesRS.getString("TABLE_NAME");
-                    System.out.println("[TABLE: " + tableName + "]");
-                    java.sql.ResultSet tableRS = mainDbConnStm1.executeQuery("SELECT * FROM " + tableName);
-                    java.sql.ResultSetMetaData metaDataTableRS = tableRS.getMetaData();
-                    while (tableRS.next()) {
-                        System.out.println("> [ROW OF TABLE]");
-                        colCount = metaDataTableRS.getColumnCount();
-                        for (int i = 1; i <= colCount; i++) {
-                            String columnName = metaDataTableRS.getColumnName(i);
-                            String columnValue = tableRS.getString(i);
-                            System.out.println(columnName + ": " + columnValue);
-                        }
-                        System.out.println(); // Separate rows
+            // SQL ERR
+            java.sql.ResultSet tablesRS = mainDbConn.getMetaData()
+                    .getTables(null, null, null, new String[] { "TABLE" });
+            int colCount = 0;
+            // SQL ERR
+            while (tablesRS.next()) {
+                // SQL ERR
+                String tableName = tablesRS.getString("TABLE_NAME");
+                System.out.println("[TABLE: " + tableName + "]");
+                // SQL ERR
+                java.sql.ResultSet tableRS = mainDbConnStm1.executeQuery("SELECT * FROM " + tableName);
+                // SQL ERR
+                java.sql.ResultSetMetaData metaDataTableRS = tableRS.getMetaData();
+                // SQL ERR
+                while (tableRS.next()) {
+                    System.out.println("> [ROW OF TABLE]");
+                    // SQL ERR
+                    colCount = metaDataTableRS.getColumnCount();
+                    for (int i = 1; i <= colCount; i++) {
+                        String columnName;
+                        // SQL ERR
+                        columnName = metaDataTableRS.getColumnName(i);
+                        String columnValue;
+                        // SQL ERR
+                        columnValue = tableRS.getString(i);
+                        System.out.println(columnName + ": " + columnValue);
                     }
-                    tableRS.close();
+                    System.out.println(); // Separate rows
                 }
-                tablesRS.close();
+                // SQL ERR
+                tableRS.close();
             }
+            // SQL ERR
+            tablesRS.close();
             // Close the resources
+            // SQL ERR
             mainDbConnStm1.close();
+            // SQL ERR
             mainDbConn.close();
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
@@ -107,7 +114,11 @@ public class Main extends javafx.application.Application {
     @javafx.fxml.FXML
     public static void tempSwitchToTestPage() throws Throwable {
         try {
-            com.github.saacsos.FXRouter.goTo("test");
+            try {
+                com.github.saacsos.FXRouter.goTo("test");
+            } catch (java.io.IOException e) {
+                throw e;
+            }
             tempChangeCSS("Test");
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);

@@ -1,3 +1,4 @@
+
 public class UICtrl_Test {
 	private boolean isDarkMode = false;
 
@@ -11,6 +12,7 @@ public class UICtrl_Test {
 				Main.tempChangeCSS("Test_1");
 				isDarkMode = true;
 			}
+			java.awt.Toolkit.getDefaultToolkit().beep(); // เสียงเพื่อสิริมงคล55
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
 		}
@@ -18,15 +20,17 @@ public class UICtrl_Test {
 
 	@javafx.fxml.FXML
 	private void onExitButtonPressed() throws Throwable {
-		try {// Add code here to open a web browser or a media player to play the Rickroll
+		try {// Add code here to open a web browser or a media player to play the
+				// Rickroll
 				// video
 				// You can use Java's Desktop class or external library to open a URL.
 				// For simplicity, you can use the default web browser to open the Rickroll URL.
 			try {
 				java.awt.Desktop.getDesktop().browse(new java.net.URI("https://www.youtube.com/watch?v=oHg5SJYRHA0"));
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (java.io.IOException | java.net.URISyntaxException e) {
+				throw e;
 			}
+			java.awt.Toolkit.getDefaultToolkit().beep(); // เสียงเพื่อสิริมงคล55
 			// just test the fatal exception
 			throw new Exception("RICKROLL");
 		} catch (Throwable e) {
