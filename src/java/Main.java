@@ -1,6 +1,5 @@
+import java.sql.SQLException;
 
-// TODO: on non-temp check if we need to change from throw e? 
-// TODO: Exception handling on tempDatabase
 public class Main extends javafx.application.Application {
 
     public static void main(String[] args) throws Throwable {
@@ -60,52 +59,77 @@ public class Main extends javafx.application.Application {
                             +
                             "WHERE NOT EXISTS (SELECT 1 FROM BUY_REQUEST WHERE Customer_Full_Name = 'John Doe' AND Product_ID = 1);"
             };
-            java.sql.Connection mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:./data/main.db");
-            // SQL ERR
-            java.sql.Statement mainDbConnStm1 = mainDbConn.createStatement();
-            for (String sqlStm : sqlStms) {
+            java.sql.Connection mainDbConn = null;
+            java.sql.Statement mainDbConnStm1 = null;
+            java.sql.ResultSet tablesRS = null, tableRS = null;
+            try {
+                mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:./data/main.db");
                 // SQL ERR
-                mainDbConnStm1.execute(sqlStm);
-            }
-            // SQL ERR
-            java.sql.ResultSet tablesRS = mainDbConn.getMetaData()
-                    .getTables(null, null, null, new String[] { "TABLE" });
-            int colCount = 0;
-            // SQL ERR
-            while (tablesRS.next()) {
-                // SQL ERR
-                String tableName = tablesRS.getString("TABLE_NAME");
-                System.out.println("[TABLE: " + tableName + "]");
-                // SQL ERR
-                java.sql.ResultSet tableRS = mainDbConnStm1.executeQuery("SELECT * FROM " + tableName);
-                // SQL ERR
-                java.sql.ResultSetMetaData metaDataTableRS = tableRS.getMetaData();
-                // SQL ERR
-                while (tableRS.next()) {
-                    System.out.println("> [ROW OF TABLE]");
+                mainDbConnStm1 = mainDbConn.createStatement();
+                for (String sqlStm : sqlStms) {
                     // SQL ERR
-                    colCount = metaDataTableRS.getColumnCount();
-                    for (int i = 1; i <= colCount; i++) {
-                        String columnName;
-                        // SQL ERR
-                        columnName = metaDataTableRS.getColumnName(i);
-                        String columnValue;
-                        // SQL ERR
-                        columnValue = tableRS.getString(i);
-                        System.out.println(columnName + ": " + columnValue);
-                    }
-                    System.out.println(); // Separate rows
+                    mainDbConnStm1.execute(sqlStm);
                 }
                 // SQL ERR
-                tableRS.close();
+                tablesRS = mainDbConn.getMetaData()
+                        .getTables(null, null, null, new String[] { "TABLE" });
+                int colCount = 0;
+                // SQL ERR
+                while (tablesRS.next()) {
+                    // SQL ERR
+                    String tableName = tablesRS.getString("TABLE_NAME");
+                    System.out.println("[TABLE: " + tableName + "]");
+                    // SQL ERR
+                    tableRS = mainDbConnStm1.executeQuery("SELECT * FROM " + tableName);
+                    // SQL ERR
+                    java.sql.ResultSetMetaData metaDataTableRS = tableRS.getMetaData();
+                    // SQL ERR
+                    while (tableRS.next()) {
+                        System.out.println("> [ROW OF TABLE]");
+                        // SQL ERR
+                        colCount = metaDataTableRS.getColumnCount();
+                        for (int i = 1; i <= colCount; i++) {
+                            String columnName;
+                            // SQL ERR
+                            columnName = metaDataTableRS.getColumnName(i);
+                            String columnValue;
+                            // SQL ERR
+                            columnValue = tableRS.getString(i);
+                            System.out.println(columnName + ": " + columnValue);
+                        }
+                        System.out.println(); // Separate rows
+                    }
+                    // SQL ERR
+                    tableRS.close();
+                }
+                // SQL ERR
+                tablesRS.close();
+                // Close the resources
+                // SQL ERR
+                mainDbConnStm1.close();
+                // SQL ERR
+                mainDbConn.close();
+            } catch (SQLException e) {
+                throw e;
+            } finally {
+                try {
+                    tableRS.close();
+                } catch (NullPointerException e) {
+                }
+                try {
+                    tablesRS.close();
+                } catch (NullPointerException e) {
+                }
+                try {
+                    mainDbConnStm1.close();
+                } catch (NullPointerException e) {
+                }
+                try {
+                    mainDbConn.close();
+                } catch (NullPointerException e) {
+                }
+
             }
-            // SQL ERR
-            tablesRS.close();
-            // Close the resources
-            // SQL ERR
-            mainDbConnStm1.close();
-            // SQL ERR
-            mainDbConn.close();
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
         }
