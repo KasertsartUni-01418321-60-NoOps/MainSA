@@ -17,7 +17,19 @@ public class MyExceptionHandling {
 				throw e0;
 			} finally {
 				try {
-					System.exit(255);
+					try {
+						javafx.application.Platform.exit();
+					} catch (Throwable e2) {
+						System.exit(255);
+					} finally {
+						// in case it don't shutdown lamo
+						try {
+							Thread.sleep(1000 * 30);
+						} catch (InterruptedException e3) {
+							// then force shutdown,so do nothing here
+						}
+						System.exit(255);
+					}
 				} catch (Throwable e1) {
 					throw e1;
 				} finally {
@@ -63,7 +75,12 @@ public class MyExceptionHandling {
 			frame.setVisible(true);
 			// Wait for the frame to be closed
 			while (frame.isVisible()) {
-				Thread.sleep(100);
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e2) {
+					// then maybe we can break from this
+					break;
+				}
 			}
 		} catch (Throwable e1) {
 			System.out.println("[" + getISODateTimeString() + "|App|Err] GUI exception reporting has exception below:");

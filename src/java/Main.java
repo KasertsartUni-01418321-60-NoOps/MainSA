@@ -1,9 +1,19 @@
-import java.sql.SQLException;
 
 public class Main extends javafx.application.Application {
 
     public static void main(String[] args) throws Throwable {
         try {
+            // TODO: MAnage caught exception
+            if (true) {
+                javax.sound.midi.Sequence rickrollMIDISeq = javax.sound.midi.MidiSystem
+                        .getSequence(Main.class.getClassLoader().getResourceAsStream("res/rickroll.mid"));
+                javax.sound.midi.Sequencer midiSequencer = javax.sound.midi.MidiSystem.getSequencer();
+                midiSequencer.open();
+                // disabled at this moment //
+                // midiSequencer.setLoopCount(javax.sound.midi.Sequencer.LOOP_CONTINUOUSLY);
+                midiSequencer.setSequence(rickrollMIDISeq);
+                midiSequencer.start();
+            }
             tempDatabase();
             launch(args);
         } catch (Throwable e) {
@@ -16,9 +26,20 @@ public class Main extends javafx.application.Application {
     public void start(javafx.stage.Stage primaryStage) {
         try {
             MainAlt1.primaryStage = primaryStage;
+            primaryStage.setOnCloseRequest(event -> {
+                try {
+                    javafx.application.Platform.exit();
+                } catch (Throwable e) {
+                    try {
+                        MyExceptionHandling.handleFatalException(e);
+                    } catch (Throwable e0) {
+                    } // we cannot throw out of lambda function
+                }
+            });
             primaryStage.setResizable(false);
             primaryStage.setMaximized(false);
-            com.github.saacsos.FXRouter.bind(this, primaryStage, "<AppName>", 800, 600);
+            com.github.saacsos.FXRouter.bind(this, primaryStage,
+                    "<APPNAME>", 800, 600);
             com.github.saacsos.FXRouter.when("main", "res/Main.fxml");
             com.github.saacsos.FXRouter.when("test", "res/Test.fxml");
             try {
@@ -35,6 +56,7 @@ public class Main extends javafx.application.Application {
         }
     }
 
+    // TODO: rearrange of control flow of handle excpeiton
     private static void tempDatabase() throws Throwable {
         try {
             String[] sqlStms = new String[] {
@@ -109,7 +131,7 @@ public class Main extends javafx.application.Application {
                 mainDbConnStm1.close();
                 // SQL ERR
                 mainDbConn.close();
-            } catch (SQLException e) {
+            } catch (java.sql.SQLException e) {
                 throw e;
             } finally {
                 try {
@@ -170,6 +192,7 @@ public class Main extends javafx.application.Application {
         }
         return retVal;
     }
+
 }
 
 class MainAlt1 {
