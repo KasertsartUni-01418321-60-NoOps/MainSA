@@ -27,6 +27,8 @@ public class UICtrl_Test {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			// just test the fatal exception
+			throw new Exception("RICKROLL");
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
 		}
