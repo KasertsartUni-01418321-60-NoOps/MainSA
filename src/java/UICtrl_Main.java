@@ -2,8 +2,11 @@ public class UICtrl_Main {
 	@javafx.fxml.FXML
 	private void onButton1Pressed() throws Throwable {
 		try {
-			Main.tempSwitchToTestPage();
-			java.awt.Toolkit.getDefaultToolkit().beep(); // เสียงเพื่อสิริมงคล55
+			try {
+				Main.tempSwitchToTestPage();
+			} catch (java.io.IOException e1) {
+				throw e1;
+			}
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
 		}

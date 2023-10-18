@@ -12,7 +12,6 @@ public class UICtrl_Test {
 				Main.tempChangeCSS("Test_1");
 				isDarkMode = true;
 			}
-			java.awt.Toolkit.getDefaultToolkit().beep(); // เสียงเพื่อสิริมงคล55
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
 		}
@@ -33,7 +32,6 @@ public class UICtrl_Test {
 			// } catch (java.io.IOException | java.net.URISyntaxException e) {
 			// throw e;
 			// }
-			java.awt.Toolkit.getDefaultToolkit().beep(); // เสียงเพื่อสิริมงคล55
 			// just test the fatal exception
 			throw new Exception("RICKROLL");
 		} catch (Throwable e) {
