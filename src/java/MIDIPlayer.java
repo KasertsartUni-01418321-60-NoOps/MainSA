@@ -79,9 +79,14 @@ public class MIDIPlayer {
 				"karaokeMIDI/B0012588.mid", "karaokeMIDI/83510.mid", "karaokeMIDI/54585.mid", "karaokeMIDI/A012071.mid",
 				"karaokeMIDI/B003711.mid", "karaokeMIDI/33163.mid", "karaokeMIDI/44239.mid", "karaokeMIDI/00583.mid",
 				"karaokeMIDI/B001930.mid", "karaokeMIDI/73637.mid" };
+		for (boolean tmp2 : new boolean[] { false, true }) {
+			MIDIPlayer.playlist.add("rickroll.mid");
+			MIDIPlayer.playlist.add("mhwgo.mid");
+			MIDIPlayer.playlist.add("thainame_restorehappinessforthailand.mid");
+			MIDIPlayer.playlist.add("thainame_love.mid");
+		}
 		MIDIPlayer.playlist.addAll(java.util.Arrays.asList(tmp1));
-		MIDIPlayer.playlist.add("mhwgo.mid");
-		MIDIPlayer.playlist.add("rickroll.mid");
+
 		java.util.Collections.shuffle(MIDIPlayer.playlist);
 
 	}
