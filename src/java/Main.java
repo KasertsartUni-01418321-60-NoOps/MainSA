@@ -58,12 +58,12 @@ public class Main extends javafx.application.Application {
             MIDIPlayer.stop();
             javafx.application.Platform.exit();
             // in case it don't shutdown lamo
-            try {
-                Thread.sleep(1000 * 30);
-            } catch (InterruptedException e3) {
-                // then force shutdown,so do nothing here
-            }
-            System.exit(0);
+            // try {
+            // Thread.sleep(1000 * 30);
+            // } catch (InterruptedException e3) {
+            // // then force shutdown,so do nothing here
+            // }
+            // System.exit(0);
         } catch (Throwable e) {
             try {
                 MyExceptionHandling.handleFatalException(e);

@@ -56,6 +56,7 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
+	// TODO: check .close()
 	public static void tempSeeDatabaseLamo() throws java.sql.SQLException {
 		java.sql.ResultSet tablesRS = null, tableRS = null;
 		try {

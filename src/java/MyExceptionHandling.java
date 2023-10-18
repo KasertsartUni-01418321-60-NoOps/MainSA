@@ -59,8 +59,15 @@ public class MyExceptionHandling {
 	// entire exception handling info: mode=no
 	private static String getStackTraceAsString(Throwable e) {
 		java.io.StringWriter sw = new java.io.StringWriter();
-		e.printStackTrace(new java.io.PrintWriter(sw));
-		return sw.toString().replace("\t", "    ");
+		java.io.PrintWriter pw = new java.io.PrintWriter(sw);
+		e.printStackTrace(pw);
+		String ret = sw.toString().replace("\t", "    ");
+		pw.close();
+		try {
+			sw.close();
+		} catch (java.io.IOException e1) {
+		}
+		return ret;
 	}
 
 	// entire exception handling info: mode=no

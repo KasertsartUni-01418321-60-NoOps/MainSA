@@ -3,6 +3,7 @@ public class MIDIPlayer {
 	private static java.util.List<String> playlist = new java.util.ArrayList<>();
 	private static short currentIndex = 0;
 	private static javax.sound.midi.Sequencer sequencer = null;
+	private static java.io.InputStream midiDataStream = null;
 	public static boolean isStop = false;
 
 	// entire exception handling info: mode=no
@@ -16,7 +17,10 @@ public class MIDIPlayer {
 			MIDIPlayer.sequencer = javax.sound.midi.MidiSystem.getSequencer();
 			MIDIPlayer.sequencer.open();
 		} catch (javax.sound.midi.MidiUnavailableException e) {
-			// else of reporting, just donothing lamo
+			try {
+				MIDIPlayer.sequencer.close();
+			} catch (NullPointerException e1) {
+			}
 		}
 		String[] tmp1 = new String[] { "karaokeMIDI/A021385.mid", "karaokeMIDI/B00255.mid", "karaokeMIDI/52929.mid",
 				"karaokeMIDI/A012890.mid", "karaokeMIDI/54794.mid", "karaokeMIDI/91341.mid", "karaokeMIDI/B005986.mid",
@@ -114,16 +118,22 @@ public class MIDIPlayer {
 				java.util.Collections.shuffle(MIDIPlayer.playlist);
 			}
 			String currentSongName = MIDIPlayer.playlist.get(MIDIPlayer.currentIndex);
+			MIDIPlayer.midiDataStream = MIDIPlayer.class.getClassLoader()
+					.getResourceAsStream("res/" + currentSongName);
 			try {
 				MIDIPlayer.sequencer.setSequence(
-						javax.sound.midi.MidiSystem.getSequence(
-								MIDIPlayer.class.getClassLoader().getResourceAsStream("res/" + currentSongName)));
+						javax.sound.midi.MidiSystem.getSequence(MIDIPlayer.midiDataStream));
 			} catch (java.io.EOFException e) {
 				currentIndex++;
 				continue;
 			} catch (javax.sound.midi.InvalidMidiDataException | java.io.IOException e) {
-				// // else of reporting, just return lamo
+				MIDIPlayer.sequencer.close();
 				return;
+			} finally {
+				try {
+					MIDIPlayer.midiDataStream.close();
+				} catch (java.io.IOException e1) {
+				}
 			}
 			break;
 		}
@@ -136,6 +146,7 @@ public class MIDIPlayer {
 
 		MIDIPlayer.isStop = true;
 		MIDIPlayer.sequencer.stop();
+		MIDIPlayer.sequencer.close();
 
 	}
 }
