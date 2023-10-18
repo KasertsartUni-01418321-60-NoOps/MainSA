@@ -57,7 +57,7 @@ public class Main extends javafx.application.Application {
             MainAlt1.primaryStage.hide();
             MIDIPlayer.stop();
             javafx.application.Platform.exit();
-            // in case it don't shutdown lamo
+            // (DISABLED) in case it don't shutdown lamo
             // try {
             // Thread.sleep(1000 * 30);
             // } catch (InterruptedException e3) {

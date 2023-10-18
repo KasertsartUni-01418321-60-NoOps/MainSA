@@ -39,12 +39,12 @@ public class MyExceptionHandling {
 						}
 						System.exit(255);
 					}
-					// in case it don't shutdown lamo +timeout lamo
-					try {
-						Thread.sleep(1000 * 30);
-					} catch (InterruptedException e2) {
-						// then force shutdown,so do nothing here
-					}
+					// (DISABLED) in case it don't shutdown lamo +timeout lamo
+					// try {
+					// Thread.sleep(1000 * 30);
+					// } catch (InterruptedException e2) {
+					// // then force shutdown,so do nothing here
+					// }
 					System.exit(255);
 				} catch (Throwable e1) {
 					throw e1;
