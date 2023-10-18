@@ -1,5 +1,8 @@
 
 public class Main extends javafx.application.Application {
+    public static void funcTestOFCaughtException(javafx.stage.Stage primary) {
+
+    }
 
     public static void main(String[] args) throws Throwable {
         try {
@@ -28,7 +31,16 @@ public class Main extends javafx.application.Application {
             MainAlt1.primaryStage = primaryStage;
             primaryStage.setOnCloseRequest(event -> {
                 try {
+
+                    primaryStage.hide();
                     javafx.application.Platform.exit();
+                    // in case it don't shutdown lamo
+                    try {
+                        Thread.sleep(1000 * 30);
+                    } catch (InterruptedException e3) {
+                        // then force shutdown,so do nothing here
+                    }
+                    System.exit(0);
                 } catch (Throwable e) {
                     try {
                         MyExceptionHandling.handleFatalException(e);
