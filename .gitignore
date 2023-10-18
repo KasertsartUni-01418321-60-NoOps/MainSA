@@ -1,4 +1,4 @@
 # no vscode
-.vscode
+/.vscode/
 # no midi file included
-src/res/*.mid
+/src/res/*.mid
