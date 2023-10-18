@@ -2,6 +2,7 @@
 public class UICtrl_Test {
 	private boolean isDarkMode = false;
 
+	// entire exception handling info: mode=fatal
 	@javafx.fxml.FXML
 	private void onMainButtonPressed() throws Throwable {
 		try {
@@ -17,6 +18,7 @@ public class UICtrl_Test {
 		}
 	}
 
+	// entire exception handling info: mode=fatal
 	@javafx.fxml.FXML
 	private void onExitButtonPressed() throws Throwable {
 		try {// Add code here to open a web browser or a media player to play the

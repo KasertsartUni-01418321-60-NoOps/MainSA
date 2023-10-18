@@ -1,5 +1,7 @@
 public class UICtrl_Main {
 	@javafx.fxml.FXML
+
+	// entire exception handling info: mode=fatal
 	private void onButton1Pressed() throws Throwable {
 		try {
 			try {

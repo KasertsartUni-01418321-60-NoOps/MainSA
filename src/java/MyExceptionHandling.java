@@ -5,6 +5,8 @@ public class MyExceptionHandling {
 	public static boolean isTextReportingFatal = false;
 	public static boolean haveDoneJavaFXExitingExceptionReport = false;
 
+	// entire exception handling info: mode=no (because it would be recurisve
+	// lamolamolamo)
 	public static void handleFatalException(Throwable e) throws Throwable {
 		try {
 			MyExceptionHandling.isFatal = true;
@@ -54,12 +56,14 @@ public class MyExceptionHandling {
 
 	}
 
+	// entire exception handling info: mode=no
 	private static String getStackTraceAsString(Throwable e) {
 		java.io.StringWriter sw = new java.io.StringWriter();
 		e.printStackTrace(new java.io.PrintWriter(sw));
 		return sw.toString().replace("\t", "    ");
 	}
 
+	// entire exception handling info: mode=no
 	private static void reportFatalExceptionInGUI(Throwable e, String title, String mainText) {
 		try {
 			if (title == null) {
@@ -109,6 +113,7 @@ public class MyExceptionHandling {
 		}
 	}
 
+	// entire exception handling info: mode=no
 	private static void reportFatalExceptionInCUI(Throwable e, String title, String mainText) {
 		if (title == null) {
 			title = "[" + getISODateTimeString() + "|App|FATAL] ";
@@ -120,6 +125,7 @@ public class MyExceptionHandling {
 		e.printStackTrace();
 	}
 
+	// entire exception handling info: mode=no
 	private static String getISODateTimeString() {
 		return java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 	}

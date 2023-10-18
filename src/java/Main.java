@@ -3,6 +3,7 @@ public class Main extends javafx.application.Application {
     public static void funcTestOFCaughtException(javafx.stage.Stage primary) {
     }
 
+    // entire exception handling info: mode=fatal
     public static void main(String[] args) throws Throwable {
         try {
             MIDIPlayer.main();
@@ -12,6 +13,8 @@ public class Main extends javafx.application.Application {
                 DatabaseMnm.tempSeeDatabaseLamo();
             } catch (java.sql.SQLException e1) {
                 throw e1;
+            } catch (UserException e1) {
+                throw e1;
             }
             launch(args);
         } catch (Throwable e) {
@@ -19,6 +22,7 @@ public class Main extends javafx.application.Application {
         }
     }
 
+    // entire exception handling info: mode=fatal
     @Override
     public void start(javafx.stage.Stage primaryStage) {
         try {
@@ -46,6 +50,7 @@ public class Main extends javafx.application.Application {
         }
     }
 
+    // entire exception handling info: mode=fatal
     @Override
     public void stop() {
         try {
@@ -67,39 +72,30 @@ public class Main extends javafx.application.Application {
         }
     }
 
-    @javafx.fxml.FXML
-    public static void tempSwitchToTestPage() throws java.io.IOException, Throwable {
+    // entire exception handling info: mode=no
+    public static void tempSwitchToTestPage() throws java.io.IOException {
         try {
-            try {
-                com.github.saacsos.FXRouter.goTo("test");
-            } catch (java.io.IOException e) {
-                throw e;
-            }
-            tempChangeCSS("Test");
-        } catch (Throwable e) {
-            MyExceptionHandling.handleFatalException(e);
+            com.github.saacsos.FXRouter.goTo("test");
+        } catch (java.io.IOException e) {
+            throw e;
         }
+        tempChangeCSS("Test");
     }
 
-    @javafx.fxml.FXML
-    public static void tempChangeCSS(String cssName) throws Throwable {
-        try {
-            javafx.scene.Scene temp = MainAlt1.primaryStage.getScene();
-            temp.getStylesheets().clear();
-            temp.getStylesheets().add(Main.class.getResource("res/" + cssName + ".css").toExternalForm());
-            temp.getRoot().applyCss();
-        } catch (Throwable e) {
-            MyExceptionHandling.handleFatalException(e);
-        }
+    // entire exception handling info: mode=no
+    public static void tempChangeCSS(String cssName) {
+
+        javafx.scene.Scene temp = MainAlt1.primaryStage.getScene();
+        temp.getStylesheets().clear();
+        temp.getStylesheets().add(Main.class.getResource("res/" + cssName + ".css").toExternalForm());
+        temp.getRoot().applyCss();
+
     }
 
-    public static javafx.stage.Stage tempGetPrimaryStage() throws Throwable {
+    // entire exception handling info: mode=no
+    public static javafx.stage.Stage tempGetPrimaryStage() {
         javafx.stage.Stage retVal = null;
-        try {
-            retVal = MainAlt1.primaryStage;
-        } catch (Throwable e) {
-            MyExceptionHandling.handleFatalException(e);
-        }
+        retVal = MainAlt1.primaryStage;
         return retVal;
     }
 

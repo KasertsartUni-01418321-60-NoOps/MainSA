@@ -2,16 +2,21 @@
 public class MIDIPlayer {
 	private static java.util.List<String> playlist = new java.util.ArrayList<>();
 	private static short currentIndex = 0;
-	private static javax.sound.midi.Sequencer sequencer;
+	private static javax.sound.midi.Sequencer sequencer = null;
 	public static boolean isStop = false;
 
+	// entire exception handling info: mode=no
+	// it's init func lamo
 	public static void main() {
-
+		MIDIPlayer.playlist.clear();
+		MIDIPlayer.playlist = new java.util.ArrayList<>();
+		MIDIPlayer.currentIndex = 0;
+		MIDIPlayer.isStop = false;
 		try {
 			MIDIPlayer.sequencer = javax.sound.midi.MidiSystem.getSequencer();
 			MIDIPlayer.sequencer.open();
 		} catch (javax.sound.midi.MidiUnavailableException e) {
-			// just donothing lamo
+			// else of reporting, just donothing lamo
 		}
 		String[] tmp1 = new String[] { "karaokeMIDI/A021385.mid", "karaokeMIDI/B00255.mid", "karaokeMIDI/52929.mid",
 				"karaokeMIDI/A012890.mid", "karaokeMIDI/54794.mid", "karaokeMIDI/91341.mid", "karaokeMIDI/B005986.mid",
@@ -88,44 +93,45 @@ public class MIDIPlayer {
 		MIDIPlayer.playlist.addAll(java.util.Arrays.asList(tmp1));
 
 		java.util.Collections.shuffle(MIDIPlayer.playlist);
-
-	}
-
-	public static void play() {
-
-		MIDIPlayer.isStop = false;
-		if (MIDIPlayer.currentIndex >= MIDIPlayer.playlist.size()) {
-			MIDIPlayer.currentIndex = 0;
-			java.util.Collections.shuffle(MIDIPlayer.playlist);
-		}
-		String currentSongName = MIDIPlayer.playlist.get(MIDIPlayer.currentIndex);
-		try {
-			MIDIPlayer.sequencer.setSequence(
-					javax.sound.midi.MidiSystem.getSequence(
-							MIDIPlayer.class.getClassLoader().getResourceAsStream("res/" + currentSongName)));
-		} catch (javax.sound.midi.InvalidMidiDataException | java.io.IOException e) {
-			// just return lamo
-			return;
-		}
-		MIDIPlayer.sequencer.start();
 		MIDIPlayer.sequencer.addMetaEventListener(meta -> {
 			if (meta.getType() == 0x2F) {
-				MIDIPlayer.currentIndex++;
-				try {
-					if (MIDIPlayer.isStop) {
-					} else {
-						MIDIPlayer.play(); // Play the next song
-					}
-				} catch (Throwable e1) {
-					try {
-						MyExceptionHandling.handleFatalException(e1);
-					} catch (Throwable e2) {
-					}
+				if (MIDIPlayer.isStop) {
+				} else {
+					MIDIPlayer.currentIndex++;
+					MIDIPlayer.play(); // Play the next song
 				}
+
 			}
 		});
 	}
 
+	// entire exception handling info: mode=no
+	public static void play() {
+		while (true) {
+			MIDIPlayer.isStop = false;
+			if (MIDIPlayer.currentIndex >= MIDIPlayer.playlist.size()) {
+				MIDIPlayer.currentIndex = 0;
+				java.util.Collections.shuffle(MIDIPlayer.playlist);
+			}
+			String currentSongName = MIDIPlayer.playlist.get(MIDIPlayer.currentIndex);
+			try {
+				MIDIPlayer.sequencer.setSequence(
+						javax.sound.midi.MidiSystem.getSequence(
+								MIDIPlayer.class.getClassLoader().getResourceAsStream("res/" + currentSongName)));
+			} catch (java.io.EOFException e) {
+				currentIndex++;
+				continue;
+			} catch (javax.sound.midi.InvalidMidiDataException | java.io.IOException e) {
+				// // else of reporting, just return lamo
+				return;
+			}
+			break;
+		}
+		MIDIPlayer.sequencer.start();
+
+	}
+
+	// entire exception handling info: mode=no
 	public static void stop() {
 
 		MIDIPlayer.isStop = true;
