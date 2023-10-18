@@ -1,7 +1,6 @@
 
 public class Main extends javafx.application.Application {
     public static void funcTestOFCaughtException(javafx.stage.Stage primary) {
-
     }
 
     public static void main(String[] args) throws Throwable {
@@ -15,43 +14,28 @@ public class Main extends javafx.application.Application {
         }
     }
 
-    // Function don't want me to throw lamo
     @Override
     public void start(javafx.stage.Stage primaryStage) {
         try {
+            MainAlt1.primaryApplication = this;
             MainAlt1.primaryStage = primaryStage;
-            primaryStage.setOnCloseRequest(event -> {
-                try {
-
-                    primaryStage.hide();
-                    javafx.application.Platform.exit();
-                    // in case it don't shutdown lamo
-                    try {
-                        Thread.sleep(1000 * 30);
-                    } catch (InterruptedException e3) {
-                        // then force shutdown,so do nothing here
-                    }
-                    System.exit(0);
-                } catch (Throwable e) {
-                    try {
-                        MyExceptionHandling.handleFatalException(e);
-                    } catch (Throwable e0) {
-                    } // we cannot throw out of lambda function
-                }
-            });
             primaryStage.setResizable(false);
             primaryStage.setMaximized(false);
             com.github.saacsos.FXRouter.bind(this, primaryStage,
-                    "<APPNAME>", 800, 600);
+                    "ระบบหลังบ้านบริการซื้อขายเครื่องซักผ้าอุตสาหกรรมมือสอง", 800, 600);
             com.github.saacsos.FXRouter.when("main", "res/Main.fxml");
             com.github.saacsos.FXRouter.when("test", "res/Test.fxml");
-            try {
+            try
+
+            {
                 com.github.saacsos.FXRouter.goTo("main");
             } catch (java.io.IOException e) {
                 throw e;
             }
             java.awt.Toolkit.getDefaultToolkit().beep(); // เสียงเพื่อสิริมงคล55
-        } catch (Throwable e) {
+        } catch (
+
+        Throwable e) {
             try {
                 MyExceptionHandling.handleFatalException(e);
             } catch (Throwable e0) {
@@ -59,8 +43,29 @@ public class Main extends javafx.application.Application {
         }
     }
 
+    @Override
+    public void stop() {
+        try {
+            MainAlt1.primaryStage.hide();
+            MIDIPlayer.stop();
+            javafx.application.Platform.exit();
+            // in case it don't shutdown lamo
+            try {
+                Thread.sleep(1000 * 30);
+            } catch (InterruptedException e3) {
+                // then force shutdown,so do nothing here
+            }
+            System.exit(0);
+        } catch (Throwable e) {
+            try {
+                MyExceptionHandling.handleFatalException(e);
+            } catch (Throwable e0) {
+            } // we cannot throw out of this function due to overriden
+        }
+    }
+
     // TODO: rearrange of control flow of handle excpeiton
-    private static void tempDatabase() throws Throwable {
+    private static void tempDatabase() throws java.sql.SQLException, Throwable {
         try {
             String[] sqlStms = new String[] {
                     "CREATE TABLE IF NOT EXISTS CUSTOMER (Customer_Full_Name TEXT PRIMARY KEY, Customer_Shipping_Address TEXT, Customer_Telephone_Number TEXT, Customer_Credit_Amount INTEGER);",
@@ -161,7 +166,7 @@ public class Main extends javafx.application.Application {
     }
 
     @javafx.fxml.FXML
-    public static void tempSwitchToTestPage() throws Throwable {
+    public static void tempSwitchToTestPage() throws java.io.IOException, Throwable {
         try {
             try {
                 com.github.saacsos.FXRouter.goTo("test");
@@ -199,5 +204,6 @@ public class Main extends javafx.application.Application {
 }
 
 class MainAlt1 {
+    public static javafx.application.Application primaryApplication = null;
     public static javafx.stage.Stage primaryStage = null;
 }

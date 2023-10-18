@@ -1,31 +1,23 @@
 
-// TODO: remove later 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MetaMessage;
-import javax.sound.midi.MidiEvent;
-import javax.sound.midi.MidiSystem;
-import javax.sound.midi.Sequencer;
-
-// TODO: MAnage caught exception
 public class MIDIPlayer {
-	private static List<String> playlist = new ArrayList<>();
+	private static java.util.List<String> playlist = new java.util.ArrayList<>();
 	private static short currentIndex = 0;
-	private static Sequencer sequencer;
+	private static javax.sound.midi.Sequencer sequencer;
 	public static boolean isStop = false;
 
 	public static void main() throws Throwable {
 		try {
-			MIDIPlayer.sequencer = MidiSystem.getSequencer();
-			MIDIPlayer.sequencer.open();
-			MIDIPlayer.playlist.add("rickroll.mid");
+			try {
+				MIDIPlayer.sequencer = javax.sound.midi.MidiSystem.getSequencer();
+				MIDIPlayer.sequencer.open();
+			} catch (javax.sound.midi.MidiUnavailableException e) {
+				// just donothing lamo
+			}
 			MIDIPlayer.playlist.add("mhwgo.mid");
-			Collections.shuffle(MIDIPlayer.playlist);
+			MIDIPlayer.playlist.add("rickroll.mid");
+			// พอดีเบื่อเพลง rickroll เลยเพิ่ม mhwgo เยอะหน่อย
+			MIDIPlayer.playlist.add("mhwgo.mid");
+			java.util.Collections.shuffle(MIDIPlayer.playlist);
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
 		}
@@ -33,32 +25,46 @@ public class MIDIPlayer {
 
 	public static void play() throws Throwable {
 		try {
-			if (MIDIPlayer.isStop) {
-				isStop = false;
-			} else {
-				if (MIDIPlayer.currentIndex >= MIDIPlayer.playlist.size()) {
-					MIDIPlayer.currentIndex = 0;
-					Collections.shuffle(MIDIPlayer.playlist);
-				}
-				String currentSongName = MIDIPlayer.playlist.get(MIDIPlayer.currentIndex);
+			MIDIPlayer.isStop = false;
+			if (MIDIPlayer.currentIndex >= MIDIPlayer.playlist.size()) {
+				MIDIPlayer.currentIndex = 0;
+				java.util.Collections.shuffle(MIDIPlayer.playlist);
+			}
+			String currentSongName = MIDIPlayer.playlist.get(MIDIPlayer.currentIndex);
+			try {
 				MIDIPlayer.sequencer.setSequence(
 						javax.sound.midi.MidiSystem.getSequence(
 								MIDIPlayer.class.getClassLoader().getResourceAsStream("res/" + currentSongName)));
-				MIDIPlayer.sequencer.start();
-				MIDIPlayer.sequencer.addMetaEventListener(meta -> {
-					if (meta.getType() == 0x2F) {
-						MIDIPlayer.currentIndex++;
-						try {
+			} catch (javax.sound.midi.InvalidMidiDataException | java.io.IOException e) {
+				// just return lamo
+				return;
+			}
+			MIDIPlayer.sequencer.start();
+			MIDIPlayer.sequencer.addMetaEventListener(meta -> {
+				if (meta.getType() == 0x2F) {
+					MIDIPlayer.currentIndex++;
+					try {
+						if (MIDIPlayer.isStop) {
+						} else {
 							MIDIPlayer.play(); // Play the next song
-						} catch (Throwable e1) {
-							try {
-								MyExceptionHandling.handleFatalException(e1);
-							} catch (Throwable e2) {
-							}
+						}
+					} catch (Throwable e1) {
+						try {
+							MyExceptionHandling.handleFatalException(e1);
+						} catch (Throwable e2) {
 						}
 					}
-				});
-			}
+				}
+			});
+		} catch (Throwable e) {
+			MyExceptionHandling.handleFatalException(e);
+		}
+	}
+
+	public static void stop() throws Throwable {
+		try {
+			MIDIPlayer.isStop = true;
+			MIDIPlayer.sequencer.stop();
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
 		}

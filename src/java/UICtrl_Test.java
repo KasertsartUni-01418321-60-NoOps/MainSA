@@ -25,11 +25,14 @@ public class UICtrl_Test {
 				// video
 				// You can use Java's Desktop class or external library to open a URL.
 				// For simplicity, you can use the default web browser to open the Rickroll URL.
-			try {
-				java.awt.Desktop.getDesktop().browse(new java.net.URI("https://www.youtube.com/watch?v=oHg5SJYRHA0"));
-			} catch (java.io.IOException | java.net.URISyntaxException e) {
-				throw e;
-			}
+
+			// [disabled]
+			// try {
+			// java.awt.Desktop.getDesktop().browse(new
+			// java.net.URI("https://www.youtube.com/watch?v=oHg5SJYRHA0"));
+			// } catch (java.io.IOException | java.net.URISyntaxException e) {
+			// throw e;
+			// }
 			java.awt.Toolkit.getDefaultToolkit().beep(); // เสียงเพื่อสิริมงคล55
 			// just test the fatal exception
 			throw new Exception("RICKROLL");

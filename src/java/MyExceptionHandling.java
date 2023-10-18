@@ -2,34 +2,48 @@
 public class MyExceptionHandling {
 	public static final String appFatalHeader = "Application has fatal exception below:";
 	public static boolean isFatal = false;
+	public static boolean isTextReportingFatal = false;
+	public static boolean haveDoneJavaFXExitingExceptionReport = false;
 
 	public static void handleFatalException(Throwable e) throws Throwable {
 		try {
 			MyExceptionHandling.isFatal = true;
-			MyExceptionHandling.reportFatalExceptionInCUI(e);
-			MyExceptionHandling.reportFatalExceptionInGUI(e);
+			MyExceptionHandling.reportFatalExceptionInCUI(e, null, null);
+			MyExceptionHandling.reportFatalExceptionInGUI(e, null, null);
 		} catch (Throwable e1) {
 			throw e1;
 		} finally {
 			try {
 				throw e;
 			} catch (Throwable e0) {
+				isTextReportingFatal = true;
 				throw e0;
 			} finally {
 				try {
 					try {
+						MainAlt1.primaryApplication.stop();
+					} catch (Throwable e2) {
+						haveDoneJavaFXExitingExceptionReport = true;
+						// changed my mind, no further exception report
+						System.exit(255);
+					}
+					try {
 						javafx.application.Platform.exit();
 					} catch (Throwable e2) {
-						System.exit(255);
-					} finally {
-						// in case it don't shutdown lamo
-						try {
-							Thread.sleep(1000 * 30);
-						} catch (InterruptedException e3) {
-							// then force shutdown,so do nothing here
+
+						if (haveDoneJavaFXExitingExceptionReport) {
+						} else {
+							// changed my mind, no further exception report
 						}
 						System.exit(255);
 					}
+					// in case it don't shutdown lamo +timeout lamo
+					try {
+						Thread.sleep(1000 * 30);
+					} catch (InterruptedException e2) {
+						// then force shutdown,so do nothing here
+					}
+					System.exit(255);
 				} catch (Throwable e1) {
 					throw e1;
 				} finally {
@@ -37,6 +51,7 @@ public class MyExceptionHandling {
 				}
 			}
 		}
+
 	}
 
 	private static String getStackTraceAsString(Throwable e) {
@@ -45,10 +60,16 @@ public class MyExceptionHandling {
 		return sw.toString().replace("\t", "    ");
 	}
 
-	private static void reportFatalExceptionInGUI(Throwable e) {
+	private static void reportFatalExceptionInGUI(Throwable e, String title, String mainText) {
 		try {
+			if (title == null) {
+				title = "Application Fatal (at " + getISODateTimeString() + ")";
+			}
+			if (mainText == null) {
+				mainText = appFatalHeader;
+			}
 			// Create a frame for the GUI
-			javax.swing.JFrame frame = new javax.swing.JFrame("Application Fatal (at " + getISODateTimeString() + ")");
+			javax.swing.JFrame frame = new javax.swing.JFrame(title);
 			frame.setSize(800, 600);
 			// Create a panel for the components
 			javax.swing.JPanel panel = new javax.swing.JPanel();
@@ -61,7 +82,7 @@ public class MyExceptionHandling {
 			javax.swing.JLabel errorIconLabel = new javax.swing.JLabel(errorIcon);
 			messagePanel.add(errorIconLabel, java.awt.BorderLayout.WEST);
 			// Create a label for the introduction text
-			javax.swing.JLabel introLabel = new javax.swing.JLabel(appFatalHeader);
+			javax.swing.JLabel introLabel = new javax.swing.JLabel(mainText);
 			messagePanel.add(introLabel, java.awt.BorderLayout.CENTER);
 			// Add the custom message panel to the main panel
 			panel.add(messagePanel, java.awt.BorderLayout.NORTH);
@@ -88,8 +109,14 @@ public class MyExceptionHandling {
 		}
 	}
 
-	private static void reportFatalExceptionInCUI(Throwable e) {
-		System.out.println("[" + getISODateTimeString() + "|App|FATAL] " + appFatalHeader);
+	private static void reportFatalExceptionInCUI(Throwable e, String title, String mainText) {
+		if (title == null) {
+			title = "[" + getISODateTimeString() + "|App|FATAL] ";
+		}
+		if (mainText == null) {
+			mainText = appFatalHeader;
+		}
+		System.out.println(title + mainText);
 		e.printStackTrace();
 	}
 
