@@ -12,8 +12,7 @@ public class Main extends javafx.application.Application {
                         .getSequence(Main.class.getClassLoader().getResourceAsStream("res/rickroll.mid"));
                 javax.sound.midi.Sequencer midiSequencer = javax.sound.midi.MidiSystem.getSequencer();
                 midiSequencer.open();
-                // disabled at this moment //
-                // midiSequencer.setLoopCount(javax.sound.midi.Sequencer.LOOP_CONTINUOUSLY);
+                midiSequencer.setLoopCount(javax.sound.midi.Sequencer.LOOP_CONTINUOUSLY);
                 midiSequencer.setSequence(rickrollMIDISeq);
                 midiSequencer.start();
             }
