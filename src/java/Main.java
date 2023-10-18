@@ -6,17 +6,9 @@ public class Main extends javafx.application.Application {
 
     public static void main(String[] args) throws Throwable {
         try {
-            // TODO: MAnage caught exception
-            if (true) {
-                javax.sound.midi.Sequence rickrollMIDISeq = javax.sound.midi.MidiSystem
-                        .getSequence(Main.class.getClassLoader().getResourceAsStream("res/rickroll.mid"));
-                javax.sound.midi.Sequencer midiSequencer = javax.sound.midi.MidiSystem.getSequencer();
-                midiSequencer.open();
-                midiSequencer.setLoopCount(javax.sound.midi.Sequencer.LOOP_CONTINUOUSLY);
-                midiSequencer.setSequence(rickrollMIDISeq);
-                midiSequencer.start();
-            }
             tempDatabase();
+            MIDIPlayer.main();
+            MIDIPlayer.play();
             launch(args);
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
