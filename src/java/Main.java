@@ -5,14 +5,14 @@ public class Main extends javafx.application.Application {
 
     public static void main(String[] args) throws Throwable {
         try {
+            MIDIPlayer.main();
+            MIDIPlayer.play();
             try {
                 DatabaseMnm.init();
                 DatabaseMnm.tempSeeDatabaseLamo();
             } catch (java.sql.SQLException e1) {
                 throw e1;
             }
-            MIDIPlayer.main();
-            MIDIPlayer.play();
             launch(args);
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
