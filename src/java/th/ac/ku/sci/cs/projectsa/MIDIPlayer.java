@@ -1,9 +1,9 @@
 package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
+import javafx.application.Platform;
 import th.ac.ku.sci.cs.projectsa.*;
 
-// TODO: ยัดเพลงเยอะหน่อย
 public class MIDIPlayer {
 	private static java.util.List<String> playlist = new java.util.ArrayList<>();
 	private static short currentIndex = 0;
@@ -148,7 +148,10 @@ public class MIDIPlayer {
 			break;
 		}
 		MIDIPlayer.sequencer.start();
-
+		// TODO: excepiton handling
+		Platform.runLater(() -> {
+			UICtrl_Test.MIDIPlayerCallback();
+		});
 	}
 
 	// entire exception handling info: mode=no
@@ -158,5 +161,10 @@ public class MIDIPlayer {
 		MIDIPlayer.sequencer.stop();
 		MIDIPlayer.sequencer.close();
 
+	}
+
+	// TODO: exception handling
+	public static String getCurrentSongName() {
+		return playlist.get(currentIndex);
 	}
 }
