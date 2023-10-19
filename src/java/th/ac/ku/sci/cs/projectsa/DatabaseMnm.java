@@ -1,6 +1,11 @@
 package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
+
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+
 import th.ac.ku.sci.cs.projectsa.*;
 
 public class DatabaseMnm {
@@ -36,7 +41,7 @@ public class DatabaseMnm {
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:./data/main.db");
 			DatabaseMnm.mainDbConnStm1 = DatabaseMnm.mainDbConn.createStatement();
 			try {
-				DatabaseMnm.runSQLcmd(sqlStms);
+				DatabaseMnm.runSQLcmd(sqlStms, false);
 			} catch (MyExceptionHandling.UserException e1) {
 				throw e1;
 			}
@@ -46,16 +51,28 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	public static void runSQLcmd(String[] sqlStms) throws MyExceptionHandling.UserException {
+	// TODO: exception handling
+	public static Table[] runSQLcmd(String[] sqlStms, boolean doRetTable) throws MyExceptionHandling.UserException {
+		Table[] tables = null;
+		int i = 0;
+		if (doRetTable) {
+			tables = new Table[sqlStms.length];
+		}
 		String recentSqlStm = null;
+		// java.sql.ResultSetMetaData::getTableName
 		try {
 			for (String sqlStm : sqlStms) {
 				recentSqlStm = sqlStm;
-				DatabaseMnm.mainDbConnStm1.execute(sqlStm);
+				if (doRetTable) {
+					// tables[i]=
+				} else {
+					DatabaseMnm.mainDbConnStm1.execute(sqlStm);
+				}
 			}
 		} catch (java.sql.SQLException e1) {
 			throw new MyExceptionHandling.UserException("SQL Error on query: " + recentSqlStm, e1);
 		}
+		return tables;
 
 	}
 
@@ -101,6 +118,32 @@ public class DatabaseMnm {
 			} catch (NullPointerException | java.sql.SQLException e1) {
 			}
 		}
+	}
+
+	// TODO: exception handling
+	// entire exception handling info: mode=no
+	private static String getTableNameFromResultSet(java.sql.ResultSet resultSet) throws SQLException {
+		ResultSetMetaData metaData = resultSet.getMetaData();
+		return metaData.getTableName(1); // Assuming the first column in the result set corresponds to a table.
+	}
+
+	// TODO: exception handling
+	// entire exception handling info: mode=no
+	private static String getColumnName(ResultSet resultSet, int columnIndex) throws SQLException {
+		ResultSetMetaData metaData = resultSet.getMetaData();
+		return metaData.getColumnName(columnIndex);
+	}
+
+	public static class Table {
+		public String name = null;
+		public Column<?>[] cols = null;
+
+	}
+
+	public static class Column<T> {
+		public String name = null;
+		public Class<T> type = null;
+		public T[] vals = null;
 	}
 
 }

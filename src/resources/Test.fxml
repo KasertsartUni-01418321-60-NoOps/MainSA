@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -7,29 +8,30 @@
 <?import javafx.scene.control.Label?>
 
 <BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_Test">
+<styleClass><String fx:value="root"/><String fx:value="background" /></styleClass>
 
     <!-- Top section for the title -->
     <top>
         <HBox alignment="CENTER" spacing="10">
-            <Label text="Modern UI Example" styleClass="title-label"/>
-            <Button fx:id="ExitButton" text="Exit" onAction="#onExitButtonPressed" styleClass="exit-button"/>
+            <Label text="Modern UI Example"><styleClass><String fx:value="label"/></styleClass></Label>
+            <Button fx:id="ExitButton" text="Exit" onAction="#onExitButtonPressed" ><styleClass><String fx:value="button"/></styleClass></Button>
         </HBox>
     </top>
 
     <!-- Left sidebar -->
     <left>
         <VBox spacing="10">
-            <Button text="Home" styleClass="sidebar-button"/>
-            <Button text="Profile" styleClass="sidebar-button"/>
-            <Button text="Settings" styleClass="sidebar-button"/>
+            <Button text="Home" ><styleClass><String fx:value="button"/></styleClass></Button>
+            <Button text="Profile" ><styleClass><String fx:value="button"/></styleClass></Button>
+            <Button text="Settings" ><styleClass><String fx:value="button"/></styleClass></Button>
         </VBox>
     </left>
 
     <!-- Center content -->
     <center>
         <VBox alignment="CENTER" spacing="20">
-            <Label text="Welcome to the Modern UI Example" styleClass="content-label"/>
-            <Button fx:id="MainButton" text="Click Me" onAction="#onMainButtonPressed" styleClass="main-button"/>
+            <Label text="Welcome to the Modern UI Example"><styleClass><String fx:value="label"/></styleClass></Label>
+            <Button fx:id="MainButton" text="Click Me" onAction="#onMainButtonPressed"><styleClass><String fx:value="primary-button"/></styleClass></Button>
         </VBox>
     </center>
 

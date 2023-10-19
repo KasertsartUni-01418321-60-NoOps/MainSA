@@ -20,6 +20,15 @@ public class Main extends javafx.application.Application {
             } catch (MyExceptionHandling.UserException e1) {
                 throw e1;
             }
+            DatabaseMnm.Table testTable = new DatabaseMnm.Table();
+            testTable.name = "Rickroll";
+            DatabaseMnm.Column<Integer> testTable_Id = new DatabaseMnm.Column<Integer>();
+            testTable_Id.type = Integer.class;
+            DatabaseMnm.Column<String> testTable_Lyrics = new DatabaseMnm.Column<String>();
+            testTable_Lyrics.type = String.class;
+            testTable_Id.vals = new Integer[] { 1, 2 };
+            testTable_Lyrics.vals = new String[] { "NeverGonnaGiveYouUp", "MyHeartWillGoOn" };
+            testTable.cols = new DatabaseMnm.Column<?>[] { testTable_Id, testTable_Lyrics };
             launch(args);
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
