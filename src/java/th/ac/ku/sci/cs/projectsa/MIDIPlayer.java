@@ -1,4 +1,9 @@
+package th.ac.ku.sci.cs.projectsa;
 
+import th.ac.ku.sci.cs.projectsa.uictrl.*;
+import th.ac.ku.sci.cs.projectsa.*;
+
+// TODO: ยัดเพลงเยอะหน่อย
 public class MIDIPlayer {
 	private static java.util.List<String> playlist = new java.util.ArrayList<>();
 	private static short currentIndex = 0;
@@ -118,8 +123,9 @@ public class MIDIPlayer {
 				java.util.Collections.shuffle(MIDIPlayer.playlist);
 			}
 			String currentSongName = MIDIPlayer.playlist.get(MIDIPlayer.currentIndex);
+			// do not put leading slash for jarfile resource for this line of code lamo
 			MIDIPlayer.midiDataStream = MIDIPlayer.class.getClassLoader()
-					.getResourceAsStream("res/" + currentSongName);
+					.getResourceAsStream("resources/" + currentSongName);
 			try {
 				MIDIPlayer.sequencer.setSequence(
 						javax.sound.midi.MidiSystem.getSequence(MIDIPlayer.midiDataStream));

@@ -1,3 +1,7 @@
+package th.ac.ku.sci.cs.projectsa;
+
+import th.ac.ku.sci.cs.projectsa.uictrl.*;
+import th.ac.ku.sci.cs.projectsa.*;
 
 public class MyExceptionHandling {
 	public static final String appFatalHeader = "Application has fatal exception below:";
@@ -136,4 +140,62 @@ public class MyExceptionHandling {
 	private static String getISODateTimeString() {
 		return java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 	}
+
+	// follow default constructors
+	public static class UserException extends Exception {
+
+		// entire exception handling info: mode=no
+		public UserException() {
+			super();
+		}
+
+		// entire exception handling info: mode=no
+		public UserException(String var1) {
+			super(var1);
+		}
+
+		// entire exception handling info: mode=no
+		public UserException(String var1, Throwable var2) {
+			super(var1, var2);
+		}
+
+		// entire exception handling info: mode=no
+		public UserException(Throwable var1) {
+			super(var1);
+		}
+
+		// entire exception handling info: mode=no
+		protected UserException(String var1, Throwable var2, boolean var3, boolean var4) {
+			super(var1, var2, var3, var4);
+		}
+	}
+
+	// follow default constructors
+	public static class UserRuntimeException extends RuntimeException {
+		// entire exception handling info: mode=no
+		public UserRuntimeException() {
+			super();
+		}
+
+		// entire exception handling info: mode=no
+		public UserRuntimeException(String var1) {
+			super(var1);
+		}
+
+		// entire exception handling info: mode=no
+		public UserRuntimeException(String var1, Throwable var2) {
+			super(var1, var2);
+		}
+
+		// entire exception handling info: mode=no
+		public UserRuntimeException(Throwable var1) {
+			super(var1);
+		}
+
+		// entire exception handling info: mode=no
+		protected UserRuntimeException(String var1, Throwable var2, boolean var3, boolean var4) {
+			super(var1, var2, var3, var4);
+		}
+	}
+
 }

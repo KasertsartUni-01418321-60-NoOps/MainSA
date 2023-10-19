@@ -1,3 +1,7 @@
+package th.ac.ku.sci.cs.projectsa;
+
+import th.ac.ku.sci.cs.projectsa.uictrl.*;
+import th.ac.ku.sci.cs.projectsa.*;
 
 public class Main extends javafx.application.Application {
     public static void funcTestOFCaughtException(javafx.stage.Stage primary) {
@@ -13,7 +17,7 @@ public class Main extends javafx.application.Application {
                 DatabaseMnm.tempSeeDatabaseLamo();
             } catch (java.sql.SQLException e1) {
                 throw e1;
-            } catch (UserException e1) {
+            } catch (MyExceptionHandling.UserException e1) {
                 throw e1;
             }
             launch(args);
@@ -32,8 +36,10 @@ public class Main extends javafx.application.Application {
             primaryStage.setMaximized(false);
             com.github.saacsos.FXRouter.bind(this, primaryStage,
                     "ระบบหลังบ้านบริการซื้อขายเครื่องซักผ้าอุตสาหกรรมมือสอง", 800, 600);
-            com.github.saacsos.FXRouter.when("main", "res/Main.fxml");
-            com.github.saacsos.FXRouter.when("test", "res/Test.fxml");
+            // do not put leading slash for jarfile resource for this line of code
+            com.github.saacsos.FXRouter.when("main", "resources/Main.fxml");
+            // do not put leading slash for jarfile resource for this line of code
+            com.github.saacsos.FXRouter.when("test", "resources/Test.fxml");
             try
 
             {
@@ -87,7 +93,7 @@ public class Main extends javafx.application.Application {
 
         javafx.scene.Scene temp = MainAlt1.primaryStage.getScene();
         temp.getStylesheets().clear();
-        temp.getStylesheets().add(Main.class.getResource("res/" + cssName + ".css").toExternalForm());
+        temp.getStylesheets().add(Main.class.getResource("/resources/" + cssName + ".css").toExternalForm());
         temp.getRoot().applyCss();
 
     }

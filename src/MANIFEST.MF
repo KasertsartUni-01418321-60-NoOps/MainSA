@@ -1,2 +1,2 @@
-Main-Class: Main
+Main-Class: th.ac.ku.sci.cs.projectsa.Main
 Class-Path: lib/sqlite-jdbc-3.43.0.0.jar lib/FXRouter.jar

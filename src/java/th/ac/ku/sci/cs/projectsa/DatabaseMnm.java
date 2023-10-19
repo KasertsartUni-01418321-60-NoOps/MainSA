@@ -1,10 +1,14 @@
+package th.ac.ku.sci.cs.projectsa;
+
+import th.ac.ku.sci.cs.projectsa.uictrl.*;
+import th.ac.ku.sci.cs.projectsa.*;
 
 public class DatabaseMnm {
 	public static java.sql.Connection mainDbConn = null;
 	public static java.sql.Statement mainDbConnStm1 = null;
 
 	// entire exception handling info: mode=no
-	public static void init() throws java.sql.SQLException, UserException {
+	public static void init() throws java.sql.SQLException, MyExceptionHandling.UserException {
 
 		try {
 			String[] sqlStms = new String[] {
@@ -33,7 +37,7 @@ public class DatabaseMnm {
 			DatabaseMnm.mainDbConnStm1 = DatabaseMnm.mainDbConn.createStatement();
 			try {
 				DatabaseMnm.runSQLcmd(sqlStms);
-			} catch (UserException e1) {
+			} catch (MyExceptionHandling.UserException e1) {
 				throw e1;
 			}
 		} catch (java.sql.SQLException e) {
@@ -42,7 +46,7 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	public static void runSQLcmd(String[] sqlStms) throws UserException {
+	public static void runSQLcmd(String[] sqlStms) throws MyExceptionHandling.UserException {
 		String recentSqlStm = null;
 		try {
 			for (String sqlStm : sqlStms) {
@@ -50,7 +54,7 @@ public class DatabaseMnm {
 				DatabaseMnm.mainDbConnStm1.execute(sqlStm);
 			}
 		} catch (java.sql.SQLException e1) {
-			throw new UserException("SQL Error on query: " + recentSqlStm, e1);
+			throw new MyExceptionHandling.UserException("SQL Error on query: " + recentSqlStm, e1);
 		}
 
 	}
