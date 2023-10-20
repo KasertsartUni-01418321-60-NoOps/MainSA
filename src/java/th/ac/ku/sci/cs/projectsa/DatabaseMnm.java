@@ -1,11 +1,6 @@
 package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
-
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-
 import th.ac.ku.sci.cs.projectsa.*;
 
 public class DatabaseMnm {
@@ -120,17 +115,41 @@ public class DatabaseMnm {
 		}
 	}
 
+	// TODO: exception ahndling
+	public static void tempCreateAndSeeMySQLTableDataStr() {
+		            DatabaseMnm.Table testTable = new DatabaseMnm.Table();
+            testTable.name = "Rickroll";
+            DatabaseMnm.Column<Integer> testTable_Id = new DatabaseMnm.Column<Integer>();
+            testTable_Id.name = "Id";
+            testTable_Id.type = Integer.class;
+            DatabaseMnm.Column<String> testTable_Lyrics = new DatabaseMnm.Column<String>();
+            testTable_Lyrics.name = "Lyrics";
+            testTable_Lyrics.type = String.class;
+            testTable_Id.vals = new Integer[] { 1, 2 };
+            testTable_Lyrics.vals = new String[] { "NeverGonnaGiveYouUp", "MyHeartWillGoOn" };
+            testTable.cols = new DatabaseMnm.Column<?>[] { testTable_Id, testTable_Lyrics };
+            //
+            for (DatabaseMnm.Column<?> col : testTable.cols) {
+                System.out.println("Col:"+col);
+                System.out.println("Name:"+col.name);
+                System.out.println("Type:"+col.type);
+                for (Object obj: col.vals) {
+                    System.out.println("> Val:"+col.type.cast(obj));
+                }
+            }
+	}
+	
 	// TODO: exception handling
 	// entire exception handling info: mode=no
-	private static String getTableNameFromResultSet(java.sql.ResultSet resultSet) throws SQLException {
-		ResultSetMetaData metaData = resultSet.getMetaData();
+	private static String getTableNameFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
+		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
 		return metaData.getTableName(1); // Assuming the first column in the result set corresponds to a table.
 	}
 
 	// TODO: exception handling
 	// entire exception handling info: mode=no
-	private static String getColumnName(ResultSet resultSet, int columnIndex) throws SQLException {
-		ResultSetMetaData metaData = resultSet.getMetaData();
+	private static String getColumnName(java.sql.ResultSet resultSet, int columnIndex) throws java.sql.SQLException {
+		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
 		return metaData.getColumnName(columnIndex);
 	}
 
