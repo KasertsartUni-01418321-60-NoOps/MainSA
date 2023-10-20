@@ -4,7 +4,6 @@ import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import javafx.application.Platform;
 import th.ac.ku.sci.cs.projectsa.*;
 
-// TODO: ตั้ง synthesizer ได้ไหม
 public class MIDIPlayer {
 	private static java.util.List<String> playlist = new java.util.ArrayList<>();
 	private static short currentIndex = 0;

@@ -16,7 +16,7 @@ public class UICtrl_Test implements javafx.fxml.Initializable {
 		UICtrl_Test.MIDIPlayerCallback();
 	}
 
-	// TODO: excepiton handling
+	// TODO: excepiton handling + check .close()
 	public static void MIDIPlayerCallback() {
 		if (currentInstance != null) {
 			try {
