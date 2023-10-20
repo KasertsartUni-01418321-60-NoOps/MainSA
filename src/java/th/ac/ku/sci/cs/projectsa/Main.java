@@ -15,12 +15,14 @@ public class Main extends javafx.application.Application {
             MIDIPlayer.play();
             try {
                 DatabaseMnm.init();
-                System.out.println("[USER] this is test of see saved database:");
+                System.out.println(Main.clReportHeader(null, "DEVTEST")+"this is test of see saved database:");
+                System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE START>");
                 DatabaseMnm.tempSeeDatabaseLamo();
-                System.out.println("[USER] <END>");
-                System.out.println("[USER] and this is test of create my datastr of sqltable, and print them lamo:");
+                System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE END>");
+                System.out.println(Main.clReportHeader(null, "DEVTEST")+"and this is test of create my datastr of sqltable, and print them lamo:");
+                System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE START>");
                 DatabaseMnm.tempCreateAndSeeMySQLTableDataStr();
-                System.out.println("[USER] <END>");
+                System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE END>");
             } catch (java.sql.SQLException e1) {
                 throw e1;
             } catch (MyExceptionHandling.UserException e1) {
@@ -83,6 +85,18 @@ public class Main extends javafx.application.Application {
             } // we cannot throw out of this function due to overriden
         }
     }
+
+    // entire exception handling info: mode=no
+    public static String clReportHeader(String scope,String cate) {
+        if (scope==null) {scope="MainApp";}
+        if (cate==null) {cate="INFO";}
+        return "["+getISODateTimeString()+"|"+scope+"|"+cate+"] ";
+    }
+
+// entire exception handling info: mode=no
+public static String getISODateTimeString() {
+    return java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+}
 
     // entire exception handling info: mode=no
     public static void tempSwitchToTestPage() throws java.io.IOException {

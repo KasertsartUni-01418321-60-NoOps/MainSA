@@ -78,7 +78,7 @@ public class MyExceptionHandling {
 	private static void reportFatalExceptionInGUI(Throwable e, String title, String mainText) {
 		try {
 			if (title == null) {
-				title = "Application Fatal (at " + getISODateTimeString() + ")";
+				title = "Application Fatal (at " + Main.getISODateTimeString() + ")";
 			}
 			if (mainText == null) {
 				mainText = appFatalHeader;
@@ -119,7 +119,7 @@ public class MyExceptionHandling {
 				}
 			}
 		} catch (Throwable e1) {
-			System.out.println("[" + getISODateTimeString() + "|App|Err] GUI exception reporting has exception below:");
+			System.out.println(Main.clReportHeader(null, "ERR")+"GUI exception reporting has exception below:");
 			e1.printStackTrace();
 		}
 	}
@@ -127,18 +127,13 @@ public class MyExceptionHandling {
 	// entire exception handling info: mode=no
 	private static void reportFatalExceptionInCUI(Throwable e, String title, String mainText) {
 		if (title == null) {
-			title = "[" + getISODateTimeString() + "|App|FATAL] ";
+			title = Main.clReportHeader(null, "FATAL");
 		}
 		if (mainText == null) {
 			mainText = appFatalHeader;
 		}
 		System.out.println(title + mainText);
 		e.printStackTrace();
-	}
-
-	// entire exception handling info: mode=no
-	private static String getISODateTimeString() {
-		return java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME);
 	}
 
 	// follow default constructors

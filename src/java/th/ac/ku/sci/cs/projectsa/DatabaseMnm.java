@@ -81,20 +81,20 @@ public class DatabaseMnm {
 			int colCount = 0;
 			while (tablesRS.next()) {
 				String tableName = tablesRS.getString("TABLE_NAME");
-				System.out.println("[TABLE: " + tableName + "]");
+				System.out.println(Main.clReportHeader(null, "DEVTEST")+"[TABLE: " + tableName + "]");
 				tableRS = mainDbConnStm1.executeQuery("SELECT * FROM " + tableName);
 				java.sql.ResultSetMetaData metaDataTableRS = tableRS.getMetaData();
 				while (tableRS.next()) {
-					System.out.println("> [ROW OF TABLE]");
+					System.out.println(Main.clReportHeader(null, "DEVTEST")+"> [ROW OF TABLE]");
 					colCount = metaDataTableRS.getColumnCount();
 					for (int i = 1; i <= colCount; i++) {
 						String columnName;
 						columnName = metaDataTableRS.getColumnName(i);
 						String columnValue;
 						columnValue = tableRS.getString(i);
-						System.out.println(columnName + ": " + columnValue);
+						System.out.println(Main.clReportHeader(null, "DEVTEST")+columnName + ": " + columnValue);
 					}
-					System.out.println(); // Separate rows
+					System.out.println(Main.clReportHeader(null, "DEVTEST")); // Separate rows
 				}
 				tableRS.close();
 				tableRS = null;
@@ -130,11 +130,11 @@ public class DatabaseMnm {
             testTable.cols = new DatabaseMnm.Column<?>[] { testTable_Id, testTable_Lyrics };
             //
             for (DatabaseMnm.Column<?> col : testTable.cols) {
-                System.out.println("Col:"+col);
-                System.out.println("Name:"+col.name);
-                System.out.println("Type:"+col.type);
+                System.out.println(Main.clReportHeader(null, "DEVTEST")+"Col:"+col);
+                System.out.println(Main.clReportHeader(null, "DEVTEST")+"Name:"+col.name);
+                System.out.println(Main.clReportHeader(null, "DEVTEST")+"Type:"+col.type);
                 for (Object obj: col.vals) {
-                    System.out.println("> Val:"+col.type.cast(obj));
+                    System.out.println(Main.clReportHeader(null, "DEVTEST")+"> Val:"+col.type.cast(obj));
                 }
             }
 	}
