@@ -11,6 +11,7 @@ public class MIDIPlayer {
 	private static javax.sound.midi.Sequencer sequencer = null;
 	private static java.io.InputStream midiDataStream = null;
 	public static boolean isStop = false;
+	private static boolean listenAtLeastOneRound = false;
 
 	// entire exception handling info: mode=no
 	// it's init func lamo
@@ -125,6 +126,7 @@ public class MIDIPlayer {
 			MIDIPlayer.isStop = false;
 			if (MIDIPlayer.currentIndex >= MIDIPlayer.playlist.size()) {
 				MIDIPlayer.currentIndex = 0;
+				MIDIPlayer.listenAtLeastOneRound=true;
 				java.util.Collections.shuffle(MIDIPlayer.playlist);
 			}
 			String currentSongName = MIDIPlayer.playlist.get(MIDIPlayer.currentIndex);
@@ -166,6 +168,7 @@ public class MIDIPlayer {
 
 	// TODO: exception handling
 	public static String getCurrentSongName() {
+		if (MIDIPlayer.listenAtLeastOneRound) {return "(เพลงตอนนี้อะไรไม่รู้ รู้แต่ว่าคุณฟังมาครบ 1 รอบแล้ว เราว่าคุณน่าจะจำได้มั้งว่าที่ฟังคือเพลงอะไร...)";}
 		return playlist.get(currentIndex);
 	}
 }
