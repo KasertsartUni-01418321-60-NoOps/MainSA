@@ -11,8 +11,7 @@ public class Main extends javafx.application.Application {
     // entire exception handling info: mode=fatal
     public static void main(String[] args) throws Throwable {
         try {
-            MIDIPlayer.main();
-            MIDIPlayer.play();
+
             try {
                 DatabaseMnm.init();
                 System.out.println(Main.clReportHeader(null, "DEVTEST")+"this is test of see saved database:");
@@ -69,7 +68,6 @@ public class Main extends javafx.application.Application {
     public void stop() {
         try {
             MainAlt1.primaryStage.hide();
-            MIDIPlayer.stop();
             javafx.application.Platform.exit();
             // (DISABLED) in case it don't shutdown lamo
             // try {

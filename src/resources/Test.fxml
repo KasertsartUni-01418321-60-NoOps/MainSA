@@ -31,7 +31,6 @@
     <center>
         <VBox alignment="CENTER" spacing="20">
             <Label text="Welcome to the Modern UI Example"><styleClass><String fx:value="label"/></styleClass></Label>
-            <Label fx:id="MIDIIndicatorLabel" text="Current MIDI song: "><styleClass><String fx:value="label"/><String fx:value="accent-color"/></styleClass></Label>
             <Button fx:id="MainButton" text="Click Me" onAction="#onMainButtonPressed"><styleClass><String fx:value="primary-button"/></styleClass></Button>
         </VBox>
     </center>

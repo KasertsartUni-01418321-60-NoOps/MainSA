@@ -3,28 +3,8 @@ package th.ac.ku.sci.cs.projectsa.uictrl;
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
 
-public class UICtrl_Test implements javafx.fxml.Initializable {
+public class UICtrl_Test  {
 	private boolean isDarkMode = false;
-	@javafx.fxml.FXML
-	private javafx.scene.control.Label MIDIIndicatorLabel;
-	private static UICtrl_Test currentInstance;
-
-	@Override
-	// TODO: exception handling
-	public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
-		UICtrl_Test.currentInstance = this;
-		UICtrl_Test.MIDIPlayerCallback();
-	}
-
-	// TODO: excepiton handling + check .close()
-	public static void MIDIPlayerCallback() {
-		if (currentInstance != null) {
-			try {
-				currentInstance.MIDIIndicatorLabel.setText("Current MIDI song: " + MIDIPlayer.getCurrentSongName());
-			} catch (RuntimeException e) {
-			} // ignore error
-		}
-	}
 
 	// entire exception handling info: mode=fatal
 	@javafx.fxml.FXML
