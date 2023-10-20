@@ -2,3 +2,5 @@
 /.vscode/
 # no class file
 *.class
+# no main.db file
+/build/final/data/main.db
