@@ -1,7 +1,6 @@
 package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
-import javafx.application.Platform;
 import th.ac.ku.sci.cs.projectsa.*;
 
 // TODO: CHANGE SOUNDFONT แต่ใช้ของ ./misc/soundfonts/*
@@ -152,7 +151,7 @@ public class MIDIPlayer {
 		}
 		MIDIPlayer.sequencer.start();
 		// TODO: excepiton handling
-		Platform.runLater(() -> {
+		javafx.application.Platform.runLater(() -> {
 			UICtrl_Test.MIDIPlayerCallback();
 		});
 	}
