@@ -36,7 +36,7 @@ public class DatabaseMnm {
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:./data/main.db");
 			DatabaseMnm.mainDbConnStm1 = DatabaseMnm.mainDbConn.createStatement();
 			try {
-				DatabaseMnm.runSQLcmd(sqlStms, false);
+				DatabaseMnm.runSQLcmds(sqlStms);
 			} catch (MyExceptionHandling.UserException e1) {
 				throw e1;
 			}
@@ -46,28 +46,31 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	// TODO: exception handling + check .close() + doRetTable
-	public static Table[] runSQLcmd(String[] sqlStms, boolean doRetTable) throws MyExceptionHandling.UserException {
-		Table[] tables = null;
-		int i = 0;
-		if (doRetTable) {
-			tables = new Table[sqlStms.length];
-		}
-		String recentSqlStm = null;
-		// java.sql.ResultSetMetaData::getTableName
+	// TODO: runSQLcmds
+	public static Object[] runSQLcmd(String sqlStm, boolean skipGetTable) throws java.sql.SQLException {
+		boolean tmp1 = false;
 		try {
-			for (String sqlStm : sqlStms) {
-				recentSqlStm = sqlStm;
-				if (doRetTable) {
-					// tables[i]=
-				} else {
-					DatabaseMnm.mainDbConnStm1.execute(sqlStm);
-				}
-			}
+			tmp1=DatabaseMnm.mainDbConnStm1.execute(sqlStm);
 		} catch (java.sql.SQLException e1) {
-			throw new MyExceptionHandling.UserException("SQL Error on query: " + recentSqlStm, e1);
+			throw e1;
 		}
-		return tables;
+		// then put resultset as table[]
+		if (tmp1) {
+			if (skipGetTable) {
+				return new Object[] {true,null};
+			}
+			else {
+			DatabaseMnm.Table table = new DatabaseMnm.Table(); 
+			// ...
+			return new Object[] {true,table};
+			}
+		}
+		// else then check if it is update count
+		else {
+			int tmp2= DatabaseMnm.mainDbConnStm1.getUpdateCount();
+			if (tmp2==-1) { return new Object[] {null,null};}
+			else {return new Object[] {false,tmp2};}
+		}
 
 	}
 
