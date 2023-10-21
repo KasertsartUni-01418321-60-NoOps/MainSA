@@ -138,14 +138,12 @@ public class DatabaseMnm {
 		}
 	}
 
-	// TODO: exception handling
 	// entire exception handling info: mode=no
 	private static String getTableNameFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
 		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
 		return metaData.getTableName(1); // Assuming the first column in the result set corresponds to a table.
 	}
 
-	// TODO: exception handling
 	// entire exception handling info: mode=no
 	private static String getColumnName(java.sql.ResultSet resultSet, int columnIndex) throws java.sql.SQLException {
 		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
