@@ -80,10 +80,14 @@ public class Main extends javafx.application.Application {
             }
             System.exit(0);
         } catch (Throwable e) {
-            try {
-                MyExceptionHandling.handleFatalException(e);
-            } catch (Throwable e0) {
-            } // we cannot throw out of this function due to overriden
+            // due to this method is called by MyExceptionHandling.handleFatalException, so if that happens, then we ignore it due to guideline that specified in that file of MyExceptionHandling
+            if (MyExceptionHandling.isFatal) {}
+            else {
+                try {
+                    MyExceptionHandling.handleFatalException(e);
+                } catch (Throwable e0) {
+                } // we cannot throw out of this function due to overriden
+            }
         }
     }
 

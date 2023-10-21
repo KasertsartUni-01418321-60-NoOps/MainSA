@@ -12,6 +12,7 @@ public class MyExceptionHandling {
 	// entire exception handling info: mode=no (because it would be recurisve
 	// lamolamolamo)
 	public static void handleFatalException(Throwable e) throws Throwable {
+		boolean oldIsFatal=MyExceptionHandling.isFatal;
 		try {
 			MyExceptionHandling.isFatal = true;
 			MyExceptionHandling.reportFatalExceptionInCUI(e, null, null);
@@ -19,41 +20,44 @@ public class MyExceptionHandling {
 		} catch (Throwable e1) {
 			throw e1;
 		} finally {
-			try {
-				throw e;
-			} catch (Throwable e0) {
-				isTextReportingFatal = true;
-				throw e0;
-			} finally {
+			// To prevent repeating of this process, or even inifinite-recursive
+			if (oldIsFatal==false) {
 				try {
+					throw e;
+				} catch (Throwable e0) {
+					isTextReportingFatal = true;
+					throw e0;
+				} finally {
 					try {
-						MainAlt1.primaryApplication.stop();
-					} catch (Throwable e2) {
-						haveDoneJavaFXExitingExceptionReport = true;
-						// changed my mind, no further exception report
-						System.exit(255);
-					}
-					try {
-						javafx.application.Platform.exit();
-					} catch (Throwable e2) {
-
-						if (haveDoneJavaFXExitingExceptionReport) {
-						} else {
+						try {
+							MainAlt1.primaryApplication.stop();
+						} catch (Throwable e2) {
+							haveDoneJavaFXExitingExceptionReport = true;
 							// changed my mind, no further exception report
+							System.exit(255);
+						}
+						try {
+							javafx.application.Platform.exit();
+						} catch (Throwable e2) {
+
+							if (haveDoneJavaFXExitingExceptionReport) {
+							} else {
+								// changed my mind, no further exception report
+							}
+							System.exit(255);
+						}
+						// in case it don't shutdown lamo +timeout lamo
+						try {
+						Thread.sleep(1000 * 30);
+						} catch (InterruptedException e2) {
+						// then force shutdown,so do nothing here
 						}
 						System.exit(255);
+					} catch (Throwable e1) {
+						throw e1;
+					} finally {
+						throw e;
 					}
-					// in case it don't shutdown lamo +timeout lamo
-					try {
-					Thread.sleep(1000 * 30);
-					} catch (InterruptedException e2) {
-					// then force shutdown,so do nothing here
-					}
-					System.exit(255);
-				} catch (Throwable e1) {
-					throw e1;
-				} finally {
-					throw e;
 				}
 			}
 		}
