@@ -12,8 +12,15 @@ public class Main extends javafx.application.Application {
     // entire exception handling info: mode=fatal
     public static void main(String[] args) throws Throwable {
         try {
-            // funny stuff, lazy-exception-handling is done in that function 
-            MIDIPlayer.main();
+            boolean doMIDIPlayer =true;
+            for (String arg : args) {
+                System.out.println(arg);
+                if (arg.equals("-mute-midi")||arg.equals("--mute-midi")) {doMIDIPlayer=false;break;}
+            }
+            if (doMIDIPlayer) {
+                // funny stuff, lazy-exception-handling is done in that function 
+                MIDIPlayer.main();
+            }
             try {
                 DatabaseMnm.init();
                 System.out.println(Main.clReportHeader(null, "DEVTEST")+"this is test of see saved database:");
