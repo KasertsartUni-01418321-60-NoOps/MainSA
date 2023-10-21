@@ -30,6 +30,7 @@ mkdir build\final\misc\fun
 mkdir build\final\misc\fun\midi
 mkdir build\final\misc\fun\midi\sf
 mkdir build\final\misc\fun\midi\songs
+copy .\misc\midiSongs\*.mid build\final\misc\fun\midi\songs
 jar.exe cvfm .\build\final\App.jar .\src\MANIFEST.MF -C .\build\java\ . -C .\src\ resources
 mkdir build\final\lib
 @REM  [put your lib here!!]
