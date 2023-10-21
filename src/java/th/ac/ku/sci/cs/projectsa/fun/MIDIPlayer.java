@@ -1,7 +1,6 @@
 package th.ac.ku.sci.cs.projectsa.fun;
 
 import th.ac.ku.sci.cs.projectsa.*;
-import th.ac.ku.sci.cs.projectsa.MyExceptionHandling.UserException;
 
 import javax.sound.midi.*;
 
@@ -62,7 +61,7 @@ public class MIDIPlayer {
 		}
 	}
 
-	public static void realMain() throws UserException, MidiUnavailableException {
+	public static void realMain() throws MyExceptionHandling.UserException, MidiUnavailableException {
 		boolean isSoundFontLoaded = false;
 		boolean isExtSoundFontErr = false;
 		String midiFilePrefix = "./misc/fun/midi/songs/";
