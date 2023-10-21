@@ -5,4 +5,4 @@
 # my 6410406576
 /npc-private
 # ignore this folder, contributor if you want to copy midifile, then create this folder manually
-/misc/midiSongs
+/misc/midiSongs/*
