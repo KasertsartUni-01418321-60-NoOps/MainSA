@@ -46,7 +46,7 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	// TODO: exception handling + check .close()
+	// TODO: exception handling + check .close() + doRetTable
 	public static Table[] runSQLcmd(String[] sqlStms, boolean doRetTable) throws MyExceptionHandling.UserException {
 		Table[] tables = null;
 		int i = 0;
@@ -72,7 +72,6 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	// TODO: check .close()
 	public static void tempSeeDatabaseLamo() throws java.sql.SQLException {
 		java.sql.ResultSet tablesRS = null, tableRS = null;
 		try {
@@ -115,7 +114,7 @@ public class DatabaseMnm {
 		}
 	}
 
-	// TODO: exception ahndling  + check .close()
+	// entire exception handling info: mode=no
 	public static void tempCreateAndSeeMySQLTableDataStr() {
 		            DatabaseMnm.Table testTable = new DatabaseMnm.Table();
             testTable.name = "Rickroll";
@@ -139,14 +138,14 @@ public class DatabaseMnm {
             }
 	}
 	
-	// TODO: exception handling + check .close()
+	// TODO: exception handling
 	// entire exception handling info: mode=no
 	private static String getTableNameFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
 		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
 		return metaData.getTableName(1); // Assuming the first column in the result set corresponds to a table.
 	}
 
-	// TODO: exception handling + check .close()
+	// TODO: exception handling
 	// entire exception handling info: mode=no
 	private static String getColumnName(java.sql.ResultSet resultSet, int columnIndex) throws java.sql.SQLException {
 		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
