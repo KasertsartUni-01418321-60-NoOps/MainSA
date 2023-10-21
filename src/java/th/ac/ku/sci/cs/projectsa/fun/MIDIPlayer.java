@@ -1,6 +1,8 @@
 package th.ac.ku.sci.cs.projectsa.fun;
 
 import th.ac.ku.sci.cs.projectsa.*;
+import th.ac.ku.sci.cs.projectsa.MyExceptionHandling.UserException;
+
 import javax.sound.midi.*;
 
 import java.io.File;
@@ -60,11 +62,17 @@ public class MIDIPlayer {
 		}
 	}
 
-	public static void realMain() throws Exception {
+	public static void realMain() throws UserException, MidiUnavailableException {
 		boolean isSoundFontLoaded = false;
+		boolean isExtSoundFontErr = false;
 		String midiFilePrefix = "./misc/fun/midi/songs/";
-		List<String> soundFontPaths = listFilesInDirectory("./misc/fun/midi/sf/");
-		List<String> midiFiles =  listFilesInDirectory(midiFilePrefix);
+		List<String> soundFontPaths = null;
+		try {
+			soundFontPaths = listFilesInDirectory("./misc/fun/midi/sf/");
+		} catch (MyExceptionHandling.UserException e) {
+			soundFontPaths = new ArrayList<>();
+		}
+		List<String> midiFiles = listFilesInDirectory(midiFilePrefix);
 
 		try {
 			mainSequencer = MidiSystem.getSequencer();
@@ -88,19 +96,40 @@ public class MIDIPlayer {
 		}
 
 		// disable loading of external soundfont because ITDONTWORKKKKKKKKKK
-		if (isSoundFontLoaded && false)
+		isSoundFontLoaded = false;
+		if (isSoundFontLoaded)
 
 		{
-			mainSynthesizer = MidiSystem.getSynthesizer();
-			for (Soundbank soundbank : soundbanks) {
-				if (soundbank != null) {
-					mainSynthesizer.loadAllInstruments(soundbank);
+			try {
+				mainSynthesizer = MidiSystem.getSynthesizer();
+			} catch (MidiUnavailableException e) {
+				isExtSoundFontErr = true;
+			}
+			if (!isExtSoundFontErr) {
+				for (Soundbank soundbank : soundbanks) {
+					if (soundbank != null) {
+						mainSynthesizer.loadAllInstruments(soundbank);
+					}
 				}
 			}
-			mainSequencer_Transmitter = mainSequencer.getTransmitter();
-			mainSynthesizer_Receiver = mainSynthesizer.getReceiver();
+			if (!isExtSoundFontErr) {
+				try {
+					mainSequencer_Transmitter = mainSequencer.getTransmitter();
+					mainSynthesizer_Receiver = mainSynthesizer.getReceiver();
+				} catch (MidiUnavailableException e) {
+					isExtSoundFontErr = true;
+					for (Soundbank soundbank : soundbanks) {
+						if (soundbank != null) {
+							mainSynthesizer.unloadAllInstruments(soundbank);
+						}
+					}
+					mainSynthesizer.loadAllInstruments(mainSynthesizer.getDefaultSoundbank());
+					
+				}
+			}
 			mainSequencer_Transmitter.setReceiver(mainSynthesizer_Receiver);
-		} else {
+		}
+		if (isExtSoundFontErr || !isSoundFontLoaded) {
 			System.out.println(Main.clReportHeader("MIDIPlayer", "DEVFUN")
 					+ "Could not load the any external SoundFont. Using the built-in SoundFont.");
 		}
