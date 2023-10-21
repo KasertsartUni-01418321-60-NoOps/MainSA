@@ -6,3 +6,5 @@
 /build/final/data/main.db
 # my 6410406576
 /npc-private
+# exclude some dirs in /build
+/build/final/misc/fun/midi
