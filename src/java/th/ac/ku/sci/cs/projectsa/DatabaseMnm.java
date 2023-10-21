@@ -50,26 +50,28 @@ public class DatabaseMnm {
 	public static Object[] runSQLcmd(String sqlStm, boolean skipGetTable) throws java.sql.SQLException {
 		boolean tmp1 = false;
 		try {
-			tmp1=DatabaseMnm.mainDbConnStm1.execute(sqlStm);
+			tmp1 = DatabaseMnm.mainDbConnStm1.execute(sqlStm);
 		} catch (java.sql.SQLException e1) {
 			throw e1;
 		}
 		// then put resultset as table[]
 		if (tmp1) {
 			if (skipGetTable) {
-				return new Object[] {true,null};
-			}
-			else {
-			DatabaseMnm.Table table = new DatabaseMnm.Table(); 
-			// ...
-			return new Object[] {true,table};
+				return new Object[] { true, null };
+			} else {
+				DatabaseMnm.Table table = new DatabaseMnm.Table();
+				// ...
+				return new Object[] { true, table };
 			}
 		}
 		// else then check if it is update count
 		else {
-			int tmp2= DatabaseMnm.mainDbConnStm1.getUpdateCount();
-			if (tmp2==-1) { return new Object[] {null,null};}
-			else {return new Object[] {false,tmp2};}
+			int tmp2 = DatabaseMnm.mainDbConnStm1.getUpdateCount();
+			if (tmp2 == -1) {
+				return new Object[] { null, null };
+			} else {
+				return new Object[] { false, tmp2 };
+			}
 		}
 
 	}
