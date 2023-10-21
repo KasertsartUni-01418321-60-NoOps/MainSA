@@ -5,7 +5,7 @@ import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer;
 
 public class Main extends javafx.application.Application {
-    public static void funcTestOFCaughtException(javafx.stage.Stage primary) {
+    public static void funcTestOFCaughtException() {
     }
 
 
