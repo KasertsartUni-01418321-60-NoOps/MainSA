@@ -5,6 +5,7 @@ import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer;
 
 public class Main extends javafx.application.Application {
+    public static String[] args =null;
     public static void funcTestOFCaughtException() {
     }
 
@@ -12,6 +13,7 @@ public class Main extends javafx.application.Application {
     // entire exception handling info: mode=fatal
     public static void main(String[] args) throws Throwable {
         try {
+            Main.args=args;
             boolean doMIDIPlayer =true;
             for (String arg : args) {
                 System.out.println(arg);
