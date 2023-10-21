@@ -2,6 +2,7 @@ package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
+import th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer;
 
 public class Main extends javafx.application.Application {
     public static void funcTestOFCaughtException(javafx.stage.Stage primary) {
@@ -11,7 +12,8 @@ public class Main extends javafx.application.Application {
     // entire exception handling info: mode=fatal
     public static void main(String[] args) throws Throwable {
         try {
-
+            // funny stuff, lazy-exception-handling is done in that function 
+            MIDIPlayer.main();
             try {
                 DatabaseMnm.init();
                 System.out.println(Main.clReportHeader(null, "DEVTEST")+"this is test of see saved database:");
@@ -68,14 +70,15 @@ public class Main extends javafx.application.Application {
     public void stop() {
         try {
             MainAlt1.primaryStage.hide();
+            MIDIPlayer.shutdown();
             javafx.application.Platform.exit();
-            // (DISABLED) in case it don't shutdown lamo
-            // try {
-            // Thread.sleep(1000 * 30);
-            // } catch (InterruptedException e3) {
-            // // then force shutdown,so do nothing here
-            // }
-            // System.exit(0);
+            // in case it don't shutdown lamo
+            try {
+            Thread.sleep(1000 * 30);
+            } catch (InterruptedException e3) {
+            // then force shutdown,so do nothing here
+            }
+            System.exit(0);
         } catch (Throwable e) {
             try {
                 MyExceptionHandling.handleFatalException(e);
