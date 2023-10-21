@@ -70,6 +70,7 @@ public class Main extends javafx.application.Application {
     public void stop() {
         try {
             MainAlt1.primaryStage.hide();
+            // funny stuff, lazy-exception-handling is done in that function 
             MIDIPlayer.shutdown();
             javafx.application.Platform.exit();
             // in case it don't shutdown lamo
