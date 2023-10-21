@@ -18,6 +18,7 @@ public class MIDIPlayer {
 	public static Transmitter mainSequencer_Transmitter = null;
 	public static ExecutorService mainThread = null;
 	private static boolean doingShutdown = false;
+	private static boolean tellSongName =false;
 
 	public static void main() {
 		try {
@@ -62,6 +63,12 @@ public class MIDIPlayer {
 	}
 
 	public static void realMain() throws MyExceptionHandling.UserException, MidiUnavailableException {
+		for (String arg :Main.args) {
+			if (arg.equals("--tell-midi-songname")||arg.equals("-tell-midi-songname")) {
+				MIDIPlayer.tellSongName=true;
+				break;
+			}
+		}
 		boolean isSoundFontLoaded = false;
 		boolean isExtSoundFontErr = false;
 		String midiFilePrefix = "./misc/fun/midi/songs/";
@@ -148,6 +155,9 @@ public class MIDIPlayer {
 							mainSequencer
 									.setSequence(MidiSystem.getSequence(new java.io.File(midiFilePrefix + midiFile)));
 							mainSequencer.start();
+							if (MIDIPlayer.tellSongName) {
+								System.out.println(Main.clReportHeader("MIDIPlayer:<mainThread-function>", "DEVFUN")+"Current song is: "+midiFile);
+							}
 							while (mainSequencer.isRunning()) {
 								try {
 									Thread.sleep(1000);
