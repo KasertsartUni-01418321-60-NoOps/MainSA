@@ -80,18 +80,18 @@ public class DatabaseMnm {
 			int colCount = 0;
 			while (tablesRS.next()) {
 				String tableName = tablesRS.getString("TABLE_NAME");
-				System.out.println(Main.clReportHeader(null, "DEVTEST")+"[TABLE: " + tableName + "]");
+				System.out.println(Main.clReportHeader(null, "DEVTEST") + "[TABLE: " + tableName + "]");
 				tableRS = mainDbConnStm1.executeQuery("SELECT * FROM " + tableName);
 				java.sql.ResultSetMetaData metaDataTableRS = tableRS.getMetaData();
 				while (tableRS.next()) {
-					System.out.println(Main.clReportHeader(null, "DEVTEST")+"> [ROW OF TABLE]");
+					System.out.println(Main.clReportHeader(null, "DEVTEST") + "> [ROW OF TABLE]");
 					colCount = metaDataTableRS.getColumnCount();
 					for (int i = 1; i <= colCount; i++) {
 						String columnName;
 						columnName = metaDataTableRS.getColumnName(i);
 						String columnValue;
 						columnValue = tableRS.getString(i);
-						System.out.println(Main.clReportHeader(null, "DEVTEST")+columnName + ": " + columnValue);
+						System.out.println(Main.clReportHeader(null, "DEVTEST") + columnName + ": " + columnValue);
 					}
 					System.out.println(Main.clReportHeader(null, "DEVTEST")); // Separate rows
 				}
@@ -116,28 +116,28 @@ public class DatabaseMnm {
 
 	// entire exception handling info: mode=no
 	public static void tempCreateAndSeeMySQLTableDataStr() {
-		            DatabaseMnm.Table testTable = new DatabaseMnm.Table();
-            testTable.name = "Rickroll";
-            DatabaseMnm.Column<Integer> testTable_Id = new DatabaseMnm.Column<Integer>();
-            testTable_Id.name = "Id";
-            testTable_Id.type = Integer.class;
-            DatabaseMnm.Column<String> testTable_Lyrics = new DatabaseMnm.Column<String>();
-            testTable_Lyrics.name = "Lyrics";
-            testTable_Lyrics.type = String.class;
-            testTable_Id.vals = new Integer[] { 1, 2 };
-            testTable_Lyrics.vals = new String[] { "NeverGonnaGiveYouUp", "MyHeartWillGoOn" };
-            testTable.cols = new DatabaseMnm.Column<?>[] { testTable_Id, testTable_Lyrics };
-            //
-            for (DatabaseMnm.Column<?> col : testTable.cols) {
-                System.out.println(Main.clReportHeader(null, "DEVTEST")+"Col:"+col);
-                System.out.println(Main.clReportHeader(null, "DEVTEST")+"Name:"+col.name);
-                System.out.println(Main.clReportHeader(null, "DEVTEST")+"Type:"+col.type);
-                for (Object obj: col.vals) {
-                    System.out.println(Main.clReportHeader(null, "DEVTEST")+"> Val:"+col.type.cast(obj));
-                }
-            }
+		DatabaseMnm.Table testTable = new DatabaseMnm.Table();
+		testTable.name = "Rickroll";
+		DatabaseMnm.Column<Integer> testTable_Id = new DatabaseMnm.Column<Integer>();
+		testTable_Id.name = "Id";
+		testTable_Id.type = Integer.class;
+		DatabaseMnm.Column<String> testTable_Lyrics = new DatabaseMnm.Column<String>();
+		testTable_Lyrics.name = "Lyrics";
+		testTable_Lyrics.type = String.class;
+		testTable_Id.vals = new Integer[] { 1, 2 };
+		testTable_Lyrics.vals = new String[] { "NeverGonnaGiveYouUp", "MyHeartWillGoOn" };
+		testTable.cols = new DatabaseMnm.Column<?>[] { testTable_Id, testTable_Lyrics };
+		//
+		for (DatabaseMnm.Column<?> col : testTable.cols) {
+			System.out.println(Main.clReportHeader(null, "DEVTEST") + "Col:" + col);
+			System.out.println(Main.clReportHeader(null, "DEVTEST") + "Name:" + col.name);
+			System.out.println(Main.clReportHeader(null, "DEVTEST") + "Type:" + col.type);
+			for (Object obj : col.vals) {
+				System.out.println(Main.clReportHeader(null, "DEVTEST") + "> Val:" + col.type.cast(obj));
+			}
+		}
 	}
-	
+
 	// TODO: exception handling
 	// entire exception handling info: mode=no
 	private static String getTableNameFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
