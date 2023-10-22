@@ -16,7 +16,6 @@ public class Main extends javafx.application.Application {
             Main.args=args;
             boolean doMIDIPlayer =true;
             for (String arg : args) {
-                System.out.println(arg);
                 if (arg.equals("-mute-midi")||arg.equals("--mute-midi")) {doMIDIPlayer=false;break;}
             }
             if (doMIDIPlayer) {
