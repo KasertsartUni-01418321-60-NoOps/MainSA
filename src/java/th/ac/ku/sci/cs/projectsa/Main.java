@@ -81,14 +81,11 @@ public class Main extends javafx.application.Application {
             MainAlt1.primaryStage.hide();
             // funny stuff, lazy-exception-handling is done in that function 
             MIDIPlayer.shutdown();
-            javafx.application.Platform.exit();
-            // in case it don't shutdown lamo
-            try {
-            Thread.sleep(1000 * 30);
-            } catch (InterruptedException e3) {
-            // then force shutdown,so do nothing here
+            if (MyExceptionHandling.isFatal) {}
+            else {
+                javafx.application.Platform.exit();
+                System.exit(0);
             }
-            System.exit(0);
         } catch (Throwable e) {
             // due to this method is called by MyExceptionHandling.handleFatalException, so if that happens, then we ignore it due to guideline that specified in that file of MyExceptionHandling
             if (MyExceptionHandling.isFatal) {}
