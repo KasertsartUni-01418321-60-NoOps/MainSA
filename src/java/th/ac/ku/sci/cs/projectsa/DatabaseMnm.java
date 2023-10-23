@@ -42,7 +42,7 @@ public class DatabaseMnm {
 			};
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:./data/main.db");
 			DatabaseMnm.mainDbConnStm1 = DatabaseMnm.mainDbConn.createStatement();
-			DatabaseMnm.runSQLcmds(sqlStms,true);
+			DatabaseMnm.runSQLcmds(sqlStms, true);
 		} catch (java.sql.SQLException e) {
 			throw e;
 		}
@@ -80,16 +80,17 @@ public class DatabaseMnm {
 
 	// entire exception handling info: mode=no
 	public static Object[][] runSQLcmds(String[] sqlStms, boolean skipGetTable) throws java.sql.SQLException {
-		Object[][] retVal= new Object[sqlStms.length][];
+		Object[][] retVal = new Object[sqlStms.length][];
 		for (int i = 0; i < sqlStms.length; i++) {
-			retVal[i]=runSQLcmd(sqlStms[i], skipGetTable);
+			retVal[i] = runSQLcmd(sqlStms[i], skipGetTable);
 		}
 		return retVal;
 	}
 
 	// TODO: check resultSet เพราะผมเข้าใจผิดคิดว่า มันจะดึงทั้ง column 555
 	// entire exception handling info: mode=no
-	public static Object getDataWithJavaTypeBasedOnSQLType(int sqlType, java.sql.ResultSet resultSet, int columnIndex) throws java.sql.SQLException {
+	public static Object getDataWithJavaTypeBasedOnSQLType(int sqlType, java.sql.ResultSet resultSet, int columnIndex)
+			throws java.sql.SQLException {
 		switch (sqlType) {
 			case java.sql.Types.INTEGER:
 				return resultSet.getInt(columnIndex);
@@ -104,7 +105,7 @@ public class DatabaseMnm {
 			case java.sql.Types.BLOB:
 				return resultSet.getBytes(columnIndex);
 			case java.sql.Types.NUMERIC:
-			// for default handler in case no any matched sqlType
+				// for default handler in case no any matched sqlType
 			default:
 				return resultSet.getBigDecimal(columnIndex);
 		}
@@ -160,12 +161,12 @@ public class DatabaseMnm {
 		DatabaseMnm.Column<Integer> testTable_Id = new DatabaseMnm.Column<Integer>();
 		testTable_Id.name = "Id";
 		// TODO:
-		testTable_Id.sqlType= java.sql.Types.INTEGER;
+		testTable_Id.sqlType = java.sql.Types.INTEGER;
 		testTable_Id.dbType = "INTEGER";
 		testTable_Id.javaType = Integer.class;
 		DatabaseMnm.Column<String> testTable_Lyrics = new DatabaseMnm.Column<String>();
 		testTable_Lyrics.name = "Lyrics";
-		testTable_Lyrics.sqlType= java.sql.Types.VARCHAR;
+		testTable_Lyrics.sqlType = java.sql.Types.VARCHAR;
 		testTable_Lyrics.dbType = "TEXT";
 		testTable_Lyrics.javaType = String.class;
 		testTable_Id.vals = new Integer[] { 1, 2 };
@@ -175,7 +176,8 @@ public class DatabaseMnm {
 		for (DatabaseMnm.Column<?> col : testTable.cols) {
 			System.out.println(Main.clReportHeader(null, "DEVTEST") + "Col:" + col);
 			System.out.println(Main.clReportHeader(null, "DEVTEST") + "Name:" + col.name);
-			System.out.println(Main.clReportHeader(null, "DEVTEST") + "sqlType (you compare to java.sql.Types manually, because it is not enum lamo):" + col.sqlType);
+			System.out.println(Main.clReportHeader(null, "DEVTEST")
+					+ "sqlType (you compare to java.sql.Types manually, because it is not enum lamo):" + col.sqlType);
 			System.out.println(Main.clReportHeader(null, "DEVTEST") + "dbType:" + col.dbType);
 			System.out.println(Main.clReportHeader(null, "DEVTEST") + "JavaType:" + col.javaType);
 			for (Object obj : col.vals) {
@@ -184,7 +186,6 @@ public class DatabaseMnm {
 		}
 	}
 
-
 	// entire exception handling info: mode=no
 	private static String getTableNameFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
 		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
@@ -192,66 +193,71 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	private static String getColumnNameFromResultSet(java.sql.ResultSet resultSet, int columnIndex) throws java.sql.SQLException {
+	private static String getColumnNameFromResultSet(java.sql.ResultSet resultSet, int columnIndex)
+			throws java.sql.SQLException {
 		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
 		return metaData.getColumnName(columnIndex);
 	}
 
 	// entire exception handling info: mode=no
-	private static Object[] getColumnDataTypeFromResultSet(java.sql.ResultSet resultSet, int columnIndex) throws java.sql.SQLException {
+	private static Object[] getColumnDataTypeFromResultSet(java.sql.ResultSet resultSet, int columnIndex)
+			throws java.sql.SQLException {
 		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
-        int sqlType= metaData.getColumnType(columnIndex);
-		String dbType= metaData.getColumnTypeName(columnIndex);
+		int sqlType = metaData.getColumnType(columnIndex);
+		String dbType = metaData.getColumnTypeName(columnIndex);
 		Class<?> javaType;
-        switch (sqlType) {
-			// การแปลงเป็น javaType ผมอิงตาม ChatGPT lamo โดยถามมันว่า อิงตาม general situation
-            case java.sql.Types.INTEGER:
-				javaType=Integer.class;
+		switch (sqlType) {
+			// การแปลงเป็น javaType ผมอิงตาม ChatGPT lamo โดยถามมันว่า อิงตาม general
+			// situation
+			case java.sql.Types.INTEGER:
+				javaType = Integer.class;
 				break;
 			case java.sql.Types.BIGINT:
-				javaType=Long.class;
+				javaType = Long.class;
 				break;
 			case java.sql.Types.REAL:
-				javaType=Float.class;
+				javaType = Float.class;
 				break;
 			case java.sql.Types.FLOAT:
-				javaType=Double.class;
+				javaType = Double.class;
 				break;
 			case java.sql.Types.VARCHAR:
-				javaType=String.class;
+				javaType = String.class;
 				break;
 			case java.sql.Types.BLOB:
-				javaType=(new byte[] {}).getClass();
+				javaType = (new byte[] {}).getClass();
 				break;
 			case java.sql.Types.NUMERIC:
-			// for default case, still using given sqlType but using default javaType for our code
-            default:
-				javaType=java.math.BigDecimal.class;
+				// for default case, still using given sqlType but using default javaType for
+				// our code
+			default:
+				javaType = java.math.BigDecimal.class;
 				break;
-            
-        }
-		return new Object[] {sqlType,dbType,javaType};
-    }
 
-    public static <T> List<T> getColumnValues(ResultSet resultSet, String columnName, Class<T> javaType) throws SQLException {
-        List<T> values = new ArrayList<>();
-        
-        while (resultSet.next()) {
-            T value = null;
-            if (javaType == Integer.class) {
-                value = javaType.cast(resultSet.getInt(columnName));
-            } else if (javaType == String.class) {
-                value = javaType.cast(resultSet.getString(columnName));
-            } else if (javaType == Double.class) {
-                value = javaType.cast(resultSet.getDouble(columnName));
-            }
-            // Add more data type checks and conversions as needed for other Java types.
-            
-            values.add(value);
-        }
-        
-        return values;
-    }
+		}
+		return new Object[] { sqlType, dbType, javaType };
+	}
+
+	public static <T> List<T> getColumnValues(ResultSet resultSet, String columnName, Class<T> javaType)
+			throws SQLException {
+		List<T> values = new ArrayList<>();
+
+		while (resultSet.next()) {
+			T value = null;
+			if (javaType == Integer.class) {
+				value = javaType.cast(resultSet.getInt(columnName));
+			} else if (javaType == String.class) {
+				value = javaType.cast(resultSet.getString(columnName));
+			} else if (javaType == Double.class) {
+				value = javaType.cast(resultSet.getDouble(columnName));
+			}
+			// Add more data type checks and conversions as needed for other Java types.
+
+			values.add(value);
+		}
+
+		return values;
+	}
 
 	// TODO: getColumnCountFromResultSet
 
@@ -262,8 +268,8 @@ public class DatabaseMnm {
 
 	public static class Column<T> {
 		public String name = null;
-		public Integer sqlType =null;
-		public String dbType =null;
+		public Integer sqlType = null;
+		public String dbType = null;
 		public Class<T> javaType = null;
 		public T[] vals = null;
 	}
