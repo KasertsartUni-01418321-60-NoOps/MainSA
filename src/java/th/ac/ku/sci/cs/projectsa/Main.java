@@ -24,17 +24,11 @@ public class Main extends javafx.application.Application {
             }
             try {
                 DatabaseMnm.init();
-                System.out.println(Main.clReportHeader(null, "DEVTEST")+"this is test of see saved database:");
-                System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE START>");
-                DatabaseMnm.tempSeeDatabaseLamo();
-                System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE END>");
-                System.out.println(Main.clReportHeader(null, "DEVTEST")+"and this is test of create my datastr of sqltable, and print them lamo:");
+                System.out.println(Main.clReportHeader(null, "DEVTEST")+"this is test of create my datastr of sqltable, and print them lamo:");
                 System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE START>");
                 DatabaseMnm.tempCreateAndSeeMySQLTableDataStr();
                 System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE END>");
             } catch (java.sql.SQLException e1) {
-                throw e1;
-            } catch (MyExceptionHandling.UserException e1) {
                 throw e1;
             }
             launch(args);
