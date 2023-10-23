@@ -116,7 +116,8 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	// TODO: separate become function that (get ResultSet from SQL query) + (get Table obj from ResultSet) + (Print Table obj) 
+	// TODO: separate become function that (get ResultSet from SQL query) + (get
+	// Table obj from ResultSet) + (Print Table obj)
 	public static void tempSeeDatabaseLamo() throws java.sql.SQLException {
 		java.sql.ResultSet tablesRS = null, tableRS = null;
 		try {
@@ -206,7 +207,8 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	// REMARK: only determine by using of native datatype in SQL query only, do not using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC}
+	// REMARK: only determine by using of native datatype in SQL query only, do not
+	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC}
 	private static Object[] getColumnDataTypeFromResultSet(java.sql.ResultSet resultSet, int columnIndex)
 			throws java.sql.SQLException {
 		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
@@ -216,7 +218,8 @@ public class DatabaseMnm {
 		switch (sqlType) {
 			// การแปลงเป็น javaType ผมอิงตาม ChatGPT lamo โดยถามมันว่า อิงตาม general
 			// situation
-			// TODO: บอกด้วยว่า db table declare แบบไหนได้อะไร แล้ว ถ้าไม่มี table declare แล้ว sqltype แบบไหนจะ route ไปอันไหน
+			// TODO: บอกด้วยว่า db table declare แบบไหนได้อะไร แล้ว ถ้าไม่มี table declare
+			// แล้ว sqltype แบบไหนจะ route ไปอันไหน
 			case java.sql.Types.INTEGER:
 				javaType = Integer.class;
 				break;
@@ -247,13 +250,17 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	// REMARK: only determine by using of native datatype in SQL query only, do not using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC}
-	public static <T> List<T> getColumnValuesFromResultSet(ResultSet resultSet, int columnIndex, Class<T> javaType, Integer initRowCountForArrayList)
+	// REMARK: only determine by using of native datatype in SQL query only, do not
+	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC}
+	public static <T> List<T> getColumnValuesFromResultSet(ResultSet resultSet, int columnIndex, Class<T> javaType,
+			Integer initRowCountForArrayList)
 			throws java.sql.SQLException {
-		List<T> values =null;
-		if (initRowCountForArrayList==null) {values = new LinkedList<>();}
-		else {values = new ArrayList<>(initRowCountForArrayList);}
-		
+		List<T> values = null;
+		if (initRowCountForArrayList == null) {
+			values = new LinkedList<>();
+		} else {
+			values = new ArrayList<>(initRowCountForArrayList);
+		}
 
 		while (resultSet.next()) {
 			T value = null;
@@ -281,35 +288,34 @@ public class DatabaseMnm {
 		return values;
 	}
 
-
 	public static Table processResultSet(ResultSet resultSet) throws SQLException {
-        Table table = new Table();
-        List<Column<?>> columns = new ArrayList<>();
+		Table table = new Table();
+		List<Column<?>> columns = new ArrayList<>();
 
-        ResultSetMetaData metaData = resultSet.getMetaData();
-        table.name = getTableNameFromResultSet(resultSet);
+		ResultSetMetaData metaData = resultSet.getMetaData();
+		table.name = getTableNameFromResultSet(resultSet);
 
-        int columnCount = metaData.getColumnCount();
-        for (int i = 1; i <= columnCount; i++) {
-            Column<Object> column = new Column<>();
-            column.name = getColumnNameFromResultSet(resultSet, i);
+		int columnCount = metaData.getColumnCount();
+		for (int i = 1; i <= columnCount; i++) {
+			Column<Object> column = new Column<>();
+			column.name = getColumnNameFromResultSet(resultSet, i);
 
-            // Use your existing getColumnDataTypeFromResultSet function
-            Object[] dataTypeInfo = getColumnDataTypeFromResultSet(resultSet, i);
-            column.sqlType = (Integer) dataTypeInfo[0];
-            column.dbType = (String) dataTypeInfo[1];
-            column.javaType = (Class<Object>) dataTypeInfo[2];
+			// Use your existing getColumnDataTypeFromResultSet function
+			Object[] dataTypeInfo = getColumnDataTypeFromResultSet(resultSet, i);
+			column.sqlType = (Integer) dataTypeInfo[0];
+			column.dbType = (String) dataTypeInfo[1];
+			column.javaType = (Class<Object>) dataTypeInfo[2];
 
-            // Use your existing getColumnValuesFromResultSet function
-            List<Object> values = getColumnValuesFromResultSet(resultSet, i, column.javaType,null);
-            column.vals = values.toArray(new Object[0]);
+			// Use your existing getColumnValuesFromResultSet function
+			List<Object> values = getColumnValuesFromResultSet(resultSet, i, column.javaType, null);
+			column.vals = values.toArray(new Object[0]);
 
-            columns.add(column);
-        }
+			columns.add(column);
+		}
 
-        table.cols = columns.toArray(new Column<?>[0]);
-        return table;
-    }
+		table.cols = columns.toArray(new Column<?>[0]);
+		return table;
+	}
 
 	// TODO: getColumnCountFromResultSet
 
