@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import th.ac.ku.sci.cs.projectsa.*;
 
-// TODO: add separator for zone of object lamo, also resort for me lamo
+// lessI TODO: add separator for zone of object lamo, also resort for me lamo
 public class DatabaseMnm {
 	public static java.sql.Connection mainDbConn = null;
 	public static java.sql.Statement mainDbConnStm1 = null;
@@ -107,9 +108,10 @@ public class DatabaseMnm {
 			case java.sql.Types.BLOB:
 				return resultSet.getBytes(columnIndex);
 			case java.sql.Types.NUMERIC:
-				// for default handler in case no any matched sqlType
-			default:
 				return resultSet.getBigDecimal(columnIndex);
+			default:
+				// it must not reached, so give runtimeexception
+				throw new MyExceptionHandling.UserRuntimeException("Given javaType is not supported");
 		}
 	}
 
@@ -159,7 +161,7 @@ public class DatabaseMnm {
 
 	// entire exception handling info: mode=no
 	// TODO: see above TODO
-	public static void tempCreateAndSeeMySQLTableDataStr() {
+	public static void unused_tempCreateAndSeeMySQLTableDataStr() {
 		DatabaseMnm.Table testTable = new DatabaseMnm.Table();
 		testTable.name = "Rickroll";
 		DatabaseMnm.Column<Integer> testTable_Id = new DatabaseMnm.Column<Integer>();
@@ -234,11 +236,11 @@ public class DatabaseMnm {
 				javaType = byte[].class;
 				break;
 			case java.sql.Types.NUMERIC:
-				// for default case, still using given sqlType but using default javaType for
-				// our code
-			default:
 				javaType = java.math.BigDecimal.class;
 				break;
+			default:
+				// it must not reached, so give runtimeexception
+				throw new MyExceptionHandling.UserRuntimeException("Given javaType is not supported");
 
 		}
 		return new Object[] { sqlType, dbType, javaType };
@@ -246,9 +248,12 @@ public class DatabaseMnm {
 
 	// entire exception handling info: mode=no
 	// REMARK: only determine by using of native datatype in SQL query only, do not using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC}
-	public static <T> List<T> getColumnValuesFromResultSet(ResultSet resultSet, int columnIndex, Class<T> javaType)
+	public static <T> List<T> getColumnValuesFromResultSet(ResultSet resultSet, int columnIndex, Class<T> javaType, Integer initRowCountForArrayList)
 			throws java.sql.SQLException {
-		List<T> values = new ArrayList<>();
+		List<T> values =null;
+		if (initRowCountForArrayList==null) {values = new LinkedList<>();}
+		else {values = new ArrayList<>(initRowCountForArrayList);}
+		
 
 		while (resultSet.next()) {
 			T value = null;
@@ -266,7 +271,10 @@ public class DatabaseMnm {
 				value = javaType.cast(resultSet.getBytes(columnIndex));
 			} else if (javaType == java.math.BigDecimal.class) {
 				value = javaType.cast(resultSet.getBigDecimal(columnIndex));
-			} 
+			} else {
+				// it must not reached, so give runtimeexception
+				throw new MyExceptionHandling.UserRuntimeException("Given javaType is not supported");
+			}
 			values.add(value);
 		}
 
@@ -290,10 +298,10 @@ public class DatabaseMnm {
             Object[] dataTypeInfo = getColumnDataTypeFromResultSet(resultSet, i);
             column.sqlType = (Integer) dataTypeInfo[0];
             column.dbType = (String) dataTypeInfo[1];
-            column.javaType = (Class<Object>) dataTypeInfo[2);
+            column.javaType = (Class<Object>) dataTypeInfo[2];
 
             // Use your existing getColumnValuesFromResultSet function
-            List<Object> values = getColumnValuesFromResultSet(resultSet, i, column.javaType);
+            List<Object> values = getColumnValuesFromResultSet(resultSet, i, column.javaType,null);
             column.vals = values.toArray(new Object[0]);
 
             columns.add(column);
