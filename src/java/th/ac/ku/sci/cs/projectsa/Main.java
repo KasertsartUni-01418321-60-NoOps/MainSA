@@ -24,9 +24,9 @@ public class Main extends javafx.application.Application {
             }
             try {
                 DatabaseMnm.init();
-                System.out.println(Main.clReportHeader(null, "DEVTEST")+"this is test of create my datastr of sqltable, and print them lamo:");
+                System.out.println(Main.clReportHeader(null, "DEVTEST")+"this is test of create our db and print them lamo:");
                 System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE START>");
-                DatabaseMnm.tempCreateAndSeeMySQLTableDataStr();
+                DatabaseMnm.tempSeeDatabaseLamo();
                 System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE END>");
             } catch (java.sql.SQLException e1) {
                 throw e1;
