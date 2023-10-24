@@ -1,14 +1,6 @@
 package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
-
-// TODO: ลบ import เลยๆ
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import th.ac.ku.sci.cs.projectsa.*;
 
 public class DatabaseMnm {

@@ -1,10 +1,7 @@
 package th.ac.ku.sci.cs.projectsa;
 
-// TODO: mangage this lamo
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
-import javafx.scene.chart.PieChart.Data;
 import th.ac.ku.sci.cs.projectsa.*;
-import th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer;
 
 public class Main extends javafx.application.Application {
     public static String[] args =null;
