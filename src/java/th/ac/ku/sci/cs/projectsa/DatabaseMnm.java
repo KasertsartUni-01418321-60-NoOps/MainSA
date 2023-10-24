@@ -3,13 +3,11 @@ package th.ac.ku.sci.cs.projectsa;
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import javafx.scene.chart.PieChart.Data;
 import th.ac.ku.sci.cs.projectsa.*;
 
 public class DatabaseMnm {
@@ -162,8 +160,8 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	// REMARK: only determine by using of native datatype in SQL query only, do not
-	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC}
+	// REMARK: only determine by using of available  javatype  in getColumnDataTypeFromResultSet() only, do not
+	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC} to control possible output of getColumnDataTypeFromResultSet() 
 	public static <T> T getDataWithJavaTypeBasedOnJavaType(Class<T>  javaType, java.sql.ResultSet resultSet, int columnIndex)
 			throws java.sql.SQLException {
 		if (javaType==Integer.class)
@@ -188,8 +186,8 @@ public class DatabaseMnm {
 
 	// entire exception handling info: mode=no
 	// WARNING: this would executed `resultSet.next()` 
-	// REMARK: only determine by using of native datatype in SQL query only, do not
-	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC}
+	// REMARK: only determine by using of available  javatype  in getColumnDataTypeFromResultSet() only, do not
+	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC} to control possible output of getColumnDataTypeFromResultSet() 
 	public static <T> List<T> getColumnValuesFromResultSet(ResultSet resultSet, int columnIndex, Class<T> javaType,
 			Integer initRowCountForArrayList)
 			throws java.sql.SQLException {
@@ -207,23 +205,43 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
+	protected static <T> Column<T> convertResultSetToTable_Helper1_createColumnWithSpecificJavaType(Class<T> javaType) {
+		Column<T> col =new Column<T>();
+		col.javaType=javaType;
+		col.vals= new LinkedList<T>();
+		return col;
+	}
+
+		// entire exception handling info: mode=no
+	protected static <T> void convertResultSetToTable_Helper2_addValueToColumnWithSpecificJavaType(Column<?> col, Class<T> javaType, ResultSet resultSet, int colIndex ) throws SQLException {
+		Column<T> tmp_newcol=(Column<T>) col;
+		tmp_newcol.vals.add(
+			getDataWithJavaTypeBasedOnJavaType(javaType,resultSet,colIndex)
+		);
+		
+	}
+
+	// entire exception handling info: mode=no
 	// WARNING: this would executed `resultSet.next()` 
 	public static Table convertResultSetToTable(java.sql.ResultSet resultSet) throws java.sql.SQLException {
 		Table table = new Table();
 		table.name=getTableNameFromResultSet(resultSet);
-		table.cols=new Column[getColsCountFromResultSet(resultSet)];
+		table.cols=new Column<?>[getColsCountFromResultSet(resultSet)];
 		Object[] tmp_colDataInfo=null;
-		Column tmp_col=null;
 		for (int i = 0; i < table.cols.length; i++) {
 			int colIndex=i+1;
 			tmp_colDataInfo = getColumnDataTypeFromResultSet(resultSet, colIndex);
-			table.cols[i] = new Column();
-			tmp_col=table.cols[i];
-			tmp_col.name= getColumnNameFromResultSet(resultSet, colIndex);
-			tmp_col.dbType = (String) tmp_colDataInfo[0];
-			tmp_col.sqlType= (Integer) tmp_colDataInfo[1];
-			tmp_col.javaType=(Class<?>) tmp_colDataInfo[2];
-			tmp_col.vals = getColumnValuesFromResultSet(resultSet, colIndex, tmp_col.javaType, null);
+			table.cols[i] = convertResultSetToTable_Helper1_createColumnWithSpecificJavaType((Class<?>) tmp_colDataInfo[2]);
+			table.cols[i].name= getColumnNameFromResultSet(resultSet, colIndex);
+			table.cols[i].dbType = (String) tmp_colDataInfo[0];
+			table.cols[i].sqlType= (Integer) tmp_colDataInfo[1];
+			// for .javaType/.vals setting, it already done in createColumnWithSpecificJavaType, due to limitation and my knowledge about Java dynamic type lamo
+		} 
+		while (resultSet.next()) {
+			for (int i = 0; i < table.cols.length; i++) {
+				int colIndex=i+1;
+				convertResultSetToTable_Helper2_addValueToColumnWithSpecificJavaType(table.cols[i], (Class<?>) table.cols[i].javaType, resultSet, colIndex);
+			}
 		}
 		return table;
 	}
@@ -238,7 +256,7 @@ public class DatabaseMnm {
 		System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "Name:" + table.name);
 		System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "Column Length:" + table.cols.length);
 		System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO")); // new line sep
-		for (DatabaseMnm.Column col : table.cols) {
+		for (DatabaseMnm.Column<?> col : table.cols) {
 			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "> [START OF SQL Column Printing]");
 			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "Name:" + col.name);
 			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "sqlType (you compare to java.sql.Types manually, because it is not enum lamo):" + col.sqlType);
@@ -272,15 +290,15 @@ public class DatabaseMnm {
 
 	public static class Table {
 		public String name = null;
-		public Column[] cols = null;
+		public Column<?>[] cols = null;
 	}
 
-	public static class Column {
+	public static class Column<T> {
 		public String name = null;
 		public Integer sqlType = null;
 		public String dbType = null;
-		public Class<?> javaType = null;
-		public List<?> vals = null;
+		public Class<T> javaType = null;
+		public List<T> vals = null;
 	}
 
 }
