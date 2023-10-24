@@ -95,11 +95,74 @@ public class DatabaseMnm {
 		}
 		return retVal;
 	}
-
-	// [Zone:Unmanaged]
-	// TODO: for sorting in this zone
+	
+	// [Zone:PublicHelper]
 
 	// entire exception handling info: mode=no
+	public static String getTableNameFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
+		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
+		return metaData.getTableName(1); // Assuming the first column in the result set corresponds to a table.
+	}
+
+	// entire exception handling info: mode=no
+	public  static int getColsCountFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
+		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
+		return  metaData.getColumnCount();
+	}
+
+	// entire exception handling info: mode=no
+	public  static String getColumnNameFromResultSet(java.sql.ResultSet resultSet, int columnIndex)
+			throws java.sql.SQLException {
+		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
+		return metaData.getColumnName(columnIndex);
+	}
+
+	// entire exception handling info: mode=no
+	// REMARK: only determine by using of native datatype in SQL query only, do not
+	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC}
+	public static Object[] getColumnDataTypeFromResultSet(java.sql.ResultSet resultSet, int columnIndex)
+			throws java.sql.SQLException {
+		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
+		int sqlType = metaData.getColumnType(columnIndex);
+		String dbType = metaData.getColumnTypeName(columnIndex);
+		Class<?> javaType;
+		switch (sqlType) {
+			// การแปลงเป็น javaType ผมอิงตาม ChatGPT lamo โดยถามมันว่า อิงตาม general
+			// situation
+			// TODO: บอกด้วยว่า db table declare แบบไหนได้อะไร แล้ว ถ้าไม่มี table declare
+			// แล้ว sqltype แบบไหนจะ route ไปอันไหน
+			case java.sql.Types.INTEGER:
+				javaType = Integer.class;
+				break;
+			case java.sql.Types.BIGINT:
+				javaType = Long.class;
+				break;
+			case java.sql.Types.REAL:
+				javaType = Float.class;
+				break;
+			case java.sql.Types.FLOAT:
+				javaType = Double.class;
+				break;
+			case java.sql.Types.VARCHAR:
+				javaType = String.class;
+				break;
+			case java.sql.Types.BLOB:
+				javaType = byte[].class;
+				break;
+			case java.sql.Types.NUMERIC:
+				javaType = java.math.BigDecimal.class;
+				break;
+			default:
+				// it must not reached, so give runtimeexception
+				throw new MyExceptionHandling.UserRuntimeException("Given javaType is not supported");
+
+		}
+		return new Object[] { sqlType, dbType, javaType };
+	}
+
+	// entire exception handling info: mode=no
+	// REMARK: only determine by using of native datatype in SQL query only, do not
+	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC}
 	public static <T> T getDataWithJavaTypeBasedOnJavaType(Class<T>  javaType, java.sql.ResultSet resultSet, int columnIndex)
 			throws java.sql.SQLException {
 		if (javaType==Integer.class)
@@ -121,6 +184,50 @@ public class DatabaseMnm {
 			throw new MyExceptionHandling.UserRuntimeException("Given javaType is not supported");}
 	
 	}
+
+	// entire exception handling info: mode=no
+	// REMARK: only determine by using of native datatype in SQL query only, do not
+	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC}
+	public static <T> List<T> getColumnValuesFromResultSet(ResultSet resultSet, int columnIndex, Class<T> javaType,
+			Integer initRowCountForArrayList)
+			throws java.sql.SQLException {
+		List<T> values = null;
+		if (initRowCountForArrayList == null) {
+			values = new LinkedList<>();
+		} else {
+			values = new ArrayList<>(initRowCountForArrayList);
+		}
+		while (resultSet.next()) {
+			values.add(getDataWithJavaTypeBasedOnJavaType(javaType,resultSet,columnIndex));
+		}
+
+		return values;
+	}
+
+	// entire exception handling info: mode=no
+	public static Table convertResultSetToTable(java.sql.ResultSet resultSet) throws java.sql.SQLException {
+		ResultSetMetaData metaData = resultSet.getMetaData();
+		Table table = new Table();
+		table.name=getTableNameFromResultSet(resultSet);
+		table.cols=new Column[getColsCountFromResultSet(resultSet)];
+		Object[] tmp_colDataInfo=null;
+		Column tmp_col=null;
+		// TODO: อย่าลืมเตือนเพื่อนล่ะว่า index ต้องดูดีๆนะว่าเริ่มจาก 0/1
+		for (int i = 1; i <= table.cols.length; i++) {
+			tmp_colDataInfo = getColumnDataTypeFromResultSet(resultSet, i);
+			table.cols[i] = new Column();
+			tmp_col=table.cols[i];
+			tmp_col.name= getColumnNameFromResultSet(resultSet, i);
+			tmp_col.dbType = (String) tmp_colDataInfo[0];
+			tmp_col.sqlType= (Integer) tmp_colDataInfo[1];
+			tmp_col.javaType=(Class<?>) tmp_colDataInfo[2];
+			tmp_col.vals = getColumnValuesFromResultSet(resultSet, i, tmp_col.javaType, null);
+		}
+		return table;
+	}
+
+	// [Zone:ToManagedMethods]
+
 
 	// entire exception handling info: mode=no
 	// TODO: separate become function that (get ResultSet from SQL query) + (get
@@ -201,109 +308,6 @@ public class DatabaseMnm {
 	// 		}
 	// 	}
 	// }
-
-	// entire exception handling info: mode=no
-	private static String getTableNameFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
-		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
-		return metaData.getTableName(1); // Assuming the first column in the result set corresponds to a table.
-	}
-
-	private static int getColsCountFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
-		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
-		return  metaData.getColumnCount();
-	}
-
-	// entire exception handling info: mode=no
-	private static String getColumnNameFromResultSet(java.sql.ResultSet resultSet, int columnIndex)
-			throws java.sql.SQLException {
-		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
-		return metaData.getColumnName(columnIndex);
-	}
-
-	// entire exception handling info: mode=no
-	// REMARK: only determine by using of native datatype in SQL query only, do not
-	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC}
-	private static Object[] getColumnDataTypeFromResultSet(java.sql.ResultSet resultSet, int columnIndex)
-			throws java.sql.SQLException {
-		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
-		int sqlType = metaData.getColumnType(columnIndex);
-		String dbType = metaData.getColumnTypeName(columnIndex);
-		Class<?> javaType;
-		switch (sqlType) {
-			// การแปลงเป็น javaType ผมอิงตาม ChatGPT lamo โดยถามมันว่า อิงตาม general
-			// situation
-			// TODO: บอกด้วยว่า db table declare แบบไหนได้อะไร แล้ว ถ้าไม่มี table declare
-			// แล้ว sqltype แบบไหนจะ route ไปอันไหน
-			case java.sql.Types.INTEGER:
-				javaType = Integer.class;
-				break;
-			case java.sql.Types.BIGINT:
-				javaType = Long.class;
-				break;
-			case java.sql.Types.REAL:
-				javaType = Float.class;
-				break;
-			case java.sql.Types.FLOAT:
-				javaType = Double.class;
-				break;
-			case java.sql.Types.VARCHAR:
-				javaType = String.class;
-				break;
-			case java.sql.Types.BLOB:
-				javaType = byte[].class;
-				break;
-			case java.sql.Types.NUMERIC:
-				javaType = java.math.BigDecimal.class;
-				break;
-			default:
-				// it must not reached, so give runtimeexception
-				throw new MyExceptionHandling.UserRuntimeException("Given javaType is not supported");
-
-		}
-		return new Object[] { sqlType, dbType, javaType };
-	}
-
-	// entire exception handling info: mode=no
-	// REMARK: only determine by using of native datatype in SQL query only, do not
-	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC}
-	public static <T> List<T> getColumnValuesFromResultSet(ResultSet resultSet, int columnIndex, Class<T> javaType,
-			Integer initRowCountForArrayList)
-			throws java.sql.SQLException {
-		List<T> values = null;
-		if (initRowCountForArrayList == null) {
-			values = new LinkedList<>();
-		} else {
-			values = new ArrayList<>(initRowCountForArrayList);
-		}
-		while (resultSet.next()) {
-			values.add(getDataWithJavaTypeBasedOnJavaType(javaType,resultSet,columnIndex));
-		}
-
-		return values;
-	}
-
-
-	// TODO: adding remark header
-	public static Table convertResultSetToTable(java.sql.ResultSet resultSet) throws java.sql.SQLException {
-		ResultSetMetaData metaData = resultSet.getMetaData();
-		Table table = new Table();
-		table.name=getTableNameFromResultSet(resultSet);
-		table.cols=new Column[getColsCountFromResultSet(resultSet)];
-		Object[] tmp_colDataInfo=null;
-		Column tmp_col=null;
-		// TODO: อย่าลืมเตือนเพื่อนล่ะว่า index ต้องดูดีๆนะว่าเริ่มจาก 0/1
-		for (int i = 1; i <= table.cols.length; i++) {
-			tmp_colDataInfo = getColumnDataTypeFromResultSet(resultSet, i);
-			table.cols[i] = new Column();
-			tmp_col=table.cols[i];
-			tmp_col.name= getColumnNameFromResultSet(resultSet, i);
-			tmp_col.dbType = (String) tmp_colDataInfo[0];
-			tmp_col.sqlType= (Integer) tmp_colDataInfo[1];
-			tmp_col.javaType=(Class<?>) tmp_colDataInfo[2];
-			tmp_col.vals = getColumnValuesFromResultSet(resultSet, i, tmp_col.javaType, null);
-		}
-		return table;
-	}
 
 	// [Zone:SubClass]
 
