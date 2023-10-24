@@ -11,7 +11,6 @@ import java.util.List;
 
 import th.ac.ku.sci.cs.projectsa.*;
 
-//TODO: fomat docs ใหม่
 public class DatabaseMnm {
 	public static java.sql.Connection mainDbConn = null;
 	public static java.sql.Statement mainDbConnStm1 = null;
@@ -48,7 +47,7 @@ public class DatabaseMnm {
 			};
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:./data/main.db");
 			DatabaseMnm.mainDbConnStm1 = DatabaseMnm.mainDbConn.createStatement();
-			DatabaseMnm.runSQLcmds(null,sqlStms, true);
+			DatabaseMnm.runSQLcmds(null, sqlStms, true);
 		} catch (java.sql.SQLException e) {
 			throw e;
 		}
@@ -57,8 +56,11 @@ public class DatabaseMnm {
 	// [Zone:GeneralUsage]
 
 	// entire exception handling info: mode=no
-	public static Object[] runSQLcmd(java.sql.Statement dbStm, String sqlStm, boolean skipGetTable) throws java.sql.SQLException {
-		if( dbStm==null) {dbStm=DatabaseMnm.mainDbConnStm1;}
+	public static Object[] runSQLcmd(java.sql.Statement dbStm, String sqlStm, boolean skipGetTable)
+			throws java.sql.SQLException {
+		if (dbStm == null) {
+			dbStm = DatabaseMnm.mainDbConnStm1;
+		}
 		boolean tmp1 = false;
 		try {
 			tmp1 = DatabaseMnm.mainDbConnStm1.execute(sqlStm);
@@ -86,15 +88,18 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	public static Object[][] runSQLcmds(java.sql.Statement dbStm, String[] sqlStms, boolean skipGetTable) throws java.sql.SQLException {
-		if( dbStm==null) {dbStm=DatabaseMnm.mainDbConnStm1;}
+	public static Object[][] runSQLcmds(java.sql.Statement dbStm, String[] sqlStms, boolean skipGetTable)
+			throws java.sql.SQLException {
+		if (dbStm == null) {
+			dbStm = DatabaseMnm.mainDbConnStm1;
+		}
 		Object[][] retVal = new Object[sqlStms.length][];
 		for (int i = 0; i < sqlStms.length; i++) {
-			retVal[i] = runSQLcmd(dbStm,sqlStms[i], skipGetTable);
+			retVal[i] = runSQLcmd(dbStm, sqlStms[i], skipGetTable);
 		}
 		return retVal;
 	}
-	
+
 	// [Zone:PublicHelper]
 
 	// entire exception handling info: mode=no
@@ -104,13 +109,13 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	public  static int getColsCountFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
+	public static int getColsCountFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
 		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
-		return  metaData.getColumnCount();
+		return metaData.getColumnCount();
 	}
 
 	// entire exception handling info: mode=no
-	public  static String getColumnNameFromResultSet(java.sql.ResultSet resultSet, int columnIndex)
+	public static String getColumnNameFromResultSet(java.sql.ResultSet resultSet, int columnIndex)
 			throws java.sql.SQLException {
 		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
 		return metaData.getColumnName(columnIndex);
@@ -160,34 +165,39 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	// REMARK: only determine by using of available  javatype  in getColumnDataTypeFromResultSet() only, do not
-	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC} to control possible output of getColumnDataTypeFromResultSet() 
-	public static <T> T getDataWithJavaTypeBasedOnJavaType(Class<T>  javaType, java.sql.ResultSet resultSet, int columnIndex)
+	// REMARK: only determine by using of available javatype in
+	// getColumnDataTypeFromResultSet() only, do not
+	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC} to control
+	// possible output of getColumnDataTypeFromResultSet()
+	public static <T> T getDataWithJavaTypeBasedOnJavaType(Class<T> javaType, java.sql.ResultSet resultSet,
+			int columnIndex)
 			throws java.sql.SQLException {
-		if (javaType==Integer.class)
-			{return (T) (Integer) resultSet.getInt(columnIndex);}
-		else if (javaType==Long.class)
-			{return (T) (Long) resultSet.getLong(columnIndex);}
-		else if (javaType==Float.class)
-			{return (T) (Float) resultSet.getFloat(columnIndex);}
-		else if (javaType==Double.class)
-			{return (T) (Double)resultSet.getDouble(columnIndex);}
-		else if (javaType==String.class)
-			{return (T) resultSet.getString(columnIndex);}
-		else if (javaType==byte[].class)
-			{return (T) resultSet.getBytes(columnIndex);}
-		else if (javaType==java.math.BigDecimal.class)
-			{return (T) resultSet.getBigDecimal(columnIndex);}
-		else
-			{// it must not reached, so give runtimeexception
-			throw new MyExceptionHandling.UserRuntimeException("Given javaType is not supported");}
-	
+		if (javaType == Integer.class) {
+			return (T) (Integer) resultSet.getInt(columnIndex);
+		} else if (javaType == Long.class) {
+			return (T) (Long) resultSet.getLong(columnIndex);
+		} else if (javaType == Float.class) {
+			return (T) (Float) resultSet.getFloat(columnIndex);
+		} else if (javaType == Double.class) {
+			return (T) (Double) resultSet.getDouble(columnIndex);
+		} else if (javaType == String.class) {
+			return (T) resultSet.getString(columnIndex);
+		} else if (javaType == byte[].class) {
+			return (T) resultSet.getBytes(columnIndex);
+		} else if (javaType == java.math.BigDecimal.class) {
+			return (T) resultSet.getBigDecimal(columnIndex);
+		} else {// it must not reached, so give runtimeexception
+			throw new MyExceptionHandling.UserRuntimeException("Given javaType is not supported");
+		}
+
 	}
 
 	// entire exception handling info: mode=no
-	// WARNING: this would executed `resultSet.next()` 
-	// REMARK: only determine by using of available  javatype  in getColumnDataTypeFromResultSet() only, do not
-	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC} to control possible output of getColumnDataTypeFromResultSet() 
+	// WARNING: this would executed `resultSet.next()`
+	// REMARK: only determine by using of available javatype in
+	// getColumnDataTypeFromResultSet() only, do not
+	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC} to control
+	// possible output of getColumnDataTypeFromResultSet()
 	public static <T> List<T> getColumnValuesFromResultSet(ResultSet resultSet, int columnIndex, Class<T> javaType,
 			Integer initRowCountForArrayList)
 			throws java.sql.SQLException {
@@ -198,50 +208,54 @@ public class DatabaseMnm {
 			values = new ArrayList<>(initRowCountForArrayList);
 		}
 		while (resultSet.next()) {
-			values.add(getDataWithJavaTypeBasedOnJavaType(javaType,resultSet,columnIndex));
+			values.add(getDataWithJavaTypeBasedOnJavaType(javaType, resultSet, columnIndex));
 		}
 
 		return values;
 	}
 
-	//TODO: move to new zone lamo
+	// TODO: move to new zone lamo
 	// entire exception handling info: mode=no
 	protected static <T> Column<T> convertResultSetToTable_Helper1_createColumnWithSpecificJavaType(Class<T> javaType) {
-		Column<T> col =new Column<T>();
-		col.javaType=javaType;
-		col.vals= new LinkedList<T>();
+		Column<T> col = new Column<T>();
+		col.javaType = javaType;
+		col.vals = new LinkedList<T>();
 		return col;
 	}
 
-		// entire exception handling info: mode=no
-	protected static <T> void convertResultSetToTable_Helper2_addValueToColumnWithSpecificJavaType(Column<?> col, Class<T> javaType, ResultSet resultSet, int colIndex ) throws SQLException {
-		Column<T> tmp_newcol=(Column<T>) col;
+	// entire exception handling info: mode=no
+	protected static <T> void convertResultSetToTable_Helper2_addValueToColumnWithSpecificJavaType(Column<?> col,
+			Class<T> javaType, ResultSet resultSet, int colIndex) throws SQLException {
+		Column<T> tmp_newcol = (Column<T>) col;
 		tmp_newcol.vals.add(
-			getDataWithJavaTypeBasedOnJavaType(javaType,resultSet,colIndex)
-		);
-		
+				getDataWithJavaTypeBasedOnJavaType(javaType, resultSet, colIndex));
+
 	}
 
 	// entire exception handling info: mode=no
-	// WARNING: this would executed `resultSet.next()` 
+	// WARNING: this would executed `resultSet.next()`
 	public static Table convertResultSetToTable(java.sql.ResultSet resultSet) throws java.sql.SQLException {
 		Table table = new Table();
-		table.name=getTableNameFromResultSet(resultSet);
-		table.cols=new Column<?>[getColsCountFromResultSet(resultSet)];
-		Object[] tmp_colDataInfo=null;
+		table.name = getTableNameFromResultSet(resultSet);
+		table.cols = new Column<?>[getColsCountFromResultSet(resultSet)];
+		Object[] tmp_colDataInfo = null;
 		for (int i = 0; i < table.cols.length; i++) {
-			int colIndex=i+1;
+			int colIndex = i + 1;
 			tmp_colDataInfo = getColumnDataTypeFromResultSet(resultSet, colIndex);
-			table.cols[i] = convertResultSetToTable_Helper1_createColumnWithSpecificJavaType((Class<?>) tmp_colDataInfo[2]);
-			table.cols[i].name= getColumnNameFromResultSet(resultSet, colIndex);
+			table.cols[i] = convertResultSetToTable_Helper1_createColumnWithSpecificJavaType(
+					(Class<?>) tmp_colDataInfo[2]);
+			table.cols[i].name = getColumnNameFromResultSet(resultSet, colIndex);
 			table.cols[i].dbType = (String) tmp_colDataInfo[0];
-			table.cols[i].sqlType= (Integer) tmp_colDataInfo[1];
-			// for .javaType/.vals setting, it already done in createColumnWithSpecificJavaType, due to limitation and my knowledge about Java dynamic type lamo
-		} 
+			table.cols[i].sqlType = (Integer) tmp_colDataInfo[1];
+			// for .javaType/.vals setting, it already done in
+			// createColumnWithSpecificJavaType, due to limitation and my knowledge about
+			// Java dynamic type lamo
+		}
 		while (resultSet.next()) {
 			for (int i = 0; i < table.cols.length; i++) {
-				int colIndex=i+1;
-				convertResultSetToTable_Helper2_addValueToColumnWithSpecificJavaType(table.cols[i], (Class<?>) table.cols[i].javaType, resultSet, colIndex);
+				int colIndex = i + 1;
+				convertResultSetToTable_Helper2_addValueToColumnWithSpecificJavaType(table.cols[i],
+						(Class<?>) table.cols[i].javaType, resultSet, colIndex);
 			}
 		}
 		return table;
@@ -249,25 +263,31 @@ public class DatabaseMnm {
 
 	// [Zone:DemoMethod]
 
-
 	// entire exception handling info: mode=no
 	public static void demo_printTableLAMO(Table table) {
 		System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "[START OF SQL Table Printing]");
 		System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "Name:" + table.name);
-		System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "Column Length:" + table.cols.length);
+		System.out
+				.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "Column Length:" + table.cols.length);
 		System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO")); // new line sep
 		for (DatabaseMnm.Column<?> col : table.cols) {
-			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "> [START OF SQL Column Printing]");
+			System.out.println(
+					Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "> [START OF SQL Column Printing]");
 			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "Name:" + col.name);
-			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "sqlType (you compare to java.sql.Types manually, because it is not enum lamo):" + col.sqlType);
+			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO")
+					+ "sqlType (you compare to java.sql.Types manually, because it is not enum lamo):" + col.sqlType);
 			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "dbType:" + col.dbType);
 			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "JavaType:" + col.javaType);
-			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "> > [START OF Each rows' value in column Printing]");
+			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO")
+					+ "> > [START OF Each rows' value in column Printing]");
 			for (Object obj : col.vals) {
-				System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "> Val:" + col.javaType.cast(obj));
+				System.out.println(
+						Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "> Val:" + col.javaType.cast(obj));
 			}
-			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "> > [END OF Each rows' value in column Printing]");
-			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "> [END OF SQL Column Printing]");
+			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO")
+					+ "> > [END OF Each rows' value in column Printing]");
+			System.out
+					.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "> [END OF SQL Column Printing]");
 			System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO")); // new line sep
 		}
 		System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "[END OF SQL Table Printing]");
@@ -276,11 +296,12 @@ public class DatabaseMnm {
 
 	// entire exception handling info: mode=no
 	public static void demo_printOurInitTableLAMO() throws SQLException {
-		java.sql.ResultSet tmpResultSet =null;
-		Table tmpTable =null;
-		String[] tableNames = new String[] {"USER","CUSTOMER","PRODUCT","BUY_REQUEST","SELLING_REQUEST","REPAIRMENT"};
+		java.sql.ResultSet tmpResultSet = null;
+		Table tmpTable = null;
+		String[] tableNames = new String[] { "USER", "CUSTOMER", "PRODUCT", "BUY_REQUEST", "SELLING_REQUEST",
+				"REPAIRMENT" };
 		for (String tableName : tableNames) {
-			tmpResultSet = (java.sql.ResultSet) (DatabaseMnm.runSQLcmd(null,"SELECT * FROM "+tableName,false)[1]);
+			tmpResultSet = (java.sql.ResultSet) (DatabaseMnm.runSQLcmd(null, "SELECT * FROM " + tableName, false)[1]);
 			tmpTable = convertResultSetToTable(tmpResultSet);
 			demo_printTableLAMO(tmpTable);
 			tmpResultSet.close();
