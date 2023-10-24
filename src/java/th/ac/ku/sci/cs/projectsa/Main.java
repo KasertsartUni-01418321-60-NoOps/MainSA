@@ -1,5 +1,6 @@
 package th.ac.ku.sci.cs.projectsa;
 
+// TODO: mangage this lamo
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import javafx.scene.chart.PieChart.Data;
 import th.ac.ku.sci.cs.projectsa.*;
