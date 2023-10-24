@@ -57,7 +57,6 @@ public class DatabaseMnm {
 	// [Zone:GeneralUsage]
 
 	// entire exception handling info: mode=no
-	// TODO: don't forget about close()
 	public static Object[] runSQLcmd(java.sql.Statement dbStm, String sqlStm, boolean skipGetTable) throws java.sql.SQLException {
 		if( dbStm==null) {dbStm=DatabaseMnm.mainDbConnStm1;}
 		boolean tmp1 = false;
@@ -87,7 +86,6 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	// TODO: don't forget about close()
 	public static Object[][] runSQLcmds(java.sql.Statement dbStm, String[] sqlStms, boolean skipGetTable) throws java.sql.SQLException {
 		if( dbStm==null) {dbStm=DatabaseMnm.mainDbConnStm1;}
 		Object[][] retVal = new Object[sqlStms.length][];
@@ -253,7 +251,6 @@ public class DatabaseMnm {
 
 
 	// entire exception handling info: mode=no
-	// TODO: don't forget about close()
 	public static void demo_printTableLAMO(Table table) {
 		System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "[START OF SQL Table Printing]");
 		System.out.println(Main.clReportHeader("MainApp/DatabaseMnm", "DEVDEMO") + "Name:" + table.name);
@@ -278,7 +275,6 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	// TODO: don't forget about close()
 	public static void demo_printOurInitTableLAMO() throws SQLException {
 		java.sql.ResultSet tmpResultSet =null;
 		Table tmpTable =null;
@@ -287,6 +283,7 @@ public class DatabaseMnm {
 			tmpResultSet = (java.sql.ResultSet) (DatabaseMnm.runSQLcmd(null,"SELECT * FROM "+tableName,false)[1]);
 			tmpTable = convertResultSetToTable(tmpResultSet);
 			demo_printTableLAMO(tmpTable);
+			tmpResultSet.close();
 		}
 	}
 	// [Zone:SubClass]
