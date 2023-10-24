@@ -206,6 +206,7 @@ public class DatabaseMnm {
 		return values;
 	}
 
+	//TODO: move to new zone lamo
 	// entire exception handling info: mode=no
 	protected static <T> Column<T> convertResultSetToTable_Helper1_createColumnWithSpecificJavaType(Class<T> javaType) {
 		Column<T> col =new Column<T>();
