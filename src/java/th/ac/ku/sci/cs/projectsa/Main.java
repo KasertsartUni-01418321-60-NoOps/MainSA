@@ -18,7 +18,7 @@ public class Main extends javafx.application.Application {
             Main.args=args;
             boolean doMIDIPlayer =true;
             for (String arg : args) {
-                if (arg.equals("-mute-midi")||arg.equals("--mute-midi")) {doMIDIPlayer=false;break;}
+                if (arg.equals("-MiscFunFlag+muteMIDI")||arg.equals("--MiscFunFlag+muteMIDI")) {doMIDIPlayer=false;break;}
             }
             if (doMIDIPlayer) {
                 // funny stuff, lazy-exception-handling is done in that function 
@@ -43,6 +43,10 @@ public class Main extends javafx.application.Application {
     @Override
     public void start(javafx.stage.Stage primaryStage) {
         try {
+            // TODO: (SHUTDOWN PART) exception handling (only about to add try-catch inside parenthesis of runnable) + also move to main()
+            Runtime.getRuntime().addShutdownHook(new Thread(()->{
+                this.stop();
+            }));
             MainAlt1.primaryApplication = this;
             MainAlt1.primaryStage = primaryStage;
             primaryStage.setResizable(false);
@@ -70,6 +74,8 @@ public class Main extends javafx.application.Application {
     }
 
     // entire exception handling info: mode=fatal
+    // TODO: (SHUTDOWN PART) move code to static method
+    // TODO: (SHUTDOWN PART) do not let exception of 1 break another actions
     @Override
     public void stop() {
         try {
@@ -79,6 +85,13 @@ public class Main extends javafx.application.Application {
             if (MyExceptionHandling.isFatal) {}
             else {
                 javafx.application.Platform.exit();
+                // in case user want something extraordinary, เราจัดให้ ๆ
+                // WARNING: do not run this arg to commandLine in production, this would skip any (Java exception handling / JVM shutdown hook/cleanup), results in ongoing-cleaning data being lossed, or even corrupts database file. 
+                for (String arg : args) {
+                if (arg.equals("-MiscFunFlag+crashOnPostExit")||arg.equals("--MiscFunFlag+crashOnPostExit")) {
+                    th.ac.ku.sci.cs.projectsa.fun.UnsafeStuff.crashJVMLamo();
+                }
+                }
                 System.exit(0);
             }
         } catch (Throwable e) {

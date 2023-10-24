@@ -64,7 +64,7 @@ public class MIDIPlayer {
 
 	public static void realMain() throws MyExceptionHandling.UserException, MidiUnavailableException {
 		for (String arg :Main.args) {
-			if (arg.equals("--tell-midi-songname")||arg.equals("-tell-midi-songname")) {
+			if (arg.equals("--MiscFunFlag+tellMIDISongname")||arg.equals("-MiscFunFlag+tellMIDISongname")) {
 				MIDIPlayer.tellSongName=true;
 				break;
 			}
