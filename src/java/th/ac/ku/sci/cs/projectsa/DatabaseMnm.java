@@ -11,13 +11,15 @@ import java.util.List;
 
 import th.ac.ku.sci.cs.projectsa.*;
 
-// lessI TODO: add separator for zone of object lamo, also resort for me lamo
 public class DatabaseMnm {
 	public static java.sql.Connection mainDbConn = null;
 	public static java.sql.Statement mainDbConnStm1 = null;
+	public final static String mainDbPath = "./data/main.db";
+
+	// [Zone:Init]
 
 	// entire exception handling info: mode=no
-	public static void init() throws java.sql.SQLException {
+	public static void mainDbInit() throws java.sql.SQLException {
 
 		try {
 			// TODO: describe Data Spec
@@ -45,14 +47,17 @@ public class DatabaseMnm {
 			};
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:./data/main.db");
 			DatabaseMnm.mainDbConnStm1 = DatabaseMnm.mainDbConn.createStatement();
-			DatabaseMnm.runSQLcmds(sqlStms, true);
+			DatabaseMnm.runSQLcmds(null,sqlStms, true);
 		} catch (java.sql.SQLException e) {
 			throw e;
 		}
 	}
 
+	// [Zone:GeneralUsage]
+
 	// entire exception handling info: mode=no
-	public static Object[] runSQLcmd(String sqlStm, boolean skipGetTable) throws java.sql.SQLException {
+	public static Object[] runSQLcmd(java.sql.Statement dbStm, String sqlStm, boolean skipGetTable) throws java.sql.SQLException {
+		if( dbStm==null) {dbStm=DatabaseMnm.mainDbConnStm1;}
 		boolean tmp1 = false;
 		try {
 			tmp1 = DatabaseMnm.mainDbConnStm1.execute(sqlStm);
@@ -82,42 +87,46 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	public static Object[][] runSQLcmds(String[] sqlStms, boolean skipGetTable) throws java.sql.SQLException {
+	public static Object[][] runSQLcmds(java.sql.Statement dbStm, String[] sqlStms, boolean skipGetTable) throws java.sql.SQLException {
+		if( dbStm==null) {dbStm=DatabaseMnm.mainDbConnStm1;}
 		Object[][] retVal = new Object[sqlStms.length][];
 		for (int i = 0; i < sqlStms.length; i++) {
-			retVal[i] = runSQLcmd(sqlStms[i], skipGetTable);
+			retVal[i] = runSQLcmd(dbStm,sqlStms[i], skipGetTable);
 		}
 		return retVal;
 	}
 
-	// TODO: check resultSet เพราะผมเข้าใจผิดคิดว่า มันจะดึงทั้ง column 555
+	// [Zone:Unmanaged]
+	// TODO: for sorting in this zone
+
 	// entire exception handling info: mode=no
-	public static Object getDataWithJavaTypeBasedOnSQLType(int sqlType, java.sql.ResultSet resultSet, int columnIndex)
+	public static <T> T getDataWithJavaTypeBasedOnJavaType(Class<T>  javaType, java.sql.ResultSet resultSet, int columnIndex)
 			throws java.sql.SQLException {
-		switch (sqlType) {
-			case java.sql.Types.INTEGER:
-				return resultSet.getInt(columnIndex);
-			case java.sql.Types.BIGINT:
-				return resultSet.getLong(columnIndex);
-			case java.sql.Types.REAL:
-				return resultSet.getFloat(columnIndex);
-			case java.sql.Types.FLOAT:
-				return resultSet.getDouble(columnIndex);
-			case java.sql.Types.VARCHAR:
-				return resultSet.getString(columnIndex);
-			case java.sql.Types.BLOB:
-				return resultSet.getBytes(columnIndex);
-			case java.sql.Types.NUMERIC:
-				return resultSet.getBigDecimal(columnIndex);
-			default:
-				// it must not reached, so give runtimeexception
-				throw new MyExceptionHandling.UserRuntimeException("Given javaType is not supported");
-		}
+		if (javaType==Integer.class)
+			{return (T) (Integer) resultSet.getInt(columnIndex);}
+		else if (javaType==Long.class)
+			{return (T) (Long) resultSet.getLong(columnIndex);}
+		else if (javaType==Float.class)
+			{return (T) (Float) resultSet.getFloat(columnIndex);}
+		else if (javaType==Double.class)
+			{return (T) (Double)resultSet.getDouble(columnIndex);}
+		else if (javaType==String.class)
+			{return (T) resultSet.getString(columnIndex);}
+		else if (javaType==byte[].class)
+			{return (T) resultSet.getBytes(columnIndex);}
+		else if (javaType==java.math.BigDecimal.class)
+			{return (T) resultSet.getBigDecimal(columnIndex);}
+		else
+			{// it must not reached, so give runtimeexception
+			throw new MyExceptionHandling.UserRuntimeException("Given javaType is not supported");}
+	
 	}
 
 	// entire exception handling info: mode=no
 	// TODO: separate become function that (get ResultSet from SQL query) + (get
 	// Table obj from ResultSet) + (Print Table obj)
+	// TODO: maybe we create this from scratch byusing as reference
+	// TODO: don't forget to check close()
 	public static void tempSeeDatabaseLamo() throws java.sql.SQLException {
 		java.sql.ResultSet tablesRS = null, tableRS = null;
 		try {
@@ -162,41 +171,46 @@ public class DatabaseMnm {
 
 	// entire exception handling info: mode=no
 	// TODO: see above TODO
-	public static void unused_tempCreateAndSeeMySQLTableDataStr() {
-		DatabaseMnm.Table testTable = new DatabaseMnm.Table();
-		testTable.name = "Rickroll";
-		DatabaseMnm.Column<Integer> testTable_Id = new DatabaseMnm.Column<Integer>();
-		testTable_Id.name = "Id";
-		// TODO:
-		testTable_Id.sqlType = java.sql.Types.INTEGER;
-		testTable_Id.dbType = "INTEGER";
-		testTable_Id.javaType = Integer.class;
-		DatabaseMnm.Column<String> testTable_Lyrics = new DatabaseMnm.Column<String>();
-		testTable_Lyrics.name = "Lyrics";
-		testTable_Lyrics.sqlType = java.sql.Types.VARCHAR;
-		testTable_Lyrics.dbType = "TEXT";
-		testTable_Lyrics.javaType = String.class;
-		testTable_Id.vals = new Integer[] { 1, 2 };
-		testTable_Lyrics.vals = new String[] { "NeverGonnaGiveYouUp", "MyHeartWillGoOn" };
-		testTable.cols = new DatabaseMnm.Column<?>[] { testTable_Id, testTable_Lyrics };
-		//
-		for (DatabaseMnm.Column<?> col : testTable.cols) {
-			System.out.println(Main.clReportHeader(null, "DEVTEST") + "Col:" + col);
-			System.out.println(Main.clReportHeader(null, "DEVTEST") + "Name:" + col.name);
-			System.out.println(Main.clReportHeader(null, "DEVTEST")
-					+ "sqlType (you compare to java.sql.Types manually, because it is not enum lamo):" + col.sqlType);
-			System.out.println(Main.clReportHeader(null, "DEVTEST") + "dbType:" + col.dbType);
-			System.out.println(Main.clReportHeader(null, "DEVTEST") + "JavaType:" + col.javaType);
-			for (Object obj : col.vals) {
-				System.out.println(Main.clReportHeader(null, "DEVTEST") + "> Val:" + col.javaType.cast(obj));
-			}
-		}
-	}
+	// public static void unused_tempCreateAndSeeMySQLTableDataStr() {
+	// 	DatabaseMnm.Table testTable = new DatabaseMnm.Table();
+	// 	testTable.name = "Rickroll";
+	// 	DatabaseMnm.Column<Integer> testTable_Id = new DatabaseMnm.Column<Integer>();
+	// 	testTable_Id.name = "Id";
+	// 	// TODO:
+	// 	testTable_Id.sqlType = java.sql.Types.INTEGER;
+	// 	testTable_Id.dbType = "INTEGER";
+	// 	testTable_Id.javaType = Integer.class;
+	// 	DatabaseMnm.Column<String> testTable_Lyrics = new DatabaseMnm.Column<String>();
+	// 	testTable_Lyrics.name = "Lyrics";
+	// 	testTable_Lyrics.sqlType = java.sql.Types.VARCHAR;
+	// 	testTable_Lyrics.dbType = "TEXT";
+	// 	testTable_Lyrics.javaType = String.class;
+	// 	testTable_Id.vals = new Integer[] { 1, 2 };
+	// 	testTable_Lyrics.vals = new String[] { "NeverGonnaGiveYouUp", "MyHeartWillGoOn" };
+	// 	testTable.cols = new DatabaseMnm.Column<?>[] { testTable_Id, testTable_Lyrics };
+	// 	//
+	// 	for (DatabaseMnm.Column<?> col : testTable.cols) {
+	// 		System.out.println(Main.clReportHeader(null, "DEVTEST") + "Col:" + col);
+	// 		System.out.println(Main.clReportHeader(null, "DEVTEST") + "Name:" + col.name);
+	// 		System.out.println(Main.clReportHeader(null, "DEVTEST")
+	// 				+ "sqlType (you compare to java.sql.Types manually, because it is not enum lamo):" + col.sqlType);
+	// 		System.out.println(Main.clReportHeader(null, "DEVTEST") + "dbType:" + col.dbType);
+	// 		System.out.println(Main.clReportHeader(null, "DEVTEST") + "JavaType:" + col.javaType);
+	// 		for (Object obj : col.vals) {
+	// 			System.out.println(Main.clReportHeader(null, "DEVTEST") + "> Val:" + col.javaType.cast(obj));
+	// 		}
+	// 	}
+	// }
 
 	// entire exception handling info: mode=no
 	private static String getTableNameFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
 		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
 		return metaData.getTableName(1); // Assuming the first column in the result set corresponds to a table.
+	}
+
+	private static int getColsCountFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
+		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
+		return  metaData.getColumnCount();
 	}
 
 	// entire exception handling info: mode=no
@@ -261,75 +275,49 @@ public class DatabaseMnm {
 		} else {
 			values = new ArrayList<>(initRowCountForArrayList);
 		}
-
 		while (resultSet.next()) {
-			T value = null;
-			if (javaType == Integer.class) {
-				value = javaType.cast(resultSet.getInt(columnIndex));
-			} else if (javaType == Long.class) {
-				value = javaType.cast(resultSet.getLong(columnIndex));
-			} else if (javaType == Float.class) {
-				value = javaType.cast(resultSet.getFloat(columnIndex));
-			} else if (javaType == Double.class) {
-				value = javaType.cast(resultSet.getDouble(columnIndex));
-			} else if (javaType == String.class) {
-				value = javaType.cast(resultSet.getString(columnIndex));
-			} else if (javaType == byte[].class) {
-				value = javaType.cast(resultSet.getBytes(columnIndex));
-			} else if (javaType == java.math.BigDecimal.class) {
-				value = javaType.cast(resultSet.getBigDecimal(columnIndex));
-			} else {
-				// it must not reached, so give runtimeexception
-				throw new MyExceptionHandling.UserRuntimeException("Given javaType is not supported");
-			}
-			values.add(value);
+			values.add(getDataWithJavaTypeBasedOnJavaType(javaType,resultSet,columnIndex));
 		}
 
 		return values;
 	}
 
-	public static Table processResultSet(ResultSet resultSet) throws SQLException {
-		Table table = new Table();
-		List<Column<?>> columns = new ArrayList<>();
 
+	// TODO: adding remark header
+	public static Table convertResultSetToTable(java.sql.ResultSet resultSet) throws java.sql.SQLException {
 		ResultSetMetaData metaData = resultSet.getMetaData();
-		table.name = getTableNameFromResultSet(resultSet);
-
-		int columnCount = metaData.getColumnCount();
-		for (int i = 1; i <= columnCount; i++) {
-			Column<Object> column = new Column<>();
-			column.name = getColumnNameFromResultSet(resultSet, i);
-
-			// Use your existing getColumnDataTypeFromResultSet function
-			Object[] dataTypeInfo = getColumnDataTypeFromResultSet(resultSet, i);
-			column.sqlType = (Integer) dataTypeInfo[0];
-			column.dbType = (String) dataTypeInfo[1];
-			column.javaType = (Class<Object>) dataTypeInfo[2];
-
-			// Use your existing getColumnValuesFromResultSet function
-			List<Object> values = getColumnValuesFromResultSet(resultSet, i, column.javaType, null);
-			column.vals = values.toArray(new Object[0]);
-
-			columns.add(column);
+		Table table = new Table();
+		table.name=getTableNameFromResultSet(resultSet);
+		table.cols=new Column[getColsCountFromResultSet(resultSet)];
+		Object[] tmp_colDataInfo=null;
+		Column tmp_col=null;
+		// TODO: อย่าลืมเตือนเพื่อนล่ะว่า index ต้องดูดีๆนะว่าเริ่มจาก 0/1
+		for (int i = 1; i <= table.cols.length; i++) {
+			tmp_colDataInfo = getColumnDataTypeFromResultSet(resultSet, i);
+			table.cols[i] = new Column();
+			tmp_col=table.cols[i];
+			tmp_col.name= getColumnNameFromResultSet(resultSet, i);
+			tmp_col.dbType = (String) tmp_colDataInfo[0];
+			tmp_col.sqlType= (Integer) tmp_colDataInfo[1];
+			tmp_col.javaType=(Class<?>) tmp_colDataInfo[2];
+			tmp_col.vals = getColumnValuesFromResultSet(resultSet, i, tmp_col.javaType, null);
 		}
-
-		table.cols = columns.toArray(new Column<?>[0]);
 		return table;
 	}
 
-	// TODO: getColumnCountFromResultSet
+	// [Zone:SubClass]
 
 	public static class Table {
 		public String name = null;
-		public Column<?>[] cols = null;
+		public Column[] cols = null;
 	}
 
-	public static class Column<T> {
+	public static class Column {
 		public String name = null;
 		public Integer sqlType = null;
 		public String dbType = null;
-		public Class<T> javaType = null;
-		public T[] vals = null;
+		public Class<?> javaType = null;
+		public List<?> vals = null;
 	}
 
 }
