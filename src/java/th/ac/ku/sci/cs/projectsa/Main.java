@@ -1,6 +1,7 @@
 package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
+import javafx.scene.chart.PieChart.Data;
 import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer;
 
@@ -26,7 +27,7 @@ public class Main extends javafx.application.Application {
                 DatabaseMnm.mainDbInit();
                 System.out.println(Main.clReportHeader(null, "DEVTEST")+"this is test of create our db and print them lamo:");
                 System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE START>");
-                DatabaseMnm.tempSeeDatabaseLamo();
+                DatabaseMnm.demo_printOurInitTableLAMO();
                 System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE END>");
             } catch (java.sql.SQLException e1) {
                 throw e1;
