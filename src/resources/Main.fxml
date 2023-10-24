@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane fx:id="root" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_Main" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="root" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_Main" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml">
    <children>
       <VBox alignment="CENTER" spacing="20.0">
          <children>

@@ -23,7 +23,7 @@ public class Main extends javafx.application.Application {
                 MIDIPlayer.main();
             }
             try {
-                DatabaseMnm.init();
+                DatabaseMnm.mainDbInit();
                 System.out.println(Main.clReportHeader(null, "DEVTEST")+"this is test of create our db and print them lamo:");
                 System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE START>");
                 DatabaseMnm.tempSeeDatabaseLamo();
