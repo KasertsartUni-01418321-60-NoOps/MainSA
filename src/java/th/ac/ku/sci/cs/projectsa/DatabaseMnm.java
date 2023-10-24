@@ -2,6 +2,7 @@ package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 
+// TODO: ลบ import เลยๆ
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import th.ac.ku.sci.cs.projectsa.*;
 
+//TODO: fomat docs ใหม่
 public class DatabaseMnm {
 	public static java.sql.Connection mainDbConn = null;
 	public static java.sql.Statement mainDbConnStm1 = null;
