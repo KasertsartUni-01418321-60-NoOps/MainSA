@@ -14,7 +14,8 @@ public class DatabaseMnm {
 	public static void mainDbInit() throws java.sql.SQLException {
 
 		try {
-			// TODO: describe Data Spec
+			// TODO: (OUTSIDE OF CODING) describe Data Spec
+			// REMARK: for my group, only use {TEXT,BLOB,REAL,INTEGER} maybe we not using "NUMERIC"
 			String[] sqlStms = new String[] {
 					"CREATE TABLE IF NOT EXISTS CUSTOMER (Customer_Full_Name TEXT PRIMARY KEY, Customer_Shipping_Address TEXT, Customer_Telephone_Number TEXT, Customer_Credit_Amount INTEGER);",
 					"CREATE TABLE IF NOT EXISTS SELLING_REQUEST (Selling_Request_ID INTEGER PRIMARY KEY, Customer_Full_Name TEXT, Selling_Request_Product_Looks TEXT, Selling_Request_Meet_Date INTEGER, Selling_Request_Paid_Amount REAL, Selling_Request_Meet_Location TEXT, Selling_Request_Status TEXT, Selling_Request_Model TEXT, Selling_Request_Brand TEXT, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name));",
@@ -125,7 +126,7 @@ public class DatabaseMnm {
 		switch (sqlType) {
 			// การแปลงเป็น javaType ผมอิงตาม ChatGPT lamo โดยถามมันว่า อิงตาม general
 			// situation
-			// TODO: บอกด้วยว่า db table declare แบบไหนได้อะไร แล้ว ถ้าไม่มี table declare
+			// TODO: (OUTSIDE OF CODING but have to inspect CODING) บอกด้วยว่า db table declare แบบไหนได้อะไร แล้ว ถ้าไม่มี table declare
 			// แล้ว sqltype แบบไหนจะ route ไปอันไหน
 			case java.sql.Types.INTEGER:
 				javaType = Integer.class;
@@ -190,38 +191,20 @@ public class DatabaseMnm {
 	// getColumnDataTypeFromResultSet() only, do not
 	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC} to control
 	// possible output of getColumnDataTypeFromResultSet()
-	public static <T> List<T> getColumnValuesFromResultSet(ResultSet resultSet, int columnIndex, Class<T> javaType,
+	public static <T> java.util.List<T> getColumnValuesFromResultSet(java.sql.ResultSet resultSet, int columnIndex, Class<T> javaType,
 			Integer initRowCountForArrayList)
 			throws java.sql.SQLException {
-		List<T> values = null;
+		java.util.List<T> values = null;
 		if (initRowCountForArrayList == null) {
-			values = new LinkedList<>();
+			values = new java.util.LinkedList<>();
 		} else {
-			values = new ArrayList<>(initRowCountForArrayList);
+			values = new java.util.ArrayList<>(initRowCountForArrayList);
 		}
 		while (resultSet.next()) {
 			values.add(getDataWithJavaTypeBasedOnJavaType(javaType, resultSet, columnIndex));
 		}
 
 		return values;
-	}
-
-	// TODO: move to new zone lamo
-	// entire exception handling info: mode=no
-	protected static <T> Column<T> convertResultSetToTable_Helper1_createColumnWithSpecificJavaType(Class<T> javaType) {
-		Column<T> col = new Column<T>();
-		col.javaType = javaType;
-		col.vals = new LinkedList<T>();
-		return col;
-	}
-
-	// entire exception handling info: mode=no
-	protected static <T> void convertResultSetToTable_Helper2_addValueToColumnWithSpecificJavaType(Column<?> col,
-			Class<T> javaType, ResultSet resultSet, int colIndex) throws SQLException {
-		Column<T> tmp_newcol = (Column<T>) col;
-		tmp_newcol.vals.add(
-				getDataWithJavaTypeBasedOnJavaType(javaType, resultSet, colIndex));
-
 	}
 
 	// entire exception handling info: mode=no
@@ -251,6 +234,25 @@ public class DatabaseMnm {
 			}
 		}
 		return table;
+	}
+
+	//  [Zone:ProtectedHelper]
+
+	// entire exception handling info: mode=no
+	protected static <T> Column<T> convertResultSetToTable_Helper1_createColumnWithSpecificJavaType(Class<T> javaType) {
+		Column<T> col = new Column<T>();
+		col.javaType = javaType;
+		col.vals = new java.util.LinkedList<T>();
+		return col;
+	}
+
+	// entire exception handling info: mode=no
+	protected static <T> void convertResultSetToTable_Helper2_addValueToColumnWithSpecificJavaType(Column<?> col,
+			Class<T> javaType, java.sql.ResultSet resultSet, int colIndex) throws java.sql.SQLException {
+		Column<T> tmp_newcol = (Column<T>) col;
+		tmp_newcol.vals.add(
+				getDataWithJavaTypeBasedOnJavaType(javaType, resultSet, colIndex));
+
 	}
 
 	// [Zone:DemoMethod]
@@ -287,7 +289,7 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	public static void demo_printOurInitTableLAMO() throws SQLException {
+	public static void demo_printOurInitTableLAMO() throws java.sql.SQLException {
 		java.sql.ResultSet tmpResultSet = null;
 		Table tmpTable = null;
 		String[] tableNames = new String[] { "USER", "CUSTOMER", "PRODUCT", "BUY_REQUEST", "SELLING_REQUEST",
@@ -311,7 +313,7 @@ public class DatabaseMnm {
 		public Integer sqlType = null;
 		public String dbType = null;
 		public Class<T> javaType = null;
-		public List<T> vals = null;
+		public java.util.List<T> vals = null;
 	}
 
 }
