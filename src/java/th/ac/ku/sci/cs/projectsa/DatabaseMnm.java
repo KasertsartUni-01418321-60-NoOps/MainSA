@@ -15,7 +15,8 @@ public class DatabaseMnm {
 
 		try {
 			// TODO: (OUTSIDE OF CODING) describe Data Spec
-			// REMARK: for my group, only use {TEXT,BLOB,REAL,INTEGER} maybe we not using "NUMERIC"
+			// REMARK: for my group, only use {TEXT,BLOB,REAL,INTEGER} maybe we not using
+			// "NUMERIC"
 			String[] sqlStms = new String[] {
 					"CREATE TABLE IF NOT EXISTS CUSTOMER (Customer_Full_Name TEXT PRIMARY KEY, Customer_Shipping_Address TEXT, Customer_Telephone_Number TEXT, Customer_Credit_Amount INTEGER);",
 					"CREATE TABLE IF NOT EXISTS SELLING_REQUEST (Selling_Request_ID INTEGER PRIMARY KEY, Customer_Full_Name TEXT, Selling_Request_Product_Looks TEXT, Selling_Request_Meet_Date INTEGER, Selling_Request_Paid_Amount REAL, Selling_Request_Meet_Location TEXT, Selling_Request_Status TEXT, Selling_Request_Model TEXT, Selling_Request_Brand TEXT, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name));",
@@ -126,7 +127,8 @@ public class DatabaseMnm {
 		switch (sqlType) {
 			// การแปลงเป็น javaType ผมอิงตาม ChatGPT lamo โดยถามมันว่า อิงตาม general
 			// situation
-			// TODO: (OUTSIDE OF CODING but have to inspect CODING) บอกด้วยว่า db table declare แบบไหนได้อะไร แล้ว ถ้าไม่มี table declare
+			// TODO: (OUTSIDE OF CODING but have to inspect CODING) บอกด้วยว่า db table
+			// declare แบบไหนได้อะไร แล้ว ถ้าไม่มี table declare
 			// แล้ว sqltype แบบไหนจะ route ไปอันไหน
 			case java.sql.Types.INTEGER:
 				javaType = Integer.class;
@@ -191,7 +193,8 @@ public class DatabaseMnm {
 	// getColumnDataTypeFromResultSet() only, do not
 	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC} to control
 	// possible output of getColumnDataTypeFromResultSet()
-	public static <T> java.util.List<T> getColumnValuesFromResultSet(java.sql.ResultSet resultSet, int columnIndex, Class<T> javaType,
+	public static <T> java.util.List<T> getColumnValuesFromResultSet(java.sql.ResultSet resultSet, int columnIndex,
+			Class<T> javaType,
 			Integer initRowCountForArrayList)
 			throws java.sql.SQLException {
 		java.util.List<T> values = null;
@@ -236,7 +239,7 @@ public class DatabaseMnm {
 		return table;
 	}
 
-	//  [Zone:ProtectedHelper]
+	// [Zone:ProtectedHelper]
 
 	// entire exception handling info: mode=no
 	protected static <T> Column<T> convertResultSetToTable_Helper1_createColumnWithSpecificJavaType(Class<T> javaType) {
