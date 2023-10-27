@@ -1,6 +1,9 @@
 package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
+
+import java.io.IOException;
+
 import th.ac.ku.sci.cs.projectsa.*;
 
 public class DatabaseMnm {
@@ -12,19 +15,19 @@ public class DatabaseMnm {
 	// [Zone:Init]
 
 	// entire exception handling info: mode=no
-	public static void mainDbInit() throws java.sql.SQLException {
+	public static void mainDbInit() throws java.sql.SQLException, IOException {
 		java.nio.file.Path tmp_Path = java.nio.file.Paths.get("./data");
 		if (!java.nio.file.Files.exists(tmp_Path)) {
 			try {
 				java.nio.file.Files.createDirectory(tmp_Path);
 			} catch (java.io.IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw e;
 			}
 		}
 		// TODO: (OUTSIDE OF CODING) describe Data Spec
 		// REMARK: for my group, only use {TEXT,BLOB,REAL,INTEGER} maybe we not using
 		// "NUMERIC"
+		// TODO: BUY_REQUEST แก้ด้วยๆ
 		String[] sqlStms = new String[] {
 				"CREATE TABLE IF NOT EXISTS CUSTOMER (Customer_Full_Name TEXT PRIMARY KEY, Customer_Shipping_Address TEXT, Customer_Telephone_Number TEXT, Customer_Credit_Amount INTEGER) STRICT,WITHOUT ROWID;",
 				"CREATE TABLE IF NOT EXISTS SELLING_REQUEST (Selling_Request_ID INTEGER PRIMARY KEY, Customer_Full_Name TEXT, Selling_Request_Product_Looks TEXT, Selling_Request_Meet_Date INTEGER, Selling_Request_Paid_Amount REAL, Selling_Request_Meet_Location TEXT, Selling_Request_Status TEXT, Selling_Request_Model TEXT, Selling_Request_Brand TEXT, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT,WITHOUT ROWID;",
@@ -137,7 +140,7 @@ public class DatabaseMnm {
 			// การแปลงเป็น javaType ผมอิงตาม ChatGPT lamo โดยถามมันว่า อิงตาม general
 			// situation
 			// TODO: (OUTSIDE OF CODING but have to inspect CODING) บอกด้วยว่า db table
-			// declare แบบไหนได้อะไร แล้ว ถ้าไม่มี table declare
+			// declare แบบไหนได้อะไร แล้วถ้าเป็นแบบ no affinity
 			// แล้ว sqltype แบบไหนจะ route ไปอันไหน
 			case java.sql.Types.INTEGER:
 				javaType = Integer.class;
