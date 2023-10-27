@@ -8,7 +8,7 @@ public class Main extends javafx.application.Application {
     public static void funcTestOFCaughtException() {
     }
 
-
+    // TODO: (OUTSIDE OF CODE) ศึกษา sqlite datatype ละเอัยดหน่อยๆ + S T R I C T
     // entire exception handling info: mode=fatal
     public static void main(String[] args) throws Throwable {
         try {
@@ -19,7 +19,7 @@ public class Main extends javafx.application.Application {
             }
             if (doMIDIPlayer) {
                 // funny stuff, lazy-exception-handling is done in that function 
-                MIDIPlayer.main();
+                th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer.main();
             }
             try {
                 DatabaseMnm.mainDbInit();
@@ -36,6 +36,12 @@ public class Main extends javafx.application.Application {
         }
     }
 
+
+    // TODO: entire exception handling info: mode=fatal
+    public static void shutdown() {
+        // TODO:
+    }
+    
     // entire exception handling info: mode=fatal
     @Override
     public void start(javafx.stage.Stage primaryStage) {
@@ -78,7 +84,7 @@ public class Main extends javafx.application.Application {
         try {
             MainAlt1.primaryStage.hide();
             // funny stuff, lazy-exception-handling is done in that function 
-            MIDIPlayer.shutdown();
+            th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer.shutdown();
             if (MyExceptionHandling.isFatal) {}
             else {
                 javafx.application.Platform.exit();
