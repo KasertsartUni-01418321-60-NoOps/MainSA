@@ -27,26 +27,27 @@ public class DatabaseMnm {
 		// TODO: (OUTSIDE OF CODING) describe Data Spec
 		// REMARK: for my group, only use {TEXT,BLOB,REAL,INTEGER} maybe we not using
 		// "NUMERIC"
-		// TODO: BUY_REQUEST แก้ด้วยๆ
 		String[] sqlStms = new String[] {
-				"CREATE TABLE IF NOT EXISTS CUSTOMER (Customer_Full_Name TEXT PRIMARY KEY, Customer_Shipping_Address TEXT, Customer_Telephone_Number TEXT, Customer_Credit_Amount INTEGER) STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS SELLING_REQUEST (Selling_Request_ID INTEGER PRIMARY KEY, Customer_Full_Name TEXT, Selling_Request_Product_Looks TEXT, Selling_Request_Meet_Date INTEGER, Selling_Request_Paid_Amount REAL, Selling_Request_Meet_Location TEXT, Selling_Request_Status TEXT, Selling_Request_Model TEXT, Selling_Request_Brand TEXT, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS PRODUCT (Product_ID INTEGER PRIMARY KEY, Selling_Request_ID INTEGER, Repairment_ID INTEGER, Product_Price REAL, Product_Arrive_Date INTEGER, Product_Status TEXT, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID), FOREIGN KEY (Repairment_ID) REFERENCES REPAIRMENT(Repairment_ID))STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS USER (Username TEXT PRIMARY KEY, Password TEXT, Role INTEGER)STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS REPAIRMENT (Repairment_ID INTEGER PRIMARY KEY, Selling_Request_ID INTEGER, Repairment_Description TEXT, Repairment_Date INTEGER, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID))STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS BUY_REQUEST (Customer_Full_Name TEXT, Product_ID INTEGER, Buy_Request_Transportation_Start_Date INTEGER, Buy_Request_Transportation_Finished_Date INTEGER, Buy_Request_Transportation_Price REAL, Buy_Request_Product_Look_After_Cleaning TEXT, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT,WITHOUT ROWID;",
-				"INSERT INTO CUSTOMER SELECT 'John Doe', '123 Main St', '555-123-4567', 1000 " +
-						"WHERE NOT EXISTS (SELECT 1 FROM CUSTOMER WHERE Customer_Full_Name = 'John Doe');",
+			"CREATE TABLE IF NOT EXISTS CUSTOMER (Customer_Full_Name TEXT PRIMARY KEY, Customer_Shipping_Address TEXT, Customer_Telephone_Number TEXT, Customer_Credit_Amount INTEGER) STRICT,WITHOUT ROWID;",
+			"CREATE TABLE IF NOT EXISTS SELLING_REQUEST (Selling_Request_ID INTEGER PRIMARY KEY, Customer_Full_Name TEXT, Selling_Request_Product_Looks TEXT, Selling_Request_Meet_Date INTEGER, Selling_Request_Paid_Amount REAL, Selling_Request_Meet_Location TEXT, Selling_Request_Status TEXT, Selling_Request_Model TEXT, Selling_Request_Brand TEXT, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT,WITHOUT ROWID;",
+			"CREATE TABLE IF NOT EXISTS PRODUCT (Product_ID INTEGER PRIMARY KEY, Selling_Request_ID INTEGER, Repairment_ID INTEGER, Product_Price REAL, Product_Arrive_Date INTEGER, Product_Status TEXT, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID), FOREIGN KEY (Repairment_ID) REFERENCES REPAIRMENT(Repairment_ID))STRICT,WITHOUT ROWID;",
+			"CREATE TABLE IF NOT EXISTS USER (Username TEXT PRIMARY KEY, Password TEXT, Role INTEGER)STRICT,WITHOUT ROWID;",
+			"CREATE TABLE IF NOT EXISTS REPAIRMENT (Repairment_ID INTEGER PRIMARY KEY, Selling_Request_ID INTEGER, Repairment_Description TEXT, Repairment_Date INTEGER, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID))STRICT,WITHOUT ROWID;",
+			// TODO: BUY_REQUEST แก้ด้วยๆ
+			"CREATE TABLE IF NOT EXISTS BUY_REQUEST (Customer_Full_Name TEXT, Product_ID INTEGER, Buy_Request_Transportation_Start_Date INTEGER, Buy_Request_Transportation_Finished_Date INTEGER, Buy_Request_Transportation_Price REAL, Buy_Request_Product_Look_After_Cleaning TEXT, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT,WITHOUT ROWID;",
+			"INSERT INTO CUSTOMER SELECT 'John Doe', '123 Main St', '555-123-4567', 1000 " +
+			"WHERE NOT EXISTS (SELECT 1 FROM CUSTOMER WHERE Customer_Full_Name = 'John Doe');",
 				"INSERT INTO SELLING_REQUEST SELECT 1, 'John Doe', 'Sample Product Looks', 1634196000, 500.00, 'Sample Location', 'Pending', 'Sample Model', 'Sample Brand' "
 						+
 						"WHERE NOT EXISTS (SELECT 1 FROM SELLING_REQUEST WHERE Selling_Request_ID = 1);",
 				"INSERT INTO PRODUCT SELECT 1, 1, NULL, 250.00, 1634196000, 'Available' " +
 						"WHERE NOT EXISTS (SELECT 1 FROM PRODUCT WHERE Product_ID = 1);",
-				"INSERT INTO USER SELECT 'user1', 'password1', 1 " +
+						"INSERT INTO USER SELECT 'user1', 'password1', 1 " +
 						"WHERE NOT EXISTS (SELECT 1 FROM USER WHERE Username = 'user1');",
-				"INSERT INTO REPAIRMENT SELECT 1, 1, 'Sample Repairment Description', 1634196000 " +
+						"INSERT INTO REPAIRMENT SELECT 1, 1, 'Sample Repairment Description', 1634196000 " +
 						"WHERE NOT EXISTS (SELECT 1 FROM REPAIRMENT WHERE Repairment_ID = 1);",
-				"INSERT INTO BUY_REQUEST SELECT 'John Doe', 1, 1634196000, 1634200000, 50.00, 'Product looks good after cleaning' "
+						// TODO: BUY_REQUEST แก้ด้วยๆ
+						"INSERT INTO BUY_REQUEST SELECT 'John Doe', 1, 1634196000, 1634200000, 50.00, 'Product looks good after cleaning' "
 						+
 						"WHERE NOT EXISTS (SELECT 1 FROM BUY_REQUEST WHERE Customer_Full_Name = 'John Doe' AND Product_ID = 1);"
 		};
@@ -60,6 +61,7 @@ public class DatabaseMnm {
 	}
 
 	// [Zone:GeneralUsage]
+
 
 	// entire exception handling info: mode=no
 	public static Object[] runSQLcmd(java.sql.Statement dbStm, String sqlStm, boolean skipGetTable)
@@ -129,7 +131,7 @@ public class DatabaseMnm {
 
 	// entire exception handling info: mode=no
 	// REMARK: only determine by using of native datatype in SQL query only, do not
-	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC}
+	// using another datatype else from {INTEGER,REAL,BLOB,TEXT}
 	public static Object[] getColumnDataTypeFromResultSet(java.sql.ResultSet resultSet, int columnIndex)
 			throws java.sql.SQLException {
 		java.sql.ResultSetMetaData metaData = resultSet.getMetaData();
@@ -139,9 +141,6 @@ public class DatabaseMnm {
 		switch (sqlType) {
 			// การแปลงเป็น javaType ผมอิงตาม ChatGPT lamo โดยถามมันว่า อิงตาม general
 			// situation
-			// TODO: (OUTSIDE OF CODING but have to inspect CODING) บอกด้วยว่า db table
-			// declare แบบไหนได้อะไร แล้วถ้าเป็นแบบ no affinity
-			// แล้ว sqltype แบบไหนจะ route ไปอันไหน
 			case java.sql.Types.INTEGER:
 				javaType = Integer.class;
 				break;
@@ -174,28 +173,31 @@ public class DatabaseMnm {
 	// entire exception handling info: mode=no
 	// REMARK: only determine by using of available javatype in
 	// getColumnDataTypeFromResultSet() only, do not
-	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC} to control
+	// using another datatype else from {INTEGER,REAL,BLOB,TEXT} to control
 	// possible output of getColumnDataTypeFromResultSet()
 	public static <T> T getDataWithJavaTypeBasedOnJavaType(Class<T> javaType, java.sql.ResultSet resultSet,
 			int columnIndex)
 			throws java.sql.SQLException {
+		T retVal =null;
 		if (javaType == Integer.class) {
-			return (T) (Integer) resultSet.getInt(columnIndex);
+			retVal =(T) (Integer) resultSet.getInt(columnIndex);
 		} else if (javaType == Long.class) {
-			return (T) (Long) resultSet.getLong(columnIndex);
+			retVal= (T) (Long) resultSet.getLong(columnIndex);
 		} else if (javaType == Float.class) {
-			return (T) (Float) resultSet.getFloat(columnIndex);
+			retVal =(T) (Float) resultSet.getFloat(columnIndex);
 		} else if (javaType == Double.class) {
-			return (T) (Double) resultSet.getDouble(columnIndex);
+			retVal =(T) (Double) resultSet.getDouble(columnIndex);
 		} else if (javaType == String.class) {
-			return (T) resultSet.getString(columnIndex);
+			retVal =(T) resultSet.getString(columnIndex);
 		} else if (javaType == byte[].class) {
-			return (T) resultSet.getBytes(columnIndex);
+			retVal =(T) resultSet.getBytes(columnIndex);
 		} else if (javaType == java.math.BigDecimal.class) {
-			return (T) resultSet.getBigDecimal(columnIndex);
+			retVal =(T) resultSet.getBigDecimal(columnIndex);
 		} else {// it must not reached, so give runtimeexception
 			throw new MyExceptionHandling.UserRuntimeException("Given javaType is not supported");
 		}
+		if (resultSet.wasNull()) {return null;}
+		return retVal;
 
 	}
 
@@ -203,7 +205,7 @@ public class DatabaseMnm {
 	// WARNING: this would executed `resultSet.next()`
 	// REMARK: only determine by using of available javatype in
 	// getColumnDataTypeFromResultSet() only, do not
-	// using another datatype else from {INTEGER,REAL,BLOB,TEXT,NUMERIC} to control
+	// using another datatype else from {INTEGER,REAL,BLOB,TEXT} to control
 	// possible output of getColumnDataTypeFromResultSet()
 	public static <T> java.util.List<T> getColumnValuesFromResultSet(java.sql.ResultSet resultSet, int columnIndex,
 			Class<T> javaType,
