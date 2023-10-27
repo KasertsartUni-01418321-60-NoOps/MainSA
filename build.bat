@@ -17,6 +17,8 @@ mkdir build\java\th\ac\ku\sci\cs\projectsa\fun
 @REM  [END zone]
 @REM  put your lib/code here!!
 javac.exe -encoding UTF-8 -cp '.;.\src\java\th\ac\ku\sci\cs\projectsa;.\src\java\th\ac\ku\sci\cs\projectsa\uictrl;.\src\java\th\ac\ku\sci\cs\projectsa\fun;.\src\lib\FXRouter.jar;.\src\lib\sqlite-jdbc-3.43.0.0.jar' .\src\java\th\ac\ku\sci\cs\projectsa\*.java .\src\java\th\ac\ku\sci\cs\projectsa\uictrl\*.java .\src\java\th\ac\ku\sci\cs\projectsa\fun\*.java
+@echo [SCRIPT] (Check if java compilation is success, then press any key to continue...)
+@pause
 @REM  [END zone]
 @REM  put your code here!!
 move .\src\java\th\ac\ku\sci\cs\projectsa\*.class .\build\java\th\ac\ku\sci\cs\projectsa\
