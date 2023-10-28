@@ -37,19 +37,28 @@ public class DatabaseMnm {
 			"CREATE TABLE IF NOT EXISTS BUY_REQUEST (Customer_Full_Name TEXT, Product_ID INTEGER, Buy_Request_Transportation_Start_Date INTEGER, Buy_Request_Transportation_Finished_Date INTEGER, Buy_Request_Transportation_Price REAL, Buy_Request_Product_Look_After_Cleaning TEXT, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT,WITHOUT ROWID;",
 			"INSERT INTO CUSTOMER SELECT 'John Doe', '123 Main St', '555-123-4567', 1000 " +
 			"WHERE NOT EXISTS (SELECT 1 FROM CUSTOMER WHERE Customer_Full_Name = 'John Doe');",
-				"INSERT INTO SELLING_REQUEST SELECT 1, 'John Doe', 'Sample Product Looks', 1634196000, 500.00, 'Sample Location', 'Pending', 'Sample Model', 'Sample Brand' "
-						+
-						"WHERE NOT EXISTS (SELECT 1 FROM SELLING_REQUEST WHERE Selling_Request_ID = 1);",
-				"INSERT INTO PRODUCT SELECT 1, 1, NULL, 250.00, 1634196000, 'Available' " +
-						"WHERE NOT EXISTS (SELECT 1 FROM PRODUCT WHERE Product_ID = 1);",
-						"INSERT INTO USER SELECT 'user1', 'password1', 1 " +
-						"WHERE NOT EXISTS (SELECT 1 FROM USER WHERE Username = 'user1');",
-						"INSERT INTO REPAIRMENT SELECT 1, 1, 'Sample Repairment Description', 1634196000 " +
-						"WHERE NOT EXISTS (SELECT 1 FROM REPAIRMENT WHERE Repairment_ID = 1);",
-						// TODO: BUY_REQUEST แก้ด้วยๆ
-						"INSERT INTO BUY_REQUEST SELECT 'John Doe', 1, 1634196000, 1634200000, 50.00, 'Product looks good after cleaning' "
-						+
-						"WHERE NOT EXISTS (SELECT 1 FROM BUY_REQUEST WHERE Customer_Full_Name = 'John Doe' AND Product_ID = 1);"
+			"INSERT INTO CUSTOMER SELECT 'Jane Smith', '456 Elm St', '555-987-6543', 1500 " +
+			"WHERE NOT EXISTS (SELECT 1 FROM CUSTOMER WHERE Customer_Full_Name = 'Jane Smith');",
+			"INSERT INTO SELLING_REQUEST SELECT 1, 'John Doe', 'Sample Product Looks', 1634196000, 500.00, 'Sample Location', 'Pending', 'Sample Model', 'Sample Brand' " +
+			"WHERE NOT EXISTS (SELECT 1 FROM SELLING_REQUEST WHERE Selling_Request_ID = 1);",
+			"INSERT INTO SELLING_REQUEST SELECT 2, 'Jane Smith', 'Another Product', 1634197000, 600.00, 'Another Location', 'In Progress', 'Another Model', 'Another Brand' " +
+			"WHERE NOT EXISTS (SELECT 1 FROM SELLING_REQUEST WHERE Selling_Request_ID = 2);",
+			"INSERT INTO PRODUCT SELECT 1, 1, NULL, 250.00, 1634196000, 'Available' " +
+			"WHERE NOT EXISTS (SELECT 1 FROM PRODUCT WHERE Product_ID = 1);",
+			"INSERT INTO PRODUCT SELECT 2, 2, NULL, 300.00, 1634197000, 'In Stock' " +
+			"WHERE NOT EXISTS (SELECT 1 FROM PRODUCT WHERE Product_ID = 2);",
+			"INSERT INTO USER SELECT 'user1', 'password1', 1 " +
+			"WHERE NOT EXISTS (SELECT 1 FROM USER WHERE Username = 'user1');",
+			"INSERT INTO USER SELECT 'user2', 'password2', 2 " +
+			"WHERE NOT EXISTS (SELECT 1 FROM USER WHERE Username = 'user2');",
+			"INSERT INTO REPAIRMENT SELECT 1, 1, 'Sample Repairment Description', 1634196000 " +
+			"WHERE NOT EXISTS (SELECT 1 FROM REPAIRMENT WHERE Repairment_ID = 1);",
+			"INSERT INTO REPAIRMENT SELECT 2, 2, 'Another Repairment', 1634197000 " +
+			"WHERE NOT EXISTS (SELECT 1 FROM REPAIRMENT WHERE Repairment_ID = 2);",
+			"INSERT INTO BUY_REQUEST SELECT 'John Doe', 1, 1634196000, 1634200000, 50.00, 'Product looks good after cleaning' " +
+			"WHERE NOT EXISTS (SELECT 1 FROM BUY_REQUEST WHERE Customer_Full_Name = 'John Doe' AND Product_ID = 1);",
+			"INSERT INTO BUY_REQUEST SELECT 'Jane Smith', 2, 1634197000, 1634201000, 60.00, NULL " +
+			"WHERE NOT EXISTS (SELECT 1 FROM BUY_REQUEST WHERE Customer_Full_Name = 'Jane Smith' AND Product_ID = 2);"
 		};
 		try {
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:./data/main.db");
