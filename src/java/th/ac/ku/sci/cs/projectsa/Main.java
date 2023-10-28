@@ -8,7 +8,7 @@ public class Main extends javafx.application.Application {
     public static void funcTestOFCaughtException() {
     }
 
-    // TODO: (OUTSIDE OF CODE) ศึกษา sqlite datatype ละเอัยดหน่อยๆ + S T R I C T
+    // TODO: Exception handling: have cause of throwning (แบบคือมีสาเหตุเวลามันโดน try-catch หลายชั้นๆอ่ะๆ)
     // entire exception handling info: mode=fatal
     public static void main(String[] args) throws Throwable {
         try {
@@ -37,16 +37,16 @@ public class Main extends javafx.application.Application {
     }
 
 
-    // TODO: entire exception handling info: mode=fatal
+    // entire exception handling info: mode=fatal
     public static void shutdown() {
-        // TODO:
+        // TODO: (SHUTDOWN PART ทำทีหลังเว้ยยย)
     }
     
     // entire exception handling info: mode=fatal
     @Override
     public void start(javafx.stage.Stage primaryStage) {
         try {
-            // TODO: (SHUTDOWN PART) exception handling (only about to add try-catch inside parenthesis of runnable) + also move to main()
+            // TODO: (SHUTDOWN PART ทำทีหลังเว้ยยย) exception handling (only about to add try-catch inside parenthesis of runnable) + also move to main()
             Runtime.getRuntime().addShutdownHook(new Thread(()->{
                 this.stop();
             }));
@@ -77,8 +77,8 @@ public class Main extends javafx.application.Application {
     }
 
     // entire exception handling info: mode=fatal
-    // TODO: (SHUTDOWN PART) move code to static method
-    // TODO: (SHUTDOWN PART) do not let exception of 1 break another actions
+    // TODO: (SHUTDOWN PART ทำทีหลังเว้ยยย) move code to static method
+    // TODO: (SHUTDOWN PART ทำทีหลังเว้ยยย) do not let exception of 1 break another actions
     @Override
     public void stop() {
         try {
