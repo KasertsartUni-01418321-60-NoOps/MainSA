@@ -55,7 +55,7 @@ public class MyExceptionHandling {
 		}
 	}
 
-	// TODO: entire exception handling info: mode=no
+	// entire exception handling info: mode=no
 	public static void handleFatalExitException(Throwable e, String scope) {
 		try {
 			if (scope == null) {

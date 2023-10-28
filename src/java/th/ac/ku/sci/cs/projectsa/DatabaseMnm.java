@@ -24,7 +24,6 @@ public class DatabaseMnm {
 				throw e;
 			}
 		}
-		// TODO: (OUTSIDE OF CODING) describe Data Spec
 		// REMARK: for my group, only use {TEXT,BLOB,REAL,INTEGER} maybe we not using
 		// "NUMERIC"
 		String[] sqlStms = new String[] {
