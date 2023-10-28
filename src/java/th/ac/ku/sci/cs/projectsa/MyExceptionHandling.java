@@ -6,56 +6,63 @@ import th.ac.ku.sci.cs.projectsa.*;
 public class MyExceptionHandling {
 	public static final String appFatalHeader = "Application has fatal exception below:";
 	public static boolean isFatal = false;
-	public static boolean isTextReportingFatal = false;
-	public static boolean haveDoneJavaFXExitingExceptionReport = false;
+
+	
 
 	// entire exception handling info: mode=no (because it would be recurisve
 	// lamolamolamo)
-	public static void handleFatalException(Throwable e) throws Throwable {
-		boolean oldIsFatal=MyExceptionHandling.isFatal;
-		try {
-			MyExceptionHandling.isFatal = true;
-			MyExceptionHandling.reportFatalExceptionInCUI(e, null, null);
-			MyExceptionHandling.reportFatalExceptionInGUI(e, null, null);
-		} catch (Throwable e1) {
-			throw e1;
-		} finally {
-			// To prevent repeating of this process, or even inifinite-recursive
-			if (oldIsFatal==false) {
-				try {
-					throw e;
-				} catch (Throwable e0) {
-					isTextReportingFatal = true;
-					throw e0;
-				} finally {
-					try {
-						try {
-							MainAlt1.primaryApplication.stop();
-						} catch (Throwable e2) {
-							haveDoneJavaFXExitingExceptionReport = true;
-							// changed my mind, no further exception report
-							System.exit(255);
-						}
-						try {
-							javafx.application.Platform.exit();
-						} catch (Throwable e2) {
-
-							if (haveDoneJavaFXExitingExceptionReport) {
-							} else {
-								// changed my mind, no further exception report
-							}
-							System.exit(255);
-						}
-						System.exit(255);
+	public static void handleFatalException(Throwable e, boolean doGUI, String[] titleAndMainTextOfCUIAndGUI) {
+		try{
+			boolean oldIsFatal=MyExceptionHandling.isFatal;
+			try {
+				MyExceptionHandling.isFatal = true;
+				MyExceptionHandling.reportFatalExceptionInCUI(e, titleAndMainTextOfCUIAndGUI[0], titleAndMainTextOfCUIAndGUI[1]);
+				if (doGUI) {MyExceptionHandling.reportFatalExceptionInGUI(e, titleAndMainTextOfCUIAndGUI[2], titleAndMainTextOfCUIAndGUI[3]);}
+			} catch (Throwable e1) {
+				// do not throw, so caller could able to continue throwing main exception // throw e1;
+			} finally {
+				// To prevent repeating of this process, or even inifinite-recursive
+				if (oldIsFatal==false) {
+					try {System.exit(255);
 					} catch (Throwable e1) {
-						throw e1;
-					} finally {
-						throw e;
+						try {MyExceptionHandling.handleFatalExitException(e1,null);}
+						catch (Throwable e2) {
+							// throw System.exit Throwable instead...
+						}
+						// do not throw, so caller could able to continue throwing main exception //throw e1;
 					}
 				}
 			}
+		} catch (Throwable e0) {
+			// do nothing so that main exception could be throw lamo
 		}
+	}
 
+	// entire exception handling info: mode=no (because it would be recurisve
+	// lamolamolamo)
+	// REMARK: ที่สร้างอันนี้มาเพราะ ขก. แก้ lamo
+	public static void handleFatalException(Throwable e) {
+		try{MyExceptionHandling.handleFatalException(e,true,new String[] {null,null,null,null});		} catch (Throwable e0) {
+			// do nothing so that main exception could be throw lamo
+		}
+	}
+	
+	// TODO: entire exception handling info: mode=no
+	public static void handleFatalExitException(Throwable e, String scope) {
+		try{ if (scope==null) {
+			scope="MainApp|ShutdownSystem";
+		}
+		String tmp1="Application has below fatal exception on app-shutdown system:";
+		String tmp2="Application Exiting Fatal (at " + Main.getISODateTimeString() + ")";
+		String[] tmp0=new String[] {Main.clReportHeader(scope, "FATAL"),tmp1,tmp2,tmp1};
+		if (MyExceptionHandling.isFatal) {
+			MyExceptionHandling.handleFatalException(e,false,tmp0);
+		} else {
+			MyExceptionHandling.handleFatalException(e,true,tmp0);
+		}
+			} catch (Throwable e0) {
+			// do nothing so that main exception could be throw lamo
+		}
 	}
 
 	// entire exception handling info: mode=no
