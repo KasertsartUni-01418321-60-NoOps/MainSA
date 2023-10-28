@@ -1,3 +1,4 @@
+@REM this file is for sample only, do not overwrite if it is specific to your machine's hw/sw config; just make your own file and add .gitignore
 @title NP-chaonay Java Building System : Application Building
 @color 0A
 set "JAVA_HOME=%HOME%\Downloads\JAVA\openlogic-openjdk-8u382-b05-windows-64\"
