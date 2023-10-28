@@ -62,7 +62,7 @@ public class MyExceptionHandling {
 				scope = "MainApp|ShutdownSystem";
 			}
 			String tmp1 = "Application has below fatal exception on app-shutdown system:";
-			String tmp2 = "Application Exiting Fatal (at " + Main.getISODateTimeString() + ")";
+			String tmp2 = "Application Exiting Fatal (at " + Main.getISODateTimeString() + " | at scope \""+scope+"\")";
 			String[] tmp0 = new String[] { Main.clReportHeader(scope, "FATAL"), tmp1, tmp2, tmp1 };
 			if (MyExceptionHandling.isFatal) {
 				MyExceptionHandling.handleFatalException(e, false, tmp0);
@@ -92,7 +92,7 @@ public class MyExceptionHandling {
 	private static void reportFatalExceptionInGUI(Throwable e, String title, String mainText) {
 		try {
 			if (title == null) {
-				title = "Application Fatal (at " + Main.getISODateTimeString() + ")";
+				title = "Application Fatal (at " + Main.getISODateTimeString() + " | at scope \""+"MainApp"+"\")";
 			}
 			if (mainText == null) {
 				mainText = appFatalHeader;

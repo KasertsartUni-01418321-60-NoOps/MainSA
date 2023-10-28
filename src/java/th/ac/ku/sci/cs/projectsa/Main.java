@@ -5,14 +5,35 @@ import th.ac.ku.sci.cs.projectsa.*;
 
 public class Main extends javafx.application.Application {
     public static String[] args =null;
+    public static java.util.concurrent.ExecutorService exitThread = java.util.concurrent.Executors.newSingleThreadExecutor();
     public static void funcTestOFCaughtException() {
     }
 
-    // TODO: Exception handling: have cause of throwning (แบบคือมีสาเหตุเวลามันโดน try-catch หลายชั้นๆอ่ะๆ)
     // entire exception handling info: mode=fatal
     public static void main(String[] args) throws Throwable {
         try {
             Main.args=args;
+            Runtime.getRuntime().addShutdownHook(new Thread(()->{
+                try {
+                    javafx.application.Platform.exit();
+                    // funny stuff, lazy-exception-handling is done in that function 
+                    th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer.shutdown();
+                    if (MyExceptionHandling.isFatal) {}
+                    else {
+                        // in case user want something extraordinary, เราจัดให้ ๆ
+                        // WARNING: do not run this arg to commandLine in production, this would skip any (Java exception handling / JVM shutdown hook/cleanup), results in ongoing-cleaning data being lossed, or even corrupts database file. 
+                        for (String arg : args) {
+                            if (arg.equals("-MiscFunFlag+crashOnPostExit")||arg.equals("--MiscFunFlag+crashOnPostExit")) {
+                                th.ac.ku.sci.cs.projectsa.fun.UnsafeStuff.crashJVMLamo();
+                            }
+                        }
+                    }
+                    Main.exitThread.shutdownNow();
+                }
+                catch (Throwable e) {
+                    MyExceptionHandling.handleFatalExitException(e, "MainApp|ShutdownSystem|ProgramMainHook");
+                }
+            }));
             boolean doMIDIPlayer =true;
             for (String arg : args) {
                 if (arg.equals("-MiscFunFlag+muteMIDI")||arg.equals("--MiscFunFlag+muteMIDI")) {doMIDIPlayer=false;break;}
@@ -33,23 +54,15 @@ public class Main extends javafx.application.Application {
             launch(args);
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
+            throw e;
         }
     }
 
 
     // entire exception handling info: mode=fatal
-    public static void shutdown() {
-        // TODO: (SHUTDOWN PART ทำทีหลังเว้ยยย)
-    }
-    
-    // entire exception handling info: mode=fatal
     @Override
     public void start(javafx.stage.Stage primaryStage) {
         try {
-            // TODO: (SHUTDOWN PART ทำทีหลังเว้ยยย) exception handling (only about to add try-catch inside parenthesis of runnable) + also move to main()
-            Runtime.getRuntime().addShutdownHook(new Thread(()->{
-                this.stop();
-            }));
             MainAlt1.primaryApplication = this;
             MainAlt1.primaryStage = primaryStage;
             primaryStage.setResizable(false);
@@ -77,25 +90,12 @@ public class Main extends javafx.application.Application {
     }
 
     // entire exception handling info: mode=fatal
-    // TODO: (SHUTDOWN PART ทำทีหลังเว้ยยย) move code to static method
-    // TODO: (SHUTDOWN PART ทำทีหลังเว้ยยย) do not let exception of 1 break another actions
     @Override
     public void stop() {
         try {
-            MainAlt1.primaryStage.hide();
-            // funny stuff, lazy-exception-handling is done in that function 
-            th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer.shutdown();
-            if (MyExceptionHandling.isFatal) {}
-            else {
-                javafx.application.Platform.exit();
-                // in case user want something extraordinary, เราจัดให้ ๆ
-                // WARNING: do not run this arg to commandLine in production, this would skip any (Java exception handling / JVM shutdown hook/cleanup), results in ongoing-cleaning data being lossed, or even corrupts database file. 
-                for (String arg : args) {
-                if (arg.equals("-MiscFunFlag+crashOnPostExit")||arg.equals("--MiscFunFlag+crashOnPostExit")) {
-                    th.ac.ku.sci.cs.projectsa.fun.UnsafeStuff.crashJVMLamo();
-                }
-                }
-                System.exit(0);
+            // in case of fatal
+            if (MyExceptionHandling.isFatal) {} else {
+		        Main.exitThread.submit(() -> {System.exit(0);});
             }
         } catch (Throwable e) {
             // due to this method is called by MyExceptionHandling.handleFatalException, so if that happens, then we ignore it due to guideline that specified in that file of MyExceptionHandling
