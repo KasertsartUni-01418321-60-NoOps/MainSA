@@ -19,6 +19,7 @@ public class UICtrl_Test  {
 			}
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
+			throw e;
 		}
 	}
 
@@ -42,6 +43,7 @@ public class UICtrl_Test  {
 			throw new Exception("RICKROLL");
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
+			throw e;
 		}
 	}
 

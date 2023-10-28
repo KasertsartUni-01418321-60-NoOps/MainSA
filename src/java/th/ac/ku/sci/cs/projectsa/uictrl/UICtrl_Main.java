@@ -16,6 +16,7 @@ public class UICtrl_Main {
 			}
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
+			throw e;
 		}
 	}
 }

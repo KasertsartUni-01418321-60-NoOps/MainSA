@@ -40,7 +40,7 @@ public class MIDIPlayer {
 			} catch (Exception e) {
 			}
 			try {
-				mainThread.shutdown();
+				mainThread.shutdownNow();
 			} catch (Exception e) {
 			}
 			try {
