@@ -4,7 +4,7 @@ import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
 
 public class MyExceptionHandling {
-	public static final String appFatalHeader = "Application has fatal exception below:";
+	public static final String appFatalHeader = "โปรแกรมเกิดข้อผิดพลาดร้ายแรง ข้อมูลปัญหาได้ถูกระบุไว้ด้านล่างนี้:";
 	public static boolean isFatal = false;
 
 	// entire exception handling info: mode=no (because it would be recurisve
@@ -92,7 +92,7 @@ public class MyExceptionHandling {
 	private static void reportFatalExceptionInGUI(Throwable e, String title, String mainText) {
 		try {
 			if (title == null) {
-				title = "Application Fatal (at " + Main.getISODateTimeString() + " | at scope \""+"MainApp"+"\")";
+				title = "ความผิดพลาดร้ายแรง (เมื่อ " + Main.getISODateTimeString() + " | ตรงส่วนของ \""+"MainApp"+"\")";
 			}
 			if (mainText == null) {
 				mainText = appFatalHeader;
