@@ -386,7 +386,6 @@ public class DatabaseMnm {
 		}
 	}
 
-	// TODO: HighPriority 1 - (Valid/transform) อย่าลืมคิดเรื่อง การvalid/แปลง string of UI เป็น suitable format แต่ทำอย่างอื่นก่อน (ยกเว้นการเปลี่ยนจาก native->real function อันนั้นเดี่ยวค่อยก็ได้)
 	// TODO: HighPriority 2 - (valid) และสุดท้าย function รวบยอดไปเลย คือป้อน raw UI value ของแต่ละ attribute แล้ว return ไว้ valid ไหม
 	// TODO: HighPriority 3 - (transform) แปลงข้อมูลกลับมาเป็น string แต่สำหรับ รัน SQL
 	// TODO: HighPriority 4 - (valid) check FK lamo check PK lamo using isExistedInTable
@@ -404,8 +403,11 @@ public class DatabaseMnm {
 		@java.lang.annotation.Target({java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD})
 		public @interface Nullable {
 		}
+		// REMARK: seem that we don't need this yet
 		public static class UIDataLevel {}
 		public static class JavaTypeLevel {
+			// [Zone:SubclassAsPkg]
+			public static class PerAttributeValidation {}
 			// [Zone:Methods]
 			public static boolean checkObjNotNull(@Nullable Object data) {
 				return !(data==null);
@@ -465,6 +467,12 @@ public class DatabaseMnm {
 			public static native boolean checkStrIsValidTelNum(@NotNull String data);
 		}
 		public static class SQLQueryLevel {}
+	}
+
+	public static class DataTransform {
+		// REMARK: seem that we don't need this yet
+		public static class UIDataToJavaType {}
+		public static class JavaTypeToSQLQuery {}
 	}
 
 	// [Zone:SubClass]
