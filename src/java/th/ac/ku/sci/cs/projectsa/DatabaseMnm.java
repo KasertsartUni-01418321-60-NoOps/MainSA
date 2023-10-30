@@ -330,6 +330,62 @@ public class DatabaseMnm {
 
 	// [Zone:SubClassAsPackage lamo]
 
+	public static class DataSpec {
+		// [Zone:Constants]
+		// for attribute that have range (that "required" range checking ถ้าไม่ required ก็เช่น ใช้ >0 หรือ >=0 ได้)
+		// > วิธีนี้เพื่อลดการ HARDCODE LAMO 
+		public final static long RANGE_MIN__Customer_Credit_Amount = -500;
+		public final static long RANGE_MAX__Customer_Credit_Amount = 500;
+		// REMARK: สำหรับ REAL attribute, ค่าMin คือ digitCount หน้าทศนิยม และค่าMax คือ digitCount หลังทศนิยม 
+		// REMARK: apply ทุก attribte!!
+		// REMARK: ชื่อ attribute ซ้ำกันเพราะ FK ซึ่ง FK คุณสมบัติของ length เหมือนกันอยู๋แล้วๆๆ
+		public final static Map<String,Integer[]> MINMAX_LENGTH_OF_ATTRIBS = new HashMap<>();
+		static {
+			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Full_Name", new Integer[] {1,192});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Address", new Integer[] {1,512});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Telephone_Number", new Integer[] {1,32});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Credit_Amount", new Integer[] {1,3});
+			MINMAX_LENGTH_OF_ATTRIBS.put("User_Name", new Integer[] {1,32});
+			MINMAX_LENGTH_OF_ATTRIBS.put("User_Password", new Integer[] {1,32});
+			MINMAX_LENGTH_OF_ATTRIBS.put("User_Role", new Integer[] {1,1});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Product_ID", new Integer[] {8,8});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Arrive_time", new Integer[] {10,10});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Price", new Integer[] {8,2});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Status", new Integer[] {1,1});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_ID", new Integer[] {8,8});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Repairment_ID", new Integer[] {8,8});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_ID", new Integer[] {8,8});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Full_Name", new Integer[] {1,192});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Brand", new Integer[] {1,64});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Model", new Integer[] {1,128});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Product_Looks", new Integer[] {1,1024});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Meet_Date", new Integer[] {10,10});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Meet_Location", new Integer[] {1,512});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Paid_Amount", new Integer[] {8,2});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Status", new Integer[] {1,1});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Repairment_ID", new Integer[] {8,8});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Repairment_Description", new Integer[] {1,1024});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Repairment_Date", new Integer[] {10,10});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Requet_ID", new Integer[] {8,8});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Full_Name", new Integer[] {1,192});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Product_ID", new Integer[] {8,8});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Buy_Request_Created_Date", new Integer[] {10,10});
+			MINMAX_LENGTH_OF_ATTRIBS.put("Buy_Request_Transportation_Price", new Integer[] {5,2});
+		}
+
+		// [Zone:StatusENUM]
+		public static enum STATUS_User {
+			Employer,
+			Employee
+		}
+		public static enum STATUS_Product {
+			NotYetSale,ForSale,SaledAndWaitForSend,Sent
+		}
+		public static enum STATUS_Selling_Request {
+			WaitForCheck,Declined,Acceapted
+		}
+	}
+
 	// TODO: HighPriority 1 - (Valid/transform) อย่าลืมคิดเรื่อง การvalid/แปลง string of UI เป็น suitable format แต่ทำอย่างอื่นก่อน (ยกเว้นการเปลี่ยนจาก native->real function อันนั้นเดี่ยวค่อยก็ได้)
 	// TODO: HighPriority 2 - (valid) และสุดท้าย function รวบยอดไปเลย คือป้อน raw UI value ของแต่ละ attribute แล้ว return ไว้ valid ไหม
 	// TODO: HighPriority 3 - (transform) แปลงข้อมูลกลับมาเป็น string แต่สำหรับ รัน SQL
@@ -338,47 +394,6 @@ public class DatabaseMnm {
 	// WARNING: ให้ถือว่า function ที่ไม่ได้มีหน้าที่เช็ค null/type จะถือว่าข้อมูลที่รับเข้ามามีการเช็ค null/type แล้ว เช่น checkStrIsNotEmpty จะไม่เช็ค String ว่า not-nullไหม หากโยน nullเข้าไปจะ error ทันที
 	// REMARK: legnth คือ integer ส่วน range/ตัวค่าคือ long/double (แล้วแต่ dattype ของ attrib)
 	public static class DataValidation {
-		// [Zone:Constants]
-		// TODO: HighPriority for attribute that have range
-		public final static int RANGE_MIN__Customer_Credit_Amount = -500;
-
-
-		// [Zone:ENUM]
-		// TODO: HighPriority ENUM for status attribute
-		// REMARK: สำหรับ REAL attribute, ค่าMin คือ digitCount หน้าทศนิยม และค่าMax คือ digitCount หลังทศนิยม 
-		public final static Map<String,Integer[]> MinMaxLengthOfAttributes = new HashMap<>();
-		static {
-			MinMaxLengthOfAttributes.put("Customer_Full_Name", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Customer_Address", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Customer_Telephone_Number", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Customer_Credit_Amount", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("User_Name", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("User_Password", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("User_Role", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Product_ID", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Product_Arrive_time", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Product_Price", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Product_Status", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Selling_Request_ID", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Repairment_ID", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Selling_Request_ID", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Customer_Full_Name", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Selling_Request_Brand", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Selling_Request_Status", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Selling_Request_Product_Looks", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Selling_Request_Meet_Date", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Selling_Request_Meet_Location", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Selling_Request_Paid_Amount", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Selling_Request_Status", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Repairment_ID", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Repairment_Description", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Repairment_Date", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Selling_Requet_ID", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Customer_Full_Name", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Product_ID", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Buy_Request_Created_Date", new Integer[] {null,});
-			MinMaxLengthOfAttributes.put("Buy_Request_Transportation_Price", new Integer[] {null,});
-		}
 
 		// [Zone:Annotation lamo]
 		@java.lang.annotation.Retention(java.lang.annotation.RetentionPolicy.RUNTIME) // You can also use RUNTIME if you want to retain annotations at runtime
@@ -389,63 +404,67 @@ public class DatabaseMnm {
 		@java.lang.annotation.Target({java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD})
 		public @interface Nullable {
 		}
-		// [Zone:Methods]
-
-		public static boolean checkObjNotNull(@Nullable Object data) {
-			return !(data==null);
-		}
-		public static boolean  checkStrNotEmpty(@NotNull String data) {
-			return data.length()>0;
-		}
-		// if max==null, then no max limit
-		// TODO: need defination
-		public static native boolean checkLongDigitLength(long data, int min, @Nullable Integer max);
-		public static boolean checkStrLength(@NotNull String data, int min, @Nullable Integer max) {
-			if (max==null) {
-				return data.length()>=min;
-			} else {
-				return data.length()>=min && data.length()<=max;
+		public static class UIDataLevel {}
+		public static class JavaTypeLevel {
+			// [Zone:Methods]
+			public static boolean checkObjNotNull(@Nullable Object data) {
+				return !(data==null);
 			}
-		}
-		// TODO:need defination
-		public static native boolean checkDoubleDigitLength(double data, int maxFront, int maxRear);
-		// TODO:how about double?
-		public static boolean checkLongNotNegative(long data) {
-			return data>=0;
-		}
-		// TODO:how about double?
-		public static boolean checkLongIsPositive(long data) {
-			return data>0;
-		}
-		// TODO:how about double?
-		// if {min/max}==null, then no {coressponding: min/max} limit
-		public static boolean checkLongIsInRange(long data, @Nullable Integer min, @Nullable Integer max) {
-			boolean tmp1=true;
-			boolean tmp2=true;
-			if (min==null) {} else {tmp1=data>=min;}
-			if (max==null) {} else {tmp2=data<=max;}
-			return tmp1&&tmp2;
-		}
-		public static <T extends Enum<T>> boolean checkLongIsMatchesEnum(long value, @NotNull Class<T> enumClass) {
-			for (T enumConstant : enumClass.getEnumConstants()) {
-				if (enumConstant.ordinal() == value) {
-					return true;
+			// REMARK: ใช้ checkStrLength แทนได้ และในทางกลับกัน (กรณีจะเช็คว่า notEmpty)
+			public static boolean  checkStrNotEmpty(@NotNull String data) {
+				return data.length()>0;
+			}
+			// if max==null, then no max limit
+			// TODO: need defination
+			public static native boolean checkLongDigitLength(long data, int min, @Nullable Integer max);
+			public static boolean checkStrLength(@NotNull String data, int min, @Nullable Integer max) {
+				if (max==null) {
+					return data.length()>=min;
+				} else {
+					return data.length()>=min && data.length()<=max;
 				}
 			}
-			return false;
+			// TODO:need defination
+			public static native boolean checkDoubleDigitLength(double data, int maxFront, int maxRear);
+			// TODO:how about double?
+			public static boolean checkLongNotNegative(long data) {
+				return data>=0;
+			}
+			// TODO:how about double?
+			public static boolean checkLongIsPositive(long data) {
+				return data>0;
+			}
+			// TODO:how about double?
+			// if {min/max}==null, then no {coressponding: min/max} limit
+			public static boolean checkLongIsInRange(long data, @Nullable Integer min, @Nullable Integer max) {
+				boolean tmp1=true;
+				boolean tmp2=true;
+				if (min==null) {} else {tmp1=data>=min;}
+				if (max==null) {} else {tmp2=data<=max;}
+				return tmp1&&tmp2;
+			}
+			public static <T extends Enum<T>> boolean checkLongIsMatchesEnum(long value, @NotNull Class<T> enumClass) {
+				for (T enumConstant : enumClass.getEnumConstants()) {
+					if (enumConstant.ordinal() == value) {
+						return true;
+					}
+				}
+				return false;
+			}
+			// TODO:need defination
+			public static native boolean checkStrIsGeneralValid(@NotNull String data);
+			// TODO:need defination
+			public static native boolean checkStrIsValidUserName(@NotNull String data);
+			// TODO:need defination
+			public static native boolean checkStrIsValidPassword(@NotNull String data);
+			// TODO:need defination
+			public static native boolean checkStrIsValidID(@NotNull String data);
+			// TODO:need defination
+			public static native boolean checkStrIsValidCustomerName(@NotNull String data);
+			// TODO:need defination
+			public static native boolean checkStrIsValidTelNum(@NotNull String data);
 		}
-		// TODO:need defination
-		public static native boolean checkStrIsGeneralValid(@NotNull String data);
-		// TODO:need defination
-		public static native boolean checkStrIsValidUserName(@NotNull String data);
-		// TODO:need defination
-		public static native boolean checkStrIsValidPassword(@NotNull String data);
-		// TODO:need defination
-		public static native boolean checkStrIsValidID(@NotNull String data);
-		// TODO:need defination
-		public static native boolean checkStrIsValidCustomerName(@NotNull String data);
-		// TODO:need defination
-		public static native boolean checkStrIsValidTelNum(@NotNull String data);
+		public static class SQLQueryLevel {}
 	}
 
 	// [Zone:SubClass]
