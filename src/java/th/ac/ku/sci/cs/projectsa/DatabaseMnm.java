@@ -2,19 +2,21 @@ package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.sql.PreparedStatement;
 
 import th.ac.ku.sci.cs.projectsa.*;
 
 public class DatabaseMnm {
 	public static java.sql.Connection mainDbConn = null;
-	public static java.sql.Statement mainDbConnStm1 = null;
 	public final static String mainDbPath = "./data/main.db";
 
 
 	// [Zone:Init]
 
+	// TODO: Important class Critical|Security: prvent SQL injection
+	// TODO: from above เราจะออกแบบใหม่ คือ
+	// >  ให้ runSQLcmd/runSQLcmds สามารถป้อน parameter ของ preparedStatement ได้
+	// TODO: LESS IMPORTANT: have arg ได้ allow statement to let statement obj: not close / close but return / close and not return (set null) 
 	// entire exception handling info: mode=no
 	public static void mainDbInit() throws java.sql.SQLException, java.io.IOException {
 		java.nio.file.Path tmp_Path = java.nio.file.Paths.get("./data");
@@ -60,9 +62,8 @@ public class DatabaseMnm {
 			"INSERT INTO BUY_REQUEST SELECT 'Jane Smith', 2, NULL, 60.00 " +
 			"WHERE NOT EXISTS (SELECT 1 FROM BUY_REQUEST WHERE Customer_Full_Name = 'Jane Smith' AND Product_ID = 2);"
 		};
-		try {
+		try {()
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:"+mainDbPath);
-			DatabaseMnm.mainDbConnStm1 = DatabaseMnm.mainDbConn.createStatement();
 			DatabaseMnm.runSQLcmds(null, sqlStms, true);
 		} catch (java.sql.SQLException e) {
 			throw e;
@@ -73,7 +74,7 @@ public class DatabaseMnm {
 
 
 	// entire exception handling info: mode=no
-	public static Object[] runSQLcmd(java.sql.Statement dbStm, String sqlStm, boolean skipGetTable)
+	public static Object[] runSQLcmd(java.sql.Connection dbConn, String sqlStm, boolean skipGetTable, int reserved0, Object... params)
 			throws java.sql.SQLException {
 		if (dbStm == null) {
 			dbStm = DatabaseMnm.mainDbConnStm1;
@@ -105,14 +106,14 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	public static Object[][] runSQLcmds(java.sql.Statement dbStm, String[] sqlStms, boolean skipGetTable)
+	public static Object[][] runSQLcmds(java.sql.Connection dbConn, String[] sqlStms, boolean skipGetTable,int reserved0, Object[][] paramsOfEachStms)
 			throws java.sql.SQLException {
 		if (dbStm == null) {
 			dbStm = DatabaseMnm.mainDbConnStm1;
 		}
 		Object[][] retVal = new Object[sqlStms.length][];
 		for (int i = 0; i < sqlStms.length; i++) {
-			retVal[i] = runSQLcmd(dbStm, sqlStms[i], skipGetTable);
+			retVal[i] = runSQLcmd(dbStm, sqlStms[i], skipGetTable, 0,);
 		}
 		return retVal;
 	}
