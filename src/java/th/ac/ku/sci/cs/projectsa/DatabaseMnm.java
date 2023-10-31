@@ -2,7 +2,11 @@ package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 
+import java.io.NotActiveException;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import th.ac.ku.sci.cs.projectsa.*;
 
@@ -12,12 +16,10 @@ public class DatabaseMnm {
 
 
 	// [Zone:Init]
-
-	// TODO: Important class Critical|Security: prvent SQL injection
 	// TODO: from above เราจะออกแบบใหม่ คือ
 	// >  ให้ runSQLcmd/runSQLcmds สามารถป้อน parameter ของ preparedStatement ได้
-	// TODO: LESS IMPORTANT: have arg ได้ allow statement to let statement obj: not close / close but return / close and not return (set null) 
 	// entire exception handling info: mode=no
+	// REMARK: normally, this sql statements execution, only create table, so no begin/rollback required.
 	public static void mainDbInit() throws java.sql.SQLException, java.io.IOException {
 		java.nio.file.Path tmp_Path = java.nio.file.Paths.get("./data");
 		if (!java.nio.file.Files.exists(tmp_Path)) {
@@ -62,9 +64,9 @@ public class DatabaseMnm {
 			"INSERT INTO BUY_REQUEST SELECT 'Jane Smith', 2, NULL, 60.00 " +
 			"WHERE NOT EXISTS (SELECT 1 FROM BUY_REQUEST WHERE Customer_Full_Name = 'Jane Smith' AND Product_ID = 2);"
 		};
-		try {()
+		try {
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:"+mainDbPath);
-			DatabaseMnm.runSQLcmds(null, sqlStms, true);
+			DatabaseMnm.runSQLcmds(null, sqlStms, true,null,null);
 		} catch (java.sql.SQLException e) {
 			throw e;
 		}
@@ -74,46 +76,125 @@ public class DatabaseMnm {
 
 
 	// entire exception handling info: mode=no
-	public static Object[] runSQLcmd(java.sql.Connection dbConn, String sqlStm, boolean skipGetTable, int reserved0, Object... params)
-			throws java.sql.SQLException {
-		if (dbStm == null) {
-			dbStm = DatabaseMnm.mainDbConnStm1;
+	// WARNING: this code only get 1st result of whole given statement, for select-query many table, using multiple runSQLcmd or runSQLcmds (which do multiple runSQLcmd, lamo) instead.
+	// > so to conclude, this function suit for write operation, and runSQLcmds suit for read operation, for both operation, it depends on you lamo but generally runSQLcmd.
+	// RETURN: Object[3] where:
+	// > (1st) is type of 1st result returned (null:noReturn; false:UpdateCount; true:QueryTable)
+	// > (2nd) is value of result (updateCount or Table)
+	// > (3rd) is return of statement
+	// REMARK: if entry of params is Class<?> then consider as it is null value of that class lamo
+	// REMARK: if keepStatementOpen==null then close statement and do not return, if ==false then same as ==null but also return, otherwise it don't be closed.
+	// TODO: try-catch some .close() ?
+	public static Object[] runSQLcmd(java.sql.Connection dbConn, String sqlStm, boolean skipGetResultSet, Boolean keepStatementOpen, Object[] params) throws java.sql.SQLException {
+		if (dbConn == null) {
+			dbConn = DatabaseMnm.mainDbConn;
 		}
-		boolean tmp1 = false;
+		java.sql.PreparedStatement tmp_stm = dbConn.prepareStatement(sqlStm);
 		try {
-			tmp1 = DatabaseMnm.mainDbConnStm1.execute(sqlStm);
-		} catch (java.sql.SQLException e1) {
-			throw e1;
-		}
-		// put resultset
-		if (tmp1) {
-			if (skipGetTable) {
-				return new Object[] { true, null };
-			} else {
-				return new Object[] { true, DatabaseMnm.mainDbConnStm1.getResultSet() };
+			if (params!=null) {
+				if (params.length>0) {
+					int tmp_c=0;
+					for (Object tmp_obj : params) {
+						tmp_c++;
+						Class<?> javaType = tmp_obj.getClass();
+						if (tmp_obj instanceof Class<?>) {
+							javaType=(Class<?>) tmp_obj;
+							// using java.sql.Types according to getColumnDataTypeFromResultSet
+							// TODO: IMPORTANT
+							if (javaType == Integer.class) {
+								tmp_stm.setNull(tmp_c, java.sql.Types.INTEGER);
+							} else if (javaType == Long.class) {
+								tmp_stm.setNull(tmp_c, java.sql.Types.BIGINT);
+							} else if (javaType == Float.class) {
+								tmp_stm.setNull(tmp_c, java.sql.Types.REAL);
+							} else if (javaType == Double.class) {
+								tmp_stm.setNull(tmp_c, java.sql.Types.FLOAT);
+							} else if (javaType == String.class) {
+								tmp_stm.setNull(tmp_c, java.sql.Types.VARCHAR);
+							} else if (javaType == byte[].class) {
+								tmp_stm.setNull(tmp_c, java.sql.Types.BLOB);
+							} else if (javaType == java.math.BigDecimal.class) {
+								tmp_stm.setNull(tmp_c, java.sql.Types.NUMERIC);
+							} else {
+								// it must not reached by putting wrong type lamo, so give runtimeexception
+								throw new MyExceptionHandling.UserRuntimeException("Given javaType of parameter is not supported");
+							}
+						} else {
+							// TODO: IMPORTANT
+							if (javaType == Integer.class) {
+								tmp_stm.setInt(tmp_c,(Integer)tmp_obj);
+							} else if (javaType == Long.class) {
+								tmp_stm.setLong(tmp_c,(Long)tmp_obj);
+							} else if (javaType == Float.class) {
+								tmp_stm.setFloat(tmp_c,(Float)tmp_obj);
+							} else if (javaType == Double.class) {
+								tmp_stm.setInt(tmp_c,(Integer)tmp_obj);
+							} else if (javaType == String.class) {
+								tmp_stm.setInt(tmp_c,(Integer)tmp_obj);
+							} else if (javaType == byte[].class) {
+								tmp_stm.setInt(tmp_c,(Integer)tmp_obj);
+							} else if (javaType == java.math.BigDecimal.class) {
+								tmp_stm.setInt(tmp_c,(Integer)tmp_obj);
+							} else {
+								// it must not reached by putting wrong type lamo, so give runtimeexception
+								throw new MyExceptionHandling.UserRuntimeException("Given javaType of parameter is not supported");
+							}
+						}
+					}
+				}
 			}
-		}
-		// else then check if it is update count
-		else {
-			int tmp2 = DatabaseMnm.mainDbConnStm1.getUpdateCount();
-			if (tmp2 == -1) {
-				return new Object[] { null, null };
-			} else {
-				return new Object[] { false, tmp2 };
+			boolean tmp1 = false;
+			try {
+				tmp1 = tmp_stm.execute();
+			} catch (java.sql.SQLException e1) {
+				throw e1;
 			}
+			// put resultset
+			if (tmp1) {
+				if (skipGetResultSet) {
+					if (keepStatementOpen==null) { tmp_stm.close();return new Object[] { true, null ,null }; }
+					else {
+						if (keepStatementOpen==false) { tmp_stm.close(); }
+						return new Object[] { true, null , tmp_stm };
+					}
+				} else {
+					// in this case cannot close Statement lamo, so...
+					if (keepStatementOpen==null) { return new Object[] { true, tmp_stm.getResultSet() ,null}; }
+					else { return new Object[] { true, tmp_stm.getResultSet() ,tmp_stm}; }
+				}
+			}
+			// else then check if it is update count
+			else {
+				int tmp2 = tmp_stm.getUpdateCount();
+				if (tmp2 == -1) {
+					if (keepStatementOpen==null) { tmp_stm.close();return new Object[] { null, null ,null }; }
+					else {
+						if (keepStatementOpen==false) { tmp_stm.close(); }
+						return new Object[] { null, null , tmp_stm };
+					}
+				} else {
+					if (keepStatementOpen==null) { tmp_stm.close();return new Object[] { false,tmp2 ,null }; }
+					else {
+						if (keepStatementOpen==false) { tmp_stm.close(); }
+						return new Object[] { false,tmp2 , tmp_stm };
+					}
+				}
+			}
+		} catch (Throwable e) {
+			try{ tmp_stm.close(); } finally {}
+			throw e;
 		}
-
 	}
 
 	// entire exception handling info: mode=no
-	public static Object[][] runSQLcmds(java.sql.Connection dbConn, String[] sqlStms, boolean skipGetTable,int reserved0, Object[][] paramsOfEachStms)
-			throws java.sql.SQLException {
-		if (dbStm == null) {
-			dbStm = DatabaseMnm.mainDbConnStm1;
+	public static Object[][] runSQLcmds(java.sql.Connection dbConn, String[] sqlStms, boolean skipGetResultSet,Boolean  keepStatementOpen, Object[][] paramsOfEachStms) throws java.sql.SQLException{
+		if (dbConn == null) {
+			dbConn = DatabaseMnm.mainDbConn;
 		}
 		Object[][] retVal = new Object[sqlStms.length][];
+		if (paramsOfEachStms==null) {paramsOfEachStms=new Object[sqlStms.length][]; }
 		for (int i = 0; i < sqlStms.length; i++) {
-			retVal[i] = runSQLcmd(dbStm, sqlStms[i], skipGetTable, 0,);
+			retVal[i] = runSQLcmd(dbConn, sqlStms[i], skipGetResultSet,keepStatementOpen,paramsOfEachStms[i]);
 		}
 		return retVal;
 	}
@@ -140,6 +221,7 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
+	// RETURN: see in code, it is not more difficult to interpret
 	// REMARK: only determine by using of native datatype in SQL query only, do not
 	// using another datatype else from {INTEGER,REAL,BLOB,TEXT}
 	public static Object[] getColumnDataTypeFromResultSet(java.sql.ResultSet resultSet, int columnIndex)
@@ -322,7 +404,7 @@ public class DatabaseMnm {
 		String[] tableNames = new String[] { "USER", "CUSTOMER", "PRODUCT", "BUY_REQUEST", "SELLING_REQUEST",
 				"REPAIRMENT" };
 		for (String tableName : tableNames) {
-			tmpResultSet = (java.sql.ResultSet) (DatabaseMnm.runSQLcmd(null, "SELECT * FROM " + tableName, false)[1]);
+			tmpResultSet = (java.sql.ResultSet) (DatabaseMnm.runSQLcmd(null, "SELECT * FROM " + tableName, false,null,null)[1]);
 			tmpTable = convertResultSetToTable(tmpResultSet);
 			demo_printTableLAMO(tmpTable);
 			tmpResultSet.close();
