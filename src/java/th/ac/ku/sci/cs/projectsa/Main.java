@@ -82,7 +82,8 @@ public class Main extends javafx.application.Application {
             // do not put leading slash for jarfile resource for this line of code
             com.github.saacsos.FXRouter.when("main", "resources/Main.fxml");
             // do not put leading slash for jarfile resource for this line of code
-            com.github.saacsos.FXRouter.when("test", "resources/Test.fxml");
+            // @Kunlachai here..
+            com.github.saacsos.FXRouter.when("test", "resources/add_item_pre.fxml");
             try
 
             {
