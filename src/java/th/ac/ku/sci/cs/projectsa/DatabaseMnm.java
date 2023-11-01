@@ -100,7 +100,6 @@ public class DatabaseMnm {
 						if (tmp_obj instanceof Class<?>) {
 							javaType=(Class<?>) tmp_obj;
 							// using java.sql.Types according to getColumnDataTypeFromResultSet
-							// TODO: IMPORTANT
 							if (javaType == Integer.class) {
 								tmp_stm.setNull(tmp_c, java.sql.Types.INTEGER);
 							} else if (javaType == Long.class) {
@@ -120,7 +119,6 @@ public class DatabaseMnm {
 								throw new MyExceptionHandling.UserRuntimeException("Given javaType of parameter is not supported");
 							}
 						} else {
-							// TODO: IMPORTANT
 							if (javaType == Integer.class) {
 								tmp_stm.setInt(tmp_c,(Integer)tmp_obj);
 							} else if (javaType == Long.class) {
@@ -128,13 +126,13 @@ public class DatabaseMnm {
 							} else if (javaType == Float.class) {
 								tmp_stm.setFloat(tmp_c,(Float)tmp_obj);
 							} else if (javaType == Double.class) {
-								tmp_stm.setInt(tmp_c,(Integer)tmp_obj);
+								tmp_stm.setDouble(tmp_c,(Double)tmp_obj);
 							} else if (javaType == String.class) {
-								tmp_stm.setInt(tmp_c,(Integer)tmp_obj);
+								tmp_stm.setString(tmp_c,(String)tmp_obj);
 							} else if (javaType == byte[].class) {
-								tmp_stm.setInt(tmp_c,(Integer)tmp_obj);
+								tmp_stm.setBytes(tmp_c,(byte[])tmp_obj);
 							} else if (javaType == java.math.BigDecimal.class) {
-								tmp_stm.setInt(tmp_c,(Integer)tmp_obj);
+								tmp_stm.setBigDecimal(tmp_c,(java.math.BigDecimal)tmp_obj);
 							} else {
 								// it must not reached by putting wrong type lamo, so give runtimeexception
 								throw new MyExceptionHandling.UserRuntimeException("Given javaType of parameter is not supported");
