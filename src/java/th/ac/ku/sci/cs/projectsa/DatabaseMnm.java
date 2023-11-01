@@ -16,8 +16,6 @@ public class DatabaseMnm {
 
 
 	// [Zone:Init]
-	// TODO: from above เราจะออกแบบใหม่ คือ
-	// >  ให้ runSQLcmd/runSQLcmds สามารถป้อน parameter ของ preparedStatement ได้
 	// entire exception handling info: mode=no
 	// REMARK: normally, this sql statements execution, only create table, so no begin/rollback required.
 	public static void mainDbInit() throws java.sql.SQLException, java.io.IOException {
@@ -84,7 +82,7 @@ public class DatabaseMnm {
 	// > (3rd) is return of statement
 	// REMARK: if entry of params is Class<?> then consider as it is null value of that class lamo
 	// REMARK: if keepStatementOpen==null then close statement and do not return, if ==false then same as ==null but also return, otherwise it don't be closed.
-	// TODO: try-catch some .close() ?
+	// TODO: EASY+LESSI try-catch all  .close()  in try clause?
 	public static Object[] runSQLcmd(java.sql.Connection dbConn, String sqlStm, boolean skipGetResultSet, Boolean keepStatementOpen, Object[] params) throws java.sql.SQLException {
 		if (dbConn == null) {
 			dbConn = DatabaseMnm.mainDbConn;
@@ -467,8 +465,7 @@ public class DatabaseMnm {
 		}
 	}
 
-	// TODO: HighPriority 2 - (valid) และสุดท้าย function รวบยอดไปเลย คือป้อน raw UI value ของแต่ละ attribute แล้ว return ไว้ valid ไหม
-	// TODO: HighPriority 3 - (transform) แปลงข้อมูลกลับมาเป็น string แต่สำหรับ รัน SQL
+	// TODO: HighPriority 5 - (valid) และสุดท้าย function รวบยอดไปเลย คือป้อน raw UI value ของแต่ละ attribute แล้ว return ไว้ valid ไหม
 	// TODO: HighPriority 4 - (valid) check FK lamo check PK lamo using isExistedInTable
 	// > ส่วนพวก conditional ใน logic ส่วนอื่น ก็เดี่ยวเขียนแยกๆ  
 	// WARNING: ให้ถือว่า function ที่ไม่ได้มีหน้าที่เช็ค null/type จะถือว่าข้อมูลที่รับเข้ามามีการเช็ค null/type แล้ว เช่น checkStrIsNotEmpty จะไม่เช็ค String ว่า not-nullไหม หากโยน nullเข้าไปจะ error ทันที
@@ -484,11 +481,8 @@ public class DatabaseMnm {
 		@java.lang.annotation.Target({java.lang.annotation.ElementType.PARAMETER, java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD})
 		public @interface Nullable {
 		}
-		// REMARK: seem that we don't need this yet
-		public static class UIDataLevel {}
+
 		public static class JavaTypeLevel {
-			// [Zone:SubclassAsPkg]
-			public static class PerAttributeValidation {}
 			// [Zone:Methods]
 			public static boolean checkObjNotNull(@Nullable Object data) {
 				return !(data==null);
@@ -547,13 +541,14 @@ public class DatabaseMnm {
 			// TODO:need defination
 			public static native boolean checkStrIsValidTelNum(@NotNull String data);
 		}
-		public static class SQLQueryLevel {}
+		public static class SQLLevel {
+			public static native boolean isThisPKInsertable();
+			public static native boolean isThisFKInsertable();
+		}
+		public static class PerAttributeValidation {}
 	}
 
 	public static class DataTransform {
-		// REMARK: seem that we don't need this yet
-		public static class UIDataToJavaType {}
-		public static class JavaTypeToSQLQuery {}
 	}
 
 	// [Zone:SubClass]
