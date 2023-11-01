@@ -9,7 +9,7 @@ public class UICtrl_Example {
 	private void onButton1Pressed() throws Throwable {
 		try {
 			try {
-				Main.tempSwitchToTestPage();
+				Main.switchToSpecificPagename("");
 			} catch (java.io.IOException e1) {
 				throw e1;
 			}

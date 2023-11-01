@@ -80,13 +80,12 @@ public class Main extends javafx.application.Application {
             com.github.saacsos.FXRouter.bind(this, primaryStage,
                     "ระบบหลังบ้านบริการซื้อขายเครื่องซักผ้าอุตสาหกรรมมือสอง", 800, 600);
             // do not put leading slash for jarfile resource for this line of code
-            com.github.saacsos.FXRouter.when("main", "resources/Main.fxml");
-            // do not put leading slash for jarfile resource for this line of code
-            com.github.saacsos.FXRouter.when("test", "resources/Test.fxml");
+            com.github.saacsos.FXRouter.when("homepage", "resources/homepage_pre.fxml");
+            // TODO: [UI] adding page lamo
             try
 
             {
-                com.github.saacsos.FXRouter.goTo("main");
+                com.github.saacsos.FXRouter.goTo("homepage");
             } catch (java.io.IOException e) {
                 throw e;
             }
@@ -132,27 +131,23 @@ public static String getISODateTimeString() {
 }
 
     // entire exception handling info: mode=no
-    public static void tempSwitchToTestPage() throws java.io.IOException {
+    public static void switchToSpecificPagename(String pageName) throws java.io.IOException {
         try {
-            com.github.saacsos.FXRouter.goTo("test");
+            com.github.saacsos.FXRouter.goTo(pageName);
         } catch (java.io.IOException e) {
             throw e;
         }
-        tempChangeCSS("Test");
     }
 
     // entire exception handling info: mode=no
-    public static void tempChangeCSS(String cssName) {
-
-        javafx.scene.Scene temp = MainAlt1.primaryStage.getScene();
-        temp.getStylesheets().clear();
-        temp.getStylesheets().add(Main.class.getResource("/resources/" + cssName + ".css").toExternalForm());
-        temp.getRoot().applyCss();
-
+    public static javafx.application.Application getPrimaryApp() {
+        javafx.application.Application retVal = null;
+        retVal = MainAlt1.primaryApplication;
+        return retVal;
     }
 
     // entire exception handling info: mode=no
-    public static javafx.stage.Stage tempGetPrimaryStage() {
+    public static javafx.stage.Stage getPrimaryStage() {
         javafx.stage.Stage retVal = null;
         retVal = MainAlt1.primaryStage;
         return retVal;
