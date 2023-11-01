@@ -4,59 +4,76 @@ import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
 
 public class Main extends javafx.application.Application {
-    public static String[] args =null;
-    public static java.util.concurrent.ExecutorService exitThread = java.util.concurrent.Executors.newSingleThreadExecutor();
+    public static String[] args = null;
+    public static java.util.concurrent.ExecutorService exitThread = java.util.concurrent.Executors
+            .newSingleThreadExecutor();
+
     public static void funcTestOFCaughtException() {
     }
 
     // entire exception handling info: mode=fatal
     public static void main(String[] args) throws Throwable {
-        boolean isFriendlyException =false;
+        boolean isFriendlyException = false;
         try {
-            Main.args=args;
-            Runtime.getRuntime().addShutdownHook(new Thread(()->{
+            Main.args = args;
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
                     javafx.application.Platform.exit();
-                    // funny stuff, lazy-exception-handling is done in that function 
+                    // funny stuff, lazy-exception-handling is done in that function
                     th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer.shutdown();
-                    if (MyExceptionHandling.isFatal) {}
-                    else {
+                    if (MyExceptionHandling.isFatal) {
+                    } else {
                         // in case user want something extraordinary, เราจัดให้ ๆ
-                        // WARNING: do not run this arg to commandLine in production, this would skip any (Java exception handling / JVM shutdown hook/cleanup), results in ongoing-cleaning data being lossed, or even corrupts database file. 
+                        // WARNING: do not run this arg to commandLine in production, this would skip
+                        // any (Java exception handling / JVM shutdown hook/cleanup), results in
+                        // ongoing-cleaning data being lossed, or even corrupts database file.
                         for (String arg : args) {
-                            if (arg.equals("-MiscFunFlag+crashOnPostExit")||arg.equals("--MiscFunFlag+crashOnPostExit")) {
+                            if (arg.equals("-MiscFunFlag+crashOnPostExit")
+                                    || arg.equals("--MiscFunFlag+crashOnPostExit")) {
                                 th.ac.ku.sci.cs.projectsa.fun.UnsafeStuff.crashJVMLamo();
                             }
                         }
                     }
                     Main.exitThread.shutdownNow();
-                }
-                catch (Throwable e) {
+                } catch (Throwable e) {
                     MyExceptionHandling.handleFatalExitException(e, "MainApp|ShutdownSystem|ProgramMainHook");
                 }
             }));
-            boolean doMIDIPlayer =true;
+            boolean doMIDIPlayer = true;
             for (String arg : args) {
-                if (arg.equals("-MiscFunFlag+muteMIDI")||arg.equals("--MiscFunFlag+muteMIDI")) {doMIDIPlayer=false;break;}
+                if (arg.equals("-MiscFunFlag+muteMIDI") || arg.equals("--MiscFunFlag+muteMIDI")) {
+                    doMIDIPlayer = false;
+                    break;
+                }
             }
             if (doMIDIPlayer) {
-                // funny stuff, lazy-exception-handling is done in that function 
+                // funny stuff, lazy-exception-handling is done in that function
                 th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer.main();
             }
             try {
                 DatabaseMnm.mainDbInit();
-                System.out.println(Main.clReportHeader(null, "DEVTEST")+"this is test of create our db and print them lamo:");
-                System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE START>");
+                System.out.println(
+                        Main.clReportHeader(null, "DEVTEST") + "this is test of create our db and print them lamo:");
+                System.out.println(Main.clReportHeader(null, "DEVTEST") + "<ZONE START>");
                 DatabaseMnm.demo_printOurInitTableLAMO();
-                System.out.println(Main.clReportHeader(null, "DEVTEST")+"<ZONE END>");
+                System.out.println(Main.clReportHeader(null, "DEVTEST") + "<ZONE END>");
             } catch (java.sql.SQLException e1) {
-                isFriendlyException=true;
-                MyExceptionHandling.handleFatalException(e1,true,new String[] {Main.clReportHeader("MainApp|DatabaseMnm", "FATAL"),null,"ข้อผิดพลาดร้ายแรงของโปรแกรม (เมื่อ " + Main.getISODateTimeString() + " | ตรงส่วนของ \""+"MainApp|DatabaseMnm"+"\")","<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>"});
+                isFriendlyException = true;
+                MyExceptionHandling.handleFatalException(e1, true, new String[] {
+                        Main.clReportHeader("MainApp|DatabaseMnm", "FATAL"), null,
+                        "ข้อผิดพลาดร้ายแรงของโปรแกรม (เมื่อ " + Main.getISODateTimeString() + " | ตรงส่วนของ \""
+                                + "MainApp|DatabaseMnm" + "\")",
+                        "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>" });
                 throw e1;
             } catch (java.io.IOException e1) {
-                // TODO: (ทำทีหลังก็ได้ แต่ทำก่อนเพิ่ม MyExceptionHandling.handleFatalException ใน overload แบบนี้) เรียบเรียงโค้ดๆๆให้ใช้ง่าย
-                isFriendlyException=true;
-                MyExceptionHandling.handleFatalException(e1,true,new String[] {Main.clReportHeader("MainApp|DatabaseMnm", "FATAL"),null,"ข้อผิดพลาดร้ายแรงของโปรแกรม (เมื่อ " + Main.getISODateTimeString() + " | ตรงส่วนของ \""+"MainApp|DatabaseMnm"+"\")","<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของการเข้าถึงไฟล์ระบบฐานข้อมูลฯ<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>"});
+                // TODO: (ทำทีหลังก็ได้ แต่ทำก่อนเพิ่ม MyExceptionHandling.handleFatalException
+                // ใน overload แบบนี้) เรียบเรียงโค้ดๆๆให้ใช้ง่าย
+                isFriendlyException = true;
+                MyExceptionHandling.handleFatalException(e1, true, new String[] {
+                        Main.clReportHeader("MainApp|DatabaseMnm", "FATAL"), null,
+                        "ข้อผิดพลาดร้ายแรงของโปรแกรม (เมื่อ " + Main.getISODateTimeString() + " | ตรงส่วนของ \""
+                                + "MainApp|DatabaseMnm" + "\")",
+                        "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของการเข้าถึงไฟล์ระบบฐานข้อมูลฯ<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>" });
                 throw e1;
             }
             launch(args);
@@ -67,7 +84,6 @@ public class Main extends javafx.application.Application {
             throw e;
         }
     }
-
 
     // entire exception handling info: mode=fatal
     @Override
@@ -82,6 +98,7 @@ public class Main extends javafx.application.Application {
             // do not put leading slash for jarfile resource for this line of code
             com.github.saacsos.FXRouter.when("homepage", "resources/homepage_pre.fxml");
             // TODO: [UI] adding page lamo
+            // TODO: [UI] adding controller
             try
 
             {
@@ -103,13 +120,18 @@ public class Main extends javafx.application.Application {
     public void stop() {
         try {
             // in case of fatal
-            if (MyExceptionHandling.isFatal) {} else {
-		        Main.exitThread.submit(() -> {System.exit(0);});
+            if (MyExceptionHandling.isFatal) {
+            } else {
+                Main.exitThread.submit(() -> {
+                    System.exit(0);
+                });
             }
         } catch (Throwable e) {
-            // due to this method is called by MyExceptionHandling.handleFatalException, so if that happens, then we ignore it due to guideline that specified in that file of MyExceptionHandling
-            if (MyExceptionHandling.isFatal) {}
-            else {
+            // due to this method is called by MyExceptionHandling.handleFatalException, so
+            // if that happens, then we ignore it due to guideline that specified in that
+            // file of MyExceptionHandling
+            if (MyExceptionHandling.isFatal) {
+            } else {
                 try {
                     MyExceptionHandling.handleFatalException(e);
                 } catch (Throwable e0) {
@@ -119,16 +141,20 @@ public class Main extends javafx.application.Application {
     }
 
     // entire exception handling info: mode=no
-    public static String clReportHeader(String scope,String cate) {
-        if (scope==null) {scope="MainApp";}
-        if (cate==null) {cate="INFO";}
-        return "["+getISODateTimeString()+"|"+scope+"|"+cate+"] ";
+    public static String clReportHeader(String scope, String cate) {
+        if (scope == null) {
+            scope = "MainApp";
+        }
+        if (cate == null) {
+            cate = "INFO";
+        }
+        return "[" + getISODateTimeString() + "|" + scope + "|" + cate + "] ";
     }
 
-// entire exception handling info: mode=no
-public static String getISODateTimeString() {
-    return java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-}
+    // entire exception handling info: mode=no
+    public static String getISODateTimeString() {
+        return java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+    }
 
     // entire exception handling info: mode=no
     public static void switchToSpecificPagename(String pageName) throws java.io.IOException {
