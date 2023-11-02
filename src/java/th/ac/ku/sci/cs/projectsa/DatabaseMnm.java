@@ -29,6 +29,7 @@ public class DatabaseMnm {
 		}
 		// REMARK: for my group, only use {TEXT,BLOB,REAL,INTEGER} maybe we not using
 		// "NUMERIC"
+		// TODO: + REMARK: [EASYJUSTWAITTIMELAMO] These example are not compatitble yet to data spec/valid but just pretesting lamo 
 		String[] sqlStms = new String[] {
 				"CREATE TABLE IF NOT EXISTS Customer (Customer_Full_Name TEXT PRIMARY KEY, Customer_Address TEXT, Customer_Telephone_Number TEXT NOT NULL, Customer_Credit_Amount INTEGER NOT NULL) STRICT,WITHOUT ROWID;",
 				"CREATE TABLE IF NOT EXISTS Selling_Request (Selling_Request_ID TEXT PRIMARY KEY, Customer_Full_Name TEXT NOT NULL, Selling_Request_Brand TEXT NOT NULL, Selling_Request_Model TEXT NOT NULL, Selling_Request_Product_Looks TEXT NOT NULL, Selling_Request_Meet_Date INTEGER NOT NULL, Selling_Request_Meet_Location TEXT NOT NULL, Selling_Request_Paid_Amount REAL, Selling_Request_Status INTEGER NOT NULL,  FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT,WITHOUT ROWID;",
@@ -450,7 +451,8 @@ public class DatabaseMnm {
 			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Telephone_Number", new Integer[] { 1, 32 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Credit_Amount", new Integer[] { 1, 3 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("User_Name", new Integer[] { 1, 32 });
-			MINMAX_LENGTH_OF_ATTRIBS.put("User_Password", new Integer[] { 1, 32 });
+			// เก็บเป็น hash ความยาวคงที่ 64 char
+			MINMAX_LENGTH_OF_ATTRIBS.put("User_Password", new Integer[] { 64, 64 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("User_Role", new Integer[] { 1, 1 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_ID", new Integer[] { 8, 8 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Arrive_time", new Integer[] { 10, 10 });
@@ -498,6 +500,7 @@ public class DatabaseMnm {
 	// REMARK: legnth คือ integer ส่วน range/ตัวค่าคือ long/double (แล้วแต่ dattype
 	// ของ attrib)
 	// REMARK: only considered type of LONG/DOUBLE/STRING
+	// TODO: clear native function lamo
 	public static class DataValidation {
 
 		// [Zone:Annotation lamo]
@@ -529,7 +532,7 @@ public class DatabaseMnm {
 			}
 
 			// if max==null, then no max limit
-			// TODO: need defination
+
 			public static native boolean checkLongDigitLength(long data, int min, @Nullable Integer max);
 
 			public static boolean checkStrLength(@NotNull String data, int min, @Nullable Integer max) {
@@ -540,22 +543,18 @@ public class DatabaseMnm {
 				}
 			}
 
-			// TODO:need defination
 			public static native boolean checkDoubleDigitLength(double data, int maxFront, int maxRear);
 
-			// TODO: [EASY] how about double?
-			public static boolean checkLongNotNegative(long data) {
+			public static boolean checkLongDoubleNotNegative(double data) {
 				return data >= 0;
 			}
 
-			// TODO: [EASY] how about double?
-			public static boolean checkLongIsPositive(long data) {
+			public static boolean checkLongDoubleIsPositive(double data) {
 				return data > 0;
 			}
 
-			// TODO: [EASY]how about double?
 			// if {min/max}==null, then no {coressponding: min/max} limit
-			public static boolean checkLongIsInRange(long data, @Nullable Integer min, @Nullable Integer max) {
+			public static boolean checkLongDoubleIsInRange(double data, @Nullable Double min, @Nullable Double max) {
 				boolean tmp1 = true;
 				boolean tmp2 = true;
 				if (min == null) {
@@ -578,22 +577,20 @@ public class DatabaseMnm {
 				return false;
 			}
 
-			// TODO:need defination
+			
+
 			public static native boolean checkStrIsGeneralValid(@NotNull String data);
 
-			// TODO:need defination
 			public static native boolean checkStrIsValidUserName(@NotNull String data);
 
-			// TODO:need defination
+			// REMARK: เผื่อ งง ๆ apply to string got from UI, not from HASH
 			public static native boolean checkStrIsValidPassword(@NotNull String data);
 
-			// TODO:need defination
 			public static native boolean checkStrIsValidID(@NotNull String data);
 
-			// TODO:need defination
 			public static native boolean checkStrIsValidCustomerName(@NotNull String data);
 
-			// TODO:need defination
+
 			public static native boolean checkStrIsValidTelNum(@NotNull String data);
 		}
 
@@ -626,8 +623,41 @@ public class DatabaseMnm {
 			}
 		}
 
-		// TODO: [MedEasy]
+		// REMARK: only Password that required DataTransform, see Misc.passwordHash() lamo
+		// REMARK: function here must handled NULL too
+		// TODO: chnge @NotNull to @Nullable
 		public static class PerAttributeValidation {
+			public static native boolean check__CUSTOMER__Customer_Full_Name(@NotNull String data);
+			public static native boolean check__CUSTOMER__Customer_Address(@NotNull String data);
+			public static native boolean check__CUSTOMER__Customer_Telephone_Number(@NotNull String data);
+			public static native boolean check__CUSTOMER__Customer_Credit_Amount(@NotNull String data);
+			public static native boolean check__USER__User_Name(@NotNull String data);
+			public static native boolean check__USER__User_Password(@NotNull String data);
+			public static native boolean check__USER__User_Role(@NotNull String data);
+			public static native boolean check__PRODUCT__Product_ID(@NotNull String data);
+			public static native boolean check__PRODUCT__Product_Arrive_Time(@NotNull String data);
+			public static native boolean check__PRODUCT__Product_Price(@NotNull String data);
+			public static native boolean check__PRODUCT__Product_Status(@NotNull String data);
+			public static native boolean check__PRODUCT__Selling_Request_ID(@NotNull String data);
+			public static native boolean check__PRODUCT__Repairment_ID(@NotNull String data);
+			public static native boolean check__SELLING_REQUEST__Selling_Request_ID(@NotNull String data);
+			public static native boolean check__SELLING_REQUEST__Customer_Full_Name(@NotNull String data);
+			public static native boolean check__SELLING_REQUEST__Selling_Request_Brand(@NotNull String data);
+			public static native boolean check__SELLING_REQUEST__Selling_Request_Model(@NotNull String data);
+			public static native boolean check__SELLING_REQUEST__Selling_Request_Product_Looks(@NotNull String data);
+			public static native boolean check__SELLING_REQUEST__Selling_Request_Meet_Date(@NotNull String data);
+			public static native boolean check__SELLING_REQUEST__Selling_Request_Meet_Location(@NotNull String data);
+			public static native boolean check__SELLING_REQUEST__Selling_Request_Paid_Amount(@NotNull String data);
+			public static native boolean check__SELLING_REQUEST__Selling_Request_Status(@NotNull String data);
+			public static native boolean check__REPAIRMENT__Repairment_ID(@NotNull String data);
+			public static native boolean check__REPAIRMENT__Repairment_Description(@NotNull String data);
+			public static native boolean check__REPAIRMENT__Repairment_Date(@NotNull String data);
+			public static native boolean check__REPAIRMENT__Selling_Request_ID(@NotNull String data);
+			public static native boolean check__BUY_REQUEST__Customer_Full_Name(@NotNull String data);
+			public static native boolean check__BUY_REQUEST__Product_ID(@NotNull String data);
+			public static native boolean check__BUY_REQUEST__Buy_Request_Created_Date(@NotNull String data);
+			public static native boolean check__BUY_REQUEST__Buy_Request_Transportation_Price(@NotNull String data);
+			
 		}
 	}
 
