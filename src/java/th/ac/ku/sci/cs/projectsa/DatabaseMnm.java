@@ -443,7 +443,9 @@ public class DatabaseMnm {
 	}
 
 	// [Zone:SubClassAsPackage lamo]
+	// REMARK APPLY THIS TO INSIDE OF THIS ZONE UNLESSS EXPLICIT OVERRIDE: entire exception handling info: mode=no
 
+	// REMARK: only considered type of LONG/DOUBLE/STRING
 	public static class DataSpec {
 		// [Zone:Constants]
 		// for attribute that have range (that "required" range checking ถ้าไม่ required
@@ -505,16 +507,12 @@ public class DatabaseMnm {
 		}
 	}
 
-	// TODO: HighPriority 5 - (valid) และสุดท้าย function รวบยอดไปเลย คือป้อน raw UI
-	// value ของแต่ละ attribute แล้ว return ไว้ valid ไหม
-	// TODO: HighPriority 4 - (valid) check FK lamo check PK lamo using
-	// isExistedInTable
-	// > ส่วนพวก conditional ใน logic ส่วนอื่น ก็เดี่ยวเขียนแยกๆ
 	// WARNING: ให้ถือว่า function ที่ไม่ได้มีหน้าที่เช็ค null/type
 	// จะถือว่าข้อมูลที่รับเข้ามามีการเช็ค null/type แล้ว เช่น checkStrIsNotEmpty
 	// จะไม่เช็ค String ว่า not-nullไหม หากโยน nullเข้าไปจะ error ทันที
 	// REMARK: legnth คือ integer ส่วน range/ตัวค่าคือ long/double (แล้วแต่ dattype
 	// ของ attrib)
+	// REMARK: only considered type of LONG/DOUBLE/STRING
 	public static class DataValidation {
 
 		// [Zone:Annotation lamo]
@@ -615,16 +613,36 @@ public class DatabaseMnm {
 		}
 
 		public static class SQLLevel {
-			public static native boolean isThisPKInsertable();
+			// SECURITY WARNING: this function using SQL string injection, do not putting public string unless strict check
+			public static boolean isThisValExisted(@NotNull Object val,@NotNull String tableName,@NotNull String colName) throws SQLException {
+				java.sql.ResultSet tmp_rs= (java.sql.ResultSet) runSQLcmd(null,
+					"SELECT count("+colName+") FROM "+tableName+" WHERE "+colName+"=?",
+					false,null,new Object[] {val}
+				)[1];
+				Table tmp_table =convertResultSetToTable(tmp_rs);
+				if (tmp_table.cols[0].vals.size()>=1) {return true;}
+				else {return false;}
+			}
 
-			public static native boolean isThisFKInsertable();
+			// SECURITY WARNING: this function using SQL string injection, do not putting public string unless strict check
+			// REMARK: tableAndColName ordering is [tableNameOfFK,colNameOfFK,tableNameOfPK,colNameOfPK]
+			// RETURN: 1st value is answer and last 2 are answer of tmp1/tmp2
+			@NotNull
+			public static boolean[] isThisFKInsertable(@NotNull Object val,@NotNull String[] tableAndColName) throws SQLException {
+				String tableNameOfFK=tableAndColName[0];
+				String colNameOfFK=tableAndColName[1];
+				String tableNameOfPK=tableAndColName[2];
+				String colNameOfPK=tableAndColName[3];
+				// to insertable, this should be false
+				boolean tmp1 = isThisValExisted(val,tableNameOfFK,colNameOfFK);
+				// to insertable, this should be true
+				boolean tmp2 = isThisValExisted(val,tableNameOfPK,colNameOfPK);
+				return new boolean[] {((!tmp1)&tmp2),tmp1,tmp2};
+			}
 		}
 
 		public static class PerAttributeValidation {
 		}
-	}
-
-	public static class DataTransform {
 	}
 
 	// [Zone:SubClass]
