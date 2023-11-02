@@ -6,7 +6,6 @@ import java.util.Locale;
 
 import th.ac.ku.sci.cs.projectsa.*;
 
-// TODO: [Med|SECURITY]: create Misc and create hashing function lamo
 public class Main extends javafx.application.Application {
     public static String[] args = null;
     public static java.util.concurrent.ExecutorService exitThread = java.util.concurrent.Executors
@@ -72,7 +71,7 @@ public class Main extends javafx.application.Application {
                         "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>" });
                 throw e1;
             } catch (java.io.IOException e1) {
-                // TODO: [MED|ALMOST FORGOT|ExceptionHandling]: (ทำทีหลังก็ได้ แต่ทำก่อนเพิ่ม MyExceptionHandling.handleFatalException
+                // TODO: [MED|ALMOST FORGOT|ExceptionHandling|LESSI]: (ทำทีหลังก็ได้ แต่ทำก่อนเพิ่ม MyExceptionHandling.handleFatalException
                 // ใน overload แบบนี้) เรียบเรียงโค้ดๆๆให้ใช้ง่าย
                 isFriendlyException = true;
                 MyExceptionHandling.handleFatalException(e1, true, new String[] {
