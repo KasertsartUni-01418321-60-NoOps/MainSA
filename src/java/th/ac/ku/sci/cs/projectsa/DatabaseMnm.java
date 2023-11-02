@@ -31,38 +31,24 @@ public class DatabaseMnm {
 		// "NUMERIC"
 		// TODO: เขียนใหม่ LAMO (ทำหลังจากพวก valid/transform lamo)
 		String[] sqlStms = new String[] {
-				"CREATE TABLE IF NOT EXISTS CUSTOMER (Customer_Full_Name TEXT PRIMARY KEY, Customer_Shipping_Address TEXT, Customer_Telephone_Number TEXT, Customer_Credit_Amount INTEGER) STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS SELLING_REQUEST (Selling_Request_ID INTEGER PRIMARY KEY, Customer_Full_Name TEXT, Selling_Request_Product_Looks TEXT, Selling_Request_Meet_Date INTEGER, Selling_Request_Paid_Amount REAL, Selling_Request_Meet_Location TEXT, Selling_Request_Status TEXT, Selling_Request_Model TEXT, Selling_Request_Brand TEXT, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS PRODUCT (Product_ID INTEGER PRIMARY KEY, Selling_Request_ID INTEGER, Repairment_ID INTEGER, Product_Price REAL, Product_Arrive_Date INTEGER, Product_Status TEXT, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID), FOREIGN KEY (Repairment_ID) REFERENCES REPAIRMENT(Repairment_ID))STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS USER (Username TEXT PRIMARY KEY, Password TEXT, Role INTEGER)STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS REPAIRMENT (Repairment_ID INTEGER PRIMARY KEY, Selling_Request_ID INTEGER, Repairment_Description TEXT, Repairment_Date INTEGER, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID))STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS BUY_REQUEST (Customer_Full_Name TEXT, Product_ID INTEGER, Buy_Request_Created_Date INTEGER, Buy_Request_Transportation_Price REAL, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT,WITHOUT ROWID;",
-				"INSERT INTO CUSTOMER SELECT 'John Doe', '123 Main St', '555-123-4567', 1000 " +
-						"WHERE NOT EXISTS (SELECT 1 FROM CUSTOMER WHERE Customer_Full_Name = 'John Doe');",
-				"INSERT INTO CUSTOMER SELECT 'Jane Smith', '456 Elm St', '555-987-6543', 1500 " +
-						"WHERE NOT EXISTS (SELECT 1 FROM CUSTOMER WHERE Customer_Full_Name = 'Jane Smith');",
-				"INSERT INTO SELLING_REQUEST SELECT 1, 'John Doe', 'Sample Product Looks', 1634196000, 500.00, 'Sample Location', 'Pending', 'Sample Model', 'Sample Brand' "
-						+
-						"WHERE NOT EXISTS (SELECT 1 FROM SELLING_REQUEST WHERE Selling_Request_ID = 1);",
-				"INSERT INTO SELLING_REQUEST SELECT 2, 'Jane Smith', 'Another Product', 1634197000, 600.00, 'Another Location', 'In Progress', 'Another Model', 'Another Brand' "
-						+
-						"WHERE NOT EXISTS (SELECT 1 FROM SELLING_REQUEST WHERE Selling_Request_ID = 2);",
-				"INSERT INTO PRODUCT SELECT 1, 1, NULL, 250.00, 1634196000, 'Available' " +
-						"WHERE NOT EXISTS (SELECT 1 FROM PRODUCT WHERE Product_ID = 1);",
-				"INSERT INTO PRODUCT SELECT 2, 2, NULL, 300.00, 1634197000, 'In Stock' " +
-						"WHERE NOT EXISTS (SELECT 1 FROM PRODUCT WHERE Product_ID = 2);",
-				"INSERT INTO USER SELECT 'user1', 'password1', 1 " +
-						"WHERE NOT EXISTS (SELECT 1 FROM USER WHERE Username = 'user1');",
-				"INSERT INTO USER SELECT 'user2', 'password2', 2 " +
-						"WHERE NOT EXISTS (SELECT 1 FROM USER WHERE Username = 'user2');",
-				"INSERT INTO REPAIRMENT SELECT 1, 1, 'Sample Repairment Description', 1634196000 " +
-						"WHERE NOT EXISTS (SELECT 1 FROM REPAIRMENT WHERE Repairment_ID = 1);",
-				"INSERT INTO REPAIRMENT SELECT 2, 2, 'Another Repairment', 1634197000 " +
-						"WHERE NOT EXISTS (SELECT 1 FROM REPAIRMENT WHERE Repairment_ID = 2);",
-				"INSERT INTO BUY_REQUEST SELECT 'John Doe', 1, 1634196000, 50.00 " +
-						"WHERE NOT EXISTS (SELECT 1 FROM BUY_REQUEST WHERE Customer_Full_Name = 'John Doe' AND Product_ID = 1);",
-				"INSERT INTO BUY_REQUEST SELECT 'Jane Smith', 2, NULL, 60.00 " +
-						"WHERE NOT EXISTS (SELECT 1 FROM BUY_REQUEST WHERE Customer_Full_Name = 'Jane Smith' AND Product_ID = 2);"
+				"CREATE TABLE IF NOT EXISTS Customer (Customer_Full_Name TEXT PRIMARY KEY, Customer_Address TEXT, Customer_Telephone_Number TEXT NOT NULL, Customer_Credit_Amount INTEGER NOT NULL) STRICT,WITHOUT ROWID;",
+				"CREATE TABLE IF NOT EXISTS Selling_Request (Selling_Request_ID TEXT PRIMARY KEY, Customer_Full_Name TEXT NOT NULL, Selling_Request_Brand TEXT NOT NULL, Selling_Request_Model TEXT NOT NULL, Selling_Request_Product_Looks TEXT NOT NULL, Selling_Request_Meet_Date INTEGER NOT NULL, Selling_Request_Meet_Location TEXT NOT NULL, Selling_Request_Paid_Amount REAL, Selling_Request_Status INTEGER NOT NULL,  FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT,WITHOUT ROWID;",
+				"CREATE TABLE IF NOT EXISTS Product (Product_ID TEXT PRIMARY KEY, Product_Arrive_Time INTEGER NOT NULL, Product_Price REAL NOT NULL, Product_Status INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL, Repairment_ID TEXT NOT NULL, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID), FOREIGN KEY (Repairment_ID) REFERENCES REPAIRMENT(Repairment_ID))STRICT,WITHOUT ROWID;",
+				"CREATE TABLE IF NOT EXISTS User (User_Name TEXT PRIMARY KEY, User_Password TEXT NOT NULL, User_Role INTEGER NOT NULL)STRICT,WITHOUT ROWID;",
+				"CREATE TABLE IF NOT EXISTS Repairment (Repairment_ID TEXT PRIMARY KEY, Repairment_Description TEXT NOT NULL, Repairment_Date INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID))STRICT,WITHOUT ROWID;",
+				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT, Product_ID TEXT, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price REAL, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT,WITHOUT ROWID;",
+				"INSERT OR IGNORE INTO Customer (Customer_Full_Name, Customer_Address, Customer_Telephone_Number, Customer_Credit_Amount)"
+				+"VALUES ('John Doe', '123 Main St', '555-123-4567', 1000);"
+				,"INSERT OR IGNORE INTO Selling_Request (Selling_Request_ID, Customer_Full_Name, Selling_Request_Brand, Selling_Request_Model, Selling_Request_Product_Looks, Selling_Request_Meet_Date, Selling_Request_Meet_Location, Selling_Request_Paid_Amount, Selling_Request_Status)"
+				+"VALUES ('SR001', 'John Doe', 'Brand1', 'Model1', 'Excellent', 1635830400, 'Park Avenue', 500.00, 1);"
+				,"INSERT OR IGNORE INTO Product (Product_ID, Product_Arrive_Time, Product_Price, Product_Status, Selling_Request_ID, Repairment_ID)"
+				+"VALUES ('P001', 1635830400, 299.99, 1, 'SR001', 'R001');"
+				,"INSERT OR IGNORE INTO User (User_Name, User_Password, User_Role)"
+				+"VALUES ('admin', 'password123', 1);"
+				,"INSERT OR IGNORE INTO Repairment (Repairment_ID, Repairment_Description, Repairment_Date, Selling_Request_ID)"
+				+"VALUES ('R001', 'Replace screen', 1635830400, 'SR001');"
+				,"INSERT OR IGNORE INTO Buy_Request (Customer_Full_Name, Product_ID, Buy_Request_Created_Date, Buy_Request_Transportation_Price)"
+				+"VALUES ('John Doe', 'P001', 1635830400, 25.00);"
 		};
 		try {
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:" + mainDbPath);
