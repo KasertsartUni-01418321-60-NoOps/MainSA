@@ -1,37 +1,33 @@
-/* Set the primary color to yellow */
+/* For element selecion */
 .root {
 	-primary-color: yellow;
-	/* for default value lamo */
 	-accent-color: #3498db;
+	-fx-font-size: 16px;
+	-fx-background-color: linear-gradient(to bottom, #ffcc00, #ff9900);
 }
-
-/* Define an accent color that complements yellow in a light theme */
-.accent-color {
-	-accent-color: #3498db;
-	/* A shade of blue, which often complements yellow in a light theme */
+.label,.text-field,.text {
+	-fx-text-fill: #333333;
 }
-
-/* Style buttons with the primary and accent colors */
 .button {
 	-fx-background-color: -primary-color;
-	-fx-text-fill: black;
+	/* using same as another text */
+	/* -fx-text-fill: black; */
 }
-
-/* Style the primary button with the accent color */
-.primary-button {
+/* For event of element */
+/* #CALCULATE_MANUALLY: just switch fg/bg */
+.button:hover {
+	-fx-background-color: #333333;
+	-fx-text-fill: -primary-color;
+}
+/* For class selecion */
+.HIGHLIGHT {
 	-fx-background-color: -accent-color;
-	-fx-text-fill: white;
+	/* #CALCULATE_MANUALLY: inverse -fx-text-fill of general text */
+	-fx-text-fill: rgb(204,204,204);
 }
-
-/* Define text color for labels and text fields */
-.label,
-.text-field {
-	-fx-text-fill: #333;
-	/* Dark gray text color */
-}
-
-/* Define a colorful background for the scene */
-.background {
-	-fx-background-color: linear-gradient(to bottom, #ffcc00, #ff9900);
-	/* Colorful gradient background with shades of orange and yellow */
+/* For event of class */
+/* #CALCULATE_MANUALLY: just switch fg/bg */
+.HIGHLIGHT:hover {
+	-fx-background-color: rgb(204,204,204);
+	-fx-text-fill: -accent-color;
 }
