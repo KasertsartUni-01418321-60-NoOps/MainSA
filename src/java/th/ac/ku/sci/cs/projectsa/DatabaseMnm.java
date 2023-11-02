@@ -72,7 +72,7 @@ public class DatabaseMnm {
 	// that class lamo
 	// REMARK: if keepStatementOpen==null then close statement and do not return, if
 	// ==false then same as ==null but also return, otherwise it don't be closed.
-	// TODO: [EASY+LESSI] try-catch all .close() in try clause?
+	// TODO: [EASY+LESSI+NOTREQUIREDACTUALLY] try-catch all .close() in try clause?
 	public static Object[] runSQLcmd(java.sql.Connection dbConn, String sqlStm, boolean skipGetResultSet,
 			Boolean keepStatementOpen, Object[] params) throws java.sql.SQLException {
 		if (dbConn == null) {
