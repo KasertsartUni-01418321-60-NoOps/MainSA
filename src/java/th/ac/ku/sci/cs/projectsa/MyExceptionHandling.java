@@ -153,6 +153,23 @@ public class MyExceptionHandling {
 	// follow default constructors
 	public static class UserException extends Exception {
 
+		
+		private boolean isMiscInfoSet=false;
+		private Object[] miscInfo=null;
+		
+		public boolean isMiscInfoSet() {
+			return isMiscInfoSet;
+		}
+		public Object[] getMiscInfo() {
+			return miscInfo;
+		}
+		public void setMiscInfo(Object[] miscInfo) {
+			if (isMiscInfoSet) {
+				throw new UserRuntimeException("Cannot set already-set miscInfo of UserException-alike exception.");
+			}
+			else {this.miscInfo = miscInfo;this.isMiscInfoSet=true;}
+		}
+
 		// entire exception handling info: mode=no
 		public UserException() {
 			super();
@@ -181,6 +198,21 @@ public class MyExceptionHandling {
 
 	// follow default constructors
 	public static class UserRuntimeException extends RuntimeException {
+		private boolean isMiscInfoSet=false;
+		private Object[] miscInfo=null;
+		
+		public boolean isMiscInfoSet() {
+			return isMiscInfoSet;
+		}
+		public Object[] getMiscInfo() {
+			return miscInfo;
+		}
+		public void setMiscInfo(Object[] miscInfo) {
+			if (isMiscInfoSet) {
+				throw new UserRuntimeException("Cannot set already-set miscInfo of UserException-alike exception.");
+			}
+			else {this.miscInfo = miscInfo;this.isMiscInfoSet=true;}
+		}
 		// entire exception handling info: mode=no
 		public UserRuntimeException() {
 			super();

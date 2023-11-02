@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javafx.scene.chart.XYChart.Data;
 import th.ac.ku.sci.cs.projectsa.*;
 
 public class DatabaseMnm {
@@ -33,10 +34,10 @@ public class DatabaseMnm {
 		String[] sqlStms = new String[] {
 				"CREATE TABLE IF NOT EXISTS Customer (Customer_Full_Name TEXT PRIMARY KEY, Customer_Address TEXT, Customer_Telephone_Number TEXT NOT NULL, Customer_Credit_Amount INTEGER NOT NULL) STRICT,WITHOUT ROWID;",
 				"CREATE TABLE IF NOT EXISTS Selling_Request (Selling_Request_ID TEXT PRIMARY KEY, Customer_Full_Name TEXT NOT NULL, Selling_Request_Brand TEXT NOT NULL, Selling_Request_Model TEXT NOT NULL, Selling_Request_Product_Looks TEXT NOT NULL, Selling_Request_Meet_Date INTEGER NOT NULL, Selling_Request_Meet_Location TEXT NOT NULL, Selling_Request_Paid_Amount REAL, Selling_Request_Status INTEGER NOT NULL,  FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS Product (Product_ID TEXT PRIMARY KEY, Product_Arrive_Time INTEGER NOT NULL, Product_Price REAL NOT NULL, Product_Status INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL, Repairment_ID TEXT NOT NULL, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID), FOREIGN KEY (Repairment_ID) REFERENCES REPAIRMENT(Repairment_ID))STRICT,WITHOUT ROWID;",
+				"CREATE TABLE IF NOT EXISTS Product (Product_ID TEXT PRIMARY KEY, Product_Arrive_Time INTEGER NOT NULL, Product_Price REAL NOT NULL, Product_Status INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL UNIQUE, Repairment_ID TEXT NOT NULL UNIQUE, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID), FOREIGN KEY (Repairment_ID) REFERENCES REPAIRMENT(Repairment_ID))STRICT,WITHOUT ROWID;",
 				"CREATE TABLE IF NOT EXISTS User (User_Name TEXT PRIMARY KEY, User_Password TEXT NOT NULL, User_Role INTEGER NOT NULL)STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS Repairment (Repairment_ID TEXT PRIMARY KEY, Repairment_Description TEXT NOT NULL, Repairment_Date INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID))STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT, Product_ID TEXT, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price REAL, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT,WITHOUT ROWID;",
+				"CREATE TABLE IF NOT EXISTS Repairment (Repairment_ID TEXT PRIMARY KEY, Repairment_Description TEXT NOT NULL, Repairment_Date INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL UNIQUE, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID))STRICT,WITHOUT ROWID;",
+				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT, Product_ID TEXT UNIQUE, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price REAL, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT,WITHOUT ROWID;",
 				"INSERT OR IGNORE INTO Customer (Customer_Full_Name, Customer_Address, Customer_Telephone_Number, Customer_Credit_Amount)"
 				+"VALUES ('John Doe', '123 Main St', '555-123-4567', 1000);"
 				,"INSERT OR IGNORE INTO Selling_Request (Selling_Request_ID, Customer_Full_Name, Selling_Request_Brand, Selling_Request_Model, Selling_Request_Product_Looks, Selling_Request_Meet_Date, Selling_Request_Meet_Location, Selling_Request_Paid_Amount, Selling_Request_Status)"
@@ -432,6 +433,7 @@ public class DatabaseMnm {
 	// REMARK APPLY THIS TO INSIDE OF THIS ZONE UNLESSS EXPLICIT OVERRIDE: entire exception handling info: mode=no
 
 	// REMARK: only considered type of LONG/DOUBLE/STRING
+	// REMARK: currently, only RANGE/LENGTH/ENUM is specified here, for another such as connectivty,nullablity,etc., implement manually in PerAttributeValidation lamo
 	public static class DataSpec {
 		// [Zone:Constants]
 		// for attribute that have range (that "required" range checking ถ้าไม่ required
@@ -500,7 +502,7 @@ public class DatabaseMnm {
 	// REMARK: legnth คือ integer ส่วน range/ตัวค่าคือ long/double (แล้วแต่ dattype
 	// ของ attrib)
 	// REMARK: only considered type of LONG/DOUBLE/STRING
-	// TODO: clear native function lamo
+	// TODO: [MED] clear native function lamo
 	public static class DataValidation {
 
 		// [Zone:Annotation lamo]
@@ -518,6 +520,12 @@ public class DatabaseMnm {
 		@java.lang.annotation.Target({ java.lang.annotation.ElementType.PARAMETER,
 				java.lang.annotation.ElementType.FIELD, java.lang.annotation.ElementType.METHOD })
 		public @interface Nullable {
+		}
+
+		public static enum DATAVALID_DECLINED_REASON {
+			ISNULL,
+			INVALID_LENGTH,
+			INVALID_FORMAT
 		}
 
 		public static class JavaTypeLevel {
@@ -625,38 +633,57 @@ public class DatabaseMnm {
 
 		// REMARK: only Password that required DataTransform, see Misc.passwordHash() lamo
 		// REMARK: function here must handled NULL too
-		// TODO: chnge @NotNull to @Nullable
+		// REMARK: function here if return as null >> valid passed
 		public static class PerAttributeValidation {
-			public static native boolean check__CUSTOMER__Customer_Full_Name(@NotNull String data);
-			public static native boolean check__CUSTOMER__Customer_Address(@NotNull String data);
-			public static native boolean check__CUSTOMER__Customer_Telephone_Number(@NotNull String data);
-			public static native boolean check__CUSTOMER__Customer_Credit_Amount(@NotNull String data);
-			public static native boolean check__USER__User_Name(@NotNull String data);
-			public static native boolean check__USER__User_Password(@NotNull String data);
-			public static native boolean check__USER__User_Role(@NotNull String data);
-			public static native boolean check__PRODUCT__Product_ID(@NotNull String data);
-			public static native boolean check__PRODUCT__Product_Arrive_Time(@NotNull String data);
-			public static native boolean check__PRODUCT__Product_Price(@NotNull String data);
-			public static native boolean check__PRODUCT__Product_Status(@NotNull String data);
-			public static native boolean check__PRODUCT__Selling_Request_ID(@NotNull String data);
-			public static native boolean check__PRODUCT__Repairment_ID(@NotNull String data);
-			public static native boolean check__SELLING_REQUEST__Selling_Request_ID(@NotNull String data);
-			public static native boolean check__SELLING_REQUEST__Customer_Full_Name(@NotNull String data);
-			public static native boolean check__SELLING_REQUEST__Selling_Request_Brand(@NotNull String data);
-			public static native boolean check__SELLING_REQUEST__Selling_Request_Model(@NotNull String data);
-			public static native boolean check__SELLING_REQUEST__Selling_Request_Product_Looks(@NotNull String data);
-			public static native boolean check__SELLING_REQUEST__Selling_Request_Meet_Date(@NotNull String data);
-			public static native boolean check__SELLING_REQUEST__Selling_Request_Meet_Location(@NotNull String data);
-			public static native boolean check__SELLING_REQUEST__Selling_Request_Paid_Amount(@NotNull String data);
-			public static native boolean check__SELLING_REQUEST__Selling_Request_Status(@NotNull String data);
-			public static native boolean check__REPAIRMENT__Repairment_ID(@NotNull String data);
-			public static native boolean check__REPAIRMENT__Repairment_Description(@NotNull String data);
-			public static native boolean check__REPAIRMENT__Repairment_Date(@NotNull String data);
-			public static native boolean check__REPAIRMENT__Selling_Request_ID(@NotNull String data);
-			public static native boolean check__BUY_REQUEST__Customer_Full_Name(@NotNull String data);
-			public static native boolean check__BUY_REQUEST__Product_ID(@NotNull String data);
-			public static native boolean check__BUY_REQUEST__Buy_Request_Created_Date(@NotNull String data);
-			public static native boolean check__BUY_REQUEST__Buy_Request_Transportation_Price(@NotNull String data);
+			@Nullable
+			public static native DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Full_Name(@Nullable String data);
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Address(@Nullable String data) {
+				// (PART 0): check if it is null
+				if (data==null) {
+					// we accept null lamo, and no further checked
+					return null;
+				} else {
+					// (PART 1): Check length
+					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Customer_Full_Name");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
+					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					// (PART 2): Check general string conditions
+					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {}
+					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
+					// the code should  reached here means it (data) is passed
+					return null;
+				}
+			}
+			@Nullable
+			public static native DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Telephone_Number(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Credit_Amount(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__USER__User_Name(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__USER__User_Password(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__USER__User_Role(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Product_ID(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Product_Arrive_Time(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Product_Price(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Product_Status(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Selling_Request_ID(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Repairment_ID(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_ID(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Customer_Full_Name(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Brand(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Model(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Product_Looks(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Meet_Date(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Meet_Location(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Paid_Amount(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Status(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__REPAIRMENT__Repairment_ID(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__REPAIRMENT__Repairment_Description(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__REPAIRMENT__Repairment_Date(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__REPAIRMENT__Selling_Request_ID(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Customer_Full_Name(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Product_ID(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Buy_Request_Created_Date(@Nullable String data);
+			@Nullable public static native DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Buy_Request_Transportation_Price(@Nullable String data);
 			
 		}
 	}
