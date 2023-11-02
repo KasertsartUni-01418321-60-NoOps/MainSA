@@ -1,14 +1,6 @@
 package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
-
-import java.io.NotActiveException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
-
-import javafx.scene.chart.XYChart.Data;
 import th.ac.ku.sci.cs.projectsa.*;
 
 public class DatabaseMnm {
@@ -446,7 +438,7 @@ public class DatabaseMnm {
 		// REMARK: apply ทุก attribte!!
 		// REMARK: ชื่อ attribute ซ้ำกันเพราะ FK ซึ่ง FK คุณสมบัติของ length
 		// เหมือนกันอยู๋แล้วๆๆ
-		public final static Map<String, Integer[]> MINMAX_LENGTH_OF_ATTRIBS = new HashMap<>();
+		public final static java.util.Map<String, Integer[]> MINMAX_LENGTH_OF_ATTRIBS = new java.util.HashMap<>();
 		static {
 			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Full_Name", new Integer[] { 1, 192 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Address", new Integer[] { 1, 512 });
@@ -604,7 +596,7 @@ public class DatabaseMnm {
 
 		public static class SQLLevel {
 			// SECURITY WARNING: this function using SQL string injection, do not putting public string unless strict check
-			public static boolean isThisValExisted(@NotNull Object val,@NotNull String tableName,@NotNull String colName) throws SQLException {
+			public static boolean isThisValExisted(@NotNull Object val,@NotNull String tableName,@NotNull String colName) throws java.sql.SQLException {
 				java.sql.ResultSet tmp_rs= (java.sql.ResultSet) runSQLcmd(null,
 					"SELECT count("+colName+") FROM "+tableName+" WHERE "+colName+"=?",
 					false,null,new Object[] {val}
@@ -618,7 +610,7 @@ public class DatabaseMnm {
 			// REMARK: tableAndColName ordering is [tableNameOfFK,colNameOfFK,tableNameOfPK,colNameOfPK]
 			// RETURN: 1st value is answer and last 2 are answer of tmp1/tmp2
 			@NotNull
-			public static boolean[] isThisFKInsertable(@NotNull Object val,@NotNull String[] tableAndColName) throws SQLException {
+			public static boolean[] isThisFKInsertable(@NotNull Object val,@NotNull String[] tableAndColName) throws java.sql.SQLException {
 				String tableNameOfFK=tableAndColName[0];
 				String colNameOfFK=tableAndColName[1];
 				String tableNameOfPK=tableAndColName[2];
