@@ -96,11 +96,11 @@ public class Main extends javafx.application.Application {
             com.github.saacsos.FXRouter.bind(this, primaryStage,
                     "ระบบหลังบ้านบริการซื้อขายเครื่องซักผ้าอุตสาหกรรมมือสอง", 800, 600);
             // do not put leading slash for jarfile resource for this line of code
-            // TODO: [UI] adding page lamo
+            // TODO: [UI] Adding CTRL / Change FXML version idk / CSS settings
+            // TODO: [UI] ตั้งภาษา ไม่ยากๆ
             for (String pageName : new String[] {"homepage","login","add_item","buy_history","check_items","create_customer","customer_data","customer_list","money_accounting","quotation","sell_history","warehouse"}) {
                 com.github.saacsos.FXRouter.when(pageName, "resources/"+pageName+"_pre.fxml");
             }
-            // TODO: [UI] adding controller
             try
 
             {
