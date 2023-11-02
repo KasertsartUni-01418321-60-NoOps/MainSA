@@ -29,7 +29,6 @@ public class DatabaseMnm {
 		}
 		// REMARK: for my group, only use {TEXT,BLOB,REAL,INTEGER} maybe we not using
 		// "NUMERIC"
-		// TODO: เขียนใหม่ LAMO (ทำหลังจากพวก valid/transform lamo)
 		String[] sqlStms = new String[] {
 				"CREATE TABLE IF NOT EXISTS Customer (Customer_Full_Name TEXT PRIMARY KEY, Customer_Address TEXT, Customer_Telephone_Number TEXT NOT NULL, Customer_Credit_Amount INTEGER NOT NULL) STRICT,WITHOUT ROWID;",
 				"CREATE TABLE IF NOT EXISTS Selling_Request (Selling_Request_ID TEXT PRIMARY KEY, Customer_Full_Name TEXT NOT NULL, Selling_Request_Brand TEXT NOT NULL, Selling_Request_Model TEXT NOT NULL, Selling_Request_Product_Looks TEXT NOT NULL, Selling_Request_Meet_Date INTEGER NOT NULL, Selling_Request_Meet_Location TEXT NOT NULL, Selling_Request_Paid_Amount REAL, Selling_Request_Status INTEGER NOT NULL,  FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT,WITHOUT ROWID;",
@@ -76,7 +75,7 @@ public class DatabaseMnm {
 	// that class lamo
 	// REMARK: if keepStatementOpen==null then close statement and do not return, if
 	// ==false then same as ==null but also return, otherwise it don't be closed.
-	// TODO: EASY+LESSI try-catch all .close() in try clause?
+	// TODO: [EASY+LESSI] try-catch all .close() in try clause?
 	public static Object[] runSQLcmd(java.sql.Connection dbConn, String sqlStm, boolean skipGetResultSet,
 			Boolean keepStatementOpen, Object[] params) throws java.sql.SQLException {
 		if (dbConn == null) {
