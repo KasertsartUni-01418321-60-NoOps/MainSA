@@ -543,17 +543,17 @@ public class DatabaseMnm {
 			// TODO:need defination
 			public static native boolean checkDoubleDigitLength(double data, int maxFront, int maxRear);
 
-			// TODO:how about double?
+			// TODO: [EASY] how about double?
 			public static boolean checkLongNotNegative(long data) {
 				return data >= 0;
 			}
 
-			// TODO:how about double?
+			// TODO: [EASY] how about double?
 			public static boolean checkLongIsPositive(long data) {
 				return data > 0;
 			}
 
-			// TODO:how about double?
+			// TODO: [EASY]how about double?
 			// if {min/max}==null, then no {coressponding: min/max} limit
 			public static boolean checkLongIsInRange(long data, @Nullable Integer min, @Nullable Integer max) {
 				boolean tmp1 = true;
@@ -626,6 +626,7 @@ public class DatabaseMnm {
 			}
 		}
 
+		// TODO: [MedEasy]
 		public static class PerAttributeValidation {
 		}
 	}
