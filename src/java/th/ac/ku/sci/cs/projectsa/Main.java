@@ -3,6 +3,7 @@ package th.ac.ku.sci.cs.projectsa;
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
 
+// TODO: LESSI: console out to utf8 lamo
 public class Main extends javafx.application.Application {
     public static String[] args = null;
     public static java.util.concurrent.ExecutorService exitThread = java.util.concurrent.Executors
@@ -40,6 +41,8 @@ public class Main extends javafx.application.Application {
                     MyExceptionHandling.handleFatalExitException(e, "MainApp|ShutdownSystem|ProgramMainHook");
                 }
             }));
+            
+            java.util.Locale.setDefault(new java.util.Locale("th", "TH"));
             boolean doMIDIPlayer = true;
             for (String arg : args) {
                 if (arg.equals("-MiscFunFlag+muteMIDI") || arg.equals("--MiscFunFlag+muteMIDI")) {
@@ -51,7 +54,6 @@ public class Main extends javafx.application.Application {
                 // funny stuff, lazy-exception-handling is done in that function
                 th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer.main();
             }
-            java.util.Locale.setDefault(new java.util.Locale("th", "TH"));
             try {
                 DatabaseMnm.mainDbInit();
                 System.out.println(
