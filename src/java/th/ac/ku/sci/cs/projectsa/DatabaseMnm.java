@@ -81,7 +81,7 @@ public class DatabaseMnm {
 				String SD_Customer_Address = "แขวงรามอินทรา เขตคันนายาว กรุงเทพมหานคร";
 				String SD_Customer_Telephone_Number="+660123456789";
 				Long SD_Customer_Credit_Amount =(long) 100;
-				String SD_Selling_Request_ID="SR0099AZ";
+				String SD_Selling_Request_ID="AR0099AZ";
 				String SD_Selling_Request_Brand="สยาม";
 				String SD_Selling_Request_Model="อภิมหาจักรวาลนฤมิต";
 				String SD_Selling_Request_Product_Looks="สภาพเหมือนใหม่";
@@ -147,31 +147,27 @@ public class DatabaseMnm {
 				tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Repairment_Date(SD_Repairment_Date);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Selling_Request_ID(SD_Selling_Request_ID);
-				// WTH
-				if (tmpReason==null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				else {DatabaseMnm.runSQLcmds(null, sqlStms_4, true, null, new Object[][] {{SD_Repairment_ID,SD_Repairment_Description,SD_Repairment_Date,SD_Selling_Request_ID}});}
 			// PART 2E:
 				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_ID(SD_Product_ID);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				// WTH
-				// tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_Arrive_Time(SD_Product_Arrive_Time);
-				// if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_Arrive_Time(SD_Product_Arrive_Time);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_Price(SD_Product_Price);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_Status(SD_Product_Status);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				// WTH
-				// tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Selling_Request_ID(SD_Selling_Request_ID);
-				// if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				// tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Repairment_ID(SD_Repairment_ID);
-				// if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				if (false) {} else {DatabaseMnm.runSQLcmds(null, sqlStms_5, true, null, new Object[][] {{SD_Product_ID,SD_Product_Arrive_Time,DataTransformation.doubleLengthCropping(SD_Product_Price,DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[0],DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[1]),SD_Product_Status,SD_Selling_Request_ID,DataTransformation.NullableTransform(SD_Repairment_ID,String.class)}});}
+				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Selling_Request_ID(SD_Selling_Request_ID);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Repairment_ID(SD_Repairment_ID);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				else {DatabaseMnm.runSQLcmds(null, sqlStms_5, true, null, new Object[][] {{SD_Product_ID,SD_Product_Arrive_Time,DataTransformation.doubleLengthCropping(SD_Product_Price,DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[0],DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[1]),SD_Product_Status,SD_Selling_Request_ID,DataTransformation.NullableTransform(SD_Repairment_ID,String.class)}});}
 			// PART 2F:
 				tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Customer_Full_Name(SD_Customer_Full_Name);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				// WTH
-				// tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Product_ID(SD_Product_ID);
-				// if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Product_ID(SD_Product_ID);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Buy_Request_Created_Date(SD_Buy_Request_Created_Date);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Buy_Request_Transportation_Price(SD_Buy_Request_Transportation_Price);
@@ -580,7 +576,7 @@ public class DatabaseMnm {
 			MINMAX_LENGTH_OF_ATTRIBS.put("User_Password", new Integer[] { 1, 32 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("User_Role", new Integer[] { 1, 1 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_ID", new Integer[] { 8, 8 });
-			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Arrive_time", new Integer[] { 10, 10 });
+			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Arrive_Time", new Integer[] { 10, 10 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Price", new Integer[] { 8, 2 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Status", new Integer[] { 1, 1 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_ID", new Integer[] { 8, 8 });
@@ -784,6 +780,7 @@ public class DatabaseMnm {
 		}
 
 		public static class SQLLevel {
+			// TODO: แก้บั๊ก
 			// SECURITY WARNING: this function using SQL string injection, do not putting public string unless strict check
 			public static boolean isThisValExisted(@NotNull Object val,@NotNull String tableName,@NotNull String colName) throws java.sql.SQLException {
 				java.sql.ResultSet tmp_rs= (java.sql.ResultSet) runSQLcmd(null,
