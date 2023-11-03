@@ -6,9 +6,14 @@ import java.sql.SQLException;
 
 import th.ac.ku.sci.cs.projectsa.*;
 
+
+// TODO: DataTransform Double to limit digit
+// - min,max to possible range
+// - and then convert to string and crop and toDouble
 public class DatabaseMnm {
 	public static java.sql.Connection mainDbConn = null;
 	public final static String mainDbPath = "./data/main.db";
+	public final static String setFKCheckQuery ="PRAGMA foreign_keys = ON;";
 
 	// [Zone:Init]
 	// entire exception handling info: mode=no
@@ -26,29 +31,72 @@ public class DatabaseMnm {
 		// REMARK: for my group, only use {TEXT,BLOB,REAL,INTEGER} maybe we not using
 		// "NUMERIC"
 		// TODO: + REMARK: [EASYJUSTWAITTIMELAMO] These example are not compatitble yet to data spec/valid but just pretesting lamo 
-		String[] sqlStms = new String[] {
+		String[] sqlStms_0 = new String[] {
+				setFKCheckQuery,
 				"CREATE TABLE IF NOT EXISTS Customer (Customer_Full_Name TEXT PRIMARY KEY, Customer_Address TEXT, Customer_Telephone_Number TEXT NOT NULL, Customer_Credit_Amount INTEGER NOT NULL) STRICT,WITHOUT ROWID;",
 				"CREATE TABLE IF NOT EXISTS Selling_Request (Selling_Request_ID TEXT PRIMARY KEY, Customer_Full_Name TEXT NOT NULL, Selling_Request_Brand TEXT NOT NULL, Selling_Request_Model TEXT NOT NULL, Selling_Request_Product_Looks TEXT NOT NULL, Selling_Request_Meet_Date INTEGER NOT NULL, Selling_Request_Meet_Location TEXT NOT NULL, Selling_Request_Paid_Amount REAL, Selling_Request_Status INTEGER NOT NULL,  FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS Product (Product_ID TEXT PRIMARY KEY, Product_Arrive_Time INTEGER NOT NULL, Product_Price REAL NOT NULL, Product_Status INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL UNIQUE, Repairment_ID TEXT NOT NULL UNIQUE, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID), FOREIGN KEY (Repairment_ID) REFERENCES REPAIRMENT(Repairment_ID))STRICT,WITHOUT ROWID;",
+				"CREATE TABLE IF NOT EXISTS Product (Product_ID TEXT PRIMARY KEY, Product_Arrive_Time INTEGER NOT NULL, Product_Price REAL NOT NULL, Product_Status INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL UNIQUE, Repairment_ID TEXT  UNIQUE, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID), FOREIGN KEY (Repairment_ID) REFERENCES REPAIRMENT(Repairment_ID))STRICT,WITHOUT ROWID;",
 				"CREATE TABLE IF NOT EXISTS User (User_Name TEXT PRIMARY KEY, User_Password TEXT NOT NULL, User_Role INTEGER NOT NULL)STRICT,WITHOUT ROWID;",
 				"CREATE TABLE IF NOT EXISTS Repairment (Repairment_ID TEXT PRIMARY KEY, Repairment_Description TEXT NOT NULL, Repairment_Date INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL UNIQUE, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID))STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT, Product_ID TEXT UNIQUE, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price REAL, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT,WITHOUT ROWID;",
-				"INSERT OR IGNORE INTO Customer (Customer_Full_Name, Customer_Address, Customer_Telephone_Number, Customer_Credit_Amount)"
-				+"VALUES ('John Doe', '123 Main St', '555-123-4567', 1000);"
-				,"INSERT OR IGNORE INTO Selling_Request (Selling_Request_ID, Customer_Full_Name, Selling_Request_Brand, Selling_Request_Model, Selling_Request_Product_Looks, Selling_Request_Meet_Date, Selling_Request_Meet_Location, Selling_Request_Paid_Amount, Selling_Request_Status)"
-				+"VALUES ('SR001', 'John Doe', 'Brand1', 'Model1', 'Excellent', 1635830400, 'Park Avenue', 500.00, 1);"
-				,"INSERT OR IGNORE INTO Product (Product_ID, Product_Arrive_Time, Product_Price, Product_Status, Selling_Request_ID, Repairment_ID)"
-				+"VALUES ('P001', 1635830400, 299.99, 1, 'SR001', 'R001');"
-				,"INSERT OR IGNORE INTO User (User_Name, User_Password, User_Role)"
-				+"VALUES ('admin', 'password123', 1);"
-				,"INSERT OR IGNORE INTO Repairment (Repairment_ID, Repairment_Description, Repairment_Date, Selling_Request_ID)"
-				+"VALUES ('R001', 'Replace screen', 1635830400, 'SR001');"
-				,"INSERT OR IGNORE INTO Buy_Request (Customer_Full_Name, Product_ID, Buy_Request_Created_Date, Buy_Request_Transportation_Price)"
-				+"VALUES ('John Doe', 'P001', 1635830400, 25.00);"
+				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT, Product_ID TEXT UNIQUE, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price REAL, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT,WITHOUT ROWID;"
 		};
+		String[] sqlStms_1 = new String[] {
+			"INSERT OR IGNORE INTO User (User_Name, User_Password, User_Role)"
+			+"VALUES (?, ?, ?);"
+		};
+		String[] sqlStms_2 = new String[] {
+			"INSERT OR IGNORE INTO Customer (Customer_Full_Name, Customer_Address, Customer_Telephone_Number, Customer_Credit_Amount)"
+			+"VALUES (?, ?, ?, ?);"
+		};
+		String[] sqlStms_3 = new String[] {
+			"INSERT OR IGNORE INTO Selling_Request (Selling_Request_ID, Customer_Full_Name, Selling_Request_Brand, Selling_Request_Model, Selling_Request_Product_Looks, Selling_Request_Meet_Date, Selling_Request_Meet_Location, Selling_Request_Paid_Amount, Selling_Request_Status)"
+			+"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"
+		};
+		String[] sqlStms_4 = new String[] {
+			"INSERT OR IGNORE INTO Repairment (Repairment_ID, Repairment_Description, Repairment_Date, Selling_Request_ID)"
+			+"VALUES (?, ?, ?, ?);"
+		};
+		String[] sqlStms_5 = new String[] {
+			"INSERT OR IGNORE INTO Product (Product_ID, Product_Arrive_Time, Product_Price, Product_Status, Selling_Request_ID, Repairment_ID)"
+			+"VALUES (?, ?, ?, ?, ?, ?);"
+		};
+		String[] sqlStms_6 = new String[] {
+			"INSERT OR IGNORE INTO Buy_Request (Customer_Full_Name, Product_ID, Buy_Request_Created_Date, Buy_Request_Transportation_Price)"
+			+"VALUES (?,?,?,?);"
+		};
+
 		try {
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:" + mainDbPath);
-			DatabaseMnm.runSQLcmds(null, sqlStms, true, null, null);
+			DatabaseMnm.runSQLcmds(null, sqlStms_0, true, null, null);
+			// PART 1:
+				String SD_User_Name = "npchaonay";
+				String SD_User_Password ="HFE#FJOS@J@(O@SOJS@OJ@SJL)";
+				Long SD_User_Role=(long)0;
+				String SD_Customer_Full_Name= "ณัฐพงศ์ พันพิพัฒน์";
+				String SD_Customer_Address = "แขวงรามอินทรา เขตคันนายาว กรุงเทพมหานคร";
+				String SD_Customer_Telephone_Number="+660123456789";
+				Long SD_Customer_Credit_Amount =(long) 100;
+				String SD_Selling_Request_ID="SR0099AZ";
+				String SD_Selling_Request_Brand="สยาม";
+				String SD_Selling_Request_Model="อภิมหาจักรวาลนฤมิต";
+				String SD_Selling_Request_Product_Looks="สภาพเหมือนใหม่";
+				Long SD_Selling_Request_Meet_Date = (long) 1635830400;
+				String SD_Selling_Request_Meet_Location = "กรมทหารราบที่ 11";
+				Double SD_Selling_Request_Paid_Amount=1000000.25;
+				Long SD_Selling_Request_Status=(long)2;
+				String SD_Repairment_ID="RP0099AZ";
+				String SD_Repairment_Description="เปลี่ยนจอเว้ยยยย";
+				Long SD_Repairment_Date= (long)1635830400;
+				String SD_Product_ID="PD0099AZ";
+				Long SD_Product_Arrive_Time = (long)1635830400;
+				Double SD_Product_Price=1234567.55;
+				Long SD_Product_Status = (long)1;
+				Long SD_Buy_Request_Created_Date=(long)1635830400;
+				Double SD_Buy_Request_Transportation_Price = null;
+			// PART 2:
+				DataValidation.DATAVALID_DECLINED_REASON tmpReason=DataValidation.PerAttributeValidation.check__USER__User_Name(SD_User_Name);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+			// [ZONE END]
 		} catch (java.sql.SQLException e) {
 			throw e;
 		}
