@@ -2,9 +2,14 @@ package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.function.DoubleBinaryOperator;
 
+import javafx.scene.chart.PieChart.Data;
 import th.ac.ku.sci.cs.projectsa.*;
+import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.NotNull;
+import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.Nullable;
 
 
 // TODO: DataTransform Double to limit digit
@@ -19,7 +24,7 @@ public class DatabaseMnm {
 	// entire exception handling info: mode=no
 	// REMARK: normally, this sql statements execution, only create table, so no
 	// begin/rollback required.
-	public static void mainDbInit() throws java.sql.SQLException, java.io.IOException {
+	public static void mainDbInit() throws java.sql.SQLException, java.io.IOException, NoSuchAlgorithmException {
 		java.nio.file.Path tmp_Path = java.nio.file.Paths.get("./data");
 		if (!java.nio.file.Files.exists(tmp_Path)) {
 			try {
@@ -93,9 +98,85 @@ public class DatabaseMnm {
 				Long SD_Product_Status = (long)1;
 				Long SD_Buy_Request_Created_Date=(long)1635830400;
 				Double SD_Buy_Request_Transportation_Price = null;
-			// PART 2:
-				DataValidation.DATAVALID_DECLINED_REASON tmpReason=DataValidation.PerAttributeValidation.check__USER__User_Name(SD_User_Name);
+				DataValidation.DATAVALID_DECLINED_REASON tmpReason=null;
+			// PART 2A:
+				tmpReason=DataValidation.PerAttributeValidation.check__USER__User_Name(SD_User_Name);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__USER__User_Password(SD_User_Password);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__USER__User_Role(SD_User_Role);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				else {DatabaseMnm.runSQLcmds(null, sqlStms_1, true, null, new Object[][] {{SD_User_Name,Misc.passwordHash(SD_User_Password),SD_User_Role}});}
+			// PART 2B:
+				tmpReason=DataValidation.PerAttributeValidation.check__CUSTOMER__Customer_Full_Name(SD_Customer_Full_Name);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__CUSTOMER__Customer_Address(SD_Customer_Address);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__CUSTOMER__Customer_Credit_Amount(SD_Customer_Credit_Amount);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__CUSTOMER__Customer_Telephone_Number(SD_Customer_Telephone_Number);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				else {
+					DatabaseMnm.runSQLcmds(null, sqlStms_2, true, null, new Object[][] {{SD_Customer_Full_Name,DataTransformation.NullableTransform(SD_Customer_Address,String.class),SD_Customer_Telephone_Number,SD_Customer_Credit_Amount}});
+				}
+			// PART 2C:
+				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_ID(SD_Selling_Request_ID);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Customer_Full_Name(SD_Customer_Full_Name);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Brand(SD_Selling_Request_Brand);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Model(SD_Selling_Request_Model);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Product_Looks(SD_Selling_Request_Product_Looks);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Meet_Date(SD_Selling_Request_Meet_Date);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Meet_Location(SD_Selling_Request_Meet_Location);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Paid_Amount(SD_Selling_Request_Paid_Amount);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Status(SD_Selling_Request_Status);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				else {DatabaseMnm.runSQLcmds(null, sqlStms_3, true, null, new Object[][] {{SD_Selling_Request_ID,SD_Customer_Full_Name,SD_Selling_Request_Brand,SD_Selling_Request_Model,SD_Selling_Request_Product_Looks,SD_Selling_Request_Meet_Date,SD_Selling_Request_Meet_Location,DataTransformation.doubleLengthCroppingAndNullableTransform(SD_Selling_Request_Paid_Amount,DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[0],DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[1]),SD_Selling_Request_Status}});}
+			// PART 2D:
+				tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Repairment_ID(SD_Repairment_ID);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Repairment_Description(SD_Repairment_Description);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Repairment_Date(SD_Repairment_Date);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Selling_Request_ID(SD_Selling_Request_ID);
+				// WTH
+				if (tmpReason==null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				else {DatabaseMnm.runSQLcmds(null, sqlStms_4, true, null, new Object[][] {{SD_Repairment_ID,SD_Repairment_Description,SD_Repairment_Date,SD_Selling_Request_ID}});}
+			// PART 2E:
+				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_ID(SD_Product_ID);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				// WTH
+				// tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_Arrive_Time(SD_Product_Arrive_Time);
+				// if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_Price(SD_Product_Price);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_Status(SD_Product_Status);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				// WTH
+				// tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Selling_Request_ID(SD_Selling_Request_ID);
+				// if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				// tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Repairment_ID(SD_Repairment_ID);
+				// if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				if (false) {} else {DatabaseMnm.runSQLcmds(null, sqlStms_5, true, null, new Object[][] {{SD_Product_ID,SD_Product_Arrive_Time,DataTransformation.doubleLengthCropping(SD_Product_Price,DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[0],DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[1]),SD_Product_Status,SD_Selling_Request_ID,DataTransformation.NullableTransform(SD_Repairment_ID,String.class)}});}
+			// PART 2F:
+				tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Customer_Full_Name(SD_Customer_Full_Name);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				// WTH
+				// tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Product_ID(SD_Product_ID);
+				// if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Buy_Request_Created_Date(SD_Buy_Request_Created_Date);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Buy_Request_Transportation_Price(SD_Buy_Request_Transportation_Price);
+				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				else {DatabaseMnm.runSQLcmds(null, sqlStms_6, true, null, new Object[][] {{SD_Customer_Full_Name,SD_Product_ID,SD_Buy_Request_Created_Date,DataTransformation.doubleLengthCroppingAndNullableTransform(SD_Buy_Request_Transportation_Price,DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[0],DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[1])}});}
 			// [ZONE END]
 		} catch (java.sql.SQLException e) {
 			throw e;
@@ -496,7 +577,7 @@ public class DatabaseMnm {
 			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Telephone_Number", new Integer[] { 1, 32 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Credit_Amount", new Integer[] { 1, 3 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("User_Name", new Integer[] { 1, 32 });
-			MINMAX_LENGTH_OF_ATTRIBS.put("User_Password", new Integer[] { 64, 64 });
+			MINMAX_LENGTH_OF_ATTRIBS.put("User_Password", new Integer[] { 1, 32 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("User_Role", new Integer[] { 1, 1 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_ID", new Integer[] { 8, 8 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Arrive_time", new Integer[] { 10, 10 });
@@ -601,7 +682,7 @@ public class DatabaseMnm {
 				}
 			}
 
-			// TODO: อันนี้คือจะต้องหา min-max range จากเงื่อนไขที่ให้มาแล้วเอาค่าไปเทียบ
+			// REMARK: ส่วนพวก maxRear เดี่ยวค่อย rounding เอา LAMO ด้วยเหตุผลกลัวว่าความ inaccrate ของ Double จะทำให้ข้อมูลเกิด ValidError lamo
 			public static boolean checkDoubleDigitLength(double data, int maxFront, int maxRear) {
 				StringBuilder tmp1 = new StringBuilder();
 				for (int i = 0; i < maxFront; i++) {
@@ -1253,6 +1334,24 @@ public class DatabaseMnm {
 			}
 			
 		}
+	}
+
+	public static class DataTransformation {
+		@NotNull
+		public static <T> Object NullableTransform(@Nullable T data, @NotNull Class<T> dataClass) {
+			if (data!=null) {return data;}
+			else {return dataClass;}
+		}
+		public static double doubleLengthCropping(double data, int maxFront, int maxRear) {
+			// TODO:
+			return data;
+		}
+		@NotNull
+		public static Object doubleLengthCroppingAndNullableTransform(@Nullable Double data, int maxFront, int maxRear) {
+			if (data!=null) {return doubleLengthCropping(data,maxFront,maxRear);}
+			else {return Double.class;}
+		}
+
 	}
 
 	// [Zone:SubClass]
