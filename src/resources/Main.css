@@ -10,6 +10,7 @@
 }
 Label,TextField,PasswordField,Text {
 	-fx-text-fill: -general-text-color;
+	-fx-background-color: -primary-color;
 	-fx-effect: -general-effect-shadowdrop;
 }
 Button {
