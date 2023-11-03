@@ -540,7 +540,10 @@ public class DatabaseMnm {
 
 			// if max==null, then no max limit
 
-			public static native boolean checkLongDigitLength(long data, int min, @Nullable Integer max);
+			public static boolean checkLongDigitLength(long data, int min, @Nullable Integer max) {
+				String tmp = Long.toString(data);
+				return checkStrLength(tmp, min, max);
+			}
 
 			public static boolean checkStrLength(@NotNull String data, int min, @Nullable Integer max) {
 				if (max == null) {
@@ -551,7 +554,29 @@ public class DatabaseMnm {
 			}
 
 			// TODO: อันนี้คือจะต้องหา min-max range จากเงื่อนไขที่ให้มาแล้วเอาค่าไปเทียบ
-			public static native boolean checkDoubleDigitLength(double data, int maxFront, int maxRear);
+			public static boolean checkDoubleDigitLength(double data, int maxFront, int maxRear) {
+				StringBuilder tmp1 = new StringBuilder();
+				for (int i = 0; i < maxFront; i++) {
+					tmp1.append("9");
+				}
+				tmp1.append(".");
+				for (int i = 0; i < maxRear; i++) {
+					tmp1.append("9");
+				}
+				String tmp_posdoublestr = tmp1.toString();
+				String tmp_negdoublestr = "-"+tmp_posdoublestr;
+				Double[] tmp2 = new Double[2];
+				try {
+					tmp2[0]=Double.parseDouble(tmp_negdoublestr);
+					tmp2[1]=Double.parseDouble(tmp_posdoublestr);
+					if (tmp2[0]<=data && data<=tmp2[1]) {return true;}
+				} catch (RuntimeException e) {
+					// in case it exceeded Double, then we sure that condition passed
+					return true;
+				}
+				// if code reached here, mean false
+				return false;
+			}
 			public static boolean checkLongNotNegative(long data) {return data >= 0;}
 			public static boolean checkDoubleNotNegative(double data) {return data >= 0;}
 			public static boolean checkLongIsPositive(long data) {return data > 0;}
@@ -597,18 +622,36 @@ public class DatabaseMnm {
 
 			
 
-			public static native boolean checkStrIsGeneralValid(@NotNull String data);
+			public static boolean checkStrIsGeneralValid(@NotNull String data) {
+				String regexPattern = "^[ -~\\u0E01-\\u0E39\\u0E3F-\\u0E4D\\u0E50-\\u0E59]*$";
+				return java.util.regex.Pattern.compile(regexPattern).matcher(data).matches();
+			}
 
-			public static native boolean checkStrIsValidUserName(@NotNull String data);
+			public static boolean checkStrIsValidUserName(@NotNull String data) {
+				String regexPattern = "^[A-Za-z0-9]{1,32}$";
+				return java.util.regex.Pattern.compile(regexPattern).matcher(data).matches();
+			}
 
-			public static native boolean checkStrIsValidPassword(@NotNull String data);
+			public static boolean checkStrIsValidPassword(@NotNull String data) {
+				String regexPattern = "^[ -~]{1,32}$";
+				return java.util.regex.Pattern.compile(regexPattern).matcher(data).matches();
+			}
 
-			public static native boolean checkStrIsValidID(@NotNull String data);
+			public static  boolean checkStrIsValidID(@NotNull String data) {
+				String regexPattern = "^[A-Z0-9]{8}$";
+				return java.util.regex.Pattern.compile(regexPattern).matcher(data).matches();
+			}
 
-			public static native boolean checkStrIsValidCustomerName(@NotNull String data);
+			public static  boolean checkStrIsValidCustomerName(@NotNull String data) {
+				if (!checkStrIsGeneralValid(data)) {return false;}
+				return true;
+			}
 
 
-			public static native boolean checkStrIsValidTelNum(@NotNull String data);
+			public static boolean checkStrIsValidTelNum(@NotNull String data) {
+				String regexPattern = "^[0-9+*#,;]+$";
+				return java.util.regex.Pattern.compile(regexPattern).matcher(data).matches();
+			}
 		}
 
 		public static class SQLLevel {
