@@ -1,18 +1,25 @@
 /* For element selecion */
 .root {
 	-primary-color: yellow;
+	-primary-color--lighten: rgb(255,255,191);
 	-accent-color: #3498db;
 	-general-text-color: #333333;
-	-general-text-color--inversed: rgb(204,204,204);
+	-general-text-color--lighten: rgb(102,102,102);
+	-text-color--inversed: rgb(204,204,204);
 	-general-effect-shadowdrop: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 5);
 	-general-effect-shadowdrop-hover: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 2.5);
 	-fx-background-color: linear-gradient(to bottom, #ffcc00, #ff9900);
 }
-Label,TextField,PasswordField,Text {
-	-fx-text-fill: -general-text-color;
-	-fx-background-color: -primary-color;
+TextField,PasswordField {
+	-fx-text-fill: -general-text-color--lighten;
+	-fx-background-color: -primary-color--lighten;
 	-fx-effect: -general-effect-shadowdrop;
 }
+Label,Text {
+	-fx-text-fill: -general-text-color;
+	-fx-effect: -general-effect-shadowdrop;
+}
+
 Button {
 	-fx-text-fill: -general-text-color;
 	-fx-background-color: -primary-color;
