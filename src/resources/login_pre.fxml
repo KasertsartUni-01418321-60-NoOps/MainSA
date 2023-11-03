@@ -16,7 +16,7 @@
             <Font size="36.0" />
          </font>
       </Text>
-      <TextField layoutX="225.0" layoutY="131.0" />
-      <PasswordField layoutX="225.0" layoutY="188.0" />
+      <TextField promptText="User Name:" layoutX="225.0" layoutY="131.0" />
+      <PasswordField promptText="Password:" layoutX="225.0" layoutY="188.0" />
    </children>
 </AnchorPane>
