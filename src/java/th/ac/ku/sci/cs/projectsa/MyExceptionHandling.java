@@ -9,7 +9,25 @@ public class MyExceptionHandling {
 
 	// entire exception handling info: mode=no (because it would be recurisve
 	// lamolamolamo)
-	public static void handleFatalException(Throwable e, boolean doGUI, String[] titleAndMainTextOfCUIAndGUI) {
+	public static void handleFatalException_simplev1(Throwable e, boolean doGUI, String scope, String DescOfCUI, String TitleOfGUI,String DescOfGUI) {
+		if (scope == null) {
+			scope = "MainApp";
+		}
+		// followed from reportFatalExceptionInGUI
+		if (TitleOfGUI==null) {
+			TitleOfGUI="ความผิดพลาดร้ายแรง";
+		}
+		MyExceptionHandling.handleFatalException_altv1(e, true, new String[] {
+			Main.clReportHeader(scope, "FATAL"), DescOfCUI,
+			TitleOfGUI+" (เมื่อ " + Main.getISODateTimeString() + " | ตรงส่วนของ \""
+					+ scope + "\")",
+			DescOfGUI });
+	}
+
+	
+	// entire exception handling info: mode=no (because it would be recurisve
+	// lamolamolamo)
+	public static void handleFatalException_altv1(Throwable e, boolean doGUI, String[] titleAndMainTextOfCUIAndGUI) {
 		try {
 			boolean oldIsFatal = MyExceptionHandling.isFatal;
 			try {
@@ -49,7 +67,7 @@ public class MyExceptionHandling {
 	// REMARK: ที่สร้างอันนี้มาเพราะ ขก. แก้ lamo
 	public static void handleFatalException(Throwable e) {
 		try {
-			MyExceptionHandling.handleFatalException(e, true, new String[] { null, null, null, null });
+			MyExceptionHandling.handleFatalException_altv1(e, true, new String[] { null, null, null, null });
 		} catch (Throwable e0) {
 			// do nothing so that main exception could be throw lamo
 		}
@@ -62,13 +80,9 @@ public class MyExceptionHandling {
 				scope = "MainApp|ShutdownSystem";
 			}
 			String tmp1 = "Application has below fatal exception on app-shutdown system:";
-			String tmp2 = "Application Exiting Fatal (at " + Main.getISODateTimeString() + " | at scope \""+scope+"\")";
-			String[] tmp0 = new String[] { Main.clReportHeader(scope, "FATAL"), tmp1, tmp2, tmp1 };
-			if (MyExceptionHandling.isFatal) {
-				MyExceptionHandling.handleFatalException(e, false, tmp0);
-			} else {
-				MyExceptionHandling.handleFatalException(e, true, tmp0);
-			}
+			String tmp2 = "ความผิดพลาดร้ายแรงขณะปิดโปรแกรม";
+			String tmp3="โปรแกรมพบปํญหาร้ายแรงในระบบการปิดโปรแกรม ข้อมูลตามด้านล่าง:";
+			MyExceptionHandling.handleFatalException_simplev1(e,(!MyExceptionHandling.isFatal),scope,tmp1,tmp2,tmp3);
 		} catch (Throwable e0) {
 			// do nothing so that main exception could be throw lamo
 		}

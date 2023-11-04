@@ -66,22 +66,11 @@ public class Main extends javafx.application.Application {
                 System.out.println(Main.clReportHeader(null, "DEVTEST") + "<ZONE END>");
             } catch (java.sql.SQLException e1) {
                 isFriendlyException = true;
-                MyExceptionHandling.handleFatalException(e1, true, new String[] {
-                        Main.clReportHeader("MainApp|DatabaseMnm", "FATAL"), null,
-                        "ข้อผิดพลาดร้ายแรงของโปรแกรม (เมื่อ " + Main.getISODateTimeString() + " | ตรงส่วนของ \""
-                                + "MainApp|DatabaseMnm" + "\")",
-                        "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>" });
+                MyExceptionHandling.handleFatalException_simplev1(e1, true,"MainApp|DatabaseMnm", null,null,"<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>" );
                 throw e1;
             } catch (java.io.IOException e1) {
-                // TODO: [MED|ALMOST FORGOT|ExceptionHandling|LESSI|NOTREQUIREDACTUALLY]:
-                // (ทำทีหลังก็ได้ แต่ทำก่อนเพิ่ม MyExceptionHandling.handleFatalException
-                // ใน overload แบบนี้) เรียบเรียงโค้ดๆๆให้ใช้ง่าย
                 isFriendlyException = true;
-                MyExceptionHandling.handleFatalException(e1, true, new String[] {
-                        Main.clReportHeader("MainApp|DatabaseMnm", "FATAL"), null,
-                        "ข้อผิดพลาดร้ายแรงของโปรแกรม (เมื่อ " + Main.getISODateTimeString() + " | ตรงส่วนของ \""
-                                + "MainApp|DatabaseMnm" + "\")",
-                        "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของการเข้าถึงไฟล์ระบบฐานข้อมูลฯ<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>" });
+                MyExceptionHandling.handleFatalException_simplev1(e1, true,"MainApp|DatabaseMnm", null,null,"<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของการเข้าถึงไฟล์ระบบฐานข้อมูลฯ<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>" );
                 throw e1;
             }
             launch(args);
