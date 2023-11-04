@@ -19,11 +19,12 @@ public class UICtrl_Login {
 	public void funcTestOFCaughtException(String[] args) {
 	}
 
+	// Exception Handling Mode: Fatal (but not yet until code is put here lamo)
 	@FXML
 	private void initialize() {
 	}
 	
-	// entire exception handling info: mode=fatal
+	// Exception Handling Mode: Fatal
 	@FXML
 	private void onPressed_Button_Login()
 			throws java.sql.SQLException, java.security.NoSuchAlgorithmException, Throwable {
@@ -89,6 +90,7 @@ public class UICtrl_Login {
 class EasterEggAgain {
 	boolean willDoRickroll =false;
 	int counter =0;
+	// Exception Handling Mode: no
 	String getRickrollMsg() {
 		if (willDoRickroll) {
 			return Misc.rickrollLyrics[counter++%Misc.rickrollLyrics.length];

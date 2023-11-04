@@ -17,23 +17,27 @@ public class UICtrl_Homepage {
 
 
 	@FXML
-	// TODO: exception handling
+	// Exception Handling Mode: Fatal
 	private void initialize() {
-		Object tmpt_obj= ((DatabaseMnm.Table)Main.globalVar.get("loggedinUserPartialTable")).cols[1].vals.get(0);
-		DatabaseMnm.DataSpec.STATUS_User currentUserRole = DatabaseMnm.DataSpec.STATUS_User.values()[
-				DatabaseMnm.convertIntegerAlikeSQLColToLong(
-					tmpt_obj,
-					tmpt_obj.getClass()
-				).intValue()
-		];
-		if (currentUserRole==DatabaseMnm.DataSpec.STATUS_User.Employer) {
-			
-		} else {
-			button_Accounting.setDisable(true);
-			button_BuyHist.setDisable(true);
-			button_SellHist.setDisable(true);
+		try{ 
+			Object tmpt_obj= ((DatabaseMnm.Table)Main.globalVar.get("loggedinUserPartialTable")).cols[1].vals.get(0);
+			DatabaseMnm.DataSpec.STATUS_User currentUserRole = DatabaseMnm.DataSpec.STATUS_User.values()[
+					DatabaseMnm.convertIntegerAlikeSQLColToLong(
+						tmpt_obj,
+						tmpt_obj.getClass()
+					).intValue()
+			];
+			if (currentUserRole==DatabaseMnm.DataSpec.STATUS_User.Employer) {
+				
+			} else {
+				button_Accounting.setDisable(true);
+				button_BuyHist.setDisable(true);
+				button_SellHist.setDisable(true);
+			}
+		} catch (Throwable e) {
+			MyExceptionHandling.handleFatalException(e);
+			throw e;
 		}
-
 	}
 	
 	@FXML private Button button_ContactsList;
