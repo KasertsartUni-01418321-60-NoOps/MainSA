@@ -64,9 +64,12 @@ public class DatabaseMnm {
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:" + mainDbPath);
 			DatabaseMnm.runSQLcmds(null, sqlStms_0, true, false, null, null);
 			// PART 1:
-			String SD_User_Name = "npchaonay";
-			String SD_User_Password = "HFE#FJOS@J@(O@SOJS@OJ@SJL)";
-			Long SD_User_Role = (long) 0;
+			String SD_User_Name_Admin = "admin";
+			String SD_User_Password_Admin = "qwerty";
+			Long SD_User_Role_Admin = (long) 0;
+			String SD_User_Name = "kasertsart";
+			String SD_User_Password = "university";
+			Long SD_User_Role = (long) 1;
 			String SD_Customer_Full_Name = "ณัฐพงศ์ พันพิพัฒน์";
 			String SD_Customer_Address = "แขวงรามอินทรา เขตคันนายาว กรุงเทพมหานคร";
 			String SD_Customer_Telephone_Number = "+660123456789";
@@ -108,6 +111,28 @@ public class DatabaseMnm {
 				} else {
 					DatabaseMnm.runSQLcmds(null, sqlStms_1, true, false,null,
 							new Object[][] { { SD_User_Name, Misc.passwordHash(SD_User_Password), SD_User_Role } });
+				}
+				break;
+			}
+			// PART 2AA:
+			while (true) {
+				tmpReason = DataValidation.PerAttributeValidation.check__USER__User_Name(SD_User_Name_Admin);
+				// in case existed data LAMO
+				if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+					break;
+				} else if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation.check__USER__User_Password(SD_User_Password_Admin);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation.check__USER__User_Role(SD_User_Role_Admin);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				} else {
+					DatabaseMnm.runSQLcmds(null, sqlStms_1, true, false,null,
+							new Object[][] { { SD_User_Name_Admin, Misc.passwordHash(SD_User_Password_Admin), SD_User_Role_Admin } });
 				}
 				break;
 			}

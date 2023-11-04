@@ -15,32 +15,32 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="29.0" layoutY="83.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="รายชื่อลูกค้า">
+      <Button layoutX="29.0" layoutY="83.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="รายชื่อลูกค้า" onAction="#onPressed_Button_ContactsList" fx:id="button_ContactsList">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="230.0" layoutY="83.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="Warehouse">
+      <Button layoutX="230.0" layoutY="83.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="Warehouse" onAction="#onPressed_Button_Warehouse" fx:id="button_Warehouse">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="419.0" layoutY="83.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="Planner">
+      <Button layoutX="419.0" layoutY="83.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="Planner" onAction="#onPressed_Button_Planner" fx:id="button_Planner">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="29.0" layoutY="227.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="ประวัติการซื้อ">
+      <Button layoutX="29.0" layoutY="227.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="ประวัติการซื้อ" onAction="#onPressed_Button_BuyHist" fx:id="button_BuyHist">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="230.0" layoutY="227.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="ประวัติการขาย">
+      <Button layoutX="230.0" layoutY="227.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="ประวัติการขาย" onAction="#onPressed_Button_SellHist" fx:id="button_SellHist">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="419.0" layoutY="227.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="บัญชี">
+      <Button layoutX="419.0" layoutY="227.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="บัญชี" onAction="#onPressed_Button_Accounting" fx:id="button_Accounting">
          <font>
             <Font size="18.0" />
          </font>

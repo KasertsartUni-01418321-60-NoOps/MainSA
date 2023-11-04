@@ -15,7 +15,9 @@ public class UICtrl_Homepage {
 	public void funcTestOFCaughtException(String[] args) {
 	}
 
+
 	@FXML
+	// TODO: exception handling
 	private void initialize() {
 		Object tmpt_obj= ((DatabaseMnm.Table)Main.globalVar.get("loggedinUserPartialTable")).cols[1].vals.get(0);
 		DatabaseMnm.DataSpec.STATUS_User currentUserRole = DatabaseMnm.DataSpec.STATUS_User.values()[
@@ -25,11 +27,27 @@ public class UICtrl_Homepage {
 				).intValue()
 		];
 		if (currentUserRole==DatabaseMnm.DataSpec.STATUS_User.Employer) {
-
-		} else {
 			
+		} else {
+			button_Accounting.setDisable(true);
+			button_BuyHist.setDisable(true);
+			button_SellHist.setDisable(true);
 		}
 
 	}
+	
+	@FXML private Button button_ContactsList;
+	@FXML private void onPressed_Button_ContactsList() {System.out.println("RICKROLL");}
+	@FXML private Button button_Planner;
+	@FXML private void onPressed_Button_Planner() {System.out.println("RICKROLL");}
+	@FXML private Button button_Warehouse;
+	@FXML private void onPressed_Button_Warehouse() {System.out.println("RICKROLL");}
+	@FXML private Button button_BuyHist;
+	@FXML private void onPressed_Button_BuyHist() {System.out.println("RICKROLL");}
+	@FXML private Button button_SellHist;
+	@FXML private void onPressed_Button_SellHist() {System.out.println("RICKROLL");}
+	@FXML private Button button_Accounting;
+	@FXML private void onPressed_Button_Accounting() {System.out.println("RICKROLL");}
+
 	
 }
