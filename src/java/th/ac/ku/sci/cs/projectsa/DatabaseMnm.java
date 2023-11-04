@@ -12,11 +12,10 @@ import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.DATAVALID_DECLINED_R
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.NotNull;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.Nullable;
 
-
 public class DatabaseMnm {
 	public static java.sql.Connection mainDbConn = null;
 	public final static String mainDbPath = "./data/main.db";
-	public final static String setFKCheckQuery ="PRAGMA foreign_keys = ON;";
+	public final static String setFKCheckQuery = "PRAGMA foreign_keys = ON;";
 
 	// [Zone:Init]
 	// entire exception handling info: mode=no
@@ -43,153 +42,275 @@ public class DatabaseMnm {
 				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT, Product_ID TEXT UNIQUE, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price REAL, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT,WITHOUT ROWID;"
 		};
 		String[] sqlStms_1 = new String[] {
-			"INSERT OR IGNORE INTO User (User_Name, User_Password, User_Role)"
-			+"VALUES (?, ?, ?);"
+				"INSERT OR IGNORE INTO User (User_Name, User_Password, User_Role)"
+						+ "VALUES (?, ?, ?);"
 		};
 		String[] sqlStms_2 = new String[] {
-			"INSERT OR IGNORE INTO Customer (Customer_Full_Name, Customer_Address, Customer_Telephone_Number, Customer_Credit_Amount)"
-			+"VALUES (?, ?, ?, ?);"
+				"INSERT OR IGNORE INTO Customer (Customer_Full_Name, Customer_Address, Customer_Telephone_Number, Customer_Credit_Amount)"
+						+ "VALUES (?, ?, ?, ?);"
 		};
 		String[] sqlStms_3 = new String[] {
-			"INSERT OR IGNORE INTO Selling_Request (Selling_Request_ID, Customer_Full_Name, Selling_Request_Brand, Selling_Request_Model, Selling_Request_Product_Looks, Selling_Request_Meet_Date, Selling_Request_Meet_Location, Selling_Request_Paid_Amount, Selling_Request_Status)"
-			+"VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"
+				"INSERT OR IGNORE INTO Selling_Request (Selling_Request_ID, Customer_Full_Name, Selling_Request_Brand, Selling_Request_Model, Selling_Request_Product_Looks, Selling_Request_Meet_Date, Selling_Request_Meet_Location, Selling_Request_Paid_Amount, Selling_Request_Status)"
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"
 		};
 		String[] sqlStms_4 = new String[] {
-			"INSERT OR IGNORE INTO Repairment (Repairment_ID, Repairment_Description, Repairment_Date, Selling_Request_ID)"
-			+"VALUES (?, ?, ?, ?);"
+				"INSERT OR IGNORE INTO Repairment (Repairment_ID, Repairment_Description, Repairment_Date, Selling_Request_ID)"
+						+ "VALUES (?, ?, ?, ?);"
 		};
 		String[] sqlStms_5 = new String[] {
-			"INSERT OR IGNORE INTO Product (Product_ID, Product_Arrive_Time, Product_Price, Product_Status, Selling_Request_ID, Repairment_ID)"
-			+"VALUES (?, ?, ?, ?, ?, ?);"
+				"INSERT OR IGNORE INTO Product (Product_ID, Product_Arrive_Time, Product_Price, Product_Status, Selling_Request_ID, Repairment_ID)"
+						+ "VALUES (?, ?, ?, ?, ?, ?);"
 		};
 		String[] sqlStms_6 = new String[] {
-			"INSERT OR IGNORE INTO Buy_Request (Customer_Full_Name, Product_ID, Buy_Request_Created_Date, Buy_Request_Transportation_Price)"
-			+"VALUES (?,?,?,?);"
+				"INSERT OR IGNORE INTO Buy_Request (Customer_Full_Name, Product_ID, Buy_Request_Created_Date, Buy_Request_Transportation_Price)"
+						+ "VALUES (?,?,?,?);"
 		};
 
 		try {
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:" + mainDbPath);
 			DatabaseMnm.runSQLcmds(null, sqlStms_0, true, null, null);
 			// PART 1:
-				String SD_User_Name = "npchaonay";
-				String SD_User_Password ="HFE#FJOS@J@(O@SOJS@OJ@SJL)";
-				Long SD_User_Role=(long)0;
-				String SD_Customer_Full_Name= "ณัฐพงศ์ พันพิพัฒน์";
-				String SD_Customer_Address = "แขวงรามอินทรา เขตคันนายาว กรุงเทพมหานคร";
-				String SD_Customer_Telephone_Number="+660123456789";
-				Long SD_Customer_Credit_Amount =(long) 100;
-				String SD_Selling_Request_ID="AR0099AZ";
-				String SD_Selling_Request_Brand="สยาม";
-				String SD_Selling_Request_Model="อภิมหาจักรวาลนฤมิต";
-				String SD_Selling_Request_Product_Looks="สภาพเหมือนใหม่";
-				Long SD_Selling_Request_Meet_Date = (long) 1635830400;
-				String SD_Selling_Request_Meet_Location = "กรมทหารราบที่ 11";
-				Double SD_Selling_Request_Paid_Amount=1000000.25;
-				Long SD_Selling_Request_Status=(long)2;
-				String SD_Repairment_ID="RP0099AZ";
-				String SD_Repairment_Description="เปลี่ยนจอเว้ยยยย";
-				Long SD_Repairment_Date= (long)1635830400;
-				String SD_Product_ID="PD0099AZ";
-				Long SD_Product_Arrive_Time = (long)1635830400;
-				Double SD_Product_Price=1234567.55;
-				Long SD_Product_Status = (long)1;
-				Long SD_Buy_Request_Created_Date=(long)1635830400;
-				Double SD_Buy_Request_Transportation_Price = null;
-				DataValidation.DATAVALID_DECLINED_REASON tmpReason=null;
+			String SD_User_Name = "npchaonay";
+			String SD_User_Password = "HFE#FJOS@J@(O@SOJS@OJ@SJL)";
+			Long SD_User_Role = (long) 0;
+			String SD_Customer_Full_Name = "ณัฐพงศ์ พันพิพัฒน์";
+			String SD_Customer_Address = "แขวงรามอินทรา เขตคันนายาว กรุงเทพมหานคร";
+			String SD_Customer_Telephone_Number = "+660123456789";
+			Long SD_Customer_Credit_Amount = (long) 100;
+			String SD_Selling_Request_ID = "AR0099AZ";
+			String SD_Selling_Request_Brand = "สยาม";
+			String SD_Selling_Request_Model = "อภิมหาจักรวาลนฤมิต";
+			String SD_Selling_Request_Product_Looks = "สภาพเหมือนใหม่";
+			Long SD_Selling_Request_Meet_Date = (long) 1635830400;
+			String SD_Selling_Request_Meet_Location = "กรมทหารราบที่ 11";
+			Double SD_Selling_Request_Paid_Amount = 1000000.25;
+			Long SD_Selling_Request_Status = (long) 2;
+			String SD_Repairment_ID = "RP0099AZ";
+			String SD_Repairment_Description = "เปลี่ยนจอเว้ยยยย";
+			Long SD_Repairment_Date = (long) 1635830400;
+			String SD_Product_ID = "PD0099AZ";
+			Long SD_Product_Arrive_Time = (long) 1635830400;
+			Double SD_Product_Price = 1234567.55;
+			Long SD_Product_Status = (long) 1;
+			Long SD_Buy_Request_Created_Date = (long) 1635830400;
+			Double SD_Buy_Request_Transportation_Price = null;
+			DataValidation.DATAVALID_DECLINED_REASON tmpReason = null;
 			// PART 2A:
-				while (true){tmpReason=DataValidation.PerAttributeValidation.check__USER__User_Name(SD_User_Name);
+			while (true) {
+				tmpReason = DataValidation.PerAttributeValidation.check__USER__User_Name(SD_User_Name);
 				// in case existed data LAMO
-				if (tmpReason==DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {break;}
-				else if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__USER__User_Password(SD_User_Password);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__USER__User_Role(SD_User_Role);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				else {DatabaseMnm.runSQLcmds(null, sqlStms_1, true, null, new Object[][] {{SD_User_Name,Misc.passwordHash(SD_User_Password),SD_User_Role}});}
-			break;}
-			// PART 2B:
-				while (true){tmpReason=DataValidation.PerAttributeValidation.check__CUSTOMER__Customer_Full_Name(SD_Customer_Full_Name);
-				// in case existed data LAMO
-				if (tmpReason==DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {break;}
-				else if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__CUSTOMER__Customer_Address(SD_Customer_Address);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__CUSTOMER__Customer_Credit_Amount(SD_Customer_Credit_Amount);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__CUSTOMER__Customer_Telephone_Number(SD_Customer_Telephone_Number);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				else {
-					DatabaseMnm.runSQLcmds(null, sqlStms_2, true, null, new Object[][] {{SD_Customer_Full_Name,DataTransformation.NullableTransform(SD_Customer_Address,String.class),SD_Customer_Telephone_Number,SD_Customer_Credit_Amount}});
+				if (tmpReason == DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+					break;
+				} else if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				}
-			break;}
-			// PART 2C:
-				while (true){tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_ID(SD_Selling_Request_ID);
-				// in case existed data LAMO
-				if (tmpReason==DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {break;}
-				else if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Customer_Full_Name(SD_Customer_Full_Name);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Brand(SD_Selling_Request_Brand);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Model(SD_Selling_Request_Model);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Product_Looks(SD_Selling_Request_Product_Looks);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Meet_Date(SD_Selling_Request_Meet_Date);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Meet_Location(SD_Selling_Request_Meet_Location);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Paid_Amount(SD_Selling_Request_Paid_Amount);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Status(SD_Selling_Request_Status);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				else {DatabaseMnm.runSQLcmds(null, sqlStms_3, true, null, new Object[][] {{SD_Selling_Request_ID,SD_Customer_Full_Name,SD_Selling_Request_Brand,SD_Selling_Request_Model,SD_Selling_Request_Product_Looks,SD_Selling_Request_Meet_Date,SD_Selling_Request_Meet_Location,DataTransformation.doubleLengthCroppingAndNullableTransform(SD_Selling_Request_Paid_Amount,DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[0],DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[1]),SD_Selling_Request_Status}});}
-				break;}
-			// PART 2D:
-				while (true){tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Repairment_ID(SD_Repairment_ID);
-				// in case existed data LAMO
-				if (tmpReason==DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {break;}
-				else if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Repairment_Description(SD_Repairment_Description);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Repairment_Date(SD_Repairment_Date);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Selling_Request_ID(SD_Selling_Request_ID);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				else {DatabaseMnm.runSQLcmds(null, sqlStms_4, true, null, new Object[][] {{SD_Repairment_ID,SD_Repairment_Description,SD_Repairment_Date,SD_Selling_Request_ID}});}
-				break;}
-			// PART 2E:
-			while (true)
-				{tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_ID(SD_Product_ID);
-				// in case existed data LAMO
-				if (tmpReason==DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {break;}
-				else if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_Arrive_Time(SD_Product_Arrive_Time);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_Price(SD_Product_Price);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_Status(SD_Product_Status);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Selling_Request_ID(SD_Selling_Request_ID);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Repairment_ID(SD_Repairment_ID);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				else {DatabaseMnm.runSQLcmds(null, sqlStms_5, true, null, new Object[][] {{SD_Product_ID,SD_Product_Arrive_Time,DataTransformation.doubleLengthCropping(SD_Product_Price,DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[0],DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[1]),SD_Product_Status,SD_Selling_Request_ID,DataTransformation.NullableTransform(SD_Repairment_ID,String.class)}});}
+				tmpReason = DataValidation.PerAttributeValidation.check__USER__User_Password(SD_User_Password);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation.check__USER__User_Role(SD_User_Role);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				} else {
+					DatabaseMnm.runSQLcmds(null, sqlStms_1, true, null,
+							new Object[][] { { SD_User_Name, Misc.passwordHash(SD_User_Password), SD_User_Role } });
+				}
 				break;
-				}
-			// PART 2F:
-			while (true)
-				{tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Product_ID(SD_Product_ID);
+			}
+			// PART 2B:
+			while (true) {
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__CUSTOMER__Customer_Full_Name(SD_Customer_Full_Name);
 				// in case existed data LAMO
-				if (tmpReason==DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK) {break;}
-				else if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Customer_Full_Name(SD_Customer_Full_Name);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Buy_Request_Created_Date(SD_Buy_Request_Created_Date);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Buy_Request_Transportation_Price(SD_Buy_Request_Transportation_Price);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				else {DatabaseMnm.runSQLcmds(null, sqlStms_6, true, null, new Object[][] {{SD_Customer_Full_Name,SD_Product_ID,SD_Buy_Request_Created_Date,DataTransformation.doubleLengthCroppingAndNullableTransform(SD_Buy_Request_Transportation_Price,DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[0],DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[1])}});}
+				if (tmpReason == DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+					break;
+				} else if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__CUSTOMER__Customer_Address(SD_Customer_Address);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__CUSTOMER__Customer_Credit_Amount(SD_Customer_Credit_Amount);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__CUSTOMER__Customer_Telephone_Number(SD_Customer_Telephone_Number);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				} else {
+					DatabaseMnm.runSQLcmds(null, sqlStms_2, true, null,
+							new Object[][] { { SD_Customer_Full_Name,
+									DataTransformation.NullableTransform(SD_Customer_Address, String.class),
+									SD_Customer_Telephone_Number, SD_Customer_Credit_Amount } });
+				}
+				break;
+			}
+			// PART 2C:
+			while (true) {
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__SELLING_REQUEST__Selling_Request_ID(SD_Selling_Request_ID);
+				// in case existed data LAMO
+				if (tmpReason == DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+					break;
+				} else if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__SELLING_REQUEST__Customer_Full_Name(SD_Customer_Full_Name);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__SELLING_REQUEST__Selling_Request_Brand(SD_Selling_Request_Brand);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__SELLING_REQUEST__Selling_Request_Model(SD_Selling_Request_Model);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__SELLING_REQUEST__Selling_Request_Product_Looks(SD_Selling_Request_Product_Looks);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__SELLING_REQUEST__Selling_Request_Meet_Date(SD_Selling_Request_Meet_Date);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__SELLING_REQUEST__Selling_Request_Meet_Location(SD_Selling_Request_Meet_Location);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__SELLING_REQUEST__Selling_Request_Paid_Amount(SD_Selling_Request_Paid_Amount);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__SELLING_REQUEST__Selling_Request_Status(SD_Selling_Request_Status);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				} else {
+					DatabaseMnm.runSQLcmds(null, sqlStms_3, true, null, new Object[][] { { SD_Selling_Request_ID,
+							SD_Customer_Full_Name, SD_Selling_Request_Brand, SD_Selling_Request_Model,
+							SD_Selling_Request_Product_Looks, SD_Selling_Request_Meet_Date,
+							SD_Selling_Request_Meet_Location,
+							DataTransformation.doubleLengthCroppingAndNullableTransform(SD_Selling_Request_Paid_Amount,
+									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[0],
+									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[1]),
+							SD_Selling_Request_Status } });
+				}
+				break;
+			}
+			// PART 2D:
+			while (true) {
+				tmpReason = DataValidation.PerAttributeValidation.check__REPAIRMENT__Repairment_ID(SD_Repairment_ID);
+				// in case existed data LAMO
+				if (tmpReason == DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+					break;
+				} else if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__REPAIRMENT__Repairment_Description(SD_Repairment_Description);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__REPAIRMENT__Repairment_Date(SD_Repairment_Date);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__REPAIRMENT__Selling_Request_ID(SD_Selling_Request_ID);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				} else {
+					DatabaseMnm.runSQLcmds(null, sqlStms_4, true, null, new Object[][] { { SD_Repairment_ID,
+							SD_Repairment_Description, SD_Repairment_Date, SD_Selling_Request_ID } });
+				}
+				break;
+			}
+			// PART 2E:
+			while (true) {
+				tmpReason = DataValidation.PerAttributeValidation.check__PRODUCT__Product_ID(SD_Product_ID);
+				// in case existed data LAMO
+				if (tmpReason == DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+					break;
+				} else if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__PRODUCT__Product_Arrive_Time(SD_Product_Arrive_Time);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation.check__PRODUCT__Product_Price(SD_Product_Price);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation.check__PRODUCT__Product_Status(SD_Product_Status);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__PRODUCT__Selling_Request_ID(SD_Selling_Request_ID);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation.check__PRODUCT__Repairment_ID(SD_Repairment_ID);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				} else {
+					DatabaseMnm.runSQLcmds(null, sqlStms_5, true, null,
+							new Object[][] { { SD_Product_ID, SD_Product_Arrive_Time,
+									DataTransformation.doubleLengthCropping(SD_Product_Price,
+											DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[0],
+											DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[1]),
+									SD_Product_Status, SD_Selling_Request_ID,
+									DataTransformation.NullableTransform(SD_Repairment_ID, String.class) } });
+				}
+				break;
+			}
+			// PART 2F:
+			while (true) {
+				tmpReason = DataValidation.PerAttributeValidation.check__BUY_REQUEST__Product_ID(SD_Product_ID);
+				// in case existed data LAMO
+				if (tmpReason == DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK) {
+					break;
+				} else if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__BUY_REQUEST__Customer_Full_Name(SD_Customer_Full_Name);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__BUY_REQUEST__Buy_Request_Created_Date(SD_Buy_Request_Created_Date);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__BUY_REQUEST__Buy_Request_Transportation_Price(SD_Buy_Request_Transportation_Price);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				} else {
+					DatabaseMnm.runSQLcmds(null, sqlStms_6, true, null, new Object[][] { { SD_Customer_Full_Name,
+							SD_Product_ID, SD_Buy_Request_Created_Date,
+							DataTransformation.doubleLengthCroppingAndNullableTransform(
+									SD_Buy_Request_Transportation_Price,
+									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[0],
+									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[1]) } });
+				}
 				break;
 			}
 			// [ZONE END]
@@ -353,36 +474,49 @@ public class DatabaseMnm {
 		return retVal;
 	}
 
-    // REMARK: only determine by using of native datatype in SQL query only, do not
+	// REMARK: only determine by using of native datatype in SQL query only, do not
 	// using another datatype else from {INTEGER,REAL,BLOB,TEXT}
-    public static Long convertIntegerAlikeSQLColToLong(Object data, Class<?> javaType) {
-        if (data==null) {return null;}
-        else {
-            if (javaType==Long.class) { return (Long) data;}
-            if (javaType==Integer.class) {return ((Integer)data).longValue();}
-            if (javaType==java.math.BigDecimal.class) {return ((java.math.BigDecimal) data).longValue();}
-            else {
-                throw new MyExceptionHandling.UserRuntimeException("Invalid JavaType, this should not happens if code if well-checked.");
-            }
-        }
-    }
-    // REMARK: only determine by using of native datatype in SQL query only, do not
+	public static Long convertIntegerAlikeSQLColToLong(Object data, Class<?> javaType) {
+		if (data == null) {
+			return null;
+		} else {
+			if (javaType == Long.class) {
+				return (Long) data;
+			}
+			if (javaType == Integer.class) {
+				return ((Integer) data).longValue();
+			}
+			if (javaType == java.math.BigDecimal.class) {
+				return ((java.math.BigDecimal) data).longValue();
+			} else {
+				throw new MyExceptionHandling.UserRuntimeException(
+						"Invalid JavaType, this should not happens if code if well-checked.");
+			}
+		}
+	}
+
+	// REMARK: only determine by using of native datatype in SQL query only, do not
 	// using another datatype else from {INTEGER,REAL,BLOB,TEXT}
-    public static Double convertRealAlikeSQLColToDouble(Object data, Class<?> javaType) {
-        if (data==null) {return null;}
-        else {
-            if (javaType==Float.class) { return ((Float) data).doubleValue();}
-            if (javaType==Double.class) {return (Double) data;}
-            if (javaType==java.math.BigDecimal.class) {return ((java.math.BigDecimal) data).doubleValue();}
-            else {
-                throw new MyExceptionHandling.UserRuntimeException("Invalid JavaType, this should not happens if code if well-checked.");
-            }
-        }
-    }
+	public static Double convertRealAlikeSQLColToDouble(Object data, Class<?> javaType) {
+		if (data == null) {
+			return null;
+		} else {
+			if (javaType == Float.class) {
+				return ((Float) data).doubleValue();
+			}
+			if (javaType == Double.class) {
+				return (Double) data;
+			}
+			if (javaType == java.math.BigDecimal.class) {
+				return ((java.math.BigDecimal) data).doubleValue();
+			} else {
+				throw new MyExceptionHandling.UserRuntimeException(
+						"Invalid JavaType, this should not happens if code if well-checked.");
+			}
+		}
+	}
 
 	// [Zone:PublicHelper]
-
-	
 
 	// entire exception handling info: mode=no
 	public static String getTableNameFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
@@ -416,7 +550,8 @@ public class DatabaseMnm {
 		switch (sqlType) {
 			// การแปลงเป็น javaType ผมอิงตาม ChatGPT lamo โดยถามมันว่า อิงตาม general
 			// situation
-			// REMARK: แก้ล่ะ เพราะเรื่อง precision LAMO ใช้ Long/Double เป็นมาตรฐานเดียวกันๆ
+			// REMARK: แก้ล่ะ เพราะเรื่อง precision LAMO ใช้ Long/Double
+			// เป็นมาตรฐานเดียวกันๆ
 			case java.sql.Types.INTEGER:
 				javaType = Long.class;
 				break;
@@ -599,10 +734,13 @@ public class DatabaseMnm {
 	}
 
 	// [Zone:SubClassAsPackage lamo]
-	// REMARK APPLY THIS TO INSIDE OF THIS ZONE UNLESSS EXPLICIT OVERRIDE: entire exception handling info: mode=no
+	// REMARK APPLY THIS TO INSIDE OF THIS ZONE UNLESSS EXPLICIT OVERRIDE: entire
+	// exception handling info: mode=no
 
 	// REMARK: only considered type of LONG/DOUBLE/STRING
-	// REMARK: currently, only RANGE/LENGTH/ENUM is specified here, for another such as connectivty,nullablity,etc., implement manually in PerAttributeValidation lamo
+	// REMARK: currently, only RANGE/LENGTH/ENUM is specified here, for another such
+	// as connectivty,nullablity,etc., implement manually in PerAttributeValidation
+	// lamo
 	public static class DataSpec {
 		// [Zone:Constants]
 		// for attribute that have range (that "required" range checking ถ้าไม่ required
@@ -726,7 +864,8 @@ public class DatabaseMnm {
 				}
 			}
 
-			// REMARK: ส่วนพวก maxRear เดี่ยวค่อย rounding เอา LAMO ด้วยเหตุผลกลัวว่าความ inaccrate ของ Double จะทำให้ข้อมูลเกิด ValidError lamo
+			// REMARK: ส่วนพวก maxRear เดี่ยวค่อย rounding เอา LAMO ด้วยเหตุผลกลัวว่าความ
+			// inaccrate ของ Double จะทำให้ข้อมูลเกิด ValidError lamo
 			public static boolean checkDoubleDigitLength(double data, int maxFront, int maxRear) {
 				StringBuilder tmp1 = new StringBuilder();
 				for (int i = 0; i < maxFront; i++) {
@@ -737,12 +876,14 @@ public class DatabaseMnm {
 					tmp1.append("9");
 				}
 				String tmp_posdoublestr = tmp1.toString();
-				String tmp_negdoublestr = "-"+tmp_posdoublestr;
+				String tmp_negdoublestr = "-" + tmp_posdoublestr;
 				Double[] tmp2 = new Double[2];
 				try {
-					tmp2[0]=Double.parseDouble(tmp_negdoublestr);
-					tmp2[1]=Double.parseDouble(tmp_posdoublestr);
-					if (tmp2[0]<=data && data<=tmp2[1]) {return true;}
+					tmp2[0] = Double.parseDouble(tmp_negdoublestr);
+					tmp2[1] = Double.parseDouble(tmp_posdoublestr);
+					if (tmp2[0] <= data && data <= tmp2[1]) {
+						return true;
+					}
 				} catch (RuntimeException e) {
 					// in case it exceeded Double, then we sure that condition passed
 					return true;
@@ -750,10 +891,22 @@ public class DatabaseMnm {
 				// if code reached here, mean false
 				return false;
 			}
-			public static boolean checkLongNotNegative(long data) {return data >= 0;}
-			public static boolean checkDoubleNotNegative(double data) {return data >= 0;}
-			public static boolean checkLongIsPositive(long data) {return data > 0;}
-			public static boolean checkDoubleIsPositive(double data) {return data > 0;}
+
+			public static boolean checkLongNotNegative(long data) {
+				return data >= 0;
+			}
+
+			public static boolean checkDoubleNotNegative(double data) {
+				return data >= 0;
+			}
+
+			public static boolean checkLongIsPositive(long data) {
+				return data > 0;
+			}
+
+			public static boolean checkDoubleIsPositive(double data) {
+				return data > 0;
+			}
 
 			// if {min/max}==null, then no {coressponding: min/max} limit
 			public static boolean checkLongIsInRange(long data, @Nullable Long min, @Nullable Long max) {
@@ -769,6 +922,7 @@ public class DatabaseMnm {
 				}
 				return tmp1 && tmp2;
 			}
+
 			// if {min/max}==null, then no {coressponding: min/max} limit
 			public static boolean checkDoubleIsInRange(double data, @Nullable Double min, @Nullable Double max) {
 				boolean tmp1 = true;
@@ -793,8 +947,6 @@ public class DatabaseMnm {
 				return false;
 			}
 
-			
-
 			public static boolean checkStrIsGeneralValid(@NotNull String data) {
 				String regexPattern = "^[ -~\\u0E01-\\u0E39\\u0E3F-\\u0E4D\\u0E50-\\u0E59]*$";
 				return java.util.regex.Pattern.compile(regexPattern).matcher(data).matches();
@@ -810,16 +962,17 @@ public class DatabaseMnm {
 				return java.util.regex.Pattern.compile(regexPattern).matcher(data).matches();
 			}
 
-			public static  boolean checkStrIsValidID(@NotNull String data) {
+			public static boolean checkStrIsValidID(@NotNull String data) {
 				String regexPattern = "^[A-Z0-9]{8}$";
 				return java.util.regex.Pattern.compile(regexPattern).matcher(data).matches();
 			}
 
-			public static  boolean checkStrIsValidCustomerName(@NotNull String data) {
-				if (!checkStrIsGeneralValid(data)) {return false;}
+			public static boolean checkStrIsValidCustomerName(@NotNull String data) {
+				if (!checkStrIsGeneralValid(data)) {
+					return false;
+				}
 				return true;
 			}
-
 
 			public static boolean checkStrIsValidTelNum(@NotNull String data) {
 				String regexPattern = "^[0-9+*#,;]+$";
@@ -828,567 +981,817 @@ public class DatabaseMnm {
 		}
 
 		public static class SQLLevel {
-			// SECURITY WARNING: this function using SQL string injection, do not putting public string unless strict check
-			public static boolean isThisValExisted(@NotNull Object val,@NotNull String tableName,@NotNull String colName) throws java.sql.SQLException {
-				java.sql.ResultSet tmp_rs= (java.sql.ResultSet) runSQLcmd(null,
-					"SELECT count("+colName+") FROM "+tableName+" WHERE "+colName+"=?",
-					false,null,new Object[] {val}
-				)[1];
-				Table tmp_table =convertResultSetToTable(tmp_rs);
-				Object tmp_val_tmp=tmp_table.cols[0].vals.get(0);
-				Long tmp_val = convertIntegerAlikeSQLColToLong(tmp_val_tmp,tmp_table.cols[0].javaType);
-				System.out.println(tmp_val );
-				if (tmp_val >=1) {return true;}
-				else {return false;}
+			// SECURITY WARNING: this function using SQL string injection, do not putting
+			// public string unless strict check
+			public static boolean isThisValExisted(@NotNull Object val, @NotNull String tableName,
+					@NotNull String colName) throws java.sql.SQLException {
+				java.sql.ResultSet tmp_rs = (java.sql.ResultSet) runSQLcmd(null,
+						"SELECT count(" + colName + ") FROM " + tableName + " WHERE " + colName + "=?",
+						false, null, new Object[] { val })[1];
+				Table tmp_table = convertResultSetToTable(tmp_rs);
+				Object tmp_val_tmp = tmp_table.cols[0].vals.get(0);
+				Long tmp_val = convertIntegerAlikeSQLColToLong(tmp_val_tmp, tmp_table.cols[0].javaType);
+				System.out.println(tmp_val);
+				if (tmp_val >= 1) {
+					return true;
+				} else {
+					return false;
+				}
 			}
 		}
 
-		// REMARK: only Password that required DataTransform, see Misc.passwordHash() lamo, อ่อลืมบอก ฐานข้อมูลจริงๆเก็บเป็น hash แต่โค้ดของเราที่จะ validate password คือ validate ว่าเป็นรหัสยอมรับได้ก่อนนำไป hashing
+		// REMARK: only Password that required DataTransform, see Misc.passwordHash()
+		// lamo, อ่อลืมบอก ฐานข้อมูลจริงๆเก็บเป็น hash แต่โค้ดของเราที่จะ validate
+		// password คือ validate ว่าเป็นรหัสยอมรับได้ก่อนนำไป hashing
 		// REMARK: function here must handled NULL too
 		// REMARK: function here if return as null >> valid passed
 		public static class PerAttributeValidation {
 			@Nullable
-			public static DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Full_Name(@Nullable String data) throws SQLException {
+			public static DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Full_Name(
+					@Nullable String data) throws SQLException {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Customer_Full_Name");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Customer_Full_Name");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsValidCustomerName(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
+					if (DataValidation.JavaTypeLevel.checkStrIsValidCustomerName(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
 					// (PART 3) Check is PK-insertable
-					if (!DataValidation.SQLLevel.isThisValExisted(data, "Customer", "Customer_Full_Name")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;}
-					// the code should  reached here means it (data) is passed
+					if (!DataValidation.SQLLevel.isThisValExisted(data, "Customer", "Customer_Full_Name")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
+
 			@Nullable
-			public static DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Address(@Nullable String data) {
+			public static DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Address(
+					@Nullable String data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					// we accept null lamo, and no further checked
 					return null;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Customer_Full_Name");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Customer_Full_Name");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
+
 			@Nullable
-			public static DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Telephone_Number(@Nullable String data) {
+			public static DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Telephone_Number(
+					@Nullable String data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Customer_Telephone_Number");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Customer_Telephone_Number");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsValidTelNum(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkStrIsValidTelNum(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Credit_Amount(@Nullable Long data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Credit_Amount(
+					@Nullable Long data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Customer_Credit_Amount");
-					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Customer_Credit_Amount");
+					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check if in range
-					if (DataValidation.JavaTypeLevel.checkLongIsInRange(data,DataSpec.RANGE_MIN__Customer_Credit_Amount,DataSpec.RANGE_MAX__Customer_Credit_Amount)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkLongIsInRange(data,
+							DataSpec.RANGE_MIN__Customer_Credit_Amount, DataSpec.RANGE_MAX__Customer_Credit_Amount)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__USER__User_Name(@Nullable String data) throws SQLException {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__USER__User_Name(@Nullable String data)
+					throws SQLException {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("User_Name");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("User_Name");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsValidUserName(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
+					if (DataValidation.JavaTypeLevel.checkStrIsValidUserName(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
 					// (PART 3) Check is PK-insertable
-					if (!DataValidation.SQLLevel.isThisValExisted(data, "User", "User_Name")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;}
-					// the code should  reached here means it (data) is passed
+					if (!DataValidation.SQLLevel.isThisValExisted(data, "User", "User_Name")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static  DataValidation.DATAVALID_DECLINED_REASON check__USER__User_Password(@Nullable String data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__USER__User_Password(@Nullable String data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("User_Password");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("User_Password");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsValidPassword(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkStrIsValidPassword(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__USER__User_Role(@Nullable Long data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__USER__User_Role(@Nullable Long data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("User_Role");
-					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("User_Role");
+					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkLongIsMatchesEnum(data,DataSpec.STATUS_User.class)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkLongIsMatchesEnum(data, DataSpec.STATUS_User.class)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static  DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Product_ID(@Nullable String data) throws SQLException {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Product_ID(@Nullable String data)
+					throws SQLException {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_ID");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_ID");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
+					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
 					// (PART 3) Check is PK-insertable
-					if (!DataValidation.SQLLevel.isThisValExisted(data, "Product", "Product_ID")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;}
-					// the code should  reached here means it (data) is passed
+					if (!DataValidation.SQLLevel.isThisValExisted(data, "Product", "Product_ID")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Product_Arrive_Time(@Nullable Long data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Product_Arrive_Time(
+					@Nullable Long data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Arrive_Time");
-					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Arrive_Time");
+					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkLongIsPositive(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkLongIsPositive(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Product_Price(@Nullable Double data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Product_Price(
+					@Nullable Double data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price");
-					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price");
+					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkDoubleIsPositive(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkDoubleIsPositive(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Product_Status(@Nullable Long data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Product_Status(@Nullable Long data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Status");
-					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Status");
+					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkLongIsMatchesEnum(data,DataSpec.STATUS_Product.class)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkLongIsMatchesEnum(data, DataSpec.STATUS_Product.class)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Selling_Request_ID(@Nullable String data) throws SQLException {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Selling_Request_ID(
+					@Nullable String data) throws SQLException {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_ID");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_ID");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
-					// (PART 3) Check is FK-insertable (in aspect of existed value at referenced column)
-					if (DataValidation.SQLLevel.isThisValExisted(data, "Selling_Request", "Selling_Request_ID")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;}
+					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
+					// (PART 3) Check is FK-insertable (in aspect of existed value at referenced
+					// column)
+					if (DataValidation.SQLLevel.isThisValExisted(data, "Selling_Request", "Selling_Request_ID")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;
+					}
 					// (PART 3) Check is FK-insertable (in aspect of UNIQUE)
-					if (!DataValidation.SQLLevel.isThisValExisted(data, "Product", "Selling_Request_ID")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK;}
-					// the code should  reached here means it (data) is passed
+					if (!DataValidation.SQLLevel.isThisValExisted(data, "Product", "Selling_Request_ID")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Repairment_ID(@Nullable String data) throws SQLException {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Repairment_ID(@Nullable String data)
+					throws SQLException {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return null;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Repairment_ID");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Repairment_ID");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
-					// (PART 3) Check is FK-insertable (in aspect of existed value at referenced column)
-					if (DataValidation.SQLLevel.isThisValExisted(data, "Repairment", "Repairment_ID")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;}
+					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
+					// (PART 3) Check is FK-insertable (in aspect of existed value at referenced
+					// column)
+					if (DataValidation.SQLLevel.isThisValExisted(data, "Repairment", "Repairment_ID")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;
+					}
 					// (PART 3) Check is FK-insertable (in aspect of UNIQUE)
-					if (!DataValidation.SQLLevel.isThisValExisted(data, "Product", "Repairment_ID")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK;}
-					// the code should  reached here means it (data) is passed
+					if (!DataValidation.SQLLevel.isThisValExisted(data, "Product", "Repairment_ID")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_ID(@Nullable String data) throws SQLException {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_ID(
+					@Nullable String data) throws SQLException {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_ID");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_ID");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
+					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
 					// (PART 3) Check is PK-insertable
-					if (!DataValidation.SQLLevel.isThisValExisted(data, "Selling_Request", "Selling_Request_ID")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;}
-					// the code should  reached here means it (data) is passed
+					if (!DataValidation.SQLLevel.isThisValExisted(data, "Selling_Request", "Selling_Request_ID")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Customer_Full_Name(@Nullable String data) throws SQLException {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Customer_Full_Name(
+					@Nullable String data) throws SQLException {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Customer_Full_Name");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Customer_Full_Name");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsValidCustomerName(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
+					if (DataValidation.JavaTypeLevel.checkStrIsValidCustomerName(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
 					// (PART 3) Check is FK-insertable
-					if (DataValidation.SQLLevel.isThisValExisted(data, "Customer", "Customer_Full_Name")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;}
-					// the code should  reached here means it (data) is passed
-					return null;
-				}	
-			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Brand(@Nullable String data) {
-				// (PART 0): check if it is null
-				if (data==null) {
-					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
-				} else {
-					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Brand");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
-					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.SQLLevel.isThisValExisted(data, "Customer", "Customer_Full_Name")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Model(@Nullable String data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Brand(
+					@Nullable String data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Model");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Brand");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Product_Looks(@Nullable String data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Model(
+					@Nullable String data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Product_Looks");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Model");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static  DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Meet_Date(@Nullable Long data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Product_Looks(
+					@Nullable String data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Meet_Date");
-					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Product_Looks");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
+					// (PART 2): Check string conditions
+					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
+					// the code should reached here means it (data) is passed
+					return null;
+				}
+			}
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Meet_Date(
+					@Nullable Long data) {
+				// (PART 0): check if it is null
+				if (data == null) {
+					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
+				} else {
+					// (PART 1): Check length
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Meet_Date");
+					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkLongIsPositive(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkLongIsPositive(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Meet_Location(@Nullable String data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Meet_Location(
+					@Nullable String data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Meet_Location");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Meet_Location");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Paid_Amount(@Nullable Double data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Paid_Amount(
+					@Nullable Double data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return null;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount");
-					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount");
+					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkDoubleIsPositive(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkDoubleIsPositive(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Status(@Nullable Long data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Status(
+					@Nullable Long data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Status");
-					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Status");
+					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkLongIsMatchesEnum(data,DataSpec.STATUS_Selling_Request.class)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkLongIsMatchesEnum(data,
+							DataSpec.STATUS_Selling_Request.class)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__REPAIRMENT__Repairment_ID(@Nullable String data) throws SQLException {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__REPAIRMENT__Repairment_ID(
+					@Nullable String data) throws SQLException {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Repairment_ID");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Repairment_ID");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
+					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
 					// (PART 3) Check is PK-insertable
-					if (!DataValidation.SQLLevel.isThisValExisted(data, "Repairment", "Repairment_ID")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;}
-					// the code should  reached here means it (data) is passed
+					if (!DataValidation.SQLLevel.isThisValExisted(data, "Repairment", "Repairment_ID")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static  DataValidation.DATAVALID_DECLINED_REASON check__REPAIRMENT__Repairment_Description(@Nullable String data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__REPAIRMENT__Repairment_Description(
+					@Nullable String data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Repairment_Description");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Repairment_Description");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static  DataValidation.DATAVALID_DECLINED_REASON check__REPAIRMENT__Repairment_Date(@Nullable Long data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__REPAIRMENT__Repairment_Date(
+					@Nullable Long data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Repairment_Date");
-					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Repairment_Date");
+					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkLongIsPositive(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkLongIsPositive(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__REPAIRMENT__Selling_Request_ID(@Nullable String data) throws SQLException {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__REPAIRMENT__Selling_Request_ID(
+					@Nullable String data) throws SQLException {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_ID");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_ID");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
-					// (PART 3) Check is FK-insertable (in aspect of existed value at referenced column)
-					if (DataValidation.SQLLevel.isThisValExisted(data, "Selling_Request", "Selling_Request_ID")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;}
+					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
+					// (PART 3) Check is FK-insertable (in aspect of existed value at referenced
+					// column)
+					if (DataValidation.SQLLevel.isThisValExisted(data, "Selling_Request", "Selling_Request_ID")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;
+					}
 					// (PART 3) Check is FK-insertable (in aspect of UNIQUE)
-					if (!DataValidation.SQLLevel.isThisValExisted(data, "Repairment", "Selling_Request_ID")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK;}
-					// the code should  reached here means it (data) is passed
+					if (!DataValidation.SQLLevel.isThisValExisted(data, "Repairment", "Selling_Request_ID")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
+
 			// REMARK: ดูด้านล่างๆ
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Customer_Full_Name(@Nullable String data) throws SQLException {
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Customer_Full_Name(
+					@Nullable String data) throws SQLException {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Customer_Full_Name");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Customer_Full_Name");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsValidCustomerName(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
+					if (DataValidation.JavaTypeLevel.checkStrIsValidCustomerName(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
 					// (PART 3) Check is PK/FK-insertable
-					if (DataValidation.SQLLevel.isThisValExisted(data, "Customer", "Customer_Full_Name")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.SQLLevel.isThisValExisted(data, "Customer", "Customer_Full_Name")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			// REMARK: ผมวิเคราะห์มาแล้ว การเช็คนี้จะเช็ค Unique of PKแบบควบ ด้วย เพราะเรื่อง UNIQUE มันโดนเช็คจาก  UNIQUE of attribute ของ Buy_Request.Product_ID แล้วๆ
-			// > ฉะนั้นหากเช็คอันนี้ผ่าน คือ PK unique ผ่านๆ 
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Product_ID(@Nullable String data) throws SQLException {
+
+			// REMARK: ผมวิเคราะห์มาแล้ว การเช็คนี้จะเช็ค Unique of PKแบบควบ ด้วย
+			// เพราะเรื่อง UNIQUE มันโดนเช็คจาก UNIQUE of attribute ของ
+			// Buy_Request.Product_ID แล้วๆ
+			// > ฉะนั้นหากเช็คอันนี้ผ่าน คือ PK unique ผ่านๆ
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Product_ID(@Nullable String data)
+					throws SQLException {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_ID");
-					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_ID");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
+					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
 					// (PART 3) Check is PK-insertable
-					if (DataValidation.SQLLevel.isThisValExisted(data, "Product", "Product_ID")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;}
+					if (DataValidation.SQLLevel.isThisValExisted(data, "Product", "Product_ID")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;
+					}
 					// (PART 4) Check is FK-insertable
-					if (!DataValidation.SQLLevel.isThisValExisted(data, "Buy_Request", "Product_ID")) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK;}
-					// the code should  reached here means it (data) is passed
+					if (!DataValidation.SQLLevel.isThisValExisted(data, "Buy_Request", "Product_ID")) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Buy_Request_Created_Date(@Nullable Long data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Buy_Request_Created_Date(
+					@Nullable Long data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Created_Date");
-					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Created_Date");
+					if (DataValidation.JavaTypeLevel.checkLongDigitLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkLongIsPositive(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkLongIsPositive(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			@Nullable public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Buy_Request_Transportation_Price(@Nullable Double data) {
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Buy_Request_Transportation_Price(
+					@Nullable Double data) {
 				// (PART 0): check if it is null
-				if (data==null) {
+				if (data == null) {
 					return null;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec=DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price");
-					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0],lenSpec[1])) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;}
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price");
+					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
 					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkDoubleNotNegative(data)) {}
-					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;}
-					// the code should  reached here means it (data) is passed
+					if (DataValidation.JavaTypeLevel.checkDoubleNotNegative(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+					}
+					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-			
+
 		}
 	}
 
 	public static class DataTransformation {
 		@NotNull
 		public static <T> Object NullableTransform(@Nullable T data, @NotNull Class<T> dataClass) {
-			if (data!=null) {return data;}
-			else {return dataClass;}
+			if (data != null) {
+				return data;
+			} else {
+				return dataClass;
+			}
 		}
+
 		public static double doubleLengthCropping(double data, int maxFront, int maxRear) {
 			StringBuilder tmp1 = new StringBuilder();
 			for (int i = 0; i < maxFront; i++) {
@@ -1399,31 +1802,37 @@ public class DatabaseMnm {
 				tmp1.append("9");
 			}
 			String tmp_posdoublestr = tmp1.toString();
-			String tmp_negdoublestr = "-"+tmp_posdoublestr;
+			String tmp_negdoublestr = "-" + tmp_posdoublestr;
 			Double[] tmp2 = new Double[2];
 			try {
-				tmp2[0]=Double.parseDouble(tmp_negdoublestr);
-				tmp2[1]=Double.parseDouble(tmp_posdoublestr);
-				if (tmp2[0]<=data && data<=tmp2[1]) {}
-				else {
-					if (tmp2[0]<=data) {
+				tmp2[0] = Double.parseDouble(tmp_negdoublestr);
+				tmp2[1] = Double.parseDouble(tmp_posdoublestr);
+				if (tmp2[0] <= data && data <= tmp2[1]) {
+				} else {
+					if (tmp2[0] <= data) {
 						return tmp2[1];
-					}
-					else {
+					} else {
 						return tmp2[0];
 					}
 				}
 			} catch (RuntimeException e) {
-				// in case it exceeded Double, then we sure that condition passed about maxFront, so do next code
+				// in case it exceeded Double, then we sure that condition passed about
+				// maxFront, so do next code
 			}
-			// if code reached here, mean value is in range, and therefore have to do some rounding of digit at back of decimal point
+			// if code reached here, mean value is in range, and therefore have to do some
+			// rounding of digit at back of decimal point
 			double tmp_scale = Math.pow(10, maxRear);
-			return Math.round(data *tmp_scale) /tmp_scale;
+			return Math.round(data * tmp_scale) / tmp_scale;
 		}
+
 		@NotNull
-		public static Object doubleLengthCroppingAndNullableTransform(@Nullable Double data, int maxFront, int maxRear) {
-			if (data!=null) {return doubleLengthCropping(data,maxFront,maxRear);}
-			else {return Double.class;}
+		public static Object doubleLengthCroppingAndNullableTransform(@Nullable Double data, int maxFront,
+				int maxRear) {
+			if (data != null) {
+				return doubleLengthCropping(data, maxFront, maxRear);
+			} else {
+				return Double.class;
+			}
 		}
 
 	}
