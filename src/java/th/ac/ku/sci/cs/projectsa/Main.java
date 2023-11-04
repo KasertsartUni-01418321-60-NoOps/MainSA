@@ -1,10 +1,6 @@
 package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
-
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
-
 import th.ac.ku.sci.cs.projectsa.*;
 
 public class Main extends javafx.application.Application {
@@ -21,9 +17,9 @@ public class Main extends javafx.application.Application {
         try {
             System.setProperty("file.encoding", "UTF-8");
             try {
-            System.setOut( new PrintStream(System.out, true, "UTF-8") );
-            } catch (UnsupportedEncodingException e) {
-            throw e;
+                System.setOut(new java.io.PrintStream(System.out, true, "UTF-8"));
+            } catch (java.io.UnsupportedEncodingException e) {
+                throw e;
             }
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
@@ -38,7 +34,7 @@ public class Main extends javafx.application.Application {
                         // ongoing-cleaning data being lossed, or even corrupts database file.
                         for (String arg : args) {
                             if (arg.equals("-MiscFunFlag+crashOnPostExit")
-                            || arg.equals("--MiscFunFlag+crashOnPostExit")) {
+                                    || arg.equals("--MiscFunFlag+crashOnPostExit")) {
                                 th.ac.ku.sci.cs.projectsa.fun.UnsafeStuff.crashJVMLamo();
                             }
                         }
@@ -77,7 +73,8 @@ public class Main extends javafx.application.Application {
                         "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>" });
                 throw e1;
             } catch (java.io.IOException e1) {
-                // TODO: [MED|ALMOST FORGOT|ExceptionHandling|LESSI|NOTREQUIREDACTUALLY]: (ทำทีหลังก็ได้ แต่ทำก่อนเพิ่ม MyExceptionHandling.handleFatalException
+                // TODO: [MED|ALMOST FORGOT|ExceptionHandling|LESSI|NOTREQUIREDACTUALLY]:
+                // (ทำทีหลังก็ได้ แต่ทำก่อนเพิ่ม MyExceptionHandling.handleFatalException
                 // ใน overload แบบนี้) เรียบเรียงโค้ดๆๆให้ใช้ง่าย
                 isFriendlyException = true;
                 MyExceptionHandling.handleFatalException(e1, true, new String[] {
@@ -106,10 +103,13 @@ public class Main extends javafx.application.Application {
             primaryStage.setMaximized(false);
             com.github.saacsos.FXRouter.bind(this, primaryStage,
                     "ระบบหลังบ้านบริการซื้อขายเครื่องซักผ้าอุตสาหกรรมมือสอง", 800, 600);
-            // TODO: [EASY|UI] each of FXML: Change FXML version (LEESI) / CSS settings (doAfter MED T O D O)
-            for (String pageName : new String[] {"homepage","login","add_item","buy_history","check_items","create_customer","customer_data","customer_list","money_accounting","quotation","sell_history","warehouse"}) {
+            // TODO: [EASY|UI] each of FXML: Change FXML version (LEESI) / CSS settings
+            // (doAfter MED T O D O)
+            for (String pageName : new String[] { "homepage", "login", "add_item", "buy_history", "check_items",
+                    "create_customer", "customer_data", "customer_list", "money_accounting", "quotation",
+                    "sell_history", "warehouse" }) {
                 // do not put leading slash for jarfile resource for this line of code
-                com.github.saacsos.FXRouter.when(pageName, "resources/"+pageName+"_pre.fxml");
+                com.github.saacsos.FXRouter.when(pageName, "resources/" + pageName + "_pre.fxml");
             }
             try
 

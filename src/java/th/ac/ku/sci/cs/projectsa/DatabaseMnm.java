@@ -1,14 +1,7 @@
 package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
-
-import java.security.NoSuchAlgorithmException;
-import java.sql.SQLException;
-import java.util.function.DoubleBinaryOperator;
-
-import javafx.scene.chart.PieChart.Data;
 import th.ac.ku.sci.cs.projectsa.*;
-import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.NotNull;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.Nullable;
 
@@ -21,7 +14,8 @@ public class DatabaseMnm {
 	// entire exception handling info: mode=no
 	// REMARK: normally, this sql statements execution, only create table, so no
 	// begin/rollback required.
-	public static void mainDbInit() throws java.sql.SQLException, java.io.IOException, NoSuchAlgorithmException {
+	public static void mainDbInit()
+			throws java.sql.SQLException, java.io.IOException, java.security.NoSuchAlgorithmException {
 		java.nio.file.Path tmp_Path = java.nio.file.Paths.get("./data");
 		if (!java.nio.file.Files.exists(tmp_Path)) {
 			try {
@@ -99,7 +93,7 @@ public class DatabaseMnm {
 			while (true) {
 				tmpReason = DataValidation.PerAttributeValidation.check__USER__User_Name(SD_User_Name);
 				// in case existed data LAMO
-				if (tmpReason == DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+				if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
 					break;
 				} else if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
@@ -122,7 +116,7 @@ public class DatabaseMnm {
 				tmpReason = DataValidation.PerAttributeValidation
 						.check__CUSTOMER__Customer_Full_Name(SD_Customer_Full_Name);
 				// in case existed data LAMO
-				if (tmpReason == DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+				if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
 					break;
 				} else if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
@@ -154,7 +148,7 @@ public class DatabaseMnm {
 				tmpReason = DataValidation.PerAttributeValidation
 						.check__SELLING_REQUEST__Selling_Request_ID(SD_Selling_Request_ID);
 				// in case existed data LAMO
-				if (tmpReason == DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+				if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
 					break;
 				} else if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
@@ -214,7 +208,7 @@ public class DatabaseMnm {
 			while (true) {
 				tmpReason = DataValidation.PerAttributeValidation.check__REPAIRMENT__Repairment_ID(SD_Repairment_ID);
 				// in case existed data LAMO
-				if (tmpReason == DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+				if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
 					break;
 				} else if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
@@ -243,7 +237,7 @@ public class DatabaseMnm {
 			while (true) {
 				tmpReason = DataValidation.PerAttributeValidation.check__PRODUCT__Product_ID(SD_Product_ID);
 				// in case existed data LAMO
-				if (tmpReason == DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+				if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
 					break;
 				} else if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
@@ -284,7 +278,7 @@ public class DatabaseMnm {
 			while (true) {
 				tmpReason = DataValidation.PerAttributeValidation.check__BUY_REQUEST__Product_ID(SD_Product_ID);
 				// in case existed data LAMO
-				if (tmpReason == DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK) {
+				if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK) {
 					break;
 				} else if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
@@ -1008,7 +1002,7 @@ public class DatabaseMnm {
 		public static class PerAttributeValidation {
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Full_Name(
-					@Nullable String data) throws SQLException {
+					@Nullable String data) throws java.sql.SQLException {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
@@ -1107,7 +1101,7 @@ public class DatabaseMnm {
 
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__USER__User_Name(@Nullable String data)
-					throws SQLException {
+					throws java.sql.SQLException {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
@@ -1179,7 +1173,7 @@ public class DatabaseMnm {
 
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Product_ID(@Nullable String data)
-					throws SQLException {
+					throws java.sql.SQLException {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
@@ -1275,7 +1269,7 @@ public class DatabaseMnm {
 
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Selling_Request_ID(
-					@Nullable String data) throws SQLException {
+					@Nullable String data) throws java.sql.SQLException {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
@@ -1309,7 +1303,7 @@ public class DatabaseMnm {
 
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Repairment_ID(@Nullable String data)
-					throws SQLException {
+					throws java.sql.SQLException {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return null;
@@ -1343,7 +1337,7 @@ public class DatabaseMnm {
 
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_ID(
-					@Nullable String data) throws SQLException {
+					@Nullable String data) throws java.sql.SQLException {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
@@ -1371,7 +1365,7 @@ public class DatabaseMnm {
 
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Customer_Full_Name(
-					@Nullable String data) throws SQLException {
+					@Nullable String data) throws java.sql.SQLException {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
@@ -1561,7 +1555,7 @@ public class DatabaseMnm {
 
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__REPAIRMENT__Repairment_ID(
-					@Nullable String data) throws SQLException {
+					@Nullable String data) throws java.sql.SQLException {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
@@ -1635,7 +1629,7 @@ public class DatabaseMnm {
 
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__REPAIRMENT__Selling_Request_ID(
-					@Nullable String data) throws SQLException {
+					@Nullable String data) throws java.sql.SQLException {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
@@ -1670,7 +1664,7 @@ public class DatabaseMnm {
 			// REMARK: ดูด้านล่างๆ
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Customer_Full_Name(
-					@Nullable String data) throws SQLException {
+					@Nullable String data) throws java.sql.SQLException {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
@@ -1702,7 +1696,7 @@ public class DatabaseMnm {
 			// > ฉะนั้นหากเช็คอันนี้ผ่าน คือ PK unique ผ่านๆ
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Product_ID(@Nullable String data)
-					throws SQLException {
+					throws java.sql.SQLException {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
