@@ -788,7 +788,10 @@ public class DatabaseMnm {
 					false,null,new Object[] {val}
 				)[1];
 				Table tmp_table =convertResultSetToTable(tmp_rs);
-				if (tmp_table.cols[0].vals.size()>=1) {return true;}
+				// REMARK เช็คล่ะ มันคาย Integer
+				Integer tmp_val = (Integer) tmp_table.cols[0].vals.get(0);
+				System.out.println(tmp_val );
+				if (tmp_val >=1) {return true;}
 				else {return false;}
 			}
 		}
@@ -811,7 +814,7 @@ public class DatabaseMnm {
 					if (DataValidation.JavaTypeLevel.checkStrIsValidCustomerName(data)) {}
 					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
 					// (PART 3) Check is PK-insertable
-					if (DataValidation.SQLLevel.isThisValExisted(data, "Customer", "Customer_Full_Name")) {}
+					if (!DataValidation.SQLLevel.isThisValExisted(data, "Customer", "Customer_Full_Name")) {}
 					else {return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;}
 					// the code should  reached here means it (data) is passed
 					return null;
@@ -881,7 +884,7 @@ public class DatabaseMnm {
 					if (DataValidation.JavaTypeLevel.checkStrIsValidUserName(data)) {}
 					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
 					// (PART 3) Check is PK-insertable
-					if (DataValidation.SQLLevel.isThisValExisted(data, "User", "User_Name")) {}
+					if (!DataValidation.SQLLevel.isThisValExisted(data, "User", "User_Name")) {}
 					else {return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;}
 					// the code should  reached here means it (data) is passed
 					return null;
@@ -932,7 +935,7 @@ public class DatabaseMnm {
 					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {}
 					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
 					// (PART 3) Check is PK-insertable
-					if (DataValidation.SQLLevel.isThisValExisted(data, "Product", "Product_ID")) {}
+					if (!DataValidation.SQLLevel.isThisValExisted(data, "Product", "Product_ID")) {}
 					else {return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;}
 					// the code should  reached here means it (data) is passed
 					return null;
@@ -1043,7 +1046,7 @@ public class DatabaseMnm {
 					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {}
 					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
 					// (PART 3) Check is PK-insertable
-					if (DataValidation.SQLLevel.isThisValExisted(data, "Selling_Request", "Selling_Request_ID")) {}
+					if (!DataValidation.SQLLevel.isThisValExisted(data, "Selling_Request", "Selling_Request_ID")) {}
 					else {return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;}
 					// the code should  reached here means it (data) is passed
 					return null;
@@ -1193,7 +1196,7 @@ public class DatabaseMnm {
 					if (DataValidation.JavaTypeLevel.checkStrIsValidID(data)) {}
 					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
 					// (PART 3) Check is PK-insertable
-					if (DataValidation.SQLLevel.isThisValExisted(data, "Repairment", "Repairment_ID")) {}
+					if (!DataValidation.SQLLevel.isThisValExisted(data, "Repairment", "Repairment_ID")) {}
 					else {return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;}
 					// the code should  reached here means it (data) is passed
 					return null;
@@ -1266,7 +1269,7 @@ public class DatabaseMnm {
 					// (PART 2): Check string conditions
 					if (DataValidation.JavaTypeLevel.checkStrIsValidCustomerName(data)) {}
 					else {return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;}
-					// (PART 3) Check is PK-insertable
+					// (PART 3) Check is PK/FK-insertable
 					if (DataValidation.SQLLevel.isThisValExisted(data, "Customer", "Customer_Full_Name")) {}
 					else {return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;}
 					// the code should  reached here means it (data) is passed
