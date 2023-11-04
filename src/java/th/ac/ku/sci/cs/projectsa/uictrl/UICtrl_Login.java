@@ -31,6 +31,11 @@ public class UICtrl_Login {
 		try {
 			String formval_userName = textField_userName.getText();
 			String formval_passWord = passwordField_passWord.getText();
+			// [DEBUG ZONE]
+			// TODO: after debug we can remove this lamo
+			formval_userName="SOMchoke";
+			formval_passWord="SC45-774";
+			// [END ZONE]
 			DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON tmpReason = DatabaseMnm.DataValidation.PerAttributeValidation
 					.check__USER__User_Name(formval_userName);
 			if (tmpReason == DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {

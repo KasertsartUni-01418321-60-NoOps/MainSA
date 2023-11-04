@@ -93,7 +93,7 @@ public class Main extends javafx.application.Application {
             primaryStage.setMaximized(false);
             com.github.saacsos.FXRouter.bind(this, primaryStage,
                     "ระบบหลังบ้านบริการซื้อขายเครื่องซักผ้าอุตสาหกรรมมือสอง", 600,400);
-            for (String pageName : new String[] { "homepage", "login", "add_item", "buy_history", "check_items",
+            for (String pageName : new String[] { "homepage", "login", "add_item", "buy_from_vender","buy_history", "check_items",
                     "create_customer", "customer_data", "customer_list", "money_accounting", "quotation",
                     "sell_history", "warehouse" }) {
                 // do not put leading slash for jarfile resource for this line of code

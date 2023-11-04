@@ -17,7 +17,6 @@ public class UICtrl_Homepage {
 
 
 	@FXML
-	// Exception Handling Mode: Fatal
 	private void initialize() {
 		try{ 
 			Object tmpt_obj= ((DatabaseMnm.Table)Main.globalVar.get("loggedinUserPartialTable")).cols[1].vals.get(0);
@@ -41,17 +40,59 @@ public class UICtrl_Homepage {
 	}
 	
 	@FXML private Button button_ContactsList;
-	@FXML private void onPressed_Button_ContactsList() {System.out.println("RICKROLL");}
+	@FXML private void onPressed_Button_ContactsList() throws java.io.IOException {
+		try{
+			try {Main.switchToSpecificPagename("customer_list");} catch (java.io.IOException e1) {throw e1;}
+		} catch (Throwable e) {
+			MyExceptionHandling.handleFatalException(e);
+			throw e;
+		}
+	}
 	@FXML private Button button_Planner;
-	@FXML private void onPressed_Button_Planner() {System.out.println("RICKROLL");}
+	@FXML private void onPressed_Button_Planner() throws java.io.IOException {
+		try{
+			try {Main.switchToSpecificPagename("quotation");} catch (java.io.IOException e1) {throw e1;}
+		} catch (Throwable e) {
+			MyExceptionHandling.handleFatalException(e);
+			throw e;
+		}
+	}
 	@FXML private Button button_Warehouse;
-	@FXML private void onPressed_Button_Warehouse() {System.out.println("RICKROLL");}
+	@FXML private void onPressed_Button_Warehouse()  throws java.io.IOException {
+		try{
+			try {Main.switchToSpecificPagename("warehouse");} catch (java.io.IOException e1) {throw e1;}
+		} catch (Throwable e) {
+			MyExceptionHandling.handleFatalException(e);
+			throw e;
+		}
+	}
 	@FXML private Button button_BuyHist;
-	@FXML private void onPressed_Button_BuyHist() {System.out.println("RICKROLL");}
+	@FXML private void onPressed_Button_BuyHist()  throws java.io.IOException {
+		try{
+			try {Main.switchToSpecificPagename("buy_history");} catch (java.io.IOException e1) {throw e1;}
+		} catch (Throwable e) {
+			MyExceptionHandling.handleFatalException(e);
+			throw e;
+		}
+	}
 	@FXML private Button button_SellHist;
-	@FXML private void onPressed_Button_SellHist() {System.out.println("RICKROLL");}
+	@FXML private void onPressed_Button_SellHist() throws java.io.IOException {
+		try{
+			try {Main.switchToSpecificPagename("sell_history");} catch (java.io.IOException e1) {throw e1;}
+		} catch (Throwable e) {
+			MyExceptionHandling.handleFatalException(e);
+			throw e;
+		}
+	}
 	@FXML private Button button_Accounting;
-	@FXML private void onPressed_Button_Accounting() {System.out.println("RICKROLL");}
+	@FXML private void onPressed_Button_Accounting()  throws java.io.IOException{
+		try{
+			try {Main.switchToSpecificPagename("money_accounting");} catch (java.io.IOException e1) {throw e1;}
+		} catch (Throwable e) {
+			MyExceptionHandling.handleFatalException(e);
+			throw e;
+		}
+	}
 
 	
 }
