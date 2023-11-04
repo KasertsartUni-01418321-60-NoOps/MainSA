@@ -13,7 +13,7 @@ public class Main extends javafx.application.Application {
     }
 
     // entire exception handling info: mode=fatal
-    public static void main(String[] args) throws Throwable {
+    public static void main(String[] args) throws java.io.UnsupportedEncodingException,java.sql.SQLException,java.io.IOException,java.security.NoSuchAlgorithmException {
         boolean isFriendlyException = false;
         try {
             System.setProperty("file.encoding", "UTF-8");

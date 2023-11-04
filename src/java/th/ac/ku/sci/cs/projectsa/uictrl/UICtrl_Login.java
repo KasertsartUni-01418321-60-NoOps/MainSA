@@ -27,7 +27,7 @@ public class UICtrl_Login {
 	// Exception Handling Mode: Fatal
 	@FXML
 	private void onPressed_Button_Login()
-			throws java.sql.SQLException, java.security.NoSuchAlgorithmException, Throwable {
+			throws java.sql.SQLException, java.security.NoSuchAlgorithmException, java.io.IOException {
 		try {
 			String formval_userName = textField_userName.getText();
 			String formval_passWord = passwordField_passWord.getText();
