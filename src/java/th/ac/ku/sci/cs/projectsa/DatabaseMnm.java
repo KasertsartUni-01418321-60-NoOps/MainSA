@@ -62,7 +62,7 @@ public class DatabaseMnm {
 
 		try {
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:" + mainDbPath);
-			DatabaseMnm.runSQLcmds(null, sqlStms_0, true, null, null);
+			DatabaseMnm.runSQLcmds(null, sqlStms_0, true, false, null, null);
 			// PART 1:
 			String SD_User_Name = "npchaonay";
 			String SD_User_Password = "HFE#FJOS@J@(O@SOJS@OJ@SJL)";
@@ -106,7 +106,7 @@ public class DatabaseMnm {
 				if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				} else {
-					DatabaseMnm.runSQLcmds(null, sqlStms_1, true, null,
+					DatabaseMnm.runSQLcmds(null, sqlStms_1, true, false,null,
 							new Object[][] { { SD_User_Name, Misc.passwordHash(SD_User_Password), SD_User_Role } });
 				}
 				break;
@@ -136,7 +136,7 @@ public class DatabaseMnm {
 				if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				} else {
-					DatabaseMnm.runSQLcmds(null, sqlStms_2, true, null,
+					DatabaseMnm.runSQLcmds(null, sqlStms_2, true, false,null,
 							new Object[][] { { SD_Customer_Full_Name,
 									DataTransformation.NullableTransform(SD_Customer_Address, String.class),
 									SD_Customer_Telephone_Number, SD_Customer_Credit_Amount } });
@@ -193,7 +193,7 @@ public class DatabaseMnm {
 				if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				} else {
-					DatabaseMnm.runSQLcmds(null, sqlStms_3, true, null, new Object[][] { { SD_Selling_Request_ID,
+					DatabaseMnm.runSQLcmds(null, sqlStms_3, true,false, null, new Object[][] { { SD_Selling_Request_ID,
 							SD_Customer_Full_Name, SD_Selling_Request_Brand, SD_Selling_Request_Model,
 							SD_Selling_Request_Product_Looks, SD_Selling_Request_Meet_Date,
 							SD_Selling_Request_Meet_Location,
@@ -228,7 +228,7 @@ public class DatabaseMnm {
 				if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				} else {
-					DatabaseMnm.runSQLcmds(null, sqlStms_4, true, null, new Object[][] { { SD_Repairment_ID,
+					DatabaseMnm.runSQLcmds(null, sqlStms_4, true,false, null, new Object[][] { { SD_Repairment_ID,
 							SD_Repairment_Description, SD_Repairment_Date, SD_Selling_Request_ID } });
 				}
 				break;
@@ -264,7 +264,7 @@ public class DatabaseMnm {
 				if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				} else {
-					DatabaseMnm.runSQLcmds(null, sqlStms_5, true, null,
+					DatabaseMnm.runSQLcmds(null, sqlStms_5, true, false,null,
 							new Object[][] { { SD_Product_ID, SD_Product_Arrive_Time,
 									DataTransformation.doubleLengthCropping(SD_Product_Price,
 											DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[0],
@@ -298,7 +298,7 @@ public class DatabaseMnm {
 				if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				} else {
-					DatabaseMnm.runSQLcmds(null, sqlStms_6, true, null, new Object[][] { { SD_Customer_Full_Name,
+					DatabaseMnm.runSQLcmds(null, sqlStms_6, true,false, null, new Object[][] { { SD_Customer_Full_Name,
 							SD_Product_ID, SD_Buy_Request_Created_Date,
 							DataTransformation.doubleLengthCroppingAndNullableTransform(
 									SD_Buy_Request_Transportation_Price,
@@ -333,7 +333,7 @@ public class DatabaseMnm {
 	// ==false then same as ==null but also return, otherwise it don't be closed.
 	// TODO: [EASY+LESSI+NOTREQUIREDACTUALLY] try-catch all .close() in try clause?
 	public static Object[] runSQLcmd(java.sql.Connection dbConn, String sqlStm, boolean skipGetResultSet,
-			Boolean keepStatementOpen, Object[] params) throws java.sql.SQLException {
+			boolean TableInsteadOfResultSet, Boolean keepStatementOpen, Object[] params) throws java.sql.SQLException {
 		if (dbConn == null) {
 			dbConn = DatabaseMnm.mainDbConn;
 		}
@@ -404,17 +404,35 @@ public class DatabaseMnm {
 						tmp_stm.close();
 						return new Object[] { true, null, null };
 					} else {
-						if (keepStatementOpen == false) {
+						if (keepStatementOpen != null && keepStatementOpen== false) {
 							tmp_stm.close();
 						}
 						return new Object[] { true, null, tmp_stm };
 					}
 				} else {
-					// in this case cannot close Statement lamo, so...
-					if (keepStatementOpen == null) {
-						return new Object[] { true, tmp_stm.getResultSet(), null };
+					Object tmp=tmp_stm.getResultSet();
+					if (TableInsteadOfResultSet) {
+						tmp=convertResultSetToTable((java.sql.ResultSet)tmp);
+					}
+					if (keepStatementOpen != null &&keepStatementOpen ==true) {
+						return new Object[] { true, tmp, tmp_stm };
 					} else {
-						return new Object[] { true, tmp_stm.getResultSet(), tmp_stm };
+						if (TableInsteadOfResultSet) {
+							tmp_stm.close();
+							if (keepStatementOpen != null &&keepStatementOpen==false) {
+								return new Object[] { true, tmp, tmp_stm };
+							} else {
+								return new Object[] { true, tmp, null};
+							}
+						}
+						// in this case, cannot close Statement, because to retrive data later from resultset lamo, so...
+						else {
+							if (keepStatementOpen != null &&keepStatementOpen==false) {
+								return new Object[] { true, tmp, tmp_stm };
+							} else {
+								return new Object[] { true, tmp, null};
+							}
+						}
 					}
 				}
 			}
@@ -426,7 +444,7 @@ public class DatabaseMnm {
 						tmp_stm.close();
 						return new Object[] { null, null, null };
 					} else {
-						if (keepStatementOpen == false) {
+						if (keepStatementOpen != null &&keepStatementOpen == false) {
 							tmp_stm.close();
 						}
 						return new Object[] { null, null, tmp_stm };
@@ -436,7 +454,7 @@ public class DatabaseMnm {
 						tmp_stm.close();
 						return new Object[] { false, tmp2, null };
 					} else {
-						if (keepStatementOpen == false) {
+						if (keepStatementOpen != null &&keepStatementOpen == false) {
 							tmp_stm.close();
 						}
 						return new Object[] { false, tmp2, tmp_stm };
@@ -453,7 +471,7 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	public static Object[][] runSQLcmds(java.sql.Connection dbConn, String[] sqlStms, boolean skipGetResultSet,
+	public static Object[][] runSQLcmds(java.sql.Connection dbConn, String[] sqlStms, boolean skipGetResultSet,boolean TableInsteadOfResultSet, 
 			Boolean keepStatementOpen, Object[][] paramsOfEachStms) throws java.sql.SQLException {
 		if (dbConn == null) {
 			dbConn = DatabaseMnm.mainDbConn;
@@ -463,7 +481,7 @@ public class DatabaseMnm {
 			paramsOfEachStms = new Object[sqlStms.length][];
 		}
 		for (int i = 0; i < sqlStms.length; i++) {
-			retVal[i] = runSQLcmd(dbConn, sqlStms[i], skipGetResultSet, keepStatementOpen, paramsOfEachStms[i]);
+			retVal[i] = runSQLcmd(dbConn, sqlStms[i], skipGetResultSet,TableInsteadOfResultSet, keepStatementOpen, paramsOfEachStms[i]);
 		}
 		return retVal;
 	}
@@ -719,7 +737,7 @@ public class DatabaseMnm {
 		String[] tableNames = new String[] { "USER", "CUSTOMER", "PRODUCT", "BUY_REQUEST", "SELLING_REQUEST",
 				"REPAIRMENT" };
 		for (String tableName : tableNames) {
-			tmpResultSet = (java.sql.ResultSet) (DatabaseMnm.runSQLcmd(null, "SELECT * FROM " + tableName, false, null,
+			tmpResultSet = (java.sql.ResultSet) (DatabaseMnm.runSQLcmd(null, "SELECT * FROM " + tableName, false,false, null,
 					null)[1]);
 			tmpTable = convertResultSetToTable(tmpResultSet);
 			demo_printTableLAMO(tmpTable);
@@ -981,7 +999,7 @@ public class DatabaseMnm {
 					@NotNull String colName) throws java.sql.SQLException {
 				java.sql.ResultSet tmp_rs = (java.sql.ResultSet) runSQLcmd(null,
 						"SELECT count(" + colName + ") FROM " + tableName + " WHERE " + colName + "=?",
-						false, null, new Object[] { val })[1];
+						false,false, null, new Object[] { val })[1];
 				Table tmp_table = convertResultSetToTable(tmp_rs);
 				Object tmp_val_tmp = tmp_table.cols[0].vals.get(0);
 				Long tmp_val = convertIntegerAlikeSQLColToLong(tmp_val_tmp, tmp_table.cols[0].javaType);

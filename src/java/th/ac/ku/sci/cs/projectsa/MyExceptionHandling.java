@@ -4,6 +4,7 @@ import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
 
 public class MyExceptionHandling {
+	public static final String appFatalHeader_en = "Application has fatal exception occured, below is problem information:";
 	public static final String appFatalHeader = "โปรแกรมเกิดข้อผิดพลาดร้ายแรง ข้อมูลปัญหาได้ถูกระบุไว้ด้านล่างนี้:";
 	public static boolean isFatal = false;
 
@@ -158,7 +159,7 @@ public class MyExceptionHandling {
 			title = Main.clReportHeader(null, "FATAL");
 		}
 		if (mainText == null) {
-			mainText = appFatalHeader;
+			mainText = appFatalHeader_en;
 		}
 		System.out.println(title + mainText);
 		e.printStackTrace();

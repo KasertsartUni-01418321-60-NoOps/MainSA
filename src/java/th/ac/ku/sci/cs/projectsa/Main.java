@@ -174,6 +174,18 @@ public class Main extends javafx.application.Application {
         }
     }
 
+    // entire exception handling info: mode=no
+    public static void showAlertBox(javafx.stage.Stage stage, javafx.scene.control.Alert.AlertType alertType, String wintitle, String title, String desc, boolean waitForClose) {
+        javafx.scene.control.Alert alert = new javafx.scene.control.Alert(alertType);
+        alert.initOwner(stage);
+        alert.initModality(javafx.stage.Modality.WINDOW_MODAL);
+        alert.setTitle(wintitle);
+        alert.setHeaderText(title);
+        alert.setContentText(desc);
+        if (waitForClose) {alert.showAndWait();}
+        else {alert.show();}
+    }
+
 
 }
 
