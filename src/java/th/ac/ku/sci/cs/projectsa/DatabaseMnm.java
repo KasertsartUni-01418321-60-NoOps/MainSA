@@ -1003,7 +1003,6 @@ public class DatabaseMnm {
 				Table tmp_table = convertResultSetToTable(tmp_rs);
 				Object tmp_val_tmp = tmp_table.cols[0].vals.get(0);
 				Long tmp_val = convertIntegerAlikeSQLColToLong(tmp_val_tmp, tmp_table.cols[0].javaType);
-				System.out.println(tmp_val);
 				if (tmp_val >= 1) {
 					return true;
 				} else {
@@ -1017,6 +1016,7 @@ public class DatabaseMnm {
 		// password คือ validate ว่าเป็นรหัสยอมรับได้ก่อนนำไป hashing
 		// REMARK: function here must handled NULL too
 		// REMARK: function here if return as null >> valid passed
+		// REMARK: พวก REPEATED ไว้เช็คตอนสุดท้าย เพราะเผื่อ caller แค่จะ SELECT
 		public static class PerAttributeValidation {
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Full_Name(
