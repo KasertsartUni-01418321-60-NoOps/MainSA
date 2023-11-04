@@ -8,15 +8,15 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" stylesheets="resources/Main.css">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" stylesheets="resources/Main.css" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_Login">
    <children>
-      <Button layoutX="274.0" layoutY="250.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="274.0" layoutY="250.0" mnemonicParsing="false" text="Login" onAction="#onPressed_Button_Login" />
       <Text layoutX="213.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" wrappingWidth="173.25">
          <font>
             <Font size="36.0" />
          </font>
       </Text>
-      <TextField promptText="User Name:" layoutX="225.0" layoutY="131.0" />
-      <PasswordField promptText="Password:" layoutX="225.0" layoutY="188.0" />
+      <TextField promptText="User Name:" layoutX="225.0" layoutY="131.0" fx:id="textField_userName" />
+      <PasswordField promptText="Password:" layoutX="225.0" layoutY="188.0" fx:id="passwordField_passWord" />
    </children>
 </AnchorPane>

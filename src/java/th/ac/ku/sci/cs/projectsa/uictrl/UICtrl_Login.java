@@ -2,14 +2,20 @@ package th.ac.ku.sci.cs.projectsa.uictrl;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
 
-public class UICtrl_Example {
+public class UICtrl_Login {
 	// entire exception handling info: mode=fatal
-	@javafx.fxml.FXML
-	private void onButton1Pressed() throws Throwable {
+	@FXML
+	private TextField textField_userName;
+	@FXML
+	private PasswordField passwordField_passWord;
+	@FXML
+	private void onPressed_Button_Login() throws Throwable {
 		try {
 			try {
-				Main.switchToSpecificPagename("");
+				Main.switchToSpecificPagename("homepage");
 			} catch (java.io.IOException e1) {
 				throw e1;
 			}

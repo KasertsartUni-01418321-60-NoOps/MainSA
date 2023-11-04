@@ -103,8 +103,6 @@ public class Main extends javafx.application.Application {
             primaryStage.setMaximized(false);
             com.github.saacsos.FXRouter.bind(this, primaryStage,
                     "ระบบหลังบ้านบริการซื้อขายเครื่องซักผ้าอุตสาหกรรมมือสอง", 800, 600);
-            // TODO: [EASY|UI] each of FXML: Change FXML version (LEESI) / CSS settings
-            // (doAfter MED T O D O)
             for (String pageName : new String[] { "homepage", "login", "add_item", "buy_history", "check_items",
                     "create_customer", "customer_data", "customer_list", "money_accounting", "quotation",
                     "sell_history", "warehouse" }) {
