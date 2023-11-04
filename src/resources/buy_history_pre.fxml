@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" stylesheets="resources/Main.css">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME">
@@ -15,12 +15,20 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="18.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ประวัติการรับซื้อ">
+      <Text layoutX="25.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="หน้ารวมสัญญาซื้อ">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <ListView layoutX="25.0" layoutY="115.0" prefHeight="221.0" prefWidth="544.0" />
-      <Button layoutX="513.0" layoutY="355.0" mnemonicParsing="false" text="ย้อนกลับ" />
+      <Button layoutX="513.0" layoutY="355.0" mnemonicParsing="false" style="-fx-background-color: #FF3C3C;" text="ย้อนกลับ" />
+      <ScrollPane layoutX="48.0" layoutY="137.0" prefHeight="200.0" prefWidth="519.0">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+        </content>
+      </ScrollPane>
+      <Text layoutX="280.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="เรียงตาม:" />
+      <Button layoutX="337.0" layoutY="86.0" mnemonicParsing="false" text="วันที่ล่าสุด" />
+      <Button layoutX="418.0" layoutY="85.0" mnemonicParsing="false" text="สถานะสินค้า" />
+      <Button layoutX="48.0" layoutY="355.0" mnemonicParsing="false" style="-fx-background-color: #00FF00;" text="สร้างสัญญาซื้อ" />
    </children>
 </AnchorPane>
