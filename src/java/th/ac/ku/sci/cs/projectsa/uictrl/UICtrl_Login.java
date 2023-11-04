@@ -12,6 +12,7 @@ public class UICtrl_Login {
 	private TextField textField_userName;
 	@FXML
 	private PasswordField passwordField_passWord;
+	private EasterEggAgain easterEggAgain=new EasterEggAgain();
 
 	public void funcTestOFCaughtException(String[] args) {
 	}
@@ -27,18 +28,18 @@ public class UICtrl_Login {
 			if (tmpReason == DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
 			} else if (tmpReason == null) {
 				Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเข้าสู่ระบบผิดพลาด",
-						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลผิด", "", false);
+						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลผิด", easterEggAgain.getRickrollMsg(), false);
 				return;
 			} else {
 				Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเข้าสู่ระบบผิดพลาด",
-						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลชื่อผู้ใช้ผิดรูปแบบ", "", false);
+						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลชื่อผู้ใช้ผิดรูปแบบ", easterEggAgain.getRickrollMsg(), false);
 				return;
 			}
 			tmpReason = DatabaseMnm.DataValidation.PerAttributeValidation.check__USER__User_Password(formval_passWord);
 			if (tmpReason == null) {
 			} else {
 				Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเข้าสู่ระบบผิดพลาด",
-						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกรหัสผ่านผิดรูปแบบ", "", false);
+						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกรหัสผ่านผิดรูปแบบ", easterEggAgain.getRickrollMsg(), false);
 				return;
 			}
 			DatabaseMnm.Table tmpc_SQLTable = null;
@@ -69,11 +70,24 @@ public class UICtrl_Login {
 				}
 			} else {
 				Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเข้าสู่ระบบผิดพลาด",
-						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลผิด", "", false);
+						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลผิด", easterEggAgain.getRickrollMsg(), false);
 			}
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
 			throw e;
+		}
+	}
+}
+class EasterEggAgain {
+	boolean willDoRickroll =false;
+	int counter =0;
+	String getRickrollMsg() {
+		if (willDoRickroll) {
+			return Misc.rickrollLyrics[counter++%Misc.rickrollLyrics.length];
+		}
+		else {
+			willDoRickroll=true;
+			return "และได้โปรดอย่าทำผิดอีก เพราะไม่งั้นจะเจอดี...";
 		}
 	}
 }
