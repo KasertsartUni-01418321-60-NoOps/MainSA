@@ -2,6 +2,7 @@ package th.ac.ku.sci.cs.projectsa.uictrl;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
+import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -22,6 +23,23 @@ public class UICtrl_Login {
 	@FXML
 	private void onPressed_Button_Login() throws java.sql.SQLException,java.security.NoSuchAlgorithmException,Throwable {
 		try {
+		String formval_userName=textField_userName.getText();
+		String formval_passWord=passwordField_passWord.getText();
+		DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON tmpReason = DataValidation.PerAttributeValidation.check__USER__User_Name(formval_userName);
+		if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+		} else if (tmpReason == null) {
+			Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเข้าสู่ระบบผิดพลาด","ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลผิด","", false);
+			return;
+		}else {
+			Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเข้าสู่ระบบผิดพลาด","ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลชื่อผู้ใช้ผิดรูปแบบ","", false);
+			return;
+		}
+		tmpReason = DataValidation.PerAttributeValidation.check__USER__User_Password(formval_passWord);
+		if (tmpReason == null) {
+		}else {
+			Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเข้าสู่ระบบผิดพลาด","ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกรหัสผ่านผิดรูปแบบ","", false);
+			return;
+		}
 		DatabaseMnm.Table tmpc_SQLTable =null;
 			try {
 				tmpc_SQLTable=(DatabaseMnm.Table)(DatabaseMnm.runSQLcmd(
@@ -31,8 +49,8 @@ public class UICtrl_Login {
 					true,
 					null,
 					new Object[] {
-						textField_userName.getText(),
-						Misc.passwordHash(passwordField_passWord.getText())
+						formval_userName,
+						Misc.passwordHash(formval_passWord)
 					}
 				)[1]);
 			} catch (NoSuchAlgorithmException e) {
