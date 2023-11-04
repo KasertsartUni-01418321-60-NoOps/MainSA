@@ -101,7 +101,7 @@ public class Main extends javafx.application.Application {
             try
 
             {
-                com.github.saacsos.FXRouter.goTo("login");
+                com.github.saacsos.FXRouter.goTo("homepage");
             } catch (java.io.IOException e) {
                 throw e;
             }
