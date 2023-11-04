@@ -1,6 +1,12 @@
 package th.ac.ku.sci.cs.projectsa;
 
 public class Misc {
+
+        // entire exception handling info: mode=no
+        public static String getISODateTimeString() {
+            return java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        }
+        
 	// entire exception handling info: mode=no
 	public static String passwordHash(String password) throws java.security.NoSuchAlgorithmException {
         try {

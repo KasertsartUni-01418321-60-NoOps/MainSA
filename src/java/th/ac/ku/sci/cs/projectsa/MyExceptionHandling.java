@@ -19,7 +19,7 @@ public class MyExceptionHandling {
 		}
 		MyExceptionHandling.handleFatalException_altv1(e, true, new String[] {
 			Main.clReportHeader(scope, "FATAL"), DescOfCUI,
-			TitleOfGUI+" (เมื่อ " + Main.getISODateTimeString() + " | ตรงส่วนของ \""
+			TitleOfGUI+" (เมื่อ " + Misc.getISODateTimeString() + " | ตรงส่วนของ \""
 					+ scope + "\")",
 			DescOfGUI });
 	}
@@ -106,7 +106,7 @@ public class MyExceptionHandling {
 	private static void reportFatalExceptionInGUI(Throwable e, String title, String mainText) {
 		try {
 			if (title == null) {
-				title = "ความผิดพลาดร้ายแรง (เมื่อ " + Main.getISODateTimeString() + " | ตรงส่วนของ \""+"MainApp"+"\")";
+				title = "ความผิดพลาดร้ายแรง (เมื่อ " + Misc.getISODateTimeString() + " | ตรงส่วนของ \""+"MainApp"+"\")";
 			}
 			if (mainText == null) {
 				mainText = appFatalHeader;

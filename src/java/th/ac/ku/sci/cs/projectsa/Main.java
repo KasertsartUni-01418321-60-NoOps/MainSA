@@ -139,31 +139,7 @@ public class Main extends javafx.application.Application {
         }
     }
 
-    // entire exception handling info: mode=no
-    public static String clReportHeader(String scope, String cate) {
-        if (scope == null) {
-            scope = "MainApp";
-        }
-        if (cate == null) {
-            cate = "INFO";
-        }
-        return "[" + getISODateTimeString() + "|" + scope + "|" + cate + "] ";
-    }
-
-    // entire exception handling info: mode=no
-    public static String getISODateTimeString() {
-        return java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-    }
-
-    // entire exception handling info: mode=no
-    public static void switchToSpecificPagename(String pageName) throws java.io.IOException {
-        try {
-            com.github.saacsos.FXRouter.goTo(pageName);
-        } catch (java.io.IOException e) {
-            throw e;
-        }
-    }
-
+    
     // entire exception handling info: mode=no
     public static javafx.application.Application getPrimaryApp() {
         javafx.application.Application retVal = null;
@@ -177,6 +153,27 @@ public class Main extends javafx.application.Application {
         retVal = MainAlt1.primaryStage;
         return retVal;
     }
+
+    // entire exception handling info: mode=no
+    public static String clReportHeader(String scope, String cate) {
+        if (scope == null) {
+            scope = "MainApp";
+        }
+        if (cate == null) {
+            cate = "INFO";
+        }
+        return "[" + Misc.getISODateTimeString() + "|" + scope + "|" + cate + "] ";
+    }
+
+    // entire exception handling info: mode=no
+    public static void switchToSpecificPagename(String pageName) throws java.io.IOException {
+        try {
+            com.github.saacsos.FXRouter.goTo(pageName);
+        } catch (java.io.IOException e) {
+            throw e;
+        }
+    }
+
 
 }
 
