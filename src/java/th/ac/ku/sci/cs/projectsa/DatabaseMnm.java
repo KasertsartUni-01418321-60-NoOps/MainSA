@@ -12,9 +12,6 @@ import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.NotNull;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.Nullable;
 
 
-// TODO: DataTransform Double to limit digit
-// - min,max to possible range
-// - and then convert to string and crop and toDouble
 public class DatabaseMnm {
 	public static java.sql.Connection mainDbConn = null;
 	public final static String mainDbPath = "./data/main.db";
@@ -35,7 +32,6 @@ public class DatabaseMnm {
 		}
 		// REMARK: for my group, only use {TEXT,BLOB,REAL,INTEGER} maybe we not using
 		// "NUMERIC"
-		// TODO: + REMARK: [EASYJUSTWAITTIMELAMO] These example are not compatitble yet to data spec/valid but just pretesting lamo 
 		String[] sqlStms_0 = new String[] {
 				setFKCheckQuery,
 				"CREATE TABLE IF NOT EXISTS Customer (Customer_Full_Name TEXT PRIMARY KEY, Customer_Address TEXT, Customer_Telephone_Number TEXT NOT NULL, Customer_Credit_Amount INTEGER NOT NULL) STRICT,WITHOUT ROWID;",
@@ -650,7 +646,6 @@ public class DatabaseMnm {
 	// REMARK: legnth คือ integer ส่วน range/ตัวค่าคือ long/double (แล้วแต่ dattype
 	// ของ attrib)
 	// REMARK: only considered type of LONG/DOUBLE/STRING
-	// TODO: [MED] clear native function lamo
 	public static class DataValidation {
 
 		// [Zone:Annotation lamo]
@@ -809,7 +804,6 @@ public class DatabaseMnm {
 		}
 
 		public static class SQLLevel {
-			// TODO: แก้บั๊ก
 			// SECURITY WARNING: this function using SQL string injection, do not putting public string unless strict check
 			public static boolean isThisValExisted(@NotNull Object val,@NotNull String tableName,@NotNull String colName) throws java.sql.SQLException {
 				java.sql.ResultSet tmp_rs= (java.sql.ResultSet) runSQLcmd(null,
@@ -1372,7 +1366,10 @@ public class DatabaseMnm {
 			else {return dataClass;}
 		}
 		public static double doubleLengthCropping(double data, int maxFront, int maxRear) {
-			// TODO:
+			// TODO: DataTransform Double to limit digit
+			// - min,max to possible range
+			// - and then convert to string and crop and toDouble
+
 			return data;
 		}
 		@NotNull
