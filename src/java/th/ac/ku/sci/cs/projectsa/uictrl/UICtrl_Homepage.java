@@ -29,6 +29,7 @@ public class UICtrl_Homepage {
 			if (currentUserRole==DatabaseMnm.DataSpec.STATUS_User.Employer) {
 				
 			} else {
+				// TODO: configure ตามความจำเป็น 
 				button_Accounting.setDisable(true);
 				button_BuyHist.setDisable(true);
 				button_SellHist.setDisable(true);
@@ -51,7 +52,7 @@ public class UICtrl_Homepage {
 	@FXML private Button button_Planner;
 	@FXML private void onPressed_Button_Planner() throws java.io.IOException {
 		try{
-			try {Main.switchToSpecificPagename("quotation");} catch (java.io.IOException e1) {throw e1;}
+			throw new MyExceptionHandling.UserRuntimeException("Planner is not available LAMO");
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
 			throw e;
