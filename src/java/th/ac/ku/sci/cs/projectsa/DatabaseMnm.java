@@ -334,7 +334,36 @@ public class DatabaseMnm {
 		return retVal;
 	}
 
+    // REMARK: only determine by using of native datatype in SQL query only, do not
+	// using another datatype else from {INTEGER,REAL,BLOB,TEXT}
+    public static Long convertIntegerAlikeSQLColToLong(Object data, Class<?> javaType) {
+        if (data==null) {return null;}
+        else {
+            if (javaType==Long.class) { return (Long) data;}
+            if (javaType==Integer.class) {return ((Integer)data).longValue();}
+            if (javaType==java.math.BigDecimal.class) {return ((java.math.BigDecimal) data).longValue();}
+            else {
+                throw new MyExceptionHandling.UserRuntimeException("Invalid JavaType, this should not happens if code if well-checked.");
+            }
+        }
+    }
+    // REMARK: only determine by using of native datatype in SQL query only, do not
+	// using another datatype else from {INTEGER,REAL,BLOB,TEXT}
+    public static Double convertRealAlikeSQLColToDouble(Object data, Class<?> javaType) {
+        if (data==null) {return null;}
+        else {
+            if (javaType==Float.class) { return ((Float) data).doubleValue();}
+            if (javaType==Double.class) {return (Double) data;}
+            if (javaType==java.math.BigDecimal.class) {return ((java.math.BigDecimal) data).doubleValue();}
+            else {
+                throw new MyExceptionHandling.UserRuntimeException("Invalid JavaType, this should not happens if code if well-checked.");
+            }
+        }
+    }
+
 	// [Zone:PublicHelper]
+
+	
 
 	// entire exception handling info: mode=no
 	public static String getTableNameFromResultSet(java.sql.ResultSet resultSet) throws java.sql.SQLException {
@@ -788,8 +817,8 @@ public class DatabaseMnm {
 					false,null,new Object[] {val}
 				)[1];
 				Table tmp_table =convertResultSetToTable(tmp_rs);
-				// REMARK เช็คล่ะ มันคาย Integer
-				Integer tmp_val = (Integer) tmp_table.cols[0].vals.get(0);
+				Object tmp_val_tmp=tmp_table.cols[0].vals.get(0);
+				Long tmp_val = convertIntegerAlikeSQLColToLong(tmp_val_tmp,tmp_table.cols[0].javaType);
 				System.out.println(tmp_val );
 				if (tmp_val >=1) {return true;}
 				else {return false;}
