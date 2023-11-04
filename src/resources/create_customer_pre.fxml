@@ -27,7 +27,7 @@
       <TextField layoutX="66.0" layoutY="115.0" />
       <TextField layoutX="93.0" layoutY="151.0" />
       <TextArea layoutX="66.0" layoutY="199.0" prefHeight="109.0" prefWidth="491.0" />
-      <Button layoutX="420.0" layoutY="345.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" text="ยืนยัน" />
-      <Button layoutX="501.0" layoutY="345.0" mnemonicParsing="false" text="ย้อนกลับ" />
+      <Button layoutX="420.0" layoutY="345.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="56.0" style="-fx-background-color: #00FF00;" text="ยืนยัน" />
+      <Button layoutX="501.0" layoutY="345.0" mnemonicParsing="false" style="-fx-background-color: #FF3C3C;" text="ย้อนกลับ" />
    </children>
 </AnchorPane>
