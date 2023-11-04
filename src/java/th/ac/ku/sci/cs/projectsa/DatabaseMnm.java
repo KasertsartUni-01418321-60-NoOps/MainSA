@@ -393,14 +393,15 @@ public class DatabaseMnm {
 		switch (sqlType) {
 			// การแปลงเป็น javaType ผมอิงตาม ChatGPT lamo โดยถามมันว่า อิงตาม general
 			// situation
+			// REMARK: แก้ล่ะ เพราะเรื่อง precision LAMO ใช้ Long/Double เป็นมาตรฐานเดียวกันๆ
 			case java.sql.Types.INTEGER:
-				javaType = Integer.class;
+				javaType = Long.class;
 				break;
 			case java.sql.Types.BIGINT:
 				javaType = Long.class;
 				break;
 			case java.sql.Types.REAL:
-				javaType = Float.class;
+				javaType = Double.class;
 				break;
 			case java.sql.Types.FLOAT:
 				javaType = Double.class;
@@ -412,7 +413,7 @@ public class DatabaseMnm {
 				javaType = byte[].class;
 				break;
 			case java.sql.Types.NUMERIC:
-				javaType = java.math.BigDecimal.class;
+				javaType = Double.class;
 				break;
 			default:
 				// it must not reached, so give runtimeexception
@@ -1366,11 +1367,35 @@ public class DatabaseMnm {
 			else {return dataClass;}
 		}
 		public static double doubleLengthCropping(double data, int maxFront, int maxRear) {
-			// TODO: DataTransform Double to limit digit
-			// - min,max to possible range
-			// - and then convert to string and crop and toDouble
-
-			return data;
+			StringBuilder tmp1 = new StringBuilder();
+			for (int i = 0; i < maxFront; i++) {
+				tmp1.append("9");
+			}
+			tmp1.append(".");
+			for (int i = 0; i < maxRear; i++) {
+				tmp1.append("9");
+			}
+			String tmp_posdoublestr = tmp1.toString();
+			String tmp_negdoublestr = "-"+tmp_posdoublestr;
+			Double[] tmp2 = new Double[2];
+			try {
+				tmp2[0]=Double.parseDouble(tmp_negdoublestr);
+				tmp2[1]=Double.parseDouble(tmp_posdoublestr);
+				if (tmp2[0]<=data && data<=tmp2[1]) {}
+				else {
+					if (tmp2[0]<=data) {
+						return tmp2[1];
+					}
+					else {
+						return tmp2[0];
+					}
+				}
+			} catch (RuntimeException e) {
+				// in case it exceeded Double, then we sure that condition passed about maxFront, so do next code
+			}
+			// if code reached here, mean value is in range, and therefore have to do some rounding of digit at back of decimal point
+			double tmp_scale = Math.pow(10, maxRear);
+			return Math.round(data *tmp_scale) /tmp_scale;
 		}
 		@NotNull
 		public static Object doubleLengthCroppingAndNullableTransform(@Nullable Double data, int maxFront, int maxRear) {
