@@ -5,6 +5,7 @@ import th.ac.ku.sci.cs.projectsa.*;
 
 public class Main extends javafx.application.Application {
     public static String[] args = null;
+    public static java.util.Map<String,Object> globalVar = new java.util.HashMap<>();
     public static java.util.concurrent.ExecutorService exitThread = java.util.concurrent.Executors
             .newSingleThreadExecutor();
 
