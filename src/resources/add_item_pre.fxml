@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" stylesheets="resources/Main.css">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME">
@@ -21,17 +21,21 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button layoutX="505.0" layoutY="361.0" mnemonicParsing="false" text="ย้อนกลับ" />
-      <Text layoutX="33.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อสินค้า :" />
-      <TextField layoutX="87.0" layoutY="100.0" />
-      <Text layoutX="255.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่นสินค้า :" />
-      <TextField layoutX="310.0" layoutY="100.0" />
-      <Text layoutX="31.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รายลัเอียดสินค้า :" />
-      <ListView layoutX="48.0" layoutY="223.0" prefHeight="120.0" prefWidth="515.0" />
-      <Text layoutX="33.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รหัสสินค้า :" />
-      <Text layoutX="31.0" layoutY="180.0" strokeType="OUTSIDE" strokeWidth="0.0" text="แนบไฟล์รูป :" />
-      <TextField layoutX="95.0" layoutY="163.0" prefHeight="25.0" prefWidth="114.0" />
-      <TextField layoutX="95.0" layoutY="131.0" />
-      <Button layoutX="430.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="บันทึก" />
+      <Button layoutX="505.0" layoutY="361.0" mnemonicParsing="false" style="-fx-background-color: #FF3C3C;" text="ย้อนกลับ" />
+      <Text layoutX="33.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อสินค้า :" />
+      <TextField layoutX="95.0" layoutY="126.0" prefHeight="26.0" prefWidth="114.0" />
+      <Text layoutX="222.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่นสินค้า :" />
+      <TextField layoutX="273.0" layoutY="126.0" prefHeight="26.0" prefWidth="114.0" />
+      <Text layoutX="35.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รายละเอียดการซ่อม :" />
+      <ListView layoutX="35.0" layoutY="189.0" prefHeight="53.0" prefWidth="528.0" />
+      <Text layoutX="33.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รหัสสินค้า :" />
+      <Text layoutX="35.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="แนบไฟล์รูป :" />
+      <TextField layoutX="95.0" layoutY="257.0" prefHeight="25.0" prefWidth="114.0" />
+      <TextField layoutX="95.0" layoutY="91.0" />
+      <Button layoutX="430.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" style="-fx-background-color: #00FF00;" text="บันทึก" />
+      <Text layoutX="396.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาซื้อ :" />
+      <TextField layoutX="448.0" layoutY="126.0" prefHeight="26.0" prefWidth="114.0" />
+      <Text layoutX="37.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาขาย :" />
+      <TextField layoutX="94.0" layoutY="288.0" prefHeight="25.0" prefWidth="114.0" />
    </children>
 </AnchorPane>

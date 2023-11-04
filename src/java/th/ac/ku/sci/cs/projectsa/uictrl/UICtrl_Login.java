@@ -2,21 +2,28 @@ package th.ac.ku.sci.cs.projectsa.uictrl;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
+
+import com.github.saacsos.FXRouter;
+
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
 public class UICtrl_Login {
-	// entire exception handling info: mode=fatal
 	@FXML
 	private TextField textField_userName;
 	@FXML
 	private PasswordField passwordField_passWord;
 	private EasterEggAgain easterEggAgain=new EasterEggAgain();
-
+	
 	public void funcTestOFCaughtException(String[] args) {
 	}
 
+	@FXML
+	private void initialize() {
+	}
+	
+	// entire exception handling info: mode=fatal
 	@FXML
 	private void onPressed_Button_Login()
 			throws java.sql.SQLException, java.security.NoSuchAlgorithmException, Throwable {
@@ -64,6 +71,7 @@ public class UICtrl_Login {
 			int tmpt_int = tmpc_SQLTable.cols[0].vals.size();
 			if (tmpt_int > 0) {
 				try {
+					Main.globalVar.put("loggedinUserPartialTable",tmpc_SQLTable);
 					Main.switchToSpecificPagename("homepage");
 				} catch (java.io.IOException e1) {
 					throw e1;

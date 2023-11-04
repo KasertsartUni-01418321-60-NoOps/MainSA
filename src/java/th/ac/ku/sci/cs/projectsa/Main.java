@@ -5,6 +5,7 @@ import th.ac.ku.sci.cs.projectsa.*;
 
 public class Main extends javafx.application.Application {
     public static String[] args = null;
+    public static java.util.Map<String,Object> globalVar = new java.util.HashMap<>();
     public static java.util.concurrent.ExecutorService exitThread = java.util.concurrent.Executors
             .newSingleThreadExecutor();
 
@@ -91,7 +92,7 @@ public class Main extends javafx.application.Application {
             primaryStage.setResizable(false);
             primaryStage.setMaximized(false);
             com.github.saacsos.FXRouter.bind(this, primaryStage,
-                    "ระบบหลังบ้านบริการซื้อขายเครื่องซักผ้าอุตสาหกรรมมือสอง", 800, 600);
+                    "ระบบหลังบ้านบริการซื้อขายเครื่องซักผ้าอุตสาหกรรมมือสอง", 600,400);
             for (String pageName : new String[] { "homepage", "login", "add_item", "buy_history", "check_items",
                     "create_customer", "customer_data", "customer_list", "money_accounting", "quotation",
                     "sell_history", "warehouse" }) {

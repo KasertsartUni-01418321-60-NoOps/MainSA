@@ -4,6 +4,6 @@
 set "JAVA_HOME=C:\Program Files\Java\jdk-1.8\openlogic-openjdk-8u392-b08-windows-64"
 set "PATH=%JAVA_HOME%\bin;%PATH%"
 cd build/final
-java -jar App.jar
+java -jar App.jar -MiscFunFlag+muteMIDI
 @echo [SCRIPT] (Process ended)
 @pause

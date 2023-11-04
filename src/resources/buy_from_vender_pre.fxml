@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,20 +17,26 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="26.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" สัญญาขาย">
+      <Text layoutX="30.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" สัญญาซื้อ">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
       <Text layoutX="33.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า :" />
-      <Text layoutX="32.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานที่จัดส่ง :" />
+      <Text layoutX="33.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานที่ตรวจ  :" />
       <TextField layoutX="89.0" layoutY="92.0" />
       <TextArea layoutX="107.0" layoutY="135.0" prefHeight="54.0" prefWidth="450.0" />
       <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false" style="-fx-background-color: #FF3C3C;" text="ย้อนกลับ" />
-      <Text layoutX="33.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ไอดีสินค้า :" />
-      <TextField layoutX="89.0" layoutY="195.0" />
-      <Text layoutX="35.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคา :" />
-      <TextField layoutX="78.0" layoutY="229.0" />
+      <Text layoutX="33.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อสินค้า :" />
+      <TextField layoutX="89.0" layoutY="195.0" prefHeight="26.0" prefWidth="120.0" />
+      <Text layoutX="419.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาซื้อ  :" />
+      <TextField layoutX="476.0" layoutY="195.0" prefHeight="26.0" prefWidth="101.0" />
       <Button layoutX="419.0" layoutY="361.0" mnemonicParsing="false" style="-fx-background-color: #00FF00;" text="บันทึก" />
+      <Text layoutX="228.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่นสินค้า :" />
+      <TextField layoutX="283.0" layoutY="195.0" prefHeight="26.0" prefWidth="120.0" />
+      <Text layoutX="249.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="วันที่ตรวจ :" />
+      <DatePicker layoutX="308.0" layoutY="92.0" />
+      <Text layoutX="33.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="บันทึกสภาพสินค้า :" />
+      <TextArea layoutX="89.0" layoutY="270.0" prefHeight="78.0" prefWidth="450.0" />
    </children>
 </AnchorPane>
