@@ -1,23 +1,30 @@
 package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
+
+import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+
 import th.ac.ku.sci.cs.projectsa.*;
 
-// TODO: LESSI: console out to utf8 lamo
 public class Main extends javafx.application.Application {
     public static String[] args = null;
     public static java.util.concurrent.ExecutorService exitThread = java.util.concurrent.Executors
             .newSingleThreadExecutor();
 
     public static void funcTestOFCaughtException() {
-        
     }
 
     // entire exception handling info: mode=fatal
     public static void main(String[] args) throws Throwable {
         boolean isFriendlyException = false;
         try {
-            Main.args = args;
+            System.setProperty("file.encoding", "UTF-8");
+            try {
+            System.setOut( new PrintStream(System.out, true, "UTF-8") );
+            } catch (UnsupportedEncodingException e) {
+            throw e;
+            }
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 try {
                     javafx.application.Platform.exit();
@@ -41,8 +48,8 @@ public class Main extends javafx.application.Application {
                     MyExceptionHandling.handleFatalExitException(e, "MainApp|ShutdownSystem|ProgramMainHook");
                 }
             }));
-            
             java.util.Locale.setDefault(new java.util.Locale("th", "TH"));
+            Main.args = args;
             boolean doMIDIPlayer = true;
             for (String arg : args) {
                 if (arg.equals("-MiscFunFlag+muteMIDI") || arg.equals("--MiscFunFlag+muteMIDI")) {
