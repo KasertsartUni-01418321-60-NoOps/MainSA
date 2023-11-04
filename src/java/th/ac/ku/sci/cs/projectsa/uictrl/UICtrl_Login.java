@@ -10,20 +10,20 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
 public class UICtrl_Login {
-	// entire exception handling info: mode=fatal
 	@FXML
 	private TextField textField_userName;
 	@FXML
 	private PasswordField passwordField_passWord;
 	private EasterEggAgain easterEggAgain=new EasterEggAgain();
-
+	
 	public void funcTestOFCaughtException(String[] args) {
 	}
 
 	@FXML
 	private void initialize() {
 	}
-
+	
+	// entire exception handling info: mode=fatal
 	@FXML
 	private void onPressed_Button_Login()
 			throws java.sql.SQLException, java.security.NoSuchAlgorithmException, Throwable {
