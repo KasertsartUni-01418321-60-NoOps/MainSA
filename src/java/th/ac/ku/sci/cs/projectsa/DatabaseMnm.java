@@ -8,6 +8,7 @@ import java.util.function.DoubleBinaryOperator;
 
 import javafx.scene.chart.PieChart.Data;
 import th.ac.ku.sci.cs.projectsa.*;
+import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.NotNull;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.Nullable;
 
@@ -96,16 +97,21 @@ public class DatabaseMnm {
 				Double SD_Buy_Request_Transportation_Price = null;
 				DataValidation.DATAVALID_DECLINED_REASON tmpReason=null;
 			// PART 2A:
-				tmpReason=DataValidation.PerAttributeValidation.check__USER__User_Name(SD_User_Name);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				while (true){tmpReason=DataValidation.PerAttributeValidation.check__USER__User_Name(SD_User_Name);
+				// in case existed data LAMO
+				if (tmpReason==DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {break;}
+				else if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__USER__User_Password(SD_User_Password);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__USER__User_Role(SD_User_Role);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				else {DatabaseMnm.runSQLcmds(null, sqlStms_1, true, null, new Object[][] {{SD_User_Name,Misc.passwordHash(SD_User_Password),SD_User_Role}});}
+			break;}
 			// PART 2B:
-				tmpReason=DataValidation.PerAttributeValidation.check__CUSTOMER__Customer_Full_Name(SD_Customer_Full_Name);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				while (true){tmpReason=DataValidation.PerAttributeValidation.check__CUSTOMER__Customer_Full_Name(SD_Customer_Full_Name);
+				// in case existed data LAMO
+				if (tmpReason==DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {break;}
+				else if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__CUSTOMER__Customer_Address(SD_Customer_Address);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__CUSTOMER__Customer_Credit_Amount(SD_Customer_Credit_Amount);
@@ -115,9 +121,12 @@ public class DatabaseMnm {
 				else {
 					DatabaseMnm.runSQLcmds(null, sqlStms_2, true, null, new Object[][] {{SD_Customer_Full_Name,DataTransformation.NullableTransform(SD_Customer_Address,String.class),SD_Customer_Telephone_Number,SD_Customer_Credit_Amount}});
 				}
+			break;}
 			// PART 2C:
-				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_ID(SD_Selling_Request_ID);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				while (true){tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_ID(SD_Selling_Request_ID);
+				// in case existed data LAMO
+				if (tmpReason==DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {break;}
+				else if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Customer_Full_Name(SD_Customer_Full_Name);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Brand(SD_Selling_Request_Brand);
@@ -135,9 +144,12 @@ public class DatabaseMnm {
 				tmpReason=DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Status(SD_Selling_Request_Status);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				else {DatabaseMnm.runSQLcmds(null, sqlStms_3, true, null, new Object[][] {{SD_Selling_Request_ID,SD_Customer_Full_Name,SD_Selling_Request_Brand,SD_Selling_Request_Model,SD_Selling_Request_Product_Looks,SD_Selling_Request_Meet_Date,SD_Selling_Request_Meet_Location,DataTransformation.doubleLengthCroppingAndNullableTransform(SD_Selling_Request_Paid_Amount,DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[0],DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[1]),SD_Selling_Request_Status}});}
+				break;}
 			// PART 2D:
-				tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Repairment_ID(SD_Repairment_ID);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+				while (true){tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Repairment_ID(SD_Repairment_ID);
+				// in case existed data LAMO
+				if (tmpReason==DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {break;}
+				else if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Repairment_Description(SD_Repairment_Description);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Repairment_Date(SD_Repairment_Date);
@@ -145,9 +157,13 @@ public class DatabaseMnm {
 				tmpReason=DataValidation.PerAttributeValidation.check__REPAIRMENT__Selling_Request_ID(SD_Selling_Request_ID);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				else {DatabaseMnm.runSQLcmds(null, sqlStms_4, true, null, new Object[][] {{SD_Repairment_ID,SD_Repairment_Description,SD_Repairment_Date,SD_Selling_Request_ID}});}
+				break;}
 			// PART 2E:
-				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_ID(SD_Product_ID);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
+			while (true)
+				{tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_ID(SD_Product_ID);
+				// in case existed data LAMO
+				if (tmpReason==DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {break;}
+				else if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_Arrive_Time(SD_Product_Arrive_Time);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Product_Price(SD_Product_Price);
@@ -159,16 +175,23 @@ public class DatabaseMnm {
 				tmpReason=DataValidation.PerAttributeValidation.check__PRODUCT__Repairment_ID(SD_Repairment_ID);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				else {DatabaseMnm.runSQLcmds(null, sqlStms_5, true, null, new Object[][] {{SD_Product_ID,SD_Product_Arrive_Time,DataTransformation.doubleLengthCropping(SD_Product_Price,DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[0],DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[1]),SD_Product_Status,SD_Selling_Request_ID,DataTransformation.NullableTransform(SD_Repairment_ID,String.class)}});}
+				break;
+				}
 			// PART 2F:
+			while (true)
+				{tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Product_ID(SD_Product_ID);
+				// in case existed data LAMO
+				if (tmpReason==DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK) {break;}
+				else if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Customer_Full_Name(SD_Customer_Full_Name);
-				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
-				tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Product_ID(SD_Product_ID);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Buy_Request_Created_Date(SD_Buy_Request_Created_Date);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				tmpReason=DataValidation.PerAttributeValidation.check__BUY_REQUEST__Buy_Request_Transportation_Price(SD_Buy_Request_Transportation_Price);
 				if (tmpReason!=null) {throw new MyExceptionHandling.UserRuntimeException("Reason:"+tmpReason.toString());}
 				else {DatabaseMnm.runSQLcmds(null, sqlStms_6, true, null, new Object[][] {{SD_Customer_Full_Name,SD_Product_ID,SD_Buy_Request_Created_Date,DataTransformation.doubleLengthCroppingAndNullableTransform(SD_Buy_Request_Transportation_Price,DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[0],DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[1])}});}
+				break;
+			}
 			// [ZONE END]
 		} catch (java.sql.SQLException e) {
 			throw e;
