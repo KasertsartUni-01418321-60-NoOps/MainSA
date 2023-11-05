@@ -16,6 +16,7 @@ public class UICtrl_Homepage {
 	}
 
 
+	// REMARK: รันทุกรอบ หากใช้ FXRouter.goto
 	@FXML
 	private void initialize() {
 		try{ 

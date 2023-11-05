@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_ProductDetail">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME">
@@ -22,7 +22,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false" text="ย้อนกลับ" />
+      <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBack_Button" text="ย้อนกลับ" />
       <Text layoutX="33.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รหัสสินค้า :" />
       <TextField layoutX="93.0" layoutY="99.0" prefHeight="26.0" prefWidth="94.0" />
       <Text layoutX="430.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่นสินค้า :" />

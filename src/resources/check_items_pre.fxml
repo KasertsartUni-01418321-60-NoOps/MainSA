@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"  stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_CheckItems">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME">
@@ -24,13 +24,13 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false" style="-fx-background-color: #FF3C3C;" text="ย้อนกลับ" />
+      <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBack_Button" text="ย้อนกลับ" styleClass="NEGHIGHLIGHT"/>
       <Text layoutX="33.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อสินค้า :" />
       <TextField layoutX="87.0" layoutY="100.0" />
       <Text layoutX="255.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่นสินค้า :" />
       <TextField layoutX="310.0" layoutY="100.0" />
       <Text layoutX="33.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สิ่งที่ต้องซ่อม :" />
-      <ListView layoutX="65.0" layoutY="187.0" prefHeight="81.0" prefWidth="491.0" />
+      <ListView editable="true" layoutX="65.0" layoutY="187.0" prefHeight="81.0" prefWidth="491.0" />
       <Text layoutX="33.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ต่องซ่อมไหม :" />
       <CheckBox layoutX="112.0" layoutY="135.0" mnemonicParsing="false" text="ซ่อม" />
       <CheckBox layoutX="200.0" layoutY="135.0" mnemonicParsing="false" text="ไม่ซ่อม" />
@@ -44,6 +44,6 @@
           <MenuItem mnemonicParsing="false" text="ลดเครดิต" />
         </items>
       </MenuButton>
-      <Button layoutX="422.0" layoutY="361.0" mnemonicParsing="false" style="-fx-background-color: #00FF00;" text="บันทึก" />
+      <Button layoutX="422.0" layoutY="361.0" mnemonicParsing="false"  text="บันทึก" styleClass="POSHIGHLIGHT"/>
    </children>
 </AnchorPane>

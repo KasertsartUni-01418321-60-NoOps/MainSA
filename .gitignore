@@ -1,7 +1,7 @@
 # no vscode
 /.vscode/
 /build/
-/.bat/
+/*.bat
 # no class file
 *.class
 # my 6410406576
