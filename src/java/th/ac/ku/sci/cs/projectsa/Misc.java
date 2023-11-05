@@ -85,4 +85,16 @@ public class Misc {
             throw e; // it should not raise it unless poor JRE lamo
         }		
 	}
+    public static class ListViewRowDataWrapper {
+        public final String ref;
+        public final String repr;
+        public ListViewRowDataWrapper(String ref, String repr) {
+            this.ref = ref;
+            this.repr = repr;
+        }
+        @Override
+        public String toString() {
+            return this.repr;
+        }
+    }
 }
