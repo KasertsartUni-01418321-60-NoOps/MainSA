@@ -13,7 +13,7 @@ public class Main extends javafx.application.Application {
     }
 
     // entire exception handling info: mode=fatal
-    public static void main(String[] args) throws Throwable {
+    public static void main(String[] args) throws java.io.UnsupportedEncodingException,java.sql.SQLException,java.io.IOException,java.security.NoSuchAlgorithmException {
         boolean isFriendlyException = false;
         try {
             System.setProperty("file.encoding", "UTF-8");
@@ -93,7 +93,7 @@ public class Main extends javafx.application.Application {
             primaryStage.setMaximized(false);
             com.github.saacsos.FXRouter.bind(this, primaryStage,
                     "ระบบหลังบ้านบริการซื้อขายเครื่องซักผ้าอุตสาหกรรมมือสอง", 600,400);
-            for (String pageName : new String[] { "homepage", "login", "add_item", "buy_history", "check_items",
+            for (String pageName : new String[] { "homepage", "login", "add_item", "buy_from_vender","buy_history", "check_items",
                     "create_customer", "customer_data", "customer_list", "money_accounting", "quotation",
                     "sell_history", "warehouse" }) {
                 // do not put leading slash for jarfile resource for this line of code
@@ -102,7 +102,7 @@ public class Main extends javafx.application.Application {
             try
 
             {
-                com.github.saacsos.FXRouter.goTo("homepage");
+                com.github.saacsos.FXRouter.goTo("login");
             } catch (java.io.IOException e) {
                 throw e;
             }

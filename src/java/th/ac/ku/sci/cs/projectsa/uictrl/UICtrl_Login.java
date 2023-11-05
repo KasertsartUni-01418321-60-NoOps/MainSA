@@ -19,17 +19,23 @@ public class UICtrl_Login {
 	public void funcTestOFCaughtException(String[] args) {
 	}
 
+	// Exception Handling Mode: Fatal (but not yet until code is put here lamo)
 	@FXML
 	private void initialize() {
 	}
 	
-	// entire exception handling info: mode=fatal
+	// Exception Handling Mode: Fatal
 	@FXML
 	private void onPressed_Button_Login()
-			throws java.sql.SQLException, java.security.NoSuchAlgorithmException, Throwable {
+			throws java.sql.SQLException, java.security.NoSuchAlgorithmException, java.io.IOException {
 		try {
 			String formval_userName = textField_userName.getText();
 			String formval_passWord = passwordField_passWord.getText();
+			// [DEBUG ZONE]
+			// TODO: after debug we can remove this lamo
+			formval_userName="SOMchoke";
+			formval_passWord="SC45-774";
+			// [END ZONE]
 			DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON tmpReason = DatabaseMnm.DataValidation.PerAttributeValidation
 					.check__USER__User_Name(formval_userName);
 			if (tmpReason == DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
@@ -89,6 +95,7 @@ public class UICtrl_Login {
 class EasterEggAgain {
 	boolean willDoRickroll =false;
 	int counter =0;
+	// Exception Handling Mode: no
 	String getRickrollMsg() {
 		if (willDoRickroll) {
 			return Misc.rickrollLyrics[counter++%Misc.rickrollLyrics.length];
