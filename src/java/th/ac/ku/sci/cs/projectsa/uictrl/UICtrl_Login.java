@@ -22,6 +22,12 @@ public class UICtrl_Login {
 	// Exception Handling Mode: Fatal (but not yet until code is put here lamo)
 	@FXML
 	private void initialize() {
+			// [DEBUG ZONE]
+			// TODO: after debug we can remove this lamo
+			// REMKAR: this is temporary, so no need to do exception handling at this code
+			textField_userName.setText("SOMchoke");
+			passwordField_passWord.setText("SC45-774");
+			// [END ZONE]
 	}
 	
 	// Exception Handling Mode: Fatal
@@ -31,11 +37,6 @@ public class UICtrl_Login {
 		try {
 			String formval_userName = textField_userName.getText();
 			String formval_passWord = passwordField_passWord.getText();
-			// [DEBUG ZONE]
-			// TODO: after debug we can remove this lamo
-			formval_userName="SOMchoke";
-			formval_passWord="SC45-774";
-			// [END ZONE]
 			DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON tmpReason = DatabaseMnm.DataValidation.PerAttributeValidation
 					.check__USER__User_Name(formval_userName);
 			if (tmpReason == DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {

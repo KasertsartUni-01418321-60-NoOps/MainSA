@@ -20,12 +20,12 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="230.0" layoutY="83.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="Warehouse" onAction="#onPressed_Button_Warehouse" fx:id="button_Warehouse">
+      <Button layoutX="230.0" layoutY="83.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="รายการสินค้า" onAction="#onPressed_Button_Warehouse" fx:id="button_Warehouse">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="419.0" layoutY="83.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="Planner" onAction="#onPressed_Button_Planner" fx:id="button_Planner">
+      <Button layoutX="419.0" layoutY="83.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="ตารางเวลา" onAction="#onPressed_Button_Planner" fx:id="button_Planner">
          <font>
             <Font size="18.0" />
          </font>
@@ -40,7 +40,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="419.0" layoutY="227.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="บัญชี" onAction="#onPressed_Button_Accounting" fx:id="button_Accounting">
+      <Button layoutX="419.0" layoutY="227.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="บัญชีฯ" onAction="#onPressed_Button_Accounting" fx:id="button_Accounting">
          <font>
             <Font size="18.0" />
          </font>
