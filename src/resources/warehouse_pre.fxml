@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -22,12 +22,12 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button layoutX="502.0" layoutY="349.0" mnemonicParsing="false" onAction="#onBack_Button" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ" />
+      <Button layoutX="502.0" layoutY="360.0" mnemonicParsing="false" onAction="#onBack_Button" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ" />
       <Button layoutX="35.0" layoutY="100.0" mnemonicParsing="false" onAction="#onPressed_Button_addProduct" styleClass="POSHIGHLIGHT" text="เพิ่มสินค้า" />
-      <ScrollPane fx:id="scrollPaneWarehouse" layoutX="35.0" layoutY="154.0" prefHeight="183.0" prefWidth="522.0" />
+      <ListView fx:id="productListView" layoutX="34.0" layoutY="149.0" prefHeight="200.0" prefWidth="524.0" />
       <Text layoutX="272.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ค้าหาโดย :" />
-      <ChoiceBox layoutX="336.0" layoutY="72.0" prefHeight="25.0" prefWidth="159.0" />
-      <Button layoutX="515.0" layoutY="113.0" mnemonicParsing="false" onAction="#onPressed_Button_findBrand" text="ค้นหา" />
+      <ChoiceBox layoutX="336.0" layoutY="72.0" prefHeight="25.0" prefWidth="159.0" fx:id="choice" />
+      <Button layoutX="515.0" layoutY="113.0" mnemonicParsing="false" text="ค้นหา" />
       <TextField layoutX="336.0" layoutY="113.0" prefHeight="25.0" prefWidth="159.0" />
    </children>
 </AnchorPane>
