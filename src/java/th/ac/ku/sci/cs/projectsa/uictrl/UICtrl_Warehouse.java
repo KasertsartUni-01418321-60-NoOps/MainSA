@@ -9,7 +9,9 @@ import javafx.scene.paint.Color;
 
 public class UICtrl_Warehouse {
     @FXML 
-    private TextField brand, model, status;
+    private TextField brandText, modelText, statusText;
+    private String brand, model, status;
+
     @FXML
     private ScrollPane scrollPaneWarehouse;
 
@@ -38,14 +40,17 @@ public class UICtrl_Warehouse {
     }
 
     @FXML private void onPressed_Button_findBrand() throws java.io.IOException {
-        System.out.println("finding brand");
+        brand = brandText.getText();
+        System.out.println(brand);
     }
 
     @FXML private void onPressed_Button_findModel() throws java.io.IOException {
-        System.out.println("finding model");
+        model = modelText.getText();
+        System.out.println(model);
     }
 
      @FXML private void onPressed_Button_findStatus() throws java.io.IOException {
-        System.out.println("finding status");
+        status = statusText.getText();
+        System.out.println(status);
     }
 }

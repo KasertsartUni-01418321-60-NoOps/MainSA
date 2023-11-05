@@ -16,4 +16,13 @@ public class UICtrl_SellHistory {
             throw e;
         }
     }
+
+    @FXML private void onCreatQuotation_Button() throws java.io.IOException, Throwable {
+        try {
+            Main.switchToSpecificPagename("quotation");
+        } catch (Throwable e) {
+            MyExceptionHandling.handleFatalException(e);
+            throw e;
+        }
+    }
 }

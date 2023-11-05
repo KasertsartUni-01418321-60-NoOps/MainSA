@@ -15,12 +15,13 @@ public class UICtrl_BuyHistory {
         }
     }
 
-    @FXML private void onCreatQuatation_Button() throws java.io.IOException, Throwable {
+    @FXML private void onCreatePurchase_Button() throws java.io.IOException, Throwable {
         try {
-            Main.switchToSpecificPagename("quotation");
+            Main.switchToSpecificPagename("buy_from_vender");
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
         }
     }
+
 }

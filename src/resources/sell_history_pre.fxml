@@ -22,7 +22,7 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
         </content>
       </ScrollPane>
-      <Button layoutX="48.0" layoutY="355.0" mnemonicParsing="false"  text="สร้างสัญญาขาย" styleClass="POSHIGHLIGHT"/>
+      <Button layoutX="48.0" layoutY="355.0" mnemonicParsing="false" onAction="#onCreatQuotation_Button" text="สร้างสัญญาขาย" styleClass="POSHIGHLIGHT"/>
       <Text layoutX="273.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ค้นหาจากสถานะ : " />
       <TextField layoutX="363.0" layoutY="56.0" />
       <Button layoutX="530.0" layoutY="56.0" mnemonicParsing="false" text="ค้นหา" />
