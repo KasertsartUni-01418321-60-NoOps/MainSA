@@ -22,8 +22,8 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button layoutX="502.0" layoutY="349.0" mnemonicParsing="false" onAction="#onBack_Button" text="ย้อนกลับ" />
-      <Button layoutX="35.0" layoutY="100.0" mnemonicParsing="false" onAction="#onPressed_Button_addProduct" text="เพิ่มสินค้า" />
+      <Button layoutX="502.0" layoutY="349.0" mnemonicParsing="false" onAction="#onBack_Button" text="ย้อนกลับ" styleClass="NEGHIGHLIGHT"/>
+      <Button layoutX="35.0" layoutY="100.0" mnemonicParsing="false" onAction="#onPressed_Button_addProduct" text="เพิ่มสินค้า" styleClass="POSHIGHLIGHT"/>
       <ImageView fitHeight="105.0" fitWidth="130.0" layoutX="36.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="105.0" fitWidth="130.0" layoutX="220.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" />
       <ImageView fitHeight="105.0" fitWidth="130.0" layoutX="419.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true" />

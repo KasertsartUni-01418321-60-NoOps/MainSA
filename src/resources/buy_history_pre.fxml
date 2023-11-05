@@ -15,7 +15,7 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="513.0" layoutY="355.0" mnemonicParsing="false" text="ย้อนกลับ" />
+      <Button layoutX="513.0" layoutY="355.0" mnemonicParsing="false" text="ย้อนกลับ" styleClass="NEGHIGHLIGHT"/>
       <ScrollPane layoutX="48.0" layoutY="137.0" prefHeight="200.0" prefWidth="519.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
@@ -24,6 +24,6 @@
       <Text layoutX="280.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="เรียงตาม:" />
       <Button layoutX="337.0" layoutY="86.0" mnemonicParsing="false" text="วันที่ล่าสุด" />
       <Button layoutX="418.0" layoutY="85.0" mnemonicParsing="false" text="สถานะสินค้า" />
-      <Button layoutX="48.0" layoutY="355.0" mnemonicParsing="false" text="สร้างสัญญาซื้อ" />
+      <Button layoutX="48.0" layoutY="355.0" mnemonicParsing="false" text="สร้างสัญญาซื้อ" styleClass="POSHIGHLIGHT" />
    </children>
 </AnchorPane>

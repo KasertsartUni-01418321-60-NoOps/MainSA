@@ -19,7 +19,7 @@
       <Text layoutX="24.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า : " />
       <TextField layoutX="95.0" layoutY="100.0" />
       <Button layoutX="268.0" layoutY="100.0" mnemonicParsing="false" text="ค้นหา" />
-      <Button layoutX="395.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="132.0"  text="สร้างลูกค้าใหม่" />
+      <Button layoutX="395.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="132.0"  text="สร้างลูกค้าใหม่" styleClass="POSHIGHLIGHT"/>
       <ScrollPane layoutX="95.0" layoutY="142.0" prefHeight="200.0" prefWidth="431.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />

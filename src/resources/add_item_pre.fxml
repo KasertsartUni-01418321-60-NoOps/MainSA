@@ -16,13 +16,13 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="505.0" layoutY="361.0" mnemonicParsing="false"  text="ย้อนกลับ" />
+      <Button layoutX="505.0" layoutY="361.0" mnemonicParsing="false"  text="ย้อนกลับ" styleClass="NEGHIGHLIGHT" />
       <Text layoutX="35.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รายละเอียดการซ่อม :" />
       <ListView layoutX="35.0" layoutY="189.0" prefHeight="53.0" prefWidth="528.0" />
       <Text layoutX="33.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รหัสสินค้า :" />
       <Text layoutX="35.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="แนบไฟล์รูป :" />
       <TextField layoutX="95.0" layoutY="91.0" />
-      <Button layoutX="430.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="บันทึก" />
+      <Button layoutX="430.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" text="บันทึก" styleClass="POSHIGHLIGHT"/>
       <Text layoutX="37.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาขาย :" />
       <TextField layoutX="94.0" layoutY="288.0" prefHeight="25.0" prefWidth="114.0" />
    </children>

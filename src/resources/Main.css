@@ -1,14 +1,17 @@
 /* For element selecion */
 .root {
-	-primary-color: yellow;
+	-primary-color: rgb(255, 255, 0);
 	-primary-color--lighten: rgb(255,255,191);
-	-accent-color: #3498db;
+	-accent-color: rgb(52, 152, 219);
+	-poshighlight-color: rgb(60,171,53);
+	-neghighlight-color: rgb(171,37,30);
 	-general-text-color: #333333;
 	-general-text-color--lighten: rgb(102,102,102);
-	-text-color--inversed: rgb(204,204,204);
+	-general-text-color--inversed: rgb(204,204,204);
+	-general-text-color--inversed--lighten: rgb(230,230,230);
 	-general-effect-shadowdrop: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 5);
 	-general-effect-shadowdrop-hover: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 2.5);
-	-fx-background-color: linear-gradient(to bottom, #ffcc00, #ff9900);
+	-fx-background-color: linear-gradient(to bottom, rgb(255, 204, 0), rgb(255, 153, 0));
 }
 TextField,PasswordField {
 	-fx-text-fill: -general-text-color--lighten;
@@ -34,11 +37,29 @@ Button:hover,TextField:hover,PasswordField:hover {
 /* For class selecion */
 .HIGHLIGHT {
 	-fx-background-color: -accent-color;
-	-fx-text-fill: -general-text-color--inversed;
+	-fx-text-fill: -general-text-color--inversed--lighten;
 }
 /* For event of class */
 .HIGHLIGHT:hover {
-	-fx-background-color: -general-text-color--inversed;
+	-fx-background-color: -general-text-color--inversed--lighten;
 	-fx-text-fill: -accent-color;
+	-fx-effect: -general-effect-shadowdrop-hover;
+}
+.POSHIGHLIGHT {
+	-fx-background-color: -poshighlight-color;
+	-fx-text-fill: -general-text-color--inversed--lighten;
+}
+.POSHIGHLIGHT:hover {
+	-fx-background-color: -general-text-color--inversed--lighten;
+	-fx-text-fill: -poshighlight-color;
+	-fx-effect: -general-effect-shadowdrop-hover;
+}
+.NEGHIGHLIGHT {
+	-fx-background-color: -neghighlight-color;
+	-fx-text-fill: -general-text-color--inversed--lighten;
+}
+.NEGHIGHLIGHT:hover {
+	-fx-background-color: -general-text-color--inversed--lighten;
+	-fx-text-fill: -neghighlight-color;
 	-fx-effect: -general-effect-shadowdrop-hover;
 }

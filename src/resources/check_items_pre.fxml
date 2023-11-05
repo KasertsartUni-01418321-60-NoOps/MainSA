@@ -24,7 +24,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false"  text="ย้อนกลับ" />
+      <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false"  text="ย้อนกลับ" styleClass="NEGHIGHLIGHT"/>
       <Text layoutX="33.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อสินค้า :" />
       <TextField layoutX="87.0" layoutY="100.0" />
       <Text layoutX="255.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่นสินค้า :" />
@@ -44,6 +44,6 @@
           <MenuItem mnemonicParsing="false" text="ลดเครดิต" />
         </items>
       </MenuButton>
-      <Button layoutX="422.0" layoutY="361.0" mnemonicParsing="false"  text="บันทึก" />
+      <Button layoutX="422.0" layoutY="361.0" mnemonicParsing="false"  text="บันทึก" styleClass="POSHIGHLIGHT"/>
    </children>
 </AnchorPane>
