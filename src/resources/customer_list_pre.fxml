@@ -8,10 +8,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_CustomerList">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_CustomerList">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME" onMouseClicked="#backHomepage">
+      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รายชื่อลูกค้า" onMouseClicked="#backHomepage">
          <font>
             <Font size="24.0" />
          </font>
@@ -19,7 +19,7 @@
       <Text layoutX="24.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า : " />
       <TextField layoutX="95.0" layoutY="100.0" />
       <Button layoutX="268.0" layoutY="100.0" mnemonicParsing="false" text="ค้นหา" />
-      <Button layoutX="395.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="132.0" style="-fx-background-color: #00FF00;" text="สร้างลูกค้าใหม่" />
+      <Button layoutX="395.0" layoutY="350.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="132.0"  text="สร้างลูกค้าใหม่" />
       <ScrollPane layoutX="95.0" layoutY="142.0" prefHeight="200.0" prefWidth="431.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
