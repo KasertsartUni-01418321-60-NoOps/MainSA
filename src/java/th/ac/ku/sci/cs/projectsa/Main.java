@@ -102,7 +102,7 @@ public class Main extends javafx.application.Application {
             try
 
             {
-                // TODO: [DEBUG START]
+                // TODO: EASY [DEBUG START]
                 try {com.github.saacsos.FXRouter.goTo(args[0]);}
                 catch (Exception e) {com.github.saacsos.FXRouter.goTo("login");}
                 // [DEBUG END]
