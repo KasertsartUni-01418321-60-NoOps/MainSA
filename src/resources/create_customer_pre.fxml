@@ -11,14 +11,9 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME">
+      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สร้างลูกค้าใหม่">
          <font>
             <Font size="24.0" />
-         </font>
-      </Text>
-      <Text layoutX="33.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สร้างลูกค้าใหม่">
-         <font>
-            <Font size="18.0" />
          </font>
       </Text>
       <Text layoutX="33.0" layoutY="132.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อ :" />

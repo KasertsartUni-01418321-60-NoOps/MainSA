@@ -11,14 +11,9 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME">
+      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" สัญญาขาย">
          <font>
             <Font size="24.0" />
-         </font>
-      </Text>
-      <Text layoutX="26.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" สัญญาขาย">
-         <font>
-            <Font size="18.0" />
          </font>
       </Text>
       <Text layoutX="33.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า :" />
@@ -28,8 +23,8 @@
       <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false" style="-fx-background-color: #FF3C3C;" text="ย้อนกลับ" />
       <Text layoutX="33.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ไอดีสินค้า :" />
       <TextField layoutX="89.0" layoutY="195.0" />
-      <Text layoutX="35.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคา :" />
       <TextField layoutX="78.0" layoutY="229.0" />
       <Button layoutX="419.0" layoutY="361.0" mnemonicParsing="false" style="-fx-background-color: #00FF00;" text="บันทึก" />
+      <Text layoutX="35.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาขนส่ง:" />
    </children>
 </AnchorPane>

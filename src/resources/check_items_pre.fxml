@@ -30,7 +30,7 @@
       <Text layoutX="255.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่นสินค้า :" />
       <TextField layoutX="310.0" layoutY="100.0" />
       <Text layoutX="33.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สิ่งที่ต้องซ่อม :" />
-      <ListView layoutX="65.0" layoutY="187.0" prefHeight="81.0" prefWidth="491.0" />
+      <ListView editable="true" layoutX="65.0" layoutY="187.0" prefHeight="81.0" prefWidth="491.0" />
       <Text layoutX="33.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ต่องซ่อมไหม :" />
       <CheckBox layoutX="112.0" layoutY="135.0" mnemonicParsing="false" text="ซ่อม" />
       <CheckBox layoutX="200.0" layoutY="135.0" mnemonicParsing="false" text="ไม่ซ่อม" />
