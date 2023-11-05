@@ -94,6 +94,6 @@ public class UICtrl_Homepage {
 			throw e;
 		}
 	}
+}
 
 	
-}
