@@ -1,5 +1,6 @@
 # no vscode
 /.vscode/
+/build/*
 # no class file
 *.class
 # my 6410406576
