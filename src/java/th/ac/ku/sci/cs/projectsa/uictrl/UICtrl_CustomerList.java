@@ -64,7 +64,7 @@ public class UICtrl_CustomerList {
     }
     @FXML private void creatNewCustomer_Button() throws java.io.IOException, Throwable {
         try {
-            Main.switchToSpecificPagename("customer_data");
+            Main.switchToSpecificPagename("create_customer");
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
