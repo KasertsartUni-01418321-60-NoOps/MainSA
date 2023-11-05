@@ -16,25 +16,25 @@ public class UICtrl_Homepage {
 	}
 
 
-	// @FXML
-	// // TODO: exception handling
-	// private void initialize() {
-	// 	Object tmpt_obj= ((DatabaseMnm.Table)Main.globalVar.get("loggedinUserPartialTable")).cols[1].vals.get(0);
-	// 	DatabaseMnm.DataSpec.STATUS_User currentUserRole = DatabaseMnm.DataSpec.STATUS_User.values()[
-	// 			DatabaseMnm.convertIntegerAlikeSQLColToLong(
-	// 				tmpt_obj,
-	// 				tmpt_obj.getClass()
-	// 			).intValue()
-	// 	];
-	// 	if (currentUserRole==DatabaseMnm.DataSpec.STATUS_User.Employer) {
+	@FXML
+	// TODO: exception handling
+	private void initialize() {
+		Object tmpt_obj= ((DatabaseMnm.Table)Main.globalVar.get("loggedinUserPartialTable")).cols[1].vals.get(0);
+		DatabaseMnm.DataSpec.STATUS_User currentUserRole = DatabaseMnm.DataSpec.STATUS_User.values()[
+				DatabaseMnm.convertIntegerAlikeSQLColToLong(
+					tmpt_obj,
+					tmpt_obj.getClass()
+				).intValue()
+		];
+		if (currentUserRole==DatabaseMnm.DataSpec.STATUS_User.Employer) {
 			
-	// 	} else {
-	// 		button_Accounting.setDisable(true);
-	// 		button_BuyHist.setDisable(true);
-	// 		button_SellHist.setDisable(true);
-	// 	}
+		} else {
+			button_Accounting.setDisable(true);
+			button_BuyHist.setDisable(true);
+			button_SellHist.setDisable(true);
+		}
 
-	// }
+	}
 	
 	@FXML private Button button_ContactsList;
 	@FXML private void onPressed_Button_ContactsList()
