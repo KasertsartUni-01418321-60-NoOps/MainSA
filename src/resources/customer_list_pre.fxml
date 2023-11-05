@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_CustomerList">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_CustomerList">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME" onMouseClicked="#backHomepage">
