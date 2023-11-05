@@ -14,7 +14,7 @@ public class UICtrl_CustomerData {
     }
     @FXML private void onBack_Button() throws java.sql.SQLException, java.security.NoSuchAlgorithmException, Throwable {
         try {
-            Main.switchToSpecificPagename("homepage");
+            Main.switchToSpecificPagename("customer_list");
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
