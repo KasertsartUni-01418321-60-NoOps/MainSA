@@ -1,23 +1,23 @@
 package th.ac.ku.sci.cs.projectsa.uictrl;
 
 import th.ac.ku.sci.cs.projectsa.*;
+import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 import javafx.event.EventHandler;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 
 public class UICtrl_Warehouse {
 
     @FXML private ChoiceBox<String> choice;
-    
+    // LESSI TODO: ยี่ห้อสินค้า
     private String[] filter = {"ยี่ห้อ", "รุ่นสินค้า", "สถานะของสินค้า"};
 
     @FXML private ListView<ListViewRowDataWrapper> productListView;
     
 
     @FXML
-    private void initialize() throws Throwable{
+    private void initialize() throws java.sql.SQLException {
         choice.getItems().addAll(filter);
         choice.setValue(filter[0]);
         // TODO: คัดกรอง query จาก filter
@@ -71,7 +71,7 @@ public class UICtrl_Warehouse {
         }
     }
 
-    @FXML private void onBack_Button() throws java.sql.SQLException, java.security.NoSuchAlgorithmException, Throwable {
+    @FXML private void onBack_Button() throws java.sql.SQLException, java.security.NoSuchAlgorithmException,java.io.IOException {
         try {
             Main.switchToSpecificPagename("homepage");
         } catch (Throwable e) {

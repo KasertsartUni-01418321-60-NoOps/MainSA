@@ -30,7 +30,7 @@ public class UICtrl_Homepage {
 			if (currentUserRole==DatabaseMnm.DataSpec.STATUS_User.Employer) {
 				
 			} else {
-				// TODO: configure ตามความจำเป็น 
+				// TODO: EASY configure ตามความจำเป็น 
 				button_Accounting.setDisable(true);
 				button_BuyHist.setDisable(true);
 				button_SellHist.setDisable(true);

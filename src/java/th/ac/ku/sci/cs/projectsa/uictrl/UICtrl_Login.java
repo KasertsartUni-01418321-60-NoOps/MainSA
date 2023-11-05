@@ -23,7 +23,7 @@ public class UICtrl_Login {
 	@FXML
 	private void initialize() {
 			// [DEBUG ZONE]
-			// TODO: after debug we can remove this lamo
+			// TODO: EASY after debug we can remove this lamo
 			// REMKAR: this is temporary, so no need to do exception handling at this code
 			textField_userName.setText("SOMchoke");
 			passwordField_passWord.setText("SC45-774");
