@@ -56,8 +56,10 @@ public class UICtrl_Warehouse {
                     try {
                         if (event.getClickCount() >= 2) {
                             ListViewRowDataWrapper tmpt_lvrdw = productListView.getSelectionModel().getSelectedItem();
-                            // TODO: แสดงรายละเอียดของสินค้า
-                            Main.switchToSpecificPagename("product_detail",tmpt_lvrdw);
+                            if (tmpt_lvrdw!=null ) {
+                                // TODO: แสดงรายละเอียดของสินค้า
+                                Main.switchToSpecificPagename("product_detail",tmpt_lvrdw);
+                            }
                         }
                     } catch (Throwable e) {
                         MyExceptionHandling.handleFatalException(e);
