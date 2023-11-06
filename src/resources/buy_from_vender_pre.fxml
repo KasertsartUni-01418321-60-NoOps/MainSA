@@ -2,8 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -19,20 +17,19 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="33.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า :" />
-      <Text layoutX="33.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานที่ตรวจ  :" />
-      <TextField fx:id="textField_custName" layoutX="89.0" layoutY="92.0" />
-      <TextArea fx:id="textArea_MeetLoc" layoutX="107.0" layoutY="135.0" prefHeight="54.0" prefWidth="450.0" />
+      <Text layoutX="14.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า :" />
+      <Text layoutX="324.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อ :" />
+      <Text layoutX="340.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่น :" />
+      <Text layoutX="29.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานที่ตรวจ  :" />
+      <TextField fx:id="textField_custName" layoutX="74.0" layoutY="54.0" prefHeight="31.0" prefWidth="300.0" />
+      <TextField fx:id="textField_brand" layoutX="381.0" layoutY="101.0" />
+      <TextField fx:id="textField_model" layoutX="381.0" layoutY="151.0" />
+      <TextArea fx:id="textArea_MeetLoc" layoutX="138.0" layoutY="200.0" prefHeight="54.0" prefWidth="450.0" />
       <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBack_Button" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ" />
-      <Text layoutX="33.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID สินค้า:" />
-      <TextField fx:id="textField_PdId" layoutX="89.0" layoutY="195.0" prefHeight="26.0" prefWidth="120.0" />
-      <Text layoutX="419.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาซื้อ  :" />
       <Button layoutX="419.0" layoutY="361.0" mnemonicParsing="false" onAction="#onpressed_Button_Save" styleClass="POSHIGHLIGHT" text="บันทึก" />
-      <Text layoutX="249.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="วันที่ตรวจ :" />
-      <DatePicker fx:id="datePicker_MeetDate" layoutX="308.0" layoutY="92.0" />
-      <Text layoutX="33.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="บันทึกสภาพสินค้า :" />
-      <TextArea fx:id="textArea_PdLooks" layoutX="89.0" layoutY="270.0" prefHeight="78.0" prefWidth="450.0" />
-      <Spinner fx:id="spinnerDouble_PaidPrice" editable="true" layoutX="476.0" layoutY="195.0" prefHeight="31.0" prefWidth="101.0">
-      </Spinner>
+      <Text layoutX="80.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="วันที่ตรวจ :" />
+      <DatePicker fx:id="datePicker_MeetDate" layoutX="158.0" layoutY="117.0" prefHeight="31.0" prefWidth="132.0" />
+      <Text layoutX="20.0" layoutY="285.0" strokeType="OUTSIDE" strokeWidth="0.0" text="บันทึกสภาพสินค้า :" />
+      <TextArea fx:id="textArea_PdLooks" layoutX="138.0" layoutY="269.0" prefHeight="78.0" prefWidth="450.0" />
    </children>
 </AnchorPane>
