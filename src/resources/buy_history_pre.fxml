@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -16,14 +16,11 @@
          </font>
       </Text>
       <Button layoutX="513.0" layoutY="355.0" mnemonicParsing="false" onAction="#onBack_Button" text="ย้อนกลับ" styleClass="NEGHIGHLIGHT"/>
-      <ScrollPane layoutX="48.0" layoutY="137.0" prefHeight="200.0" prefWidth="519.0">
-        <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-        </content>
-      </ScrollPane>
+      <ListView fx:id="srListView" layoutX="48.0" layoutY="137.0" prefHeight="200.0" prefWidth="519.0">
+      </ListView>
       <Text layoutX="280.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="เรียงตาม:" />
-      <Button layoutX="337.0" layoutY="86.0" mnemonicParsing="false" text="วันที่ล่าสุด" />
-      <Button layoutX="418.0" layoutY="85.0" mnemonicParsing="false" text="สถานะสินค้า" />
+      <Button layoutX="337.0" layoutY="86.0" mnemonicParsing="false" text="วันที่ล่าสุด" fx:id="button_sortByDate" onAction="#onpressed_Button_sortByDate"/>
+      <Button layoutX="418.0" layoutY="85.0" mnemonicParsing="false" text="สถานะสินค้า" fx:id="button_sortByPdStatus" onAction="#onpressed_Button_sortByPdStatus" />
       <Button layoutX="48.0" layoutY="355.0" mnemonicParsing="false" onAction="#onCreatePurchase_Button" text="สร้างสัญญาซื้อ" styleClass="POSHIGHLIGHT" />
    </children>
 </AnchorPane>
