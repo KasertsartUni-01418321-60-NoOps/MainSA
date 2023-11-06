@@ -24,7 +24,11 @@ public class UICtrl_CreateCustomer {
             DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON tmpReason;
             tmpReason = DataValidation.PerAttributeValidation
                     .check__CUSTOMER__Customer_Full_Name(formval_customerName);
-            if (tmpReason != null) {
+            if  (tmpReason == DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+                onPressed_Button_CreateCustomer__Helper2();
+				return;
+            }
+            else if (tmpReason != null) {
                 onPressed_Button_CreateCustomer__Helper1();
 				return;
             }
@@ -71,6 +75,12 @@ public class UICtrl_CreateCustomer {
         Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเพิ่มข้อมูลผิดพลาด",
 						"ไม่สามารถเพ่ิมข้อมูลลูกค้าได้ เนื่องจากกรอกข้อมูลลูกค้าผิดรูปแบบ", null, false);
     }
+// เหมือนแบบบน แต่แจ้งว่า existed Customer LAMO
+ private void onPressed_Button_CreateCustomer__Helper2() {
+        Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเพิ่มข้อมูลผิดพลาด",
+						"ไม่สามารถเพ่ิมข้อมูลลูกค้าได้ เนื่องจากมีชื่อลูกค้านี้อยู่แล้ว", null, false);
+    }
+
 	@FXML 
     private void onPress_Back_To_CustomerList() throws java.io.IOException {
 		try{
