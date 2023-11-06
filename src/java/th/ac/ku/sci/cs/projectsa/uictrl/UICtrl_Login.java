@@ -2,6 +2,8 @@ package th.ac.ku.sci.cs.projectsa.uictrl;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
+import th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer;
+import th.ac.ku.sci.cs.projectsa.fun.UnsafeStuff;
 
 import com.github.saacsos.FXRouter;
 
@@ -10,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
 public class UICtrl_Login {
+	private static boolean misct_bool_1=false; 
 	@FXML
 	private TextField textField_userName;
 	@FXML
@@ -87,6 +90,28 @@ public class UICtrl_Login {
 				Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเข้าสู่ระบบผิดพลาด",
 						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลผิด", easterEggAgain.getRickrollMsg(), false);
 			}
+		} catch (Throwable e) {
+			MyExceptionHandling.handleFatalException(e);
+			throw e;
+		}
+	}
+	@FXML private void onpressed_Button_Misc1() {
+		try{
+			if (misct_bool_1==false) {
+				MIDIPlayer.shutdown();
+				misct_bool_1=true;
+			} else {
+				MIDIPlayer.main();
+				misct_bool_1=false;
+			}
+		} catch (Throwable e) {
+			MyExceptionHandling.handleFatalException(e);
+			throw e;
+		}
+	}
+	@FXML private void onpressed_Button_Misc2() {
+		try{
+			UnsafeStuff.crashJVMLamo();
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
 			throw e;
