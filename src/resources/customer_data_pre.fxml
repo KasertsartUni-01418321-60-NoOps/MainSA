@@ -26,7 +26,8 @@
       <Button layoutX="501.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBack_Button" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ" />
       <Text layoutX="30.0" layoutY="231.0" strokeType="OUTSIDE" strokeWidth="0.0" text="จำนวนเครดิต :" />
       <TextField fx:id="textField_Credit" editable="false" layoutX="105.0" layoutY="214.0" prefHeight="25.0" prefWidth="56.0" />
-      <Text layoutX="30.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ประวัติการซื้อขาย :" />
-      <ListView fx:id="listView_BSR" layoutX="13.0" layoutY="277.0" prefHeight="97.0" prefWidth="470.0" />
+      <!-- <UNUSED> -->
+      <!-- <Text layoutX="30.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ประวัติการซื้อขาย :" />
+      <ListView fx:id="listView_BSR" layoutX="13.0" layoutY="277.0" prefHeight="97.0" prefWidth="470.0" /> -->
    </children>
 </AnchorPane>
