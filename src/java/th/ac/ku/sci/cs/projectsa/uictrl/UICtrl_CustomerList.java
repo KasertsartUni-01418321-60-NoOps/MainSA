@@ -5,6 +5,7 @@ import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 
 public class UICtrl_CustomerList {
@@ -22,12 +23,25 @@ public class UICtrl_CustomerList {
                         if (event.getClickCount() >= 2) {
                             ListViewRowDataWrapper tmpt_lvrdw = custListView.getSelectionModel().getSelectedItem();
                             if (tmpt_lvrdw!=null) {
-                            Main.switchToSpecificPagename("customer_data",tmpt_lvrdw);
+                            Main.switchToSpecificPagename("customer_data",new Object[] {this.getClass(),tmpt_lvrdw});
                             }
                         }
                     } catch (Throwable e) {
                         MyExceptionHandling.handleFatalException(e);
                     }
+                }
+            });
+            // SAME AS ABOVE LAMO
+            custListView.setOnKeyPressed(event -> {
+                try {
+                    if (event.getCode() == KeyCode.ENTER) {
+                        ListViewRowDataWrapper tmpt_lvrdw = custListView.getSelectionModel().getSelectedItem();
+                        if (tmpt_lvrdw!=null) {
+                        Main.switchToSpecificPagename("customer_data",new Object[] {this.getClass(),tmpt_lvrdw});
+                        }
+                    }
+                } catch (Throwable e) {
+                    MyExceptionHandling.handleFatalException(e);
                 }
             });
         }
@@ -67,7 +81,7 @@ public class UICtrl_CustomerList {
         try {
             tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
                     null,
-                    "SELECT Customer_Full_Name FROM Customer WHERE Customer_Full_Name LIKE ?",
+                    "SELECT Customer_Full_Name FROM Customer WHERE Customer_Full_Name LIKE ? ORDER BY Customer_Full_Name",
                     false,
                     true,
                     null,

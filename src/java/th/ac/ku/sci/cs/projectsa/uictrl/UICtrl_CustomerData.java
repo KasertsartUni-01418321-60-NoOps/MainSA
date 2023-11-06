@@ -19,7 +19,7 @@ public class UICtrl_CustomerData {
 
     @FXML private void initialize() throws java.sql.SQLException {
         try {
-            String custName =( (ListViewRowDataWrapper)com.github.saacsos.FXRouter.getData()).ref;
+            String custName =((ListViewRowDataWrapper) ((Object[])com.github.saacsos.FXRouter.getData())[1]).ref;
             DatabaseMnm.Table tmpc_SQLTable = null;
             try {
                 tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
