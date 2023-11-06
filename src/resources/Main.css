@@ -13,6 +13,11 @@
 	-general-effect-shadowdrop-hover: dropshadow(three-pass-box, rgba(0, 0, 0, 0.2), 10, 0, 0, 2.5);
 	-fx-background-color: linear-gradient(to bottom, rgb(255, 204, 0), rgb(255, 153, 0));
 }
+
+/* TextArea,ListView มีแค่ effect เพราะ ตั้ง สี bg ไม่ได้ LAMO */
+TextArea,ListView {
+	-fx-effect: -general-effect-shadowdrop;
+}
 TextField,PasswordField {
 	-fx-text-fill: -general-text-color--lighten;
 	-fx-background-color: -primary-color--lighten;
@@ -32,6 +37,10 @@ Button {
 Button:hover,TextField:hover,PasswordField:hover {
 	-fx-background-color: -general-text-color;
 	-fx-text-fill: -primary-color;
+	-fx-effect: -general-effect-shadowdrop-hover;
+}
+/* see above remark */
+TextArea:hover,ListView:hover {
 	-fx-effect: -general-effect-shadowdrop-hover;
 }
 /* For class selecion */

@@ -21,6 +21,6 @@
       <Button layoutX="268.0" layoutY="100.0" mnemonicParsing="false" onAction="#searchCustomer_Button" text="ค้นหา" />
       <Button layoutX="394.0" layoutY="98.0" mnemonicParsing="false" onAction="#creatNewCustomer_Button" prefHeight="25.0" prefWidth="132.0" styleClass="POSHIGHLIGHT" text="สร้างลูกค้าใหม่" />
       <ListView fx:id="custListView" layoutX="18.0" layoutY="145.0" prefHeight="191.0" prefWidth="562.0" />
-      <Button layoutX="512.0" layoutY="359.0" mnemonicParsing="false" onAction="#onBack_Button" style="-fx-background-color: #FF3C3C;" text="ย้อนกลับ" />
+      <Button layoutX="512.0" layoutY="359.0" mnemonicParsing="false" onAction="#onBack_Button" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ" />
    </children>
 </AnchorPane>

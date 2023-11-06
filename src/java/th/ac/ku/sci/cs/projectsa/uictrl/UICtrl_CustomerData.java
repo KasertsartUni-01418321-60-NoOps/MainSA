@@ -11,7 +11,7 @@ import javafx.scene.control.*;
 
 public class UICtrl_CustomerData {
     @FXML private TextField textField_Name;
-    @FXML private TextField textField_Addr;
+    @FXML private TextArea textArea_Addr;
     @FXML private TextField textField_Tel;
     @FXML private TextField textField_Credit;
     @FXML private ListView<ListViewRowDataWrapper> listView_BSR;
@@ -35,8 +35,13 @@ public class UICtrl_CustomerData {
                 throw e;
             }
             textField_Name.setText(custName);
-            // TODO: ADDR is nullable
-            //textField_Addr.setText((String)(tmpc_SQLTable.cols[1].vals.get(0)));
+            String tmpt_str =  (String) (tmpc_SQLTable.cols[1].vals.get(0));            
+            if (tmpt_str!=null) { 
+                textArea_Addr.setText(tmpt_str);
+            } else {
+                textArea_Addr.setText("<ว่างเปล่า>");
+                textArea_Addr.setDisable(true);
+            }
             textField_Tel.setText((String)(tmpc_SQLTable.cols[2].vals.get(0)));
             textField_Credit.setText(
                 DatabaseMnm.convertIntegerAlikeSQLColToLong(
