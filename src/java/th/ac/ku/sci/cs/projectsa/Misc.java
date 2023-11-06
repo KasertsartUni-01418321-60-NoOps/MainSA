@@ -85,6 +85,19 @@ public class Misc {
             throw e; // it should not raise it unless poor JRE lamo
         }		
 	}
+    
+    public static String generateRandomID() {
+        char[] charArray = {
+            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+            'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+        };
+        char[] retval = new char[8];
+        for (int i = 0; i < 8; i++) {
+            retval[i]=charArray[new java.util.Random().nextInt(charArray.length)];
+        }
+        return new String(retval);
+    }
     public static class ListViewRowDataWrapper {
         public final String ref;
         public final String repr;
