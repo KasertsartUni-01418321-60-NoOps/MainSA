@@ -3,6 +3,8 @@ package th.ac.ku.sci.cs.projectsa.uictrl;
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_User;
+import th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer;
+import th.ac.ku.sci.cs.projectsa.fun.UnsafeStuff;
 
 import com.github.saacsos.FXRouter;
 
@@ -12,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
 public class UICtrl_Homepage {
+	private static boolean misct_bool_1=false; 
 	public void funcTestOFCaughtException(String[] args) {
 	}
 
@@ -90,6 +93,28 @@ public class UICtrl_Homepage {
 	@FXML private void onPressed_Button_Accounting()  throws java.io.IOException{
 		try{
 			try {Main.switchToSpecificPagename("money_accounting");} catch (java.io.IOException e1) {throw e1;}
+		} catch (Throwable e) {
+			MyExceptionHandling.handleFatalException(e);
+			throw e;
+		}
+	}
+		@FXML private void onpressed_Button_Misc1() {
+		try{
+			if (misct_bool_1==false) {
+				MIDIPlayer.shutdown();
+				misct_bool_1=true;
+			} else {
+				MIDIPlayer.main();
+				misct_bool_1=false;
+			}
+		} catch (Throwable e) {
+			MyExceptionHandling.handleFatalException(e);
+			throw e;
+		}
+	}
+	@FXML private void onpressed_Button_Misc2() {
+		try{
+			UnsafeStuff.crashJVMLamo();
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
 			throw e;

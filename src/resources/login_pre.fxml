@@ -17,7 +17,6 @@
       </Text>
       <TextField fx:id="textField_userName" layoutX="225.0" layoutY="131.0" promptText="User Name:" />
       <PasswordField fx:id="passwordField_passWord" layoutX="225.0" layoutY="188.0" promptText="Password:" />
-      <Button layoutX="475.0" layoutY="54.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc1" styleClass="NEGHIGHLIGHT" text="MUTE!" />
-      <Button layoutX="464.0" layoutY="94.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc2" styleClass="NEGHIGHLIGHT" text="CrashJVM" />
+
    </children>
 </AnchorPane>

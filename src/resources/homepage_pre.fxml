@@ -6,8 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" stylesheets="resources/Main.css" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_Homepage">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_Homepage">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME">
@@ -15,35 +14,37 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="29.0" layoutY="83.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="รายชื่อลูกค้า" onAction="#onPressed_Button_ContactsList" fx:id="button_ContactsList">
+      <Button fx:id="button_ContactsList" layoutX="29.0" layoutY="83.0" mnemonicParsing="false" onAction="#onPressed_Button_ContactsList" prefHeight="91.0" prefWidth="141.0" text="รายชื่อลูกค้า">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="230.0" layoutY="83.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="รายการสินค้า" onAction="#onPressed_Button_Warehouse" fx:id="button_Warehouse">
+      <Button fx:id="button_Warehouse" layoutX="230.0" layoutY="83.0" mnemonicParsing="false" onAction="#onPressed_Button_Warehouse" prefHeight="91.0" prefWidth="141.0" text="รายการสินค้า">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="419.0" layoutY="83.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="ตารางเวลา" onAction="#onPressed_Button_Planner" fx:id="button_Planner">
+      <Button fx:id="button_Planner" layoutX="419.0" layoutY="83.0" mnemonicParsing="false" onAction="#onPressed_Button_Planner" prefHeight="91.0" prefWidth="141.0" text="ตารางเวลา">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="29.0" layoutY="227.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="ประวัติการซื้อ" onAction="#onPressed_Button_BuyHist" fx:id="button_BuyHist">
+      <Button fx:id="button_BuyHist" layoutX="29.0" layoutY="227.0" mnemonicParsing="false" onAction="#onPressed_Button_BuyHist" prefHeight="91.0" prefWidth="141.0" text="ประวัติการซื้อ">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="230.0" layoutY="227.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="ประวัติการขาย" onAction="#onPressed_Button_SellHist" fx:id="button_SellHist">
+      <Button fx:id="button_SellHist" layoutX="230.0" layoutY="227.0" mnemonicParsing="false" onAction="#onPressed_Button_SellHist" prefHeight="91.0" prefWidth="141.0" text="ประวัติการขาย">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="419.0" layoutY="227.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="141.0" text="บัญชีฯ" onAction="#onPressed_Button_Accounting" fx:id="button_Accounting">
+      <Button fx:id="button_Accounting" layoutX="419.0" layoutY="227.0" mnemonicParsing="false" onAction="#onPressed_Button_Accounting" prefHeight="91.0" prefWidth="141.0" text="บัญชีฯ">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
+      <Button layoutX="410.0" layoutY="14.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc1" styleClass="NEGHIGHLIGHT" text="MUTE!" />
+      <Button layoutX="490.0" layoutY="14.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc2" styleClass="NEGHIGHLIGHT" text="CrashJVM" />
    </children>
 </AnchorPane>
