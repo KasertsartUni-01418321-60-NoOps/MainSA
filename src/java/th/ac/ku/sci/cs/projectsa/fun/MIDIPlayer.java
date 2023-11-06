@@ -34,9 +34,15 @@ public class MIDIPlayer {
 
 	public static void shutdown() {
 		if (doingShutdown == false) {
+			System.out.println(Main.clReportHeader("MIDIPlayer:<mainThread-function>", "DEVFUNDEBUG")
+							+ "Shutdown requested.");
 			doingShutdown = true;
 			try {
 				mainSequencer.stop();
+			} catch (Exception e) {
+			}
+			try {
+				mainThread.awaitTermination(5, java.util.concurrent.TimeUnit.SECONDS);
 			} catch (Exception e) {
 			}
 			try {
@@ -59,10 +65,13 @@ public class MIDIPlayer {
 				mainSynthesizer.close();
 			} catch (Exception e) {
 			}
+			System.out.println(Main.clReportHeader("MIDIPlayer:<mainThread-function>", "DEVFUNDEBUG")
+						+ "Shutdown process finished.");
 		}
 	}
 
 	public static void realMain() throws MyExceptionHandling.UserException, MidiUnavailableException {
+		doingShutdown=false;
 		for (String arg :Main.args) {
 			if (arg.equals("--MiscFunFlag+tellMIDISongname")||arg.equals("-MiscFunFlag+tellMIDISongname")) {
 				MIDIPlayer.tellSongName=true;

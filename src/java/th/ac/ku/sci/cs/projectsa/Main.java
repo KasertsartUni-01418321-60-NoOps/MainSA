@@ -1,6 +1,9 @@
 package th.ac.ku.sci.cs.projectsa;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
+
+import java.io.File;
+
 import th.ac.ku.sci.cs.projectsa.*;
 
 public class Main extends javafx.application.Application {
@@ -16,6 +19,8 @@ public class Main extends javafx.application.Application {
     public static void main(String[] args) throws java.io.UnsupportedEncodingException,java.sql.SQLException,java.io.IOException,java.security.NoSuchAlgorithmException {
         boolean isFriendlyException = false;
         try {
+            String jarParentDirectoryPath = (new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath())).getParentFile().getAbsolutePath();
+            System.setProperty("user.dir", jarParentDirectoryPath);
             System.setProperty("file.encoding", "UTF-8");
             try {
                 System.setOut(new java.io.PrintStream(System.out, true, "UTF-8"));
