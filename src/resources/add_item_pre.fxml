@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -17,13 +18,12 @@
          </font>
       </Text>
       <Button layoutX="505.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBack_Button" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ" />
-      <Text layoutX="35.0" layoutY="178.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รายละเอียดการซ่อม :" />
-      <ListView layoutX="35.0" layoutY="189.0" prefHeight="53.0" prefWidth="528.0" />
+      <Text layoutX="35.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รายละเอียดการซ่อม :" />
       <Text layoutX="33.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รหัสสินค้า :" />
-      <Text layoutX="35.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="แนบไฟล์รูป :" />
-      <TextField layoutX="95.0" layoutY="91.0" />
-      <Button layoutX="430.0" layoutY="361.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="51.0" styleClass="POSHIGHLIGHT" text="บันทึก" />
-      <Text layoutX="37.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาขาย :" />
-      <TextField layoutX="94.0" layoutY="288.0" prefHeight="25.0" prefWidth="114.0" />
+      <TextField fx:id="productID" layoutX="95.0" layoutY="91.0" />
+      <Button layoutX="425.0" layoutY="361.0" mnemonicParsing="false" onAction="#onpressed_Button_Save" prefHeight="26.0" prefWidth="56.0" styleClass="POSHIGHLIGHT" text="บันทึก" />
+      <Text layoutX="34.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาขาย :" />
+      <Spinner fx:id="creatPrice" layoutX="95.0" layoutY="300.0" />
+      <TextArea fx:id="repairDetail" layoutX="33.0" layoutY="181.0" prefHeight="104.0" prefWidth="536.0" />
    </children>
 </AnchorPane>
