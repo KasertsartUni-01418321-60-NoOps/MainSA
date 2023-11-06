@@ -60,11 +60,6 @@ public class Main extends javafx.application.Application {
             }
             try {
                 DatabaseMnm.mainDbInit();
-                System.out.println(
-                        Main.clReportHeader(null, "DEVTEST") + "this is test of create our db and print them lamo:");
-                System.out.println(Main.clReportHeader(null, "DEVTEST") + "<ZONE START>");
-                DatabaseMnm.demo_printOurInitTableLAMO();
-                System.out.println(Main.clReportHeader(null, "DEVTEST") + "<ZONE END>");
             } catch (java.sql.SQLException e1) {
                 isFriendlyException = true;
                 MyExceptionHandling.handleFatalException_simplev1(e1, true,"MainApp|DatabaseMnm", null,null,"<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>" );
