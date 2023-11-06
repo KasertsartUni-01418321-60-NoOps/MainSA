@@ -38,7 +38,7 @@ public class UICtrl_AddItem {
 
     @FXML private void onBack_Button() throws java.sql.SQLException, java.security.NoSuchAlgorithmException, Throwable {
         try {
-            Main.switchToSpecificPagename("homepage");
+            Main.switchToSpecificPagename("warehouse");
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
