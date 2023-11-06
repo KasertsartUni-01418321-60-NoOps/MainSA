@@ -28,8 +28,8 @@ public class UICtrl_Login {
 			// [DEBUG ZONE]
 			// TODO: EASY after debug we can remove this lamo
 			// REMKAR: this is temporary, so no need to do exception handling at this code
-			textField_userName.setText("SOMchoke");
-			passwordField_passWord.setText("SC45-774");
+			// textField_userName.setText("");
+			// passwordField_passWord.setText("");
 			// [END ZONE]
 	}
 	

@@ -5,6 +5,7 @@ import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataTransformation;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation;
 import javafx.fxml.*;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
@@ -66,6 +67,10 @@ public class UICtrl_BuyFromVendor {
                 helper1();
                 return;
             }
+            if (!DatabaseMnm.DataValidation.ForMoreBussinessConstraint.checkDateAsEpochTimeIsNotPast(formval_meetDate)) {
+                helper3();
+                return;
+            }
             tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Meet_Location(formval_custLoc);
             if (tmpReason != null) {
                 helper1();
@@ -119,11 +124,15 @@ public class UICtrl_BuyFromVendor {
     }
     private void helper1() {
         Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเพิ่มข้อมูลผิดพลาด",
-						"ไม่สามารถเพ่ิมข้อมูลลูกค้าได้ เนื่องจากกรอกข้อมูลผิดรูปแบบ", null, false);
+						"ไม่สามารถเพ่ิมข้อมูลสัญญาชื้อได้", "เนื่องจากกรอกข้อมูลผิดรูปแบบ", false);
     }
     private void helper2() {
         Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเพิ่มข้อมูลผิดพลาด",
-						"ไม่สามารถเพ่ิมข้อมูลลูกค้าได้ เนื่องจากชื่อลูกค้าที่กรอกไม่มีอยู่ โปรดตรวจสอบชื่อฯให้ถูกต้องทุกตัวอักษร", null, false);
+						"ไม่สามารถเพ่ิมข้อมูลสัญญาชื้อได้", "เนื่องจากชื่อลูกค้าที่กรอกไม่มีอยู่ โปรดตรวจสอบชื่อฯให้ถูกต้องทุกตัวอักษร", false);
+    }
+    private void helper3() {
+        Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเพิ่มข้อมูลผิดพลาด",
+						"ไม่สามารถเพ่ิมข้อมูลสัญญาชื้อได้","เนื่องจากวันที่ไม่ใช่วันนี้หรือเวลาในอนาคต", false);
     }
 }
 

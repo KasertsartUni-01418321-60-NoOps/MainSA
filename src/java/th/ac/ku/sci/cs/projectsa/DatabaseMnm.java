@@ -64,13 +64,13 @@ public class DatabaseMnm {
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:" + mainDbPath);
 			DatabaseMnm.runSQLcmds(null, sqlStms_0, true, false, null, null);
 			// PART 1:
-			String SD_User_Name_Admin = "SOMchoke";
-			String SD_User_Password_Admin = "SC45-774";
+			String SD_User_Name_Admin = "nobody";
+			String SD_User_Password_Admin = "nopassword";
 			Long SD_User_Role_Admin = (long) 0;
 			String SD_User_Name = "kasertsart";
 			String SD_User_Password = "UNIVERSITY";
 			Long SD_User_Role = (long) 1;
-			String SD_Customer_Full_Name = "สมโชค เรืองอิทธินันท์";
+			String SD_Customer_Full_Name = "นามสมมุติ ไม่มีสกุล";
 			String SD_Customer_Address = "เลขที่ 50 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร กรุงเทพฯ 10900";
 			String SD_Customer_Telephone_Number = "+662942820045";
 			Long SD_Customer_Credit_Amount = (long) 500;
@@ -1816,6 +1816,12 @@ public class DatabaseMnm {
 				}
 			}
 
+		}
+		public static class ForMoreBussinessConstraint {
+			public static boolean checkDateAsEpochTimeIsNotPast(Long val) {
+				Long tmpt_long = java.time.LocalDate.now().toEpochDay()*86400+43200-1;
+				return val>=tmpt_long;
+			}
 		}
 	}
 
