@@ -22,7 +22,7 @@ public class UICtrl_BuyData {
     @FXML private TextField textField_PaidAmount;
     @FXML private TextField textField_Status;
 
-    @FXML private void initialize() throws java.sql.SQLException {
+    @FXML private void initialize() {
         try {
             // String custName =((ListViewRowDataWrapper) ((Object[])com.github.saacsos.FXRouter.getData())[1]).ref;
             // DatabaseMnm.Table tmpc_SQLTable = null;
@@ -61,7 +61,7 @@ public class UICtrl_BuyData {
     } 
     @FXML private void onBack_Button() throws java.io.IOException {
         try {
-            Main.switchToSpecificPagename("customer_list");
+            Main.switchToSpecificPagename("buy_history");
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;

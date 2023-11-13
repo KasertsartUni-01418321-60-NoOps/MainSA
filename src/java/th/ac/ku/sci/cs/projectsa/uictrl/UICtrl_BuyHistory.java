@@ -26,7 +26,7 @@ public class UICtrl_BuyHistory {
                         if (event.getClickCount() >= 2) {
                             ListViewRowDataWrapper tmpt_lvrdw = srListView.getSelectionModel().getSelectedItem();
                             if (tmpt_lvrdw!=null) {
-                            Main.switchToSpecificPagename("customer_data",new Object[] {this.getClass(),tmpt_lvrdw});
+                            Main.switchToSpecificPagename("buy_data",new Object[] {this.getClass(),tmpt_lvrdw});
                             }
                         }
                     } catch (Throwable e) {
