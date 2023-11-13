@@ -356,7 +356,6 @@ public class DatabaseMnm {
 	// that class lamo
 	// REMARK: if keepStatementOpen==null then close statement and do not return, if
 	// ==false then same as ==null but also return, otherwise it don't be closed.
-	// TODO: [EASY+LESSI+NOTREQUIREDACTUALLY] try-catch all .close() in try clause?
 	public static Object[] runSQLcmd(java.sql.Connection dbConn, String sqlStm, boolean skipGetResultSet,
 			boolean TableInsteadOfResultSet, Boolean keepStatementOpen, Object[] params) throws java.sql.SQLException {
 		if (dbConn == null) {
@@ -426,11 +425,11 @@ public class DatabaseMnm {
 			if (tmp1) {
 				if (skipGetResultSet) {
 					if (keepStatementOpen == null) {
-						tmp_stm.close();
+						try{tmp_stm.close();} catch (Throwable e0) {System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")+ "Statement closing have exception. Stacktrace is below:");e0.printStackTrace();}
 						return new Object[] { true, null, null };
 					} else {
 						if (keepStatementOpen != null && keepStatementOpen== false) {
-							tmp_stm.close();
+							try{tmp_stm.close();} catch (Throwable e0) {System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")+ "Statement closing have exception. Stacktrace is below:");e0.printStackTrace();}
 						}
 						return new Object[] { true, null, tmp_stm };
 					}
@@ -443,7 +442,7 @@ public class DatabaseMnm {
 						return new Object[] { true, tmp, tmp_stm };
 					} else {
 						if (TableInsteadOfResultSet) {
-							tmp_stm.close();
+							try{tmp_stm.close();} catch (Throwable e0) {System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")+ "Statement closing have exception. Stacktrace is below:");e0.printStackTrace();}
 							if (keepStatementOpen != null &&keepStatementOpen==false) {
 								return new Object[] { true, tmp, tmp_stm };
 							} else {
@@ -466,21 +465,21 @@ public class DatabaseMnm {
 				int tmp2 = tmp_stm.getUpdateCount();
 				if (tmp2 == -1) {
 					if (keepStatementOpen == null) {
-						tmp_stm.close();
+						try{tmp_stm.close();} catch (Throwable e0) {System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")+ "Statement closing have exception. Stacktrace is below:");e0.printStackTrace();}
 						return new Object[] { null, null, null };
 					} else {
 						if (keepStatementOpen != null &&keepStatementOpen == false) {
-							tmp_stm.close();
+							try{tmp_stm.close();} catch (Throwable e0) {System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")+ "Statement closing have exception. Stacktrace is below:");e0.printStackTrace();}
 						}
 						return new Object[] { null, null, tmp_stm };
 					}
 				} else {
 					if (keepStatementOpen == null) {
-						tmp_stm.close();
+						try{tmp_stm.close();} catch (Throwable e0) {System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")+ "Statement closing have exception. Stacktrace is below:");e0.printStackTrace();}
 						return new Object[] { false, tmp2, null };
 					} else {
 						if (keepStatementOpen != null &&keepStatementOpen == false) {
-							tmp_stm.close();
+							try{tmp_stm.close();} catch (Throwable e0) {System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")+ "Statement closing have exception. Stacktrace is below:");e0.printStackTrace();}
 						}
 						return new Object[] { false, tmp2, tmp_stm };
 					}
