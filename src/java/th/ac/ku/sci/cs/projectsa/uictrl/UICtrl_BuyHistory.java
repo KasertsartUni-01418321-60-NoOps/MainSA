@@ -4,6 +4,9 @@ import javafx.fxml.FXML;
 import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Selling_Request;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
+
+import java.io.IOException;
+
 import javafx.event.EventHandler;
 import javafx.fxml.*;
 import javafx.scene.control.*;
@@ -24,10 +27,7 @@ public class UICtrl_BuyHistory {
                 public void handle(MouseEvent event) {
                     try {
                         if (event.getClickCount() >= 2) {
-                            ListViewRowDataWrapper tmpt_lvrdw = srListView.getSelectionModel().getSelectedItem();
-                            if (tmpt_lvrdw!=null) {
-                            Main.switchToSpecificPagename("buy_data",new Object[] {this.getClass(),tmpt_lvrdw});
-                            }
+                            helper_changePageForViewDataOfRow();
                         }
                     } catch (Throwable e) {
                         MyExceptionHandling.handleFatalException(e);
@@ -38,10 +38,7 @@ public class UICtrl_BuyHistory {
             srListView.setOnKeyPressed(event -> {
                 try {
                     if (event.getCode() == KeyCode.ENTER) {
-                        ListViewRowDataWrapper tmpt_lvrdw = srListView.getSelectionModel().getSelectedItem();
-                            if (tmpt_lvrdw!=null) {
-                            Main.switchToSpecificPagename("customer_data",new Object[] {this.getClass(),tmpt_lvrdw});
-                            }
+                        helper_changePageForViewDataOfRow();
                     }
                 } catch (Throwable e) {
                     MyExceptionHandling.handleFatalException(e);
@@ -63,6 +60,27 @@ public class UICtrl_BuyHistory {
     @FXML private void onCreatePurchase_Button() throws java.io.IOException {
         try {
             Main.switchToSpecificPagename("buy_from_vender");
+        } catch (Throwable e) {
+            MyExceptionHandling.handleFatalException(e);
+            throw e;
+        }
+    }
+    
+    @FXML private void onpressed_Button_sortByPdStatus() throws java.sql.SQLException {
+        try {
+            helper_listViewUpdate(1);
+            button_sortByDate.setDisable(false);
+            button_sortByPdStatus.setDisable(true);
+        } catch (Throwable e) {
+            MyExceptionHandling.handleFatalException(e);
+            throw e;
+        }
+    }
+    @FXML private void onpressed_Button_sortByDate() throws java.sql.SQLException {
+        try {
+            helper_listViewUpdate(-1);
+            button_sortByDate.setDisable(true);
+            button_sortByPdStatus.setDisable(false);
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
@@ -113,25 +131,10 @@ public class UICtrl_BuyHistory {
         }
         srListView.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
     }
-
-    @FXML private void onpressed_Button_sortByPdStatus() throws java.sql.SQLException {
-        try {
-            helper_listViewUpdate(1);
-            button_sortByDate.setDisable(false);
-            button_sortByPdStatus.setDisable(true);
-        } catch (Throwable e) {
-            MyExceptionHandling.handleFatalException(e);
-            throw e;
-        }
-    }
-    @FXML private void onpressed_Button_sortByDate() throws java.sql.SQLException {
-        try {
-            helper_listViewUpdate(-1);
-            button_sortByDate.setDisable(true);
-            button_sortByPdStatus.setDisable(false);
-        } catch (Throwable e) {
-            MyExceptionHandling.handleFatalException(e);
-            throw e;
+    private void helper_changePageForViewDataOfRow() throws java.io.IOException {
+        ListViewRowDataWrapper tmpt_lvrdw = srListView.getSelectionModel().getSelectedItem();
+        if (tmpt_lvrdw!=null) {
+        Main.switchToSpecificPagename("buy_data",new Object[] {this.getClass(),tmpt_lvrdw});
         }
     }
 }

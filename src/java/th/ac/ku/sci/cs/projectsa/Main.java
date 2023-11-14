@@ -173,6 +173,9 @@ public class Main extends javafx.application.Application {
     // entire exception handling info: mode=no
     public static void switchToSpecificPagename(String pageName, Object obj) throws java.io.IOException {
         try {
+            // TODO: [DEBUG START]
+            System.out.println(pageName);
+            // [DEBUG END]
             com.github.saacsos.FXRouter.goTo(pageName, obj);
         } catch (java.io.IOException e) {
             throw e;

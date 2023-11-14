@@ -4,6 +4,9 @@ import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+
+import java.io.IOException;
+
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -21,10 +24,7 @@ public class UICtrl_CustomerList {
                 public void handle(MouseEvent event) {
                     try {
                         if (event.getClickCount() >= 2) {
-                            ListViewRowDataWrapper tmpt_lvrdw = custListView.getSelectionModel().getSelectedItem();
-                            if (tmpt_lvrdw!=null) {
-                            Main.switchToSpecificPagename("customer_data",new Object[] {this.getClass(),tmpt_lvrdw});
-                            }
+                            helper_changePageForViewDataOfRow();
                         }
                     } catch (Throwable e) {
                         MyExceptionHandling.handleFatalException(e);
@@ -35,10 +35,7 @@ public class UICtrl_CustomerList {
             custListView.setOnKeyPressed(event -> {
                 try {
                     if (event.getCode() == KeyCode.ENTER) {
-                        ListViewRowDataWrapper tmpt_lvrdw = custListView.getSelectionModel().getSelectedItem();
-                        if (tmpt_lvrdw!=null) {
-                        Main.switchToSpecificPagename("customer_data",new Object[] {this.getClass(),tmpt_lvrdw});
-                        }
+                        helper_changePageForViewDataOfRow();
                     }
                 } catch (Throwable e) {
                     MyExceptionHandling.handleFatalException(e);
@@ -99,6 +96,12 @@ public class UICtrl_CustomerList {
             tmpc_SQLTable__listViewRowDataWrapper[tmpc_int]=new ListViewRowDataWrapper(tmpt_str, tmpt_str);
         }
         custListView.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
+    }
+    private void helper_changePageForViewDataOfRow() throws java.io.IOException {
+        ListViewRowDataWrapper tmpt_lvrdw = custListView.getSelectionModel().getSelectedItem();
+        if (tmpt_lvrdw!=null) {
+        Main.switchToSpecificPagename("customer_data",new Object[] {this.getClass(),tmpt_lvrdw});
+        }
     }
 }
 
