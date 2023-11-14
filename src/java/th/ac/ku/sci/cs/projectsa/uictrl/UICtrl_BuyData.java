@@ -23,6 +23,7 @@ public class UICtrl_BuyData {
     // เราไม่ได้แก้ไขค่า double เลยตั้งเป็น non-editable textfield
     @FXML private TextField textField_PaidAmount;
     @FXML private TextField textField_Status;
+    @FXML private Button button_Check;
 
     @FXML private void initialize() throws Throwable {
         try {
@@ -68,9 +69,10 @@ public class UICtrl_BuyData {
                 tmpc_SQLTable.cols[8].vals.get(0),tmpc_SQLTable.cols[8].javaType
             ).intValue();
             DatabaseMnm.DataSpec.STATUS_Selling_Request tmpt_statusSR= DatabaseMnm.DataSpec.STATUS_Selling_Request.values()[tmpt_int];
-            if (tmpt_statusSR==DatabaseMnm.DataSpec.STATUS_Selling_Request.Acceapted) {textField_Status.setText("ผ่านการอนุมัติ");}
-            else if (tmpt_statusSR==DatabaseMnm.DataSpec.STATUS_Selling_Request.Declined) {textField_Status.setText("ไม่อนุมติ");}
-            else {textField_Status.setText("รอการตรวจสภาพสินค้า");}
+            button_Check.setDisable(true);
+            if (tmpt_statusSR==DatabaseMnm.DataSpec.STATUS_Selling_Request.Acceapted) {textField_Status.setText(Misc.ThaiStr_DataSpec_Status_SR[2]);}
+            else if (tmpt_statusSR==DatabaseMnm.DataSpec.STATUS_Selling_Request.Declined) {textField_Status.setText(Misc.ThaiStr_DataSpec_Status_SR[1]);}
+            else {textField_Status.setText(Misc.ThaiStr_DataSpec_Status_SR[0]); button_Check.setDisable(false);}
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;

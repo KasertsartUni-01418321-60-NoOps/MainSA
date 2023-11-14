@@ -123,9 +123,9 @@ public class UICtrl_BuyHistory {
                 ).intValue()
             ];
             String tmpt_str_1=null;
-            if (tmpk_Selling_Request_Status==STATUS_Selling_Request.WaitForCheck) {tmpt_str_1="รอการนัดเช็คสภาพฯ";}
-            else if (tmpk_Selling_Request_Status==STATUS_Selling_Request.Acceapted) {tmpt_str_1="รับซื้อแล้ว";}
-            else {tmpt_str_1="ปฏิเสธการรับซื้อแล้ว";}
+            if (tmpk_Selling_Request_Status==STATUS_Selling_Request.WaitForCheck) {tmpt_str_1=Misc.ThaiStr_DataSpec_Status_SR[0];}
+            else if (tmpk_Selling_Request_Status==STATUS_Selling_Request.Acceapted) {tmpt_str_1=Misc.ThaiStr_DataSpec_Status_SR[2];}
+            else {tmpt_str_1=Misc.ThaiStr_DataSpec_Status_SR[1];}
             String tmpk_repr = "["+tmpk_Selling_Request_ID+": "+tmpt_str_1+"] เสนอขาย (ยี่ห้อ/รุ่น: "+tmpk_Selling_Request_Brand+"/"+tmpk_Selling_Request_Model+") โดยคุณ \""+tmpk_Customer_Full_Name+"\"";
             tmpc_SQLTable__listViewRowDataWrapper[tmpc_int]=new ListViewRowDataWrapper(tmpk_Selling_Request_ID, tmpk_repr);
         }
