@@ -120,6 +120,16 @@ public class UICtrl_Homepage {
 			throw e;
 		}
 	}
+
+	@FXML private void onpressed_Button_Logout() throws java.io.IOException{
+		try{
+			Main.globalVar.remove("loggedinUserPartialTable");
+			try {Main.switchToSpecificPagename("login");} catch (java.io.IOException e1) {throw e1;}
+		} catch (Throwable e) {
+			MyExceptionHandling.handleFatalException(e);
+			throw e;
+		}
+	}
 }
 
 	

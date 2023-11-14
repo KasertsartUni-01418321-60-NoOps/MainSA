@@ -16,11 +16,10 @@ public class UICtrl_CheckItems {
 
     @FXML private void onBack_Button() throws java.sql.SQLException, java.security.NoSuchAlgorithmException, Throwable {
         try {
-            String tmpt_str=(String)(((Object[])FXRouter.getData())[1]);
-            // TODO: โยน
-            // 1: this class
-            // 2: Param [1] ที่โยนจาก BuyData
-            Main.switchToSpecificPagename("buy_history");
+            Main.switchToSpecificPagename("buy_data", new Object[] {
+                this.getClass(),
+                (((Object[])FXRouter.getData())[1])
+            });
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;

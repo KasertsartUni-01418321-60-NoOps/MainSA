@@ -44,7 +44,8 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="410.0" layoutY="14.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc1" styleClass="NEGHIGHLIGHT" text="MUTE!" />
-      <Button layoutX="490.0" layoutY="14.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc2" styleClass="NEGHIGHLIGHT" text="CrashJVM" />
+      <Button layoutX="341.0" layoutY="14.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc1" styleClass="NEGHIGHLIGHT" text="MUTE!" />
+      <Button layoutX="421.0" layoutY="14.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc2" styleClass="NEGHIGHLIGHT" text="CrashJVM" />
+      <Button layoutX="518.0" layoutY="14.0" mnemonicParsing="false" onAction="#onpressed_Button_Logout" styleClass="NEGHIGHLIGHT" text="Logout" />
    </children>
 </AnchorPane>
