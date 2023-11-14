@@ -85,4 +85,24 @@ public class UICtrl_BuyData {
         }
     }
 
+    @FXML private void onCheck_Button() throws java.io.IOException {
+        try {
+            // TODO: โยน
+            // 0: this class
+            // 1: (Object[])com.github.saacsos.FXRouter.getData())[1]
+            // 2: Array ของข้อมูล ดังนี้ Brand/Model 
+            Main.switchToSpecificPagename(
+                "check_items",
+                new Object[] {
+                    this.getClass(),
+                    ((Object[])com.github.saacsos.FXRouter.getData())[1],
+                    new Object[] {textField_Brand.getText(),textField_Model.getText()}
+                }
+            );
+        } catch (Throwable e) {
+            MyExceptionHandling.handleFatalException(e);
+            throw e;
+        }
+    }
+
 }
