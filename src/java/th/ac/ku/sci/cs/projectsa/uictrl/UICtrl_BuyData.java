@@ -4,6 +4,8 @@ import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 
+import java.text.DecimalFormat;
+
 import com.github.saacsos.FXRouter;
 
 import javafx.fxml.*;
@@ -22,38 +24,53 @@ public class UICtrl_BuyData {
     @FXML private TextField textField_PaidAmount;
     @FXML private TextField textField_Status;
 
-    @FXML private void initialize() {
+    @FXML private void initialize() throws Throwable {
         try {
-            // String custName =((ListViewRowDataWrapper) ((Object[])com.github.saacsos.FXRouter.getData())[1]).ref;
-            // DatabaseMnm.Table tmpc_SQLTable = null;
-            // try {
-            //     tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
-            //             null,
-            //             "SELECT * FROM Customer WHERE Customer_Full_Name=?",
-            //             false,
-            //             true,
-            //             null,
-            //             new Object[] {custName}
-            //     )[1]);
-            // } catch (java.sql.SQLException e) {
-            //     MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
-            //             "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
-            //     throw e;
-            // }
-            // textField_CustName.setText(custName);
-            // String tmpt_str =  (String) (tmpc_SQLTable.cols[1].vals.get(0));            
-            // if (tmpt_str!=null) { 
-            //     textArea_Addr.setText(tmpt_str);
-            // } else {
-            //     textArea_Addr.setText("<ว่างเปล่า>");
-            //     textArea_Addr.setDisable(true);
-            // }
-            // textField_Tel.setText((String)(tmpc_SQLTable.cols[2].vals.get(0)));
-            // textField_Credit.setText(
-            //     DatabaseMnm.convertIntegerAlikeSQLColToLong(
-            //         tmpc_SQLTable.cols[3].vals.get(0),tmpc_SQLTable.cols[3].javaType
-            //     ).toString()
-            // );
+            String srID =((ListViewRowDataWrapper) ((Object[])com.github.saacsos.FXRouter.getData())[1]).ref;
+            DatabaseMnm.Table tmpc_SQLTable = null;
+            try {
+                tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
+                        null,
+                        "SELECT * FROM Selling_Request WHERE Selling_Request_ID=?",
+                        false,
+                        true,
+                        null,
+                        new Object[] {srID}
+                )[1]);
+            } catch (java.sql.SQLException e) {
+                MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
+                        "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
+                throw e;
+            }
+            String tmpt_str;
+            textField_ID.setText(srID);
+            textField_CustName.setText((String)(tmpc_SQLTable.cols[1].vals.get(0)));
+            textField_Brand.setText((String)(tmpc_SQLTable.cols[2].vals.get(0)));
+            textField_Model.setText((String)(tmpc_SQLTable.cols[3].vals.get(0)));
+            textArea_PLooks.setText((String)(tmpc_SQLTable.cols[4].vals.get(0)));
+            Long tmpu_epochTimeData = DatabaseMnm.convertIntegerAlikeSQLColToLong(
+                tmpc_SQLTable.cols[5].vals.get(0),tmpc_SQLTable.cols[5].javaType
+            );
+            tmpt_str = (java.time.Instant.ofEpochSecond(tmpu_epochTimeData)).atZone(java.time.ZoneOffset.UTC).toLocalDate().toString();
+            textField_MeetDate.setText(tmpt_str);
+            textArea_MeetLoc.setText((String)(tmpc_SQLTable.cols[6].vals.get(0)));
+            Double tmpu_paidAmount = DatabaseMnm.convertRealAlikeSQLColToDouble(
+                tmpc_SQLTable.cols[7].vals.get(0),tmpc_SQLTable.cols[7].javaType
+            );
+            if (tmpu_paidAmount!=null) { 
+                tmpt_str=(new java.text.DecimalFormat("0.00")).format(tmpu_paidAmount);
+                textField_PaidAmount.setText(tmpt_str);
+            } else {
+                textField_PaidAmount.setText("<ไม่มีค่า>");
+                textField_PaidAmount.setDisable(true);
+            }
+            int tmpt_int = DatabaseMnm.convertIntegerAlikeSQLColToLong(
+                tmpc_SQLTable.cols[8].vals.get(0),tmpc_SQLTable.cols[8].javaType
+            ).intValue();
+            DatabaseMnm.DataSpec.STATUS_Selling_Request tmpt_statusSR= DatabaseMnm.DataSpec.STATUS_Selling_Request.values()[tmpt_int];
+            if (tmpt_statusSR==DatabaseMnm.DataSpec.STATUS_Selling_Request.Acceapted) {textField_Status.setText("ผ่านการอนุมัติ");}
+            else if (tmpt_statusSR==DatabaseMnm.DataSpec.STATUS_Selling_Request.Declined) {textField_Status.setText("ไม่อนุมติ");}
+            else {textField_Status.setText("รอการตรวจสภาพสินค้า");}
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
