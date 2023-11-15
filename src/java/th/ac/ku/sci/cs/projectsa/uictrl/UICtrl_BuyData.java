@@ -91,7 +91,7 @@ public class UICtrl_BuyData {
         try {
             // TODO: โยน
             // 0: this class
-            // 1: (Object[])com.github.saacsos.FXRouter.getData())[1]
+            // 1: (Object[])com.github.saacsos.FXRouter.getData())[1] (ListViewRowDataWrapper<String> ของ SR_ID)
             // 2: Array ของข้อมูล ดังนี้ Brand/Model 
             Main.switchToSpecificPagename(
                 "check_items",

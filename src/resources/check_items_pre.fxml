@@ -29,10 +29,10 @@
       <TextField fx:id="textField_Price" layoutX="95.0" layoutY="273.0" prefHeight="25.0" prefWidth="114.0" />
       <Text layoutX="216.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="บาท" />
       <Text layoutX="37.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="เครดิต :" />
-      <ComboBox fx:id="comboBox_Action" layoutX="95.0" layoutY="306.0">
+      <ComboBox fx:id="comboBox_creditAction" layoutX="95.0" layoutY="306.0">
       </ComboBox>
       <Button layoutX="422.0" layoutY="361.0" mnemonicParsing="false" styleClass="POSHIGHLIGHT" text="บันทึก" />
-      <ComboBox fx:id="comboBox_creditAction" layoutX="83.0" layoutY="136.0">
+      <ComboBox fx:id="comboBox_Action" layoutX="83.0" layoutY="136.0">
       </ComboBox>
    </children>
 </AnchorPane>

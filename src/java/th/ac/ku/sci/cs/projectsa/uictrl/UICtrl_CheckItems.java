@@ -19,7 +19,15 @@ public class UICtrl_CheckItems {
     @FXML private ComboBox<ListViewRowDataWrapper<Integer>> comboBox_creditAction;
     @FXML private void initialize() {
         try{
-            comboBox_Action.getItems().add(new ListViewRowDataWrapper(0,"0"));
+            Object[] tmpt_arr_obj = (Object[])((Object[])FXRouter.getData())[2];
+            comboBox_Action.getItems().add(new ListViewRowDataWrapper(-1,"รับซื้อ/ไม่ซ่อม"));
+            comboBox_Action.getItems().add(new ListViewRowDataWrapper(0,"ปฏิเสธการรับซื้อ"));
+            comboBox_Action.getItems().add(new ListViewRowDataWrapper(1,"รับซื้อ/ซ่อมด้วย"));
+            comboBox_creditAction.getItems().add(new ListViewRowDataWrapper(-1,"-1"));
+            comboBox_creditAction.getItems().add(new ListViewRowDataWrapper(0,"ไม่แก้ไข"));
+            comboBox_creditAction.getItems().add(new ListViewRowDataWrapper(1,"+1"));
+            textField_Brand.setText(tmpt_arr_obj[0].toString());
+            textField_Model.setText(tmpt_arr_obj[1].toString());
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
