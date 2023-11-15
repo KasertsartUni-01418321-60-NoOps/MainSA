@@ -28,8 +28,8 @@ public class UICtrl_Login {
 			// [DEBUG ZONE]
 			// TODO: EASY after debug we can remove this lamo
 			// REMKAR: this is temporary, so no need to do exception handling at this code
-			textField_userName.setText("nobody");
-			passwordField_passWord.setText("nopassword");
+			textField_userName.setText("kasertsart");
+			passwordField_passWord.setText("UNIVERSITY");
 			// [END ZONE]
 	}
 	
@@ -76,8 +76,15 @@ public class UICtrl_Login {
 			}
 			int tmpt_int = tmpc_SQLTable.cols[0].vals.size();
 			if (tmpt_int > 0) {
+				Object tmpt_obj =tmpc_SQLTable.cols[1].vals.get(0);
+				DatabaseMnm.DataSpec.STATUS_User currentUserRole = DatabaseMnm.DataSpec.STATUS_User.values()[
+					DatabaseMnm.convertIntegerAlikeSQLColToLong(
+						tmpt_obj,
+						tmpt_obj.getClass()
+						).intValue()
+						];
+				Main.globalVar.put("loggedinUser_Role",currentUserRole);
 				try {
-					Main.globalVar.put("loggedinUserPartialTable",tmpc_SQLTable);
 					Main.switchToSpecificPagename("homepage");
 				} catch (java.io.IOException e1) {
 					throw e1;

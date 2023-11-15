@@ -23,19 +23,11 @@ public class UICtrl_Homepage {
 	@FXML
 	private void initialize() {
 		try{ 
-			Object tmpt_obj= ((DatabaseMnm.Table)Main.globalVar.get("loggedinUserPartialTable")).cols[1].vals.get(0);
-			DatabaseMnm.DataSpec.STATUS_User currentUserRole = DatabaseMnm.DataSpec.STATUS_User.values()[
-					DatabaseMnm.convertIntegerAlikeSQLColToLong(
-						tmpt_obj,
-						tmpt_obj.getClass()
-					).intValue()
-			];
+			DatabaseMnm.DataSpec.STATUS_User currentUserRole =(DatabaseMnm.DataSpec.STATUS_User)Main.globalVar.get("loggedinUser_Role");
 			if (currentUserRole==DatabaseMnm.DataSpec.STATUS_User.Employer) {
-				
-			} else {
-				// TODO: EASY configure ตามความจำเป็น 
+			} else { 
 				button_Accounting.setDisable(true);
-				button_BuyHist.setDisable(true);
+				button_ContactsList.setDisable(true);
 				button_SellHist.setDisable(true);
 			}
 		} catch (Throwable e) {

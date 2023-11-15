@@ -21,6 +21,6 @@
       <Text layoutX="280.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="เรียงตาม:" />
       <Button layoutX="337.0" layoutY="86.0" mnemonicParsing="false" text="วันที่ล่าสุด" fx:id="button_sortByDate" onAction="#onpressed_Button_sortByDate"/>
       <Button layoutX="418.0" layoutY="85.0" mnemonicParsing="false" text="สถานะสินค้า" fx:id="button_sortByPdStatus" onAction="#onpressed_Button_sortByPdStatus" />
-      <Button layoutX="48.0" layoutY="355.0" mnemonicParsing="false" onAction="#onCreatePurchase_Button" text="สร้างสัญญาซื้อ" styleClass="POSHIGHLIGHT" />
+      <Button fx:id="button_CreatePurchase" layoutX="48.0" layoutY="355.0" mnemonicParsing="false" onAction="#onCreatePurchase_Button" text="สร้างสัญญาซื้อ" styleClass="POSHIGHLIGHT" />
    </children>
 </AnchorPane>

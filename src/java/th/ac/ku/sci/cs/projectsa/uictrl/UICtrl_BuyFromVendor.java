@@ -31,7 +31,7 @@ public class UICtrl_BuyFromVendor {
 
     @FXML private void onBack_Button() throws java.io.IOException {
         try {
-            Main.switchToSpecificPagename("homepage");
+            Main.switchToSpecificPagename("buy_history");
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
@@ -151,7 +151,7 @@ public class UICtrl_BuyFromVendor {
         try {
             tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
                     null,
-                    "SELECT Customer_Full_Name FROM Customer",
+                    "SELECT Customer_Full_Name FROM Customer ORDER BY Customer_Full_Name ASEC",
                     false,
                     true,
                     null,
@@ -168,7 +168,10 @@ public class UICtrl_BuyFromVendor {
             String tmpt_str=(String)(tmpc_SQLTable.cols[0].vals.get(tmpc_int));
             tmpc_SQLTable__listViewRowDataWrapper[tmpc_int]=new ListViewRowDataWrapper(tmpt_str, tmpt_str);
         }
-        comboBox_custName.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
+        for (int i = 0; i < 100; i++) {
+            
+            comboBox_custName.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
+        }
     }
 }
 

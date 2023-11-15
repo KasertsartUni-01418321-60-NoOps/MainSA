@@ -3,6 +3,7 @@ package th.ac.ku.sci.cs.projectsa.uictrl;
 import javafx.fxml.FXML;
 import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Selling_Request;
+import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_User;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 
 import java.io.IOException;
@@ -17,9 +18,13 @@ public class UICtrl_BuyHistory {
     @FXML private ListView<ListViewRowDataWrapper> srListView;
     @FXML private Button button_sortByDate;
     @FXML private Button button_sortByPdStatus;
+    @FXML private Button button_CreatePurchase;
     @FXML
     private void initialize() throws java.sql.SQLException{
         try {
+            if (((DatabaseMnm.DataSpec.STATUS_User)Main.globalVar.get("loggedinUser_Role"))==DatabaseMnm.DataSpec.STATUS_User.Employee) {
+                button_CreatePurchase.setDisable(true);
+            }
             button_sortByDate.setDisable(true);
 			helper_listViewUpdate(-1);
             srListView.setOnMouseClicked(new EventHandler<MouseEvent>() {

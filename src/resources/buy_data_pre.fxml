@@ -16,21 +16,21 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="33.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID การซื้อ :" />
-      <Text layoutX="33.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า :" />
-      <Text layoutX="33.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="วันที่นัดตรวจฯ:" />
-      <Text layoutX="33.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อ :" />
-      <Text layoutX="33.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่น :" />
+      <Text layoutX="23.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID การซื้อ :" />
+      <Text layoutX="20.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า :" />
+      <Text layoutX="304.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="วันที่นัดตรวจฯ:" />
+      <Text layoutX="22.0" layoutY="158.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อ :" />
+      <Text layoutX="275.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่น :" />
       <Text layoutX="33.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ลักษณะสินค้า :" />
       <Text layoutX="33.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานที่นัดตรวจฯ :" />
       <Text layoutX="33.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="จำนวนเงินที่ชำระ :" />
       <Text layoutX="33.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานะ :" />
 
-      <TextField fx:id="textField_ID" editable="false" layoutX="150.0" layoutY="73.0" />
-      <TextField fx:id="textField_CustName" editable="false" layoutX="150.0" layoutY="103.0" />
-      <TextField fx:id="textField_MeetDate" editable="false" layoutX="150.0" layoutY="133.0" />
-      <TextField fx:id="textField_Brand" editable="false" layoutX="150.0" layoutY="163.0" />
-      <TextField fx:id="textField_Model" editable="false" layoutX="150.0" layoutY="193.0" />
+      <TextField fx:id="textField_ID" editable="false" layoutX="103.0" layoutY="57.0" />
+      <TextField fx:id="textField_CustName" editable="false" layoutX="88.0" layoutY="97.0" />
+      <TextField fx:id="textField_MeetDate" editable="false" layoutX="399.0" layoutY="57.0" />
+      <TextField fx:id="textField_Brand" editable="false" layoutX="64.0" layoutY="138.0" />
+      <TextField fx:id="textField_Model" editable="false" layoutX="314.0" layoutY="146.0" />
       <TextArea fx:id="textArea_PLooks" editable="false" layoutX="150.0" layoutY="223.0" prefHeight="53.0" prefWidth="400.0" />
       <TextArea fx:id="textArea_MeetLoc" editable="false" layoutX="150.0" layoutY="253.0" prefHeight="53.0" prefWidth="400.0" />
       <TextField fx:id="textField_PaidAmount" editable="false" layoutX="150.0" layoutY="283.0" />
