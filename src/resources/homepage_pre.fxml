@@ -24,11 +24,6 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="button_Planner" layoutX="419.0" layoutY="83.0" mnemonicParsing="false" onAction="#onPressed_Button_Planner" prefHeight="91.0" prefWidth="141.0" text="ตารางเวลา">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
       <Button fx:id="button_BuyHist" layoutX="29.0" layoutY="227.0" mnemonicParsing="false" onAction="#onPressed_Button_BuyHist" prefHeight="91.0" prefWidth="141.0" text="ประวัติการซื้อ">
          <font>
             <Font size="18.0" />

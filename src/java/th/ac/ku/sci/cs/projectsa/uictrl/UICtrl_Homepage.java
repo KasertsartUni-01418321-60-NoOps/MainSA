@@ -45,15 +45,6 @@ public class UICtrl_Homepage {
 			throw e;
 		}
 	}
-	@FXML private Button button_Planner;
-	@FXML private void onPressed_Button_Planner() throws java.io.IOException {
-		try{
-			throw new MyExceptionHandling.UserRuntimeException("Planner is not available LAMO");
-		} catch (Throwable e) {
-			MyExceptionHandling.handleFatalException(e);
-			throw e;
-		}
-	}
 	@FXML private Button button_Warehouse;
 	@FXML private void onPressed_Button_Warehouse()  throws java.io.IOException {
 		try{
