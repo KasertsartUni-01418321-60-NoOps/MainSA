@@ -43,20 +43,16 @@ public class UICtrl_Login {
 			DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON tmpReason = DatabaseMnm.DataValidation.PerAttributeValidation
 					.check__USER__User_Name(formval_userName);
 			if (tmpReason == DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
-			} else if (tmpReason == null) {
-				Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเข้าสู่ระบบผิดพลาด",
-						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลผิด", easterEggAgain.getRickrollMsg(), false);
-				return;
 			} else {
 				Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเข้าสู่ระบบผิดพลาด",
-						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลชื่อผู้ใช้ผิดรูปแบบ", easterEggAgain.getRickrollMsg(), false);
+						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลชื่อผู้ใช้หรือรหัสผ่านผิดรูปแบบหรือไม่ตรงกับฐานข้อมูล", easterEggAgain.getRickrollMsg(), false);
 				return;
 			}
 			tmpReason = DatabaseMnm.DataValidation.PerAttributeValidation.check__USER__User_Password(formval_passWord);
 			if (tmpReason == null) {
 			} else {
 				Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเข้าสู่ระบบผิดพลาด",
-						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกรหัสผ่านผิดรูปแบบ", easterEggAgain.getRickrollMsg(), false);
+						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลชื่อผู้ใช้หรือรหัสผ่านผิดรูปแบบหรือไม่ตรงกับฐานข้อมูล", easterEggAgain.getRickrollMsg(), false);
 				return;
 			}
 			DatabaseMnm.Table tmpc_SQLTable = null;
@@ -88,7 +84,7 @@ public class UICtrl_Login {
 				}
 			} else {
 				Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเข้าสู่ระบบผิดพลาด",
-						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลผิด", easterEggAgain.getRickrollMsg(), false);
+						"ไม่สามารถเข้าสู่ระบบได้ เนื่องจากกรอกข้อมูลชื่อผู้ใช้หรือรหัสผ่านผิดรูปแบบหรือไม่ตรงกับฐานข้อมูล", easterEggAgain.getRickrollMsg(), false);
 			}
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
