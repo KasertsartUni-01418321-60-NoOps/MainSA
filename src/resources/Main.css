@@ -18,7 +18,7 @@
 TextArea,ListView {
 	-fx-effect: -general-effect-shadowdrop;
 }
-TextField,PasswordField {
+TextField,PasswordField,ComboBox {
 	-fx-text-fill: -general-text-color--lighten;
 	-fx-background-color: -primary-color--lighten;
 	-fx-effect: -general-effect-shadowdrop;
@@ -34,7 +34,7 @@ Button {
 	-fx-effect: -general-effect-shadowdrop;
 }
 /* For event of element */
-Button:hover,TextField:hover,PasswordField:hover {
+Button:hover,TextField:hover,PasswordField:hover,ComboBox:hover {
 	-fx-background-color: -general-text-color;
 	-fx-text-fill: -primary-color;
 	-fx-effect: -general-effect-shadowdrop-hover;
