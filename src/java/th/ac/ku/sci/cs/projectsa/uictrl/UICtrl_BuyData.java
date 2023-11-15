@@ -92,13 +92,13 @@ public class UICtrl_BuyData {
             // TODO: โยน
             // 0: this class
             // 1: (Object[])com.github.saacsos.FXRouter.getData())[1] (ListViewRowDataWrapper<String> ของ SR_ID)
-            // 2: Array ของข้อมูล ดังนี้ Brand/Model 
+            // 2: Array ของข้อมูล ดังนี้ Brand/Model/CustName
             Main.switchToSpecificPagename(
                 "check_items",
                 new Object[] {
                     this.getClass(),
                     ((Object[])com.github.saacsos.FXRouter.getData())[1],
-                    new Object[] {textField_Brand.getText(),textField_Model.getText()}
+                    new Object[] {textField_Brand.getText(),textField_Model.getText(),textField_CustName.getText()}
                 }
             );
         } catch (Throwable e) {
