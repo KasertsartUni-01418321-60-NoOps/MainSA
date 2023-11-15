@@ -11,20 +11,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"  stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_CheckItems">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_CheckItems">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOME">
+      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ตรวจสอบสินค้า">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="35.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ตรวจสอบสินค้า">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Text>
-      <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBack_Button" text="ย้อนกลับ" styleClass="NEGHIGHLIGHT"/>
+      <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBack_Button" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ" />
       <Text layoutX="33.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อสินค้า :" />
       <TextField layoutX="87.0" layoutY="100.0" />
       <Text layoutX="255.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่นสินค้า :" />
@@ -44,6 +39,6 @@
           <MenuItem mnemonicParsing="false" text="ลดเครดิต" />
         </items>
       </MenuButton>
-      <Button layoutX="422.0" layoutY="361.0" mnemonicParsing="false"  text="บันทึก" styleClass="POSHIGHLIGHT"/>
+      <Button layoutX="422.0" layoutY="361.0" mnemonicParsing="false" styleClass="POSHIGHLIGHT" text="บันทึก" />
    </children>
 </AnchorPane>

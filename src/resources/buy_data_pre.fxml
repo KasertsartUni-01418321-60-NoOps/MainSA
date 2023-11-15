@@ -11,20 +11,20 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_BuyData">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
-      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ข้อมูลการซื้อสินค้า">
+      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ข้อมูลการซื้อ">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="33.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รหัสการซื้อ :" />
+      <Text layoutX="33.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID การซื้อ :" />
       <Text layoutX="33.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า :" />
-      <Text layoutX="33.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="วันที่เริ่มค้าขาย :" />
+      <Text layoutX="33.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="วันที่นัดตรวจฯ:" />
       <Text layoutX="33.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อ :" />
       <Text layoutX="33.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่น :" />
       <Text layoutX="33.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ลักษณะสินค้า :" />
-      <Text layoutX="33.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานที่นัดพบ :" />
+      <Text layoutX="33.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานที่นัดตรวจฯ :" />
       <Text layoutX="33.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="จำนวนเงินที่ชำระ :" />
-      <Text layoutX="33.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานะการซื้อขาย :" />
+      <Text layoutX="33.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานะ :" />
 
       <TextField fx:id="textField_ID" editable="false" layoutX="150.0" layoutY="73.0" />
       <TextField fx:id="textField_CustName" editable="false" layoutX="150.0" layoutY="103.0" />
