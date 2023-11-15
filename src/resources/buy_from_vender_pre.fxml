@@ -4,6 +4,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -21,7 +22,7 @@
       <Text layoutX="324.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อ :" />
       <Text layoutX="340.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่น :" />
       <Text layoutX="29.0" layoutY="216.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานที่ตรวจ  :" />
-      <TextField fx:id="textField_custName" layoutX="74.0" layoutY="54.0" prefHeight="31.0" prefWidth="300.0" />
+      <ComboBox fx:id="comboBox_custName" layoutX="74.0" layoutY="54.0" prefHeight="31.0" prefWidth="300.0" />
       <TextField fx:id="textField_brand" layoutX="381.0" layoutY="101.0" />
       <TextField fx:id="textField_model" layoutX="381.0" layoutY="151.0" />
       <TextArea fx:id="textArea_MeetLoc" layoutX="138.0" layoutY="200.0" prefHeight="54.0" prefWidth="450.0" />
