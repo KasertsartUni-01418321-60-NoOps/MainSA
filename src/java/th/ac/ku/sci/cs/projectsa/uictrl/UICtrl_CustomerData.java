@@ -15,11 +15,11 @@ public class UICtrl_CustomerData {
     @FXML private TextField textField_Tel;
     @FXML private TextField textField_Credit;
     // <UNUSED>
-    // @FXML private ListView<ListViewRowDataWrapper> listView_BSR;
+    // @FXML private ListView<ListViewRowDataWrapper<String>> listView_BSR;
 
     @FXML private void initialize() throws java.sql.SQLException {
         try {
-            String custName =((ListViewRowDataWrapper) ((Object[])com.github.saacsos.FXRouter.getData())[1]).ref;
+            String custName =((ListViewRowDataWrapper<String>) ((Object[])com.github.saacsos.FXRouter.getData())[1]).ref;
             DatabaseMnm.Table tmpc_SQLTable = null;
             try {
                 tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
@@ -82,10 +82,10 @@ public class UICtrl_CustomerData {
     //         throw e;
     //     }
     //     int tmpl_0=tmpc_SQLTable.cols[0].vals.size();
-    //     ListViewRowDataWrapper[] tmpc_SQLTable__listViewRowDataWrapper = new ListViewRowDataWrapper[tmpl_0];
+    //     ListViewRowDataWrapper<String>[] tmpc_SQLTable__listViewRowDataWrapper = new ListViewRowDataWrapper<String>[tmpl_0];
     //     for (int tmpc_int =0; tmpc_int<tmpl_0; tmpc_int++) {
     //         String tmpt_str=(String)(tmpc_SQLTable.cols[0].vals.get(tmpc_int));
-    //         tmpc_SQLTable__listViewRowDataWrapper[tmpc_int]=new ListViewRowDataWrapper(tmpt_str, tmpt_str);
+    //         tmpc_SQLTable__listViewRowDataWrapper[tmpc_int]=new ListViewRowDataWrapper<String>(tmpt_str, tmpt_str);
     //     }
     //     custListView.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
     // }

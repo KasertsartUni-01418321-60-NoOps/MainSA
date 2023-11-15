@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -17,58 +17,22 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="662.0" layoutY="523.0" mnemonicParsing="false" onAction="#onBack_Button" prefWidth="100.0" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-      <Text layoutX="33.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อสินค้า :">
-         <font>
-            <Font size="18.0" />
-         </font></Text>
-      <TextField fx:id="textField_Brand" layoutX="122.0" layoutY="90.0">
-         <font>
-            <Font size="18.0" />
-         </font></TextField>
-      <Text layoutX="376.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่นสินค้า :">
-         <font>
-            <Font size="18.0" />
-         </font></Text>
-      <TextField fx:id="textField_Model" layoutX="450.0" layoutY="90.0">
-         <font>
-            <Font size="18.0" />
-         </font></TextField>
-      <Text layoutX="32.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สิ่งที่ต้องซ่อม :">
-         <font>
-            <Font size="18.0" />
-         </font></Text>
-      <ListView fx:id="textArea_rpmDesc" editable="true" layoutX="32.0" layoutY="249.0" prefHeight="154.0" prefWidth="735.0" />
-      <Text layoutX="55.0" layoutY="176.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานะ :">
-         <font>
-            <Font size="18.0" />
-         </font></Text>
-      <Text layoutX="30.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาสินค้า :">
-         <font>
-            <Font size="18.0" />
-         </font></Text>
-      <TextField fx:id="textField_Price" layoutX="126.0" layoutY="417.0" prefHeight="25.0" prefWidth="114.0">
-         <font>
-            <Font size="18.0" />
-         </font></TextField>
-      <Text layoutX="260.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="บาท">
-         <font>
-            <Font size="18.0" />
-         </font></Text>
-      <Text layoutX="562.0" layoutY="445.0" strokeType="OUTSIDE" strokeWidth="0.0" text="เครดิต :">
-         <font>
-            <Font size="18.0" />
-         </font></Text>
-      <ComboBox fx:id="comboBox_Action" layoutX="629.0" layoutY="418.0" prefHeight="40.0" prefWidth="138.0" promptText="จัดการเครดิตลูกค้า">
+      <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBack_Button" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ" />
+      <Text layoutX="33.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อสินค้า :" />
+      <TextField fx:id="textField_Brand" layoutX="87.0" layoutY="100.0" />
+      <Text layoutX="255.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่นสินค้า :" />
+      <TextField fx:id="textField_Model" layoutX="310.0" layoutY="100.0" />
+      <Text layoutX="33.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สิ่งที่ต้องซ่อม :" />
+      <ListView fx:id="textArea_rpmDesc" editable="true" layoutX="65.0" layoutY="187.0" prefHeight="81.0" prefWidth="491.0" />
+      <Text layoutX="33.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานะ :" />
+      <Text layoutX="38.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาสินค้า :" />
+      <TextField fx:id="textField_Price" layoutX="95.0" layoutY="273.0" prefHeight="25.0" prefWidth="114.0" />
+      <Text layoutX="216.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="บาท" />
+      <Text layoutX="37.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="เครดิต :" />
+      <ComboBox fx:id="comboBox_Action" layoutX="95.0" layoutY="306.0">
       </ComboBox>
-      <Button layoutX="523.0" layoutY="523.0" mnemonicParsing="false" prefWidth="100.0" styleClass="POSHIGHLIGHT" text="บันทึก">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-      <ComboBox fx:id="comboBox_creditAction" layoutX="122.0" layoutY="150.0" prefHeight="40.0" prefWidth="138.0">
+      <Button layoutX="422.0" layoutY="361.0" mnemonicParsing="false" styleClass="POSHIGHLIGHT" text="บันทึก" />
+      <ComboBox fx:id="comboBox_creditAction" layoutX="83.0" layoutY="136.0">
       </ComboBox>
    </children>
 </AnchorPane>

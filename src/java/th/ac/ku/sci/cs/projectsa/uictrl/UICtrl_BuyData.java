@@ -27,7 +27,7 @@ public class UICtrl_BuyData {
 
     @FXML private void initialize() throws Throwable {
         try {
-            String srID =((ListViewRowDataWrapper) ((Object[])com.github.saacsos.FXRouter.getData())[1]).ref;
+            String srID =((ListViewRowDataWrapper<String>) ((Object[])com.github.saacsos.FXRouter.getData())[1]).ref;
             DatabaseMnm.Table tmpc_SQLTable = null;
             try {
                 tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
@@ -91,14 +91,14 @@ public class UICtrl_BuyData {
         try {
             // TODO: โยน
             // 0: this class
-            // 1: (Object[])com.github.saacsos.FXRouter.getData())[1]
-            // 2: Array ของข้อมูล ดังนี้ Brand/Model 
+            // 1: (Object[])com.github.saacsos.FXRouter.getData())[1] (ListViewRowDataWrapper<String> ของ SR_ID)
+            // 2: Array ของข้อมูล ดังนี้ Brand/Model/CustName
             Main.switchToSpecificPagename(
                 "check_items",
                 new Object[] {
                     this.getClass(),
                     ((Object[])com.github.saacsos.FXRouter.getData())[1],
-                    new Object[] {textField_Brand.getText(),textField_Model.getText()}
+                    new Object[] {textField_Brand.getText(),textField_Model.getText(),textField_CustName.getText()}
                 }
             );
         } catch (Throwable e) {

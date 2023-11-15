@@ -11,7 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
 public class UICtrl_BuyFromVendor {
-    @FXML private ComboBox<ListViewRowDataWrapper> comboBox_custName;
+    @FXML private ComboBox<ListViewRowDataWrapper<String>> comboBox_custName;
     @FXML private TextField textField_brand;
     @FXML private TextField textField_model;
     @FXML private TextArea textArea_MeetLoc;
@@ -163,10 +163,12 @@ public class UICtrl_BuyFromVendor {
             throw e;
         }
         int tmpl_0=tmpc_SQLTable.cols[0].vals.size();
-        ListViewRowDataWrapper[] tmpc_SQLTable__listViewRowDataWrapper = new ListViewRowDataWrapper[tmpl_0];
+        java.util.List<ListViewRowDataWrapper<String>> tmpc_SQLTable__listViewRowDataWrapper = new java.util.ArrayList<ListViewRowDataWrapper<String>>(tmpl_0);
         for (int tmpc_int =0; tmpc_int<tmpl_0; tmpc_int++) {
             String tmpt_str=(String)(tmpc_SQLTable.cols[0].vals.get(tmpc_int));
-            tmpc_SQLTable__listViewRowDataWrapper[tmpc_int]=new ListViewRowDataWrapper(tmpt_str, tmpt_str);
+            tmpc_SQLTable__listViewRowDataWrapper.add(
+                new ListViewRowDataWrapper<String>(tmpt_str, tmpt_str)
+            );
         }
         comboBox_custName.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
     }

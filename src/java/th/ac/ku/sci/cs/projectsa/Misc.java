@@ -99,10 +99,10 @@ public class Misc {
         }
         return new String(retval);
     }
-    public static class ListViewRowDataWrapper {
-        public final String ref;
+    public static class ListViewRowDataWrapper<T> {
+        public final T ref;
         public final String repr;
-        public ListViewRowDataWrapper(String ref, String repr) {
+        public ListViewRowDataWrapper(T ref, String repr) {
             this.ref = ref;
             this.repr = repr;
         }

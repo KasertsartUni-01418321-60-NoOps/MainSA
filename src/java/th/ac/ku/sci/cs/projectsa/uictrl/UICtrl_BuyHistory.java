@@ -15,7 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 
 public class UICtrl_BuyHistory {
-    @FXML private ListView<ListViewRowDataWrapper> srListView;
+    @FXML private ListView<ListViewRowDataWrapper<String>> srListView;
     @FXML private Button button_sortByDate;
     @FXML private Button button_sortByPdStatus;
     @FXML private Button button_CreatePurchase;
@@ -115,7 +115,7 @@ public class UICtrl_BuyHistory {
             throw e;
         }
         int tmpl_0=tmpc_SQLTable.cols[0].vals.size();
-        ListViewRowDataWrapper[] tmpc_SQLTable__listViewRowDataWrapper = new ListViewRowDataWrapper[tmpl_0];
+        java.util.List<ListViewRowDataWrapper<String>> tmpc_SQLTable__listViewRowDataWrapper = new java.util.ArrayList<ListViewRowDataWrapper<String>>(tmpl_0);
         for (int tmpc_int =0; tmpc_int<tmpl_0; tmpc_int++) {
             String tmpk_Selling_Request_ID=(String)(tmpc_SQLTable.cols[0].vals.get(tmpc_int));
             String tmpk_Customer_Full_Name=(String)(tmpc_SQLTable.cols[1].vals.get(tmpc_int));
@@ -132,12 +132,14 @@ public class UICtrl_BuyHistory {
             else if (tmpk_Selling_Request_Status==STATUS_Selling_Request.Acceapted) {tmpt_str_1=Misc.ThaiStr_DataSpec_Status_SR[2];}
             else {tmpt_str_1=Misc.ThaiStr_DataSpec_Status_SR[1];}
             String tmpk_repr = "["+tmpk_Selling_Request_ID+": "+tmpt_str_1+"] เสนอขาย (ยี่ห้อ/รุ่น: "+tmpk_Selling_Request_Brand+"/"+tmpk_Selling_Request_Model+") โดยคุณ \""+tmpk_Customer_Full_Name+"\"";
-            tmpc_SQLTable__listViewRowDataWrapper[tmpc_int]=new ListViewRowDataWrapper(tmpk_Selling_Request_ID, tmpk_repr);
+            tmpc_SQLTable__listViewRowDataWrapper.add(
+                new ListViewRowDataWrapper<String>(tmpk_Selling_Request_ID, tmpk_repr)
+            );
         }
         srListView.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
     }
     private void helper_changePageForViewDataOfRow() throws java.io.IOException {
-        ListViewRowDataWrapper tmpt_lvrdw = srListView.getSelectionModel().getSelectedItem();
+        ListViewRowDataWrapper<String> tmpt_lvrdw = srListView.getSelectionModel().getSelectedItem();
         if (tmpt_lvrdw!=null) {
         Main.switchToSpecificPagename("buy_data",new Object[] {this.getClass(),tmpt_lvrdw});
         }
