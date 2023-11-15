@@ -8,19 +8,34 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_CustomerList">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_CustomerList">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รายชื่อลูกค้า">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="24.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า : " />
-      <TextField fx:id="textField_SearchBox" layoutX="95.0" layoutY="100.0" />
-      <Button layoutX="268.0" layoutY="100.0" mnemonicParsing="false" onAction="#searchCustomer_Button" text="ค้นหา" />
-      <Button layoutX="394.0" layoutY="98.0" mnemonicParsing="false" onAction="#creatNewCustomer_Button" prefHeight="25.0" prefWidth="132.0" styleClass="POSHIGHLIGHT" text="สร้างลูกค้าใหม่" />
-      <ListView fx:id="custListView" layoutX="18.0" layoutY="145.0" prefHeight="191.0" prefWidth="562.0" />
-      <Button layoutX="512.0" layoutY="359.0" mnemonicParsing="false" onAction="#onBack_Button" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ" />
+      <Text layoutX="53.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า : ">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <TextField fx:id="textField_SearchBox" layoutX="126.0" layoutY="101.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Button layoutX="349.0" layoutY="101.0" mnemonicParsing="false" onAction="#searchCustomer_Button" text="ค้นหา">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button layoutX="630.0" layoutY="101.0" mnemonicParsing="false" onAction="#creatNewCustomer_Button" prefHeight="25.0" prefWidth="132.0" styleClass="POSHIGHLIGHT" text="สร้างลูกค้าใหม่">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <ListView fx:id="custListView" layoutX="37.0" layoutY="156.0" prefHeight="341.0" prefWidth="726.0" />
+      <Button layoutX="662.0" layoutY="523.0" mnemonicParsing="false" onAction="#onBack_Button" prefWidth="100.0" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
    </children>
 </AnchorPane>

@@ -8,23 +8,59 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_Quotation">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_Quotation">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="600.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" สัญญาขาย">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Text layoutX="33.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า :" />
-      <Text layoutX="32.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานที่จัดส่ง :" />
-      <TextField layoutX="89.0" layoutY="92.0" />
-      <TextArea layoutX="107.0" layoutY="135.0" prefHeight="54.0" prefWidth="450.0" />
-      <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBack_Button" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ" />
-      <Text layoutX="33.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ไอดีสินค้า :" />
-      <TextField layoutX="89.0" layoutY="195.0" />
-      <TextField layoutX="89.0" layoutY="230.0" />
-      <Button layoutX="419.0" layoutY="361.0" mnemonicParsing="false" styleClass="POSHIGHLIGHT" text="บันทึก" />
-      <Text layoutX="35.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาขนส่ง:" />
+      <Text layoutX="41.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า :">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Text>
+      <Text layoutX="42.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานที่จัดส่ง :">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <TextField layoutX="128.0" layoutY="119.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextArea layoutX="105.0" layoutY="238.0" prefHeight="192.0" prefWidth="622.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextArea>
+      <Button layoutX="662.0" layoutY="523.0" mnemonicParsing="false" onAction="#onBack_Button" prefWidth="100.0" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <TextField layoutX="520.0" layoutY="119.0" prefHeight="40.0" prefWidth="206.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <TextField layoutX="217.0" layoutY="448.0" prefHeight="40.0" prefWidth="182.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextField>
+      <Button layoutX="532.0" layoutY="523.0" mnemonicParsing="false" prefWidth="100.0" styleClass="POSHIGHLIGHT" text="บันทึก">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Text layoutX="122.0" layoutY="475.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาขนส่ง:">
+         <font>
+            <Font size="18.0" />
+         </font></Text>
+      <Text layoutX="416.0" layoutY="474.0" strokeType="OUTSIDE" strokeWidth="0.0" text="บาท">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="416.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID สินค้า :">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

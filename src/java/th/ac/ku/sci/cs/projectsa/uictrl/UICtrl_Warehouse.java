@@ -9,7 +9,7 @@ import javafx.scene.input.MouseEvent;
 
 public class UICtrl_Warehouse {
 
-    @FXML private ChoiceBox<String> choice;
+    @FXML private ComboBox<String> choice;
     // LESSI TODO: ยี่ห้อสินค้า
     private String[] filter = {"ยี่ห้อ", "รุ่นสินค้า", "สถานะของสินค้า"};
 

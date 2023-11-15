@@ -9,8 +9,6 @@ import javafx.fxml.*;
 import javafx.scene.control.*;
 
 public class UICtrl_CheckItems {
-
-    @FXML
     
     @FXML private void initialize() {
         try{
