@@ -9,8 +9,8 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_Login">
    <children>
-      <Button layoutX="274.0" layoutY="250.0" mnemonicParsing="false" onAction="#onPressed_Button_Login" text="Login" />
-      <Text layoutX="213.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WELCOME" wrappingWidth="173.25">
+      <Button layoutX="274.0" layoutY="250.0" mnemonicParsing="false" onAction="#onPressed_Button_Login" text="เข้าสู่ระบบ" />
+      <Text layoutX="213.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สวัสดี :)" wrappingWidth="173.25">
          <font>
             <Font size="36.0" />
          </font>
