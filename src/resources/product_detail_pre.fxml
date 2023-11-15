@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
@@ -41,7 +40,6 @@
       <Text layoutX="417.0" layoutY="159.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ไอดีสัญญาขาย :" />
       <TextField layoutX="499.0" layoutY="141.0" prefHeight="26.0" prefWidth="94.0" />
       <Text layoutX="33.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานะ :" />
-      <Button layoutX="195.0" layoutY="187.0" mnemonicParsing="false" text="เปลี่ยนสถานะ" />
       <ImageView fitHeight="99.0" fitWidth="146.0" layoutX="33.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="379.0" layoutY="361.0" mnemonicParsing="false" text="สร้างสัญญาขาย" />
       <ChoiceBox fx:id="changeStatus" layoutX="93.0" layoutY="187.0" prefWidth="150.0" />
