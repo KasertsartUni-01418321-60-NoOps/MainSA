@@ -24,12 +24,12 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="button_BuyHist" layoutX="137.0" layoutY="384.0" mnemonicParsing="false" onAction="#onPressed_Button_BuyHist" prefHeight="91.0" prefWidth="200.0" text="ประวัติการซื้อ">
+      <Button fx:id="button_BuyHist" layoutX="137.0" layoutY="254.0" mnemonicParsing="false" onAction="#onPressed_Button_BuyHist" prefHeight="91.0" prefWidth="200.0" text="ประวัติการซื้อ">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button fx:id="button_SellHist" layoutX="137.0" layoutY="250.0" mnemonicParsing="false" onAction="#onPressed_Button_SellHist" prefHeight="91.0" prefWidth="200.0" text="ประวัติการขาย">
+      <Button fx:id="button_SellHist" layoutX="137.0" layoutY="390.0" mnemonicParsing="false" onAction="#onPressed_Button_SellHist" prefHeight="91.0" prefWidth="200.0" text="ประวัติการขาย">
          <font>
             <Font size="24.0" />
          </font>
