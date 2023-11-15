@@ -13,7 +13,7 @@ public class UICtrl_Warehouse {
     // LESSI TODO: ยี่ห้อสินค้า
     private String[] filter = {"ยี่ห้อ", "รุ่นสินค้า", "สถานะของสินค้า"};
 
-    @FXML private ListView<ListViewRowDataWrapper> productListView;
+    @FXML private ListView<ListViewRowDataWrapper<String>> productListView;
     
 
     @FXML
@@ -44,10 +44,12 @@ public class UICtrl_Warehouse {
 				throw e;
 			}
             int tmpl_0=tmpc_SQLTable.cols[0].vals.size();
-            ListViewRowDataWrapper[] tmpc_SQLTable__listViewRowDataWrapper = new ListViewRowDataWrapper[tmpl_0];
+            java.util.List<ListViewRowDataWrapper<String>> tmpc_SQLTable__listViewRowDataWrapper = new java.util.ArrayList<ListViewRowDataWrapper<String>>(tmpl_0);
             for (int tmpc_int =0; tmpc_int<tmpl_0; tmpc_int++) {
                 String tmpt_str=(String)(tmpc_SQLTable.cols[0].vals.get(tmpc_int));
-                tmpc_SQLTable__listViewRowDataWrapper[tmpc_int]=new ListViewRowDataWrapper(tmpt_str, tmpt_str);
+                tmpc_SQLTable__listViewRowDataWrapper.add(
+                new ListViewRowDataWrapper<String>(tmpt_str, tmpt_str)
+                );
             }
             productListView.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
             productListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
@@ -55,7 +57,7 @@ public class UICtrl_Warehouse {
                 public void handle(MouseEvent event) {
                     try {
                         if (event.getClickCount() >= 2) {
-                            ListViewRowDataWrapper tmpt_lvrdw = productListView.getSelectionModel().getSelectedItem();
+                            ListViewRowDataWrapper<String> tmpt_lvrdw = productListView.getSelectionModel().getSelectedItem();
                             if (tmpt_lvrdw!=null ) {
                                 // TODO: แสดงรายละเอียดของสินค้า
                                 Main.switchToSpecificPagename("product_detail",new Object[] {this.getClass(),tmpt_lvrdw});

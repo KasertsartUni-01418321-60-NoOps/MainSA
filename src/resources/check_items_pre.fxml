@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -23,7 +23,7 @@
       <Text layoutX="255.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่นสินค้า :" />
       <TextField fx:id="textField_Model" layoutX="310.0" layoutY="100.0" />
       <Text layoutX="33.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สิ่งที่ต้องซ่อม :" />
-      <ListView fx:id="textArea_rpmDesc" editable="true" layoutX="65.0" layoutY="187.0" prefHeight="81.0" prefWidth="491.0" />
+      <TextArea fx:id="textArea_rpmDesc" editable="true" layoutX="65.0" layoutY="187.0" prefHeight="81.0" prefWidth="491.0" />
       <Text layoutX="33.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานะ :" />
       <Text layoutX="38.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาสินค้า :" />
       <TextField fx:id="textField_Price" layoutX="95.0" layoutY="273.0" prefHeight="25.0" prefWidth="114.0" />

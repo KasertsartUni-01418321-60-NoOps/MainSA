@@ -12,7 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 
 public class UICtrl_CustomerList {
-    @FXML private ListView<ListViewRowDataWrapper> custListView;
+    @FXML private ListView<ListViewRowDataWrapper<String>> custListView;
     @FXML private TextField textField_SearchBox;
     
     @FXML
@@ -90,15 +90,17 @@ public class UICtrl_CustomerList {
             throw e;
         }
         int tmpl_0=tmpc_SQLTable.cols[0].vals.size();
-        ListViewRowDataWrapper[] tmpc_SQLTable__listViewRowDataWrapper = new ListViewRowDataWrapper[tmpl_0];
+        java.util.List<ListViewRowDataWrapper<String>> tmpc_SQLTable__listViewRowDataWrapper = new java.util.ArrayList<ListViewRowDataWrapper<String>>(tmpl_0);
         for (int tmpc_int =0; tmpc_int<tmpl_0; tmpc_int++) {
             String tmpt_str=(String)(tmpc_SQLTable.cols[0].vals.get(tmpc_int));
-            tmpc_SQLTable__listViewRowDataWrapper[tmpc_int]=new ListViewRowDataWrapper(tmpt_str, tmpt_str);
+            tmpc_SQLTable__listViewRowDataWrapper.add(
+                new ListViewRowDataWrapper<String>(tmpt_str, tmpt_str)
+            );
         }
         custListView.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
     }
     private void helper_changePageForViewDataOfRow() throws java.io.IOException {
-        ListViewRowDataWrapper tmpt_lvrdw = custListView.getSelectionModel().getSelectedItem();
+        ListViewRowDataWrapper<String> tmpt_lvrdw = custListView.getSelectionModel().getSelectedItem();
         if (tmpt_lvrdw!=null) {
         Main.switchToSpecificPagename("customer_data",new Object[] {this.getClass(),tmpt_lvrdw});
         }
