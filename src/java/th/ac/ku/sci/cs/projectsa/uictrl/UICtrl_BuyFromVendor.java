@@ -4,22 +4,25 @@ import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataTransformation;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation;
+import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 import javafx.fxml.*;
 import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
 public class UICtrl_BuyFromVendor {
-    @FXML private TextField textField_custName;
+    @FXML private ComboBox<ListViewRowDataWrapper> comboBox_custName;
     @FXML private TextField textField_brand;
     @FXML private TextField textField_model;
     @FXML private TextArea textArea_MeetLoc;
     @FXML private TextArea textArea_PdLooks;
     @FXML private DatePicker datePicker_MeetDate;
 
-    @FXML private void initialize() {
+    @FXML private void initialize() throws java.sql.SQLException{
         try{
+            comboBox_custName_Helper1();
             datePicker_MeetDate.setValue(java.time.LocalDate.now().plusDays(1));
+            
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
@@ -36,7 +39,13 @@ public class UICtrl_BuyFromVendor {
     }
     @FXML private void onpressed_Button_Save() throws java.io.IOException,java.sql.SQLException {
         try {
-            String formval_custName = textField_custName.getText();
+            // Note that this always got from DB, so no validation
+            String formval_custName=null;
+            try {formval_custName = comboBox_custName.getSelectionModel().getSelectedItem().ref;}
+            catch (NullPointerException e) {
+                helper2();
+                return;
+            }
             String formval_brand = textField_brand.getText();
             String formval_model = textField_model.getText();
             Long formval_meetDate= datePicker_MeetDate.getValue().toEpochDay()*86400+43200-1;
@@ -44,14 +53,16 @@ public class UICtrl_BuyFromVendor {
             String formval_productLooks = textArea_PdLooks.getText();
             // [VALIDZONE]
             DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON tmpReason;
-            tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Customer_Full_Name(formval_custName);
-            if (tmpReason ==DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL) {
-                helper2();
-                return;
-            } else if (tmpReason != null) {
-                helper1();
-                return;
-            }
+            // DISABLED: due to above reason
+            // DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON tmpReason;
+            // tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Customer_Full_Name(formval_custName);
+            // if (tmpReason ==DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL) {
+            //     helper2();
+            //     return;
+            // } else if (tmpReason != null) {
+            //     helper1();
+            //     return;
+            // }
             tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Brand(formval_brand);
             if (tmpReason != null) {
                 helper1();
@@ -126,13 +137,38 @@ public class UICtrl_BuyFromVendor {
         Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเพิ่มข้อมูลผิดพลาด",
 						"ไม่สามารถเพ่ิมข้อมูลสัญญาชื้อได้", "เนื่องจากกรอกข้อมูลผิดรูปแบบ", false);
     }
+    // REMARK: เผื่อกรณี NULL ของ ComboBox
     private void helper2() {
         Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเพิ่มข้อมูลผิดพลาด",
-						"ไม่สามารถเพ่ิมข้อมูลสัญญาชื้อได้", "เนื่องจากชื่อลูกค้าที่กรอกไม่มีอยู่ โปรดตรวจสอบชื่อฯให้ถูกต้องทุกตัวอักษร", false);
+						"ไม่สามารถเพ่ิมข้อมูลสัญญาชื้อได้", "เนื่องจากชื่อลูกค้ายังไม่ได้ถูกเลือก", false);
     }
     private void helper3() {
         Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเพิ่มข้อมูลผิดพลาด",
 						"ไม่สามารถเพ่ิมข้อมูลสัญญาชื้อได้","เนื่องจากวันที่ไม่ใช่วันนี้หรือเวลาในอนาคต", false);
+    }
+    private void comboBox_custName_Helper1() throws java.sql.SQLException {
+        DatabaseMnm.Table tmpc_SQLTable = null;
+        try {
+            tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
+                    null,
+                    "SELECT Customer_Full_Name FROM Customer",
+                    false,
+                    true,
+                    null,
+                    null
+            )[1]);
+        } catch (java.sql.SQLException e) {
+            MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
+                    "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
+            throw e;
+        }
+        int tmpl_0=tmpc_SQLTable.cols[0].vals.size();
+        ListViewRowDataWrapper[] tmpc_SQLTable__listViewRowDataWrapper = new ListViewRowDataWrapper[tmpl_0];
+        for (int tmpc_int =0; tmpc_int<tmpl_0; tmpc_int++) {
+            String tmpt_str=(String)(tmpc_SQLTable.cols[0].vals.get(tmpc_int));
+            tmpc_SQLTable__listViewRowDataWrapper[tmpc_int]=new ListViewRowDataWrapper(tmpt_str, tmpt_str);
+        }
+        comboBox_custName.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
     }
 }
 
