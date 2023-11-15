@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -21,24 +19,20 @@
       </Text>
       <Button layoutX="499.0" layoutY="361.0" mnemonicParsing="false" onAction="#onBack_Button" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ" />
       <Text layoutX="33.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อสินค้า :" />
-      <TextField layoutX="87.0" layoutY="100.0" />
+      <TextField fx:id="textField_Brand" layoutX="87.0" layoutY="100.0" />
       <Text layoutX="255.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่นสินค้า :" />
-      <TextField layoutX="310.0" layoutY="100.0" />
+      <TextField fx:id="textField_Model" layoutX="310.0" layoutY="100.0" />
       <Text layoutX="33.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สิ่งที่ต้องซ่อม :" />
-      <ListView editable="true" layoutX="65.0" layoutY="187.0" prefHeight="81.0" prefWidth="491.0" />
-      <Text layoutX="33.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ต่องซ่อมไหม :" />
-      <CheckBox layoutX="112.0" layoutY="135.0" mnemonicParsing="false" text="ซ่อม" />
-      <CheckBox layoutX="200.0" layoutY="135.0" mnemonicParsing="false" text="ไม่ซ่อม" />
+      <ListView fx:id="textArea_rpmDesc" editable="true" layoutX="65.0" layoutY="187.0" prefHeight="81.0" prefWidth="491.0" />
+      <Text layoutX="33.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานะ :" />
       <Text layoutX="38.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาสินค้า :" />
-      <TextField layoutX="95.0" layoutY="273.0" prefHeight="25.0" prefWidth="114.0" />
+      <TextField fx:id="textField_Price" layoutX="95.0" layoutY="273.0" prefHeight="25.0" prefWidth="114.0" />
       <Text layoutX="216.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="บาท" />
       <Text layoutX="37.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="เครดิต :" />
-      <MenuButton layoutX="95.0" layoutY="306.0" mnemonicParsing="false" text="จัดการเครดิต">
-        <items>
-          <MenuItem mnemonicParsing="false" text="เพิ่มเครดิต" />
-          <MenuItem mnemonicParsing="false" text="ลดเครดิต" />
-        </items>
-      </MenuButton>
+      <ComboBox fx:id="comboBox_Action" layoutX="95.0" layoutY="306.0">
+      </ComboBox>
       <Button layoutX="422.0" layoutY="361.0" mnemonicParsing="false" styleClass="POSHIGHLIGHT" text="บันทึก" />
+      <ComboBox fx:id="comboBox_creditAction" layoutX="83.0" layoutY="136.0">
+      </ComboBox>
    </children>
 </AnchorPane>

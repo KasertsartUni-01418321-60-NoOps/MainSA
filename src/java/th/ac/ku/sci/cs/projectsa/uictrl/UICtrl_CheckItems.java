@@ -10,11 +10,18 @@ import javafx.scene.control.*;
 
 public class UICtrl_CheckItems {
 
-    // TODO:
-    @FXML private void initialize() throws Throwable {
+    @FXML
+    
+    @FXML private void initialize() {
+        try{
+            
+        } catch (Throwable e) {
+            MyExceptionHandling.handleFatalException(e);
+            throw e;
+        }
     }
 
-    @FXML private void onBack_Button() throws java.sql.SQLException, java.security.NoSuchAlgorithmException, Throwable {
+    @FXML private void onBack_Button() throws java.io.IOException {
         try {
             Main.switchToSpecificPagename("buy_data", new Object[] {
                 this.getClass(),

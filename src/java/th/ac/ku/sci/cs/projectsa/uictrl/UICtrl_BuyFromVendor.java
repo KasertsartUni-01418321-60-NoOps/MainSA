@@ -151,7 +151,7 @@ public class UICtrl_BuyFromVendor {
         try {
             tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
                     null,
-                    "SELECT Customer_Full_Name FROM Customer ORDER BY Customer_Full_Name ASEC",
+                    "SELECT Customer_Full_Name FROM Customer ORDER BY Customer_Full_Name ASC",
                     false,
                     true,
                     null,
@@ -168,10 +168,7 @@ public class UICtrl_BuyFromVendor {
             String tmpt_str=(String)(tmpc_SQLTable.cols[0].vals.get(tmpc_int));
             tmpc_SQLTable__listViewRowDataWrapper[tmpc_int]=new ListViewRowDataWrapper(tmpt_str, tmpt_str);
         }
-        for (int i = 0; i < 100; i++) {
-            
-            comboBox_custName.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
-        }
+        comboBox_custName.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
     }
 }
 
