@@ -56,8 +56,8 @@ public class DatabaseMnm {
 						+ "VALUES (?, ?, ?, ?, ?, ?);"
 		};
 		String[] sqlStms_6 = new String[] {
-				"INSERT INTO Buy_Request (Customer_Full_Name, Product_ID, Buy_Request_Created_Date, Buy_Request_Transportation_Price)"
-						+ "VALUES (?,?,?,?);"
+				"INSERT INTO Buy_Request (Customer_Full_Name, Product_ID, Buy_Request_Created_Date, Buy_Request_Transportation_Price, Buy_Request_Location)"
+						+ "VALUES (?,?,?,?,?);"
 		};
 
 		try {
@@ -323,13 +323,6 @@ public class DatabaseMnm {
 						.check__BUY_REQUEST__Buy_Request_Transportation_Price(SD_Buy_Request_Transportation_Price);
 				if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-				} else {
-					DatabaseMnm.runSQLcmds(null, sqlStms_6, true,false, null, new Object[][] { { SD_Customer_Full_Name,
-							SD_Product_ID, SD_Buy_Request_Created_Date,
-							DataTransformation.doubleLengthCroppingAndNullableTransform(
-									SD_Buy_Request_Transportation_Price,
-									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[0],
-									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[1]) } });
 				}
 				tmpReason = DataValidation.PerAttributeValidation
 						.check__BUY_REQUEST__Buy_Request_Location(SD_Buy_Request_Location);
@@ -342,10 +335,9 @@ public class DatabaseMnm {
 									SD_Buy_Request_Transportation_Price,
 									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[0],
 									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[1]),
-							SD_Buy_Request_Location		
+							SD_Buy_Request_Location			
 					} });
 				}
-				break;
 			}
 			// [ZONE END]
 		} catch (java.sql.SQLException e) {
