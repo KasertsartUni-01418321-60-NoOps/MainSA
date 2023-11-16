@@ -33,7 +33,7 @@ public class DatabaseMnm {
 				"CREATE TABLE IF NOT EXISTS Product (Product_ID TEXT PRIMARY KEY, Product_Arrive_Time INTEGER NOT NULL, Product_Price REAL NOT NULL, Product_Status INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL UNIQUE, Repairment_ID TEXT  UNIQUE, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID), FOREIGN KEY (Repairment_ID) REFERENCES REPAIRMENT(Repairment_ID))STRICT,WITHOUT ROWID;",
 				"CREATE TABLE IF NOT EXISTS User (User_Name TEXT PRIMARY KEY, User_Password TEXT NOT NULL, User_Role INTEGER NOT NULL)STRICT,WITHOUT ROWID;",
 				"CREATE TABLE IF NOT EXISTS Repairment (Repairment_ID TEXT PRIMARY KEY, Repairment_Description TEXT NOT NULL, Repairment_Date INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL UNIQUE, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID))STRICT,WITHOUT ROWID;",
-				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT, Product_ID TEXT UNIQUE, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price REAL NOT NULL, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT,WITHOUT ROWID;"
+				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT, Product_ID TEXT UNIQUE, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price REAL NOT NULL, Buy_Request_Location TEXT NOT NULL, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT,WITHOUT ROWID;"
 		};
 		String[] sqlStms_1 = new String[] {
 				"INSERT INTO User (User_Name, User_Password, User_Role)"
@@ -91,6 +91,7 @@ public class DatabaseMnm {
 			Long SD_Product_Status = (long) 2;
 			Long SD_Buy_Request_Created_Date = (long) 1635830400;
 			Double SD_Buy_Request_Transportation_Price = 10.25;
+			String SD_Buy_Request_Location = "ประเทศไทย";
 			DataValidation.DATAVALID_DECLINED_REASON tmpReason = null;
 			// PART 2A:
 			while (true) {
@@ -329,6 +330,20 @@ public class DatabaseMnm {
 									SD_Buy_Request_Transportation_Price,
 									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[0],
 									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[1]) } });
+				}
+				tmpReason = DataValidation.PerAttributeValidation
+						.check__BUY_REQUEST__Buy_Request_Location(SD_Buy_Request_Location);
+				if (tmpReason != null) {
+					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
+				} else {
+					DatabaseMnm.runSQLcmds(null, sqlStms_6, true,false, null, new Object[][] { { SD_Customer_Full_Name,
+							SD_Product_ID, SD_Buy_Request_Created_Date,
+							DataTransformation.doubleLengthCroppingAndNullableTransform(
+									SD_Buy_Request_Transportation_Price,
+									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[0],
+									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[1]),
+							SD_Buy_Request_Location		
+					} });
 				}
 				break;
 			}
@@ -821,6 +836,7 @@ public class DatabaseMnm {
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_ID", new Integer[] { 8, 8 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Buy_Request_Created_Date", new Integer[] { 10, 10 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Buy_Request_Transportation_Price", new Integer[] { 5, 2 });
+			MINMAX_LENGTH_OF_ATTRIBS.put("Buy_Request_Location", new Integer[] { 1, 512 });
 		}
 
 		// [Zone:StatusENUM]
@@ -1809,6 +1825,29 @@ public class DatabaseMnm {
 					if (DataValidation.JavaTypeLevel.checkDoubleNotNegative(data)) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+					}
+					// the code should reached here means it (data) is passed
+					return null;
+				}
+			}
+
+			@Nullable
+			public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Buy_Request_Location(
+					@Nullable String data) {
+				// (PART 0): check if it is null
+				if (data == null) {
+					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
+				} else {
+					// (PART 1): Check length
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Location");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
+					}
+					// (PART 2): Check string conditions
+					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {
+					} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
 					// the code should reached here means it (data) is passed
 					return null;
