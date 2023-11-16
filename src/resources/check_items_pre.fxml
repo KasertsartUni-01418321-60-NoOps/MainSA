@@ -63,7 +63,7 @@
          </font></Text>
       <ComboBox fx:id="comboBox_creditAction" layoutX="142.0" layoutY="474.0" prefHeight="40.0" prefWidth="114.0">
       </ComboBox>
-      <Button layoutX="532.0" layoutY="523.0" mnemonicParsing="false" prefWidth="100.0" styleClass="POSHIGHLIGHT" text="บันทึก">
+      <Button  onAction="#onSave_Button" layoutX="532.0" layoutY="523.0" mnemonicParsing="false" prefWidth="100.0" styleClass="POSHIGHLIGHT" text="บันทึก">
          <font>
             <Font size="18.0" />
          </font></Button>
