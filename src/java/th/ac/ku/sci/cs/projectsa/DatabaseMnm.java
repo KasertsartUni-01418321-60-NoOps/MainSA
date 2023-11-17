@@ -786,16 +786,29 @@ public class DatabaseMnm {
 	// lamo
 	public static class DataSpec {
 		// [Zone:Constants]
+		
 		// for attribute that have range (that "required" range checking ถ้าไม่ required
 		// ก็เช่น ใช้ >0 หรือ >=0 ได้)
 		// > วิธีนี้เพื่อลดการ HARDCODE LAMO
 		public final static long RANGE_MIN__Customer_Credit_Amount = -500;
 		public final static long RANGE_MAX__Customer_Credit_Amount = 500;
+		public final static double RANGE_MIN__Selling_Request_Paid_Amount = 0.01;
+		public final static double RANGE_MAX__Selling_Request_Paid_Amount = 99999999.99;
+		public final static double RANGE_MIN__Product_Price = 0.01;
+		public final static double RANGE_MAX__Product_Price = 99999999.99;
+		public final static double RANGE_MIN__Buy_Request_Transportation_Price = 0;
+		public final static double RANGE_MAX__Buy_Request_Transportation_Price = 99999.99;
+		
+		// for attribute that limit range by digit limiting
+		// > วิธีนี้เพื่อลดการ HARDCODE LAMO
+
+
 		// REMARK: สำหรับ REAL attribute, ค่าMin คือ digitCount หน้าทศนิยม และค่าMax คือ
 		// digitCount หลังทศนิยม
 		// REMARK: apply ทุก attribte!!
 		// REMARK: ชื่อ attribute ซ้ำกันเพราะ FK ซึ่ง FK คุณสมบัติของ length
 		// เหมือนกันอยู๋แล้วๆๆ
+		// REMARK: YOU HAVE TO set limit double above, in case double have digit limit.
 		public final static java.util.Map<String, Integer[]> MINMAX_LENGTH_OF_ATTRIBS = new java.util.HashMap<>();
 		static {
 			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Full_Name", new Integer[] { 1, 192 });
@@ -871,6 +884,7 @@ public class DatabaseMnm {
 		public @interface Nullable {
 		}
 
+		// [Zone:ENUM]
 		public static enum DATAVALID_DECLINED_REASON {
 			ISNULL,
 			INVALID_LENGTH,
@@ -882,6 +896,7 @@ public class DatabaseMnm {
 			VALUE_NOT_EXISTED_AT_REFERENCED_COL,
 		}
 
+		// [Zone:Subclass]
 		public static class JavaTypeLevel {
 			// [Zone:Methods]
 			public static boolean checkObjNotNull(@Nullable Object data) {
@@ -1047,8 +1062,9 @@ public class DatabaseMnm {
 		// lamo, อ่อลืมบอก ฐานข้อมูลจริงๆเก็บเป็น hash แต่โค้ดของเราที่จะ validate
 		// password คือ validate ว่าเป็นรหัสยอมรับได้ก่อนนำไป hashing
 		// REMARK: function here must handled NULL too
-		// REMARK: function here if return as null >> valid passed
+		// REMARK: function here if return as null >> valid passed (except some case)
 		// REMARK: พวก REPEATED ไว้เช็คตอนสุดท้าย เพราะเผื่อ caller แค่จะ SELECT
+		// REMARK: value getting is of cleaned-By-UI
 		public static class PerAttributeValidation {
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__CUSTOMER__Customer_Full_Name(
@@ -1279,8 +1295,10 @@ public class DatabaseMnm {
 				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
-					// (PART 1): Check length
+					// (PART 0.5) transform into doubleLengthCropping
 					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price");
+					data=DataTransformation.doubleLengthCropping(data, lenSpec[0], lenSpec[1],true);
+					// (PART 1): Check length
 					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0], lenSpec[1])) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
@@ -1563,8 +1581,10 @@ public class DatabaseMnm {
 				if (data == null) {
 					return null;
 				} else {
-					// (PART 1): Check length
+					// (PART 0.5) transform into doubleLengthCropping
 					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount");
+					data=DataTransformation.doubleLengthCropping(data, lenSpec[0], lenSpec[1],true);
+					// (PART 1): Check length
 					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0], lenSpec[1])) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
@@ -1807,8 +1827,10 @@ public class DatabaseMnm {
 				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
-					// (PART 1): Check length
+					// (PART 0.5) transform into doubleLengthCropping
 					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price");
+					data=DataTransformation.doubleLengthCropping(data, lenSpec[0], lenSpec[1],true);
+					// (PART 1): Check length
 					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0], lenSpec[1])) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
@@ -1865,7 +1887,12 @@ public class DatabaseMnm {
 			}
 		}
 
+		
 		public static double doubleLengthCropping(double data, int maxFront, int maxRear) {
+			return doubleLengthCropping(data, maxFront, maxRear, false);
+		}
+
+		public static double doubleLengthCropping(double data, int maxFront, int maxRear, boolean doNotCap) {
 			StringBuilder tmp1 = new StringBuilder();
 			for (int i = 0; i < maxFront; i++) {
 				tmp1.append("9");
@@ -1878,14 +1905,16 @@ public class DatabaseMnm {
 			String tmp_negdoublestr = "-" + tmp_posdoublestr;
 			Double[] tmp2 = new Double[2];
 			try {
-				tmp2[0] = Double.parseDouble(tmp_negdoublestr);
-				tmp2[1] = Double.parseDouble(tmp_posdoublestr);
-				if (tmp2[0] <= data && data <= tmp2[1]) {
-				} else {
-					if (tmp2[0] <= data) {
-						return tmp2[1];
+				if (!doNotCap) {
+					tmp2[0] = Double.parseDouble(tmp_negdoublestr);
+					tmp2[1] = Double.parseDouble(tmp_posdoublestr);
+					if (tmp2[0] <= data && data <= tmp2[1]) {
 					} else {
-						return tmp2[0];
+						if (tmp2[0] <= data) {
+							return tmp2[1];
+						} else {
+							return tmp2[0];
+						}
 					}
 				}
 			} catch (RuntimeException e) {
