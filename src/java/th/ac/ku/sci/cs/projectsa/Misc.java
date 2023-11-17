@@ -2,6 +2,7 @@ package th.ac.ku.sci.cs.projectsa;
 
 public class Misc {
     public static final String[] ThaiStr_DataSpec_Status_SR= {"รอการนัดเช็คสภาพฯ","ปฏิเสธการรับซื้อแล้ว","รับซื้อแล้ว"};
+    public static final String[] ThaiStr_DataSpec_Status_pd= {"รอการประกาศขาย","พร้อมขาย","ขายแล้ว/กำลังส่ง","ส่งแล้ว"};
 
     public static String[] rickrollLyrics = new String[] {
         "We're no strangers to love",
