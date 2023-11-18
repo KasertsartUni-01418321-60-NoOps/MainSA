@@ -106,7 +106,7 @@ public class UICtrl_BuyFromVendor {
             try{
                 DatabaseMnm.runSQLcmd(
                     null,
-                    "INSERT INTO Selling_Request VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+                    "INSERT INTO Selling_Request VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);",
                     true,
                     false,
                     null,
@@ -119,7 +119,8 @@ public class UICtrl_BuyFromVendor {
                         formval_meetDate,
                         formval_custLoc,
                         Double.class,
-                        (long)0
+                        (long)0,
+                        String.class
                     }
                 );
             } catch (java.sql.SQLException e) {
