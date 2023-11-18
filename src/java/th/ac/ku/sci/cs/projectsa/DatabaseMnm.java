@@ -827,9 +827,9 @@ public class DatabaseMnm {
 		}
 	}
 
-	// WARNING: ให้ถือว่า function ที่ไม่ได้มีหน้าที่เช็ค null/type
-	// จะถือว่าข้อมูลที่รับเข้ามามีการเช็ค null/type แล้ว เช่น checkStrIsNotEmpty
-	// จะไม่เช็ค String ว่า not-nullไหม หากโยน nullเข้าไปจะ error ทันที
+	// WARNING: ให้ถือว่า function ที่ไม่ได้มีหน้าที่ตรวจสอบ null/type
+	// จะถือว่าข้อมูลที่รับเข้ามามีการตรวจสอบ null/type แล้ว เช่น checkStrIsNotEmpty
+	// จะไม่ตรวจสอบ String ว่า not-nullไหม หากโยน nullเข้าไปจะ error ทันที
 	// REMARK: legnth คือ integer ส่วน range/ตัวค่าคือ long/double (แล้วแต่ dattype
 	// ของ attrib)
 	// REMARK: only considered type of LONG/DOUBLE/STRING
@@ -871,7 +871,7 @@ public class DatabaseMnm {
 				return !(data == null);
 			}
 
-			// REMARK: ใช้ checkStrLength แทนได้ และในทางกลับกัน (กรณีจะเช็คว่า notEmpty)
+			// REMARK: ใช้ checkStrLength แทนได้ และในทางกลับกัน (กรณีจะตรวจสอบว่า notEmpty)
 			public static boolean checkStrNotEmpty(@NotNull String data) {
 				return data.length() > 0;
 			}
@@ -1031,7 +1031,7 @@ public class DatabaseMnm {
 		// password คือ validate ว่าเป็นรหัสยอมรับได้ก่อนนำไป hashing
 		// REMARK: function here must handled NULL too
 		// REMARK: function here if return as null >> valid passed (except some case)
-		// REMARK: พวก REPEATED ไว้เช็คตอนสุดท้าย เพราะเผื่อ caller แค่จะ SELECT
+		// REMARK: พวก REPEATED ไว้ตรวจสอบตอนสุดท้าย เพราะเผื่อ caller แค่จะ SELECT
 		// REMARK: value getting is of cleaned-By-UI
 		public static class PerAttributeValidation {
 			@Nullable
@@ -1611,10 +1611,10 @@ public class DatabaseMnm {
 				}
 			}
 
-			// REMARK: ผมวิเคราะห์มาแล้ว การเช็คนี้จะเช็ค Unique of PKแบบควบ ด้วย
-			// เพราะเรื่อง UNIQUE มันโดนเช็คจาก UNIQUE of attribute ของ
+			// REMARK: ผมวิเคราะห์มาแล้ว การตรวจสอบนี้จะตรวจสอบ Unique of PKแบบควบ ด้วย
+			// เพราะเรื่อง UNIQUE มันโดนตรวจสอบจาก UNIQUE of attribute ของ
 			// Buy_Request.Product_ID แล้วๆ
-			// > ฉะนั้นหากเช็คอันนี้ผ่าน คือ PK unique ผ่านๆ
+			// > ฉะนั้นหากตรวจสอบอันนี้ผ่าน คือ PK unique ผ่านๆ
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Product_ID(@Nullable String data)
 					throws java.sql.SQLException {
