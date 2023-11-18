@@ -2,11 +2,6 @@ package th.ac.ku.sci.cs.projectsa.uictrl;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
-import th.ac.ku.sci.cs.projectsa.fun.MIDIPlayer;
-import th.ac.ku.sci.cs.projectsa.fun.UnsafeStuff;
-
-import com.github.saacsos.FXRouter;
-
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;

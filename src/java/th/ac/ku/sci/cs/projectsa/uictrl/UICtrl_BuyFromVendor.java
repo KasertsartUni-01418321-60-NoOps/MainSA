@@ -2,11 +2,9 @@ package th.ac.ku.sci.cs.projectsa.uictrl;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
-import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataTransformation;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 import javafx.fxml.*;
-import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 

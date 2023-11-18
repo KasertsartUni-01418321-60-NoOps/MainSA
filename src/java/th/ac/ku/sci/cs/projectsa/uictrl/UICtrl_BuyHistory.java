@@ -4,10 +4,7 @@ import javafx.fxml.FXML;
 import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Product;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Selling_Request;
-import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_User;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
-
-import java.io.IOException;
 
 import javafx.event.EventHandler;
 import javafx.fxml.*;

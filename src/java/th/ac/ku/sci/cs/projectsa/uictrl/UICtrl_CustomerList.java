@@ -3,10 +3,6 @@ import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 import javafx.fxml.*;
 import javafx.scene.control.*;
-import javafx.scene.control.Alert.AlertType;
-
-import java.io.IOException;
-
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;

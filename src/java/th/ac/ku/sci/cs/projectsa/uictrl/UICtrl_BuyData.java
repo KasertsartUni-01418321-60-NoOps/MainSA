@@ -108,7 +108,6 @@ public class UICtrl_BuyData {
 
     @FXML private void onCheck_Button() throws java.io.IOException {
         try {
-            // TODO: โยน
             // 0: this class
             // 1: (Object[])com.github.saacsos.FXRouter.getData())[1] (ListViewRowDataWrapper<String> ของ SR_ID)
             // 2: Array ของข้อมูล ดังนี้ Brand/Model/CustName
