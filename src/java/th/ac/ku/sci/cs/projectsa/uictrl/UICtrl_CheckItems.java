@@ -18,7 +18,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class UICtrl_CheckItems {
-
+    // set to default of comboBox default seleection
+    private int selectedOption=1;
     @FXML private TextField textField_Brand;
     @FXML private TextField textField_Model;
     @FXML private TextArea textArea_rpmDesc;
@@ -74,7 +75,7 @@ public class UICtrl_CheckItems {
             textField_Model.setText(tmpt_arr_obj[1].toString());
             comboBox_Action.setOnAction(event -> {
                 try {
-                    Integer selectedOption = comboBox_Action.getValue().ref;
+                    selectedOption = comboBox_Action.getValue().ref;
                     if (selectedOption==1) {
                         textArea_rpmDesc.setDisable(false);
                         spinnerDouble_Price.setDisable(false);
@@ -121,11 +122,20 @@ public class UICtrl_CheckItems {
                 onSave_Button__Helper1();
                 return;
             }
-            tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Paid_Amount(textField_Model.getText());
-            if (tmpReason != null) {
-                onSave_Button__Helper1();
-                return;
+            if (selectedOption!=0) {
+                tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Paid_Amount(spinnerDouble_Price.getValue());
+                if (tmpReason != null) {
+                    onSave_Button__Helper1();
+                    return;
+                }
             }
+            if (selectedOption==1) {
+                tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Repairment_Description(textArea_rpmDesc.getText());
+                if (tmpReason != null) {
+                    onSave_Button__Helper1();
+                    return;
+                }
+            } 
             // [PART: Update SR]
             String SR_ID= ((ListViewRowDataWrapper<String>)((Object[])FXRouter.getData())[1]).ref;
             int tmpt_int = 1;
