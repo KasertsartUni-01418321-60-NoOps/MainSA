@@ -139,10 +139,10 @@ public class UICtrl_CheckItems {
             // [PART: Update SR]
             String SR_ID= ((ListViewRowDataWrapper<String>)((Object[])FXRouter.getData())[1]).ref;
             int tmpt_int = 1;
+            if (comboBox_Action.getValue().ref!=0) {
+                tmpt_int=2;
+            }
             try{
-                if (comboBox_Action.getValue().ref!=0) {
-                    tmpt_int=2;
-                }
                 DatabaseMnm.runSQLcmd(
                     null,
                     "UPDATE Selling_Request SET Selling_Request_Status=?, Selling_Request_Brand=?,Selling_Request_Model=?  WHERE Selling_Request_ID=? ;",
@@ -151,10 +151,9 @@ public class UICtrl_CheckItems {
                     null,
                     new Object[] {
                         tmpt_int,
-                        SR_ID,
-                        // TODO
                         textField_Brand.getText(),
-                        textField_Model.getText()
+                        textField_Model.getText(),
+                        SR_ID
                     }
                 );
             } catch (java.sql.SQLException e) {
