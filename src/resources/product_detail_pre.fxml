@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -25,7 +25,7 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Text>
-      <TextField layoutX="131.0" layoutY="90.0" prefHeight="40.0" prefWidth="176.0">
+      <TextField fx:id="productID" layoutX="131.0" layoutY="90.0" prefHeight="40.0" prefWidth="176.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -33,7 +33,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <TextField layoutX="587.0" layoutY="90.0" prefHeight="40.0" prefWidth="185.0">
+      <TextField fx:id="modelText" layoutX="587.0" layoutY="90.0" prefHeight="40.0" prefWidth="185.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -41,12 +41,11 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <ListView layoutX="31.0" layoutY="276.0" prefHeight="274.0" prefWidth="448.0" />
       <Text layoutX="493.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาสินค้า :">
          <font>
             <Font size="18.0" />
          </font></Text>
-      <TextField layoutX="588.0" layoutY="199.0" prefHeight="40.0" prefWidth="146.0">
+      <TextField fx:id="priceText" layoutX="588.0" layoutY="199.0" prefHeight="40.0" prefWidth="146.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -58,7 +57,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <TextField layoutX="375.0" layoutY="90.0" prefHeight="40.0" prefWidth="166.0">
+      <TextField fx:id="brandText" layoutX="375.0" layoutY="90.0" prefHeight="40.0" prefWidth="166.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -66,7 +65,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <TextField layoutX="154.0" layoutY="144.0" prefHeight="40.0" prefWidth="152.0">
+      <TextField fx:id="purchaseID" layoutX="154.0" layoutY="144.0" prefHeight="40.0" prefWidth="152.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -74,7 +73,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <TextField layoutX="447.0" layoutY="144.0" prefHeight="40.0" prefWidth="152.0">
+      <TextField fx:id="quotationID" layoutX="447.0" layoutY="144.0" prefHeight="40.0" prefWidth="152.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -82,10 +81,11 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Button layoutX="508.0" layoutY="273.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="256.0" text="สร้างสัญญาขาย">
+      <Button layoutX="506.0" layoutY="283.0" mnemonicParsing="false" onAction="#onCreatQuotation_Button" prefHeight="54.0" prefWidth="256.0" text="สร้างสัญญาขาย">
          <font>
             <Font size="18.0" />
          </font></Button>
       <ChoiceBox fx:id="changeStatus" layoutX="131.0" layoutY="199.0" prefHeight="40.0" prefWidth="176.0" />
+      <TextArea fx:id="maintanaceID" layoutX="35.0" layoutY="283.0" prefHeight="270.0" prefWidth="446.0" />
    </children>
 </AnchorPane>
