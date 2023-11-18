@@ -3,6 +3,8 @@ package th.ac.ku.sci.cs.projectsa;
 public class Misc {
     public static final String[] ThaiStr_DataSpec_Status_SR= {"รอการนัดเช็คสภาพฯ","ปฏิเสธการรับซื้อแล้ว","รับซื้อแล้ว"};
     public static final String[] ThaiStr_DataSpec_Status_pd= {"รอการประกาศขาย","พร้อมขาย","ขายแล้ว/กำลังส่ง","ส่งแล้ว"};
+    public static final double choosenDefaultValueFor_PaidAmount_AtCheckItemPAge=25000;
+    public static double choosenStepValueFor_PaidAmount_AtCheckItemPAge=100;
 
     public static String[] rickrollLyrics = new String[] {
         "We're no strangers to love",
@@ -60,6 +62,7 @@ public class Misc {
         "Never gonna say goodbye",
         "Never gonna tell a lie and hurt you",
     };
+
 
         // entire exception handling info: mode=no
         public static String getISODateTimeString() {
