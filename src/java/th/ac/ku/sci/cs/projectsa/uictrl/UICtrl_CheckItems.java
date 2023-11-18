@@ -164,13 +164,44 @@ public class UICtrl_CheckItems {
                         SR_ID
                     }
                 );
-                DatabaseMnm.mainDbConn.commit();
             } catch (java.sql.SQLException e) {
                 MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
                 "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
                 throw e;
             };
             // [PART: Update Ctm]
+            if (comboBox_creditAction.getValue().ref==1) {
+                tmpt_int=1;
+            } else {
+                tmpt_int=-1;
+            }
+            try{
+                DatabaseMnm.runSQLcmd(
+                    null,
+                    "UPDATE Customer SET Customer_Credit_Amount=CASE WHEN (Customer_Credit_Amount + ?) < -500 THEN -500 WHEN (Customer_Credit_Amount + ?) > 500 THEN 500 ELSE (Customer_Credit_Amount + ?) END WHERE Customer_Full_Name=? ;",
+                    true,
+                    false,
+                    null,
+                    new Object[] {
+                        tmpt_int,
+                        (String)(
+                            (
+                                (Object[])(
+                                    (
+                                        (Object[])FXRouter.getData()
+                                    )[2]
+                                )
+                            )[2]
+                        )
+                    }
+                );
+                // ค่อย commit ทีเดียวๆ
+                DatabaseMnm.mainDbConn.commit();
+            } catch (java.sql.SQLException e) {
+                MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
+                "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
+                throw e;
+            };
             Main.switchToSpecificPagename("buy_data", new Object[] {
                 this.getClass(),
                 (((Object[])FXRouter.getData())[1])
