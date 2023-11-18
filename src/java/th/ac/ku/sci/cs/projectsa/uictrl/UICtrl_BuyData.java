@@ -23,6 +23,7 @@ public class UICtrl_BuyData {
     // เราไม่ได้แก้ไขค่า double เลยตั้งเป็น non-editable textfield
     @FXML private TextField textField_PaidAmount;
     @FXML private TextField textField_Status;
+    @FXML private TextArea textArea_RpmDesc;
     @FXML private Button button_Check;
 
     @FXML private void initialize() throws Throwable {
@@ -40,7 +41,7 @@ public class UICtrl_BuyData {
                 )[1]);
             } catch (java.sql.SQLException e) {
                 MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
-                        "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
+                        "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
                 throw e;
             }
             String tmpt_str;
@@ -69,10 +70,28 @@ public class UICtrl_BuyData {
                 tmpc_SQLTable.cols[8].vals.get(0),tmpc_SQLTable.cols[8].javaType
             ).intValue();
             DatabaseMnm.DataSpec.STATUS_Selling_Request tmpt_statusSR= DatabaseMnm.DataSpec.STATUS_Selling_Request.values()[tmpt_int];
+            String tmpk_rpmDesc= (String)(tmpc_SQLTable.cols[9].vals.get(0));
             button_Check.setDisable(true);
-            if (tmpt_statusSR==DatabaseMnm.DataSpec.STATUS_Selling_Request.Acceapted) {textField_Status.setText(Misc.ThaiStr_DataSpec_Status_SR[2]);}
-            else if (tmpt_statusSR==DatabaseMnm.DataSpec.STATUS_Selling_Request.Declined) {textField_Status.setText(Misc.ThaiStr_DataSpec_Status_SR[1]);}
-            else {textField_Status.setText(Misc.ThaiStr_DataSpec_Status_SR[0]); button_Check.setDisable(false);}
+            if (tmpt_statusSR==DatabaseMnm.DataSpec.STATUS_Selling_Request.Acceapted) {
+                textField_Status.setText(Misc.ThaiStr_DataSpec_Status_SR[2]);
+                if (tmpk_rpmDesc==null) {
+                    textArea_RpmDesc.setText("<สินค้าไม่มีการซ่อม>");
+                    textArea_RpmDesc.setDisable(true);
+                } else {
+                    textArea_RpmDesc.setText(tmpk_rpmDesc);
+                }
+            }
+            else if (tmpt_statusSR==DatabaseMnm.DataSpec.STATUS_Selling_Request.Declined) {
+                textField_Status.setText(Misc.ThaiStr_DataSpec_Status_SR[1]);
+                textArea_RpmDesc.setText("<คำร้องฯถูกปฏิเสธ>");
+                textArea_RpmDesc.setDisable(true);
+            }
+            else {
+                textField_Status.setText(Misc.ThaiStr_DataSpec_Status_SR[0]);
+                button_Check.setDisable(false);
+                textArea_RpmDesc.setText("<รอการตรวจสอบสภาพ>");
+                textArea_RpmDesc.setDisable(true);
+            }
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
@@ -89,7 +108,6 @@ public class UICtrl_BuyData {
 
     @FXML private void onCheck_Button() throws java.io.IOException {
         try {
-            // TODO: โยน
             // 0: this class
             // 1: (Object[])com.github.saacsos.FXRouter.getData())[1] (ListViewRowDataWrapper<String> ของ SR_ID)
             // 2: Array ของข้อมูล ดังนี้ Brand/Model/CustName

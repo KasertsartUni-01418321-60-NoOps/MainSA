@@ -4,10 +4,7 @@ import javafx.fxml.FXML;
 import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Product;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Selling_Request;
-import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_User;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
-
-import java.io.IOException;
 
 import javafx.event.EventHandler;
 import javafx.fxml.*;
@@ -112,7 +109,7 @@ public class UICtrl_BuyHistory {
             )[1]);
         } catch (java.sql.SQLException e) {
             MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
-                    "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
+                    "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
             throw e;
         }
         int tmpl_0=tmpc_SQLTable.cols[0].vals.size();
@@ -152,7 +149,7 @@ public class UICtrl_BuyHistory {
                 tmpc_SQLTable.cols[6].vals.get(tmpc_int),tmpc_SQLTable.cols[6].javaType
             );
             String tmpk_dateStr= (java.time.Instant.ofEpochSecond(tmpu_epochTimeData)).atZone(java.time.ZoneOffset.UTC).toLocalDate().toString();
-            String tmpk_repr="(นัดเช็คสภาพเมื่อ "+tmpk_dateStr+") ["+tmpk_Selling_Request_ID+": "+tmpt_str_1+"] โดยคุณ \""+tmpk_Customer_Full_Name+"\" (ยี่ห้อ/รุ่น: "+tmpk_Selling_Request_Brand+"/"+tmpk_Selling_Request_Model+")";
+            String tmpk_repr="(นัดตรวจสอบสภาพเมื่อ "+tmpk_dateStr+") ["+tmpk_Selling_Request_ID+": "+tmpt_str_1+"] โดยคุณ \""+tmpk_Customer_Full_Name+"\" (ยี่ห้อ/รุ่น: "+tmpk_Selling_Request_Brand+"/"+tmpk_Selling_Request_Model+")";
             tmpc_SQLTable__listViewRowDataWrapper.add(
                 new ListViewRowDataWrapper<String>(tmpk_Selling_Request_ID, tmpk_repr)
             );

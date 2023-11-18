@@ -7,8 +7,6 @@ import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory;
 
-import java.util.Random;
-
 public class UICtrl_AddItem {
 
     @FXML private TextField productID;

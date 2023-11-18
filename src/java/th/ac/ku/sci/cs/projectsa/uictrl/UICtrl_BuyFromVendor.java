@@ -2,11 +2,9 @@ package th.ac.ku.sci.cs.projectsa.uictrl;
 
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
-import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataTransformation;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 import javafx.fxml.*;
-import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
@@ -106,7 +104,7 @@ public class UICtrl_BuyFromVendor {
             try{
                 DatabaseMnm.runSQLcmd(
                     null,
-                    "INSERT INTO Selling_Request VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);",
+                    "INSERT INTO Selling_Request VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);",
                     true,
                     false,
                     null,
@@ -119,12 +117,14 @@ public class UICtrl_BuyFromVendor {
                         formval_meetDate,
                         formval_custLoc,
                         Double.class,
-                        (long)0
+                        (long)0,
+                        String.class
                     }
                 );
+                DatabaseMnm.mainDbConn.commit();
             } catch (java.sql.SQLException e) {
                 MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
-                "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
+                "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
                 throw e;
             };
             Main.switchToSpecificPagename("buy_history");
@@ -159,7 +159,7 @@ public class UICtrl_BuyFromVendor {
             )[1]);
         } catch (java.sql.SQLException e) {
             MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
-                    "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
+                    "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
             throw e;
         }
         int tmpl_0=tmpc_SQLTable.cols[0].vals.size();
