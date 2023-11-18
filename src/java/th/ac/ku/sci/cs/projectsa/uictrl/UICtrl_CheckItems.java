@@ -130,7 +130,7 @@ public class UICtrl_CheckItems {
                 }
             }
             if (selectedOption==1) {
-                tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Repairment_Description(textArea_rpmDesc.getText());
+                tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Repairment_Description(textArea_rpmDesc.getText());
                 if (tmpReason != null) {
                     onSave_Button__Helper1();
                     return;

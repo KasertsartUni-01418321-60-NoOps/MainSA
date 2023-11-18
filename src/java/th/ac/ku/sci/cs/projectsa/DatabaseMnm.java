@@ -29,7 +29,7 @@ public class DatabaseMnm {
 		String[] sqlStms_0 = new String[] {
 				setFKCheckQuery,
 				"CREATE TABLE IF NOT EXISTS Customer (Customer_Full_Name TEXT PRIMARY KEY, Customer_Address TEXT, Customer_Telephone_Number TEXT NOT NULL, Customer_Credit_Amount INTEGER NOT NULL) STRICT;",
-				"CREATE TABLE IF NOT EXISTS Selling_Request (Selling_Request_ID TEXT PRIMARY KEY, Customer_Full_Name TEXT NOT NULL, Selling_Request_Brand TEXT NOT NULL, Selling_Request_Model TEXT NOT NULL, Selling_Request_Product_Looks TEXT NOT NULL, Selling_Request_Meet_Date INTEGER NOT NULL, Selling_Request_Meet_Location TEXT NOT NULL, Selling_Request_Paid_Amount REAL, Selling_Request_Status INTEGER NOT NULL,  Repairment_Description TEXT, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT;",
+				"CREATE TABLE IF NOT EXISTS Selling_Request (Selling_Request_ID TEXT PRIMARY KEY, Customer_Full_Name TEXT NOT NULL, Selling_Request_Brand TEXT NOT NULL, Selling_Request_Model TEXT NOT NULL, Selling_Request_Product_Looks TEXT NOT NULL, Selling_Request_Meet_Date INTEGER NOT NULL, Selling_Request_Meet_Location TEXT NOT NULL, Selling_Request_Paid_Amount REAL, Selling_Request_Status INTEGER NOT NULL,  Selling_Request_Repairment_Description TEXT, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT;",
 				"CREATE TABLE IF NOT EXISTS Product (Product_ID TEXT PRIMARY KEY, Product_Arrive_Time INTEGER NOT NULL, Product_Price REAL NOT NULL, Product_Status INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL UNIQUE, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID))STRICT;",
 				"CREATE TABLE IF NOT EXISTS User (User_Name TEXT PRIMARY KEY, User_Password TEXT NOT NULL, User_Role INTEGER NOT NULL)STRICT;",
 				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT, Product_ID TEXT UNIQUE, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price REAL NOT NULL, Buy_Request_Location TEXT NOT NULL, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT;"
@@ -43,7 +43,7 @@ public class DatabaseMnm {
 						+ "VALUES (?, ?, ?, ?);"
 		};
 		String[] sqlStms_3 = new String[] {
-				"INSERT INTO Selling_Request (Selling_Request_ID, Customer_Full_Name, Selling_Request_Brand, Selling_Request_Model, Selling_Request_Product_Looks, Selling_Request_Meet_Date, Selling_Request_Meet_Location, Selling_Request_Paid_Amount, Selling_Request_Status,Repairment_Description )"
+				"INSERT INTO Selling_Request (Selling_Request_ID, Customer_Full_Name, Selling_Request_Brand, Selling_Request_Model, Selling_Request_Product_Looks, Selling_Request_Meet_Date, Selling_Request_Meet_Location, Selling_Request_Paid_Amount, Selling_Request_Status,Selling_Request_Repairment_Description )"
 						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);"
 		};
 		// UNUSED
@@ -82,7 +82,7 @@ public class DatabaseMnm {
 			String SD_Selling_Request_Meet_Location = "เลขที่ 50 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร กรุงเทพฯ 10900";
 			Double SD_Selling_Request_Paid_Amount = 1000000.25;
 			Long SD_Selling_Request_Status = (long) 2;
-			String SD_Repairment_Description = "ปรับปรุงครั้งใหญ่มาก ๆ";
+			String SD_Selling_Request_Repairment_Description = "ปรับปรุงครั้งใหญ่มาก ๆ";
 			String SD_Product_ID = "PD0099AZ";
 			Long SD_Product_Arrive_Time = (long) 1635830400;
 			Double SD_Product_Price = 99999999.99;
@@ -218,7 +218,7 @@ public class DatabaseMnm {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				}
 				tmpReason = DataValidation.PerAttributeValidation
-						.check__SELLING_REQUEST__Repairment_Description(SD_Repairment_Description);
+						.check__SELLING_REQUEST__Selling_Request_Repairment_Description(SD_Selling_Request_Repairment_Description);
 				if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				} else {
@@ -230,7 +230,7 @@ public class DatabaseMnm {
 									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[0],
 									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[1]),
 							SD_Selling_Request_Status,
-							DataTransformation.NullableTransform(SD_Repairment_Description, String.class)
+							DataTransformation.NullableTransform(SD_Selling_Request_Repairment_Description, String.class)
 					} });
 				}
 				break;
@@ -804,7 +804,7 @@ public class DatabaseMnm {
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Meet_Location", new Integer[] { 1, 512 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Paid_Amount", new Integer[] { 8, 2 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Status", new Integer[] { 1, 1 });
-			MINMAX_LENGTH_OF_ATTRIBS.put("Repairment_Description", new Integer[] { 1, 1024 });
+			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Repairment_Description", new Integer[] { 1, 1024 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Full_Name", new Integer[] { 1, 192 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_ID", new Integer[] { 8, 8 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Buy_Request_Created_Date", new Integer[] { 10, 10 });
@@ -1559,14 +1559,14 @@ public class DatabaseMnm {
 			}
 			
 			@Nullable
-			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Repairment_Description(
+			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Repairment_Description(
 					@Nullable String data) {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return null;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Repairment_Description");
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Repairment_Description");
 					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
