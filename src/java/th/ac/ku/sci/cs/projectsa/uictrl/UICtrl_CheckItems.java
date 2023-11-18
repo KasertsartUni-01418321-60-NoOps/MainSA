@@ -12,6 +12,7 @@ import com.github.saacsos.FXRouter;
 import javafx.fxml.*;
 import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -57,37 +58,37 @@ public class UICtrl_CheckItems {
                 }
             });
             // SEP
-            // ListViewRowDataWrapper<Integer> tmpu_default_lvrdw_int;
-            // tmpu_default_lvrdw_int=new ListViewRowDataWrapper<Integer>(1,"รับซื้อ/ซ่อมด้วย");
-            // comboBox_Action.getItems().add(tmpu_default_lvrdw_int);
-            // comboBox_Action.getItems().add(new ListViewRowDataWrapper<Integer>(-1,"รับซื้อ/ไม่ซ่อม"));
-            // comboBox_Action.getItems().add(new ListViewRowDataWrapper<Integer>(0,"ปฏิเสธการรับซื้อ"));
-            // comboBox_Action.setValue(tmpu_default_lvrdw_int);
-            // tmpu_default_lvrdw_int=new ListViewRowDataWrapper<Integer>(1,"+1");
-            // comboBox_creditAction.getItems().add(tmpu_default_lvrdw_int);
-            // // comboBox_creditAction.getItems().add(new ListViewRowDataWrapper<Integer>(0,"ไม่แก้ไข"));
-            // comboBox_creditAction.getItems().add(new ListViewRowDataWrapper<Integer>(-1,"-1"));
-            // comboBox_creditAction.setValue(tmpu_default_lvrdw_int);
-            // Object[] tmpt_arr_obj = (Object[])((Object[])FXRouter.getData())[2];
-            // textField_Brand.setText(tmpt_arr_obj[0].toString());
-            // textField_Model.setText(tmpt_arr_obj[1].toString());
-            // comboBox_Action.setOnAction(event -> {
-            //     try {
-            //         Integer selectedOption = comboBox_Action.getValue().ref;
-            //         if (selectedOption==1) {
-            //             textArea_rpmDesc.setDisable(false);
-            //             spinnerDouble_Price.setDisable(false);
-            //         } else if (selectedOption==-1) {
-            //             textArea_rpmDesc.setDisable(true);
-            //             spinnerDouble_Price.setDisable(false);
-            //         } else {
-            //             textArea_rpmDesc.setDisable(true);
-            //             spinnerDouble_Price.setDisable(true);
-            //         }
-            //     } catch (Throwable e) {
-            //         MyExceptionHandling.handleFatalException(e);
-            //     }
-            // });
+            ListViewRowDataWrapper<Integer> tmpu_default_lvrdw_int;
+            tmpu_default_lvrdw_int=new ListViewRowDataWrapper<Integer>(1,"รับซื้อ/ซ่อมด้วย");
+            comboBox_Action.getItems().add(tmpu_default_lvrdw_int);
+            comboBox_Action.getItems().add(new ListViewRowDataWrapper<Integer>(-1,"รับซื้อ/ไม่ซ่อม"));
+            comboBox_Action.getItems().add(new ListViewRowDataWrapper<Integer>(0,"ปฏิเสธการรับซื้อ"));
+            comboBox_Action.setValue(tmpu_default_lvrdw_int);
+            tmpu_default_lvrdw_int=new ListViewRowDataWrapper<Integer>(1,"+1");
+            comboBox_creditAction.getItems().add(tmpu_default_lvrdw_int);
+            // comboBox_creditAction.getItems().add(new ListViewRowDataWrapper<Integer>(0,"ไม่แก้ไข"));
+            comboBox_creditAction.getItems().add(new ListViewRowDataWrapper<Integer>(-1,"-1"));
+            comboBox_creditAction.setValue(tmpu_default_lvrdw_int);
+            Object[] tmpt_arr_obj = (Object[])((Object[])FXRouter.getData())[2];
+            textField_Brand.setText(tmpt_arr_obj[0].toString());
+            textField_Model.setText(tmpt_arr_obj[1].toString());
+            comboBox_Action.setOnAction(event -> {
+                try {
+                    Integer selectedOption = comboBox_Action.getValue().ref;
+                    if (selectedOption==1) {
+                        textArea_rpmDesc.setDisable(false);
+                        spinnerDouble_Price.setDisable(false);
+                    } else if (selectedOption==-1) {
+                        textArea_rpmDesc.setDisable(true);
+                        spinnerDouble_Price.setDisable(false);
+                    } else {
+                        textArea_rpmDesc.setDisable(true);
+                        spinnerDouble_Price.setDisable(true);
+                    }
+                } catch (Throwable e) {
+                    MyExceptionHandling.handleFatalException(e);
+                }
+            });
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
@@ -108,52 +109,55 @@ public class UICtrl_CheckItems {
 
     @FXML private void onSave_Button() throws java.sql.SQLException, java.io.IOException {
         try {
-            // // [PART: Valid]
-            // DataValidation.DATAVALID_DECLINED_REASON tmpReason;
-            // tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Brand(textField_Brand.getText());
-            // if (tmpReason != null) {
-            //     // TODO: alert box LAMO and then return LAMO
-            // }
-            // tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Model(textField_Model.getText());
-            // if (tmpReason != null) {
-            //     // TODO: alert box LAMO and then return LAMO
-            // }
-            // tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Paid_Amount(textField_Model.getText());
-            // if (tmpReason != null) {
-            //     // TODO: alert box LAMO and then return LAMO
-            // }
-            // // [PART: Update SR]
-            // String SR_ID= ((ListViewRowDataWrapper<String>)((Object[])FXRouter.getData())[1]).ref;
-            // int tmpt_int = 1;
-            // try{
-            //     if (comboBox_Action.getValue().ref!=0) {
-            //         tmpt_int=2;
-            //     }
-            //     DatabaseMnm.runSQLcmd(
-            //         null,
-            //         "UPDATE Selling_Request SET Selling_Request_Status=?, Selling_Request_Brand=?,Selling_Request_Model=?  WHERE Selling_Request_ID=? ;",
-            //         true,
-            //         false,
-            //         null,
-            //         new Object[] {
-            //             tmpt_int,
-            //             SR_ID,
-            //             // TODO
-            //             textField_Brand.getText(),
-            //             textField_Model.getText()
-            //         }
-            //     );
-            // } catch (java.sql.SQLException e) {
-            //     MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
-            //     "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
-            //     throw e;
-            // };
-            // // [PART: Create Rpm]
-            // // [PART: Update Ctm]
-            // Main.switchToSpecificPagename("buy_data", new Object[] {
-            //     this.getClass(),
-            //     (((Object[])FXRouter.getData())[1])
-            // });
+            // [PART: Valid]
+            DataValidation.DATAVALID_DECLINED_REASON tmpReason;
+            tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Brand(textField_Brand.getText());
+            if (tmpReason != null) {
+                onSave_Button__Helper1();
+                return;
+            }
+            tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Model(textField_Model.getText());
+            if (tmpReason != null) {
+                onSave_Button__Helper1();
+                return;
+            }
+            tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Paid_Amount(textField_Model.getText());
+            if (tmpReason != null) {
+                onSave_Button__Helper1();
+                return;
+            }
+            // [PART: Update SR]
+            String SR_ID= ((ListViewRowDataWrapper<String>)((Object[])FXRouter.getData())[1]).ref;
+            int tmpt_int = 1;
+            try{
+                if (comboBox_Action.getValue().ref!=0) {
+                    tmpt_int=2;
+                }
+                DatabaseMnm.runSQLcmd(
+                    null,
+                    "UPDATE Selling_Request SET Selling_Request_Status=?, Selling_Request_Brand=?,Selling_Request_Model=?  WHERE Selling_Request_ID=? ;",
+                    true,
+                    false,
+                    null,
+                    new Object[] {
+                        tmpt_int,
+                        SR_ID,
+                        // TODO
+                        textField_Brand.getText(),
+                        textField_Model.getText()
+                    }
+                );
+            } catch (java.sql.SQLException e) {
+                MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
+                "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดเช็คความถูกต้องของไฟล์โปรแกรมและข้อมูลและเช็คว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
+                throw e;
+            };
+            // [PART: Create Rpm]
+            // [PART: Update Ctm]
+            Main.switchToSpecificPagename("buy_data", new Object[] {
+                this.getClass(),
+                (((Object[])FXRouter.getData())[1])
+            });
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
@@ -177,5 +181,10 @@ public class UICtrl_CheckItems {
         spinnerDouble_Price.getValueFactory().setValue(tmpk_data);
         // TODO: delete this dEbug later
         System.out.println("GOOD:"+tmpk_data.toString());
+    }
+
+    private void onSave_Button__Helper1() {
+        Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การแก้ไขข้อมูลผิดพลาด",
+						"ไม่สามารถบันทึกข้อมูลการตรวจสอบสภาพสินค้าได้ เนื่องจากกรอกข้อมูลผิดรูปแบบ", null, false);
     }
 }
