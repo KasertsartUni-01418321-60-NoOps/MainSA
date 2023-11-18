@@ -16,6 +16,7 @@ public class DatabaseMnm {
 	// begin/rollback required.
 	public static void mainDbInit()
 			throws java.sql.SQLException, java.io.IOException, java.security.NoSuchAlgorithmException {
+		// PART:0 
 		java.nio.file.Path tmp_Path = java.nio.file.Paths.get("./data");
 		if (!java.nio.file.Files.exists(tmp_Path)) {
 			try {
@@ -24,6 +25,7 @@ public class DatabaseMnm {
 				throw e;
 			}
 		}
+		// PART:1
 		// REMARK: for my group, only use {TEXT,BLOB,REAL,INTEGER} maybe we not using
 		// "NUMERIC"
 		String[] sqlStms_0 = new String[] {
@@ -59,39 +61,41 @@ public class DatabaseMnm {
 				"INSERT INTO Buy_Request (Customer_Full_Name, Product_ID, Buy_Request_Created_Date, Buy_Request_Transportation_Price, Buy_Request_Location)"
 						+ "VALUES (?,?,?,?,?);"
 		};
-
+		// PART:2
+		String SD_User_Name_Admin = "nobody";
+		String SD_User_Password_Admin = "nopassword";
+		Long SD_User_Role_Admin = (long) 0;
+		String SD_User_Name = "kasertsart";
+		String SD_User_Password = "UNIVERSITY";
+		Long SD_User_Role = (long) 1;
+		String SD_Customer_Full_Name = "นามสมมุติ ไม่มีสกุล";
+		String SD_Customer_Address = "เลขที่ 50 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร กรุงเทพฯ 10900";
+		String SD_Customer_Telephone_Number = "+662942820045";
+		Long SD_Customer_Credit_Amount = (long) 500;
+		String SD_Selling_Request_ID = "AR0099AZ";
+		String SD_Selling_Request_Brand = "เกษตรศาสตร์";
+		String SD_Selling_Request_Model = "บางเขน";
+		String SD_Selling_Request_Product_Looks = "เก่งและดี";
+		Long SD_Selling_Request_Meet_Date = (long) 1635830400;
+		String SD_Selling_Request_Meet_Location = "เลขที่ 50 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร กรุงเทพฯ 10900";
+		Double SD_Selling_Request_Paid_Amount = 1000000.25;
+		Long SD_Selling_Request_Status = (long) 2;
+		String SD_Selling_Request_Repairment_Description = "ปรับปรุงครั้งใหญ่มาก ๆ";
+		String SD_Product_ID = "PD0099AZ";
+		Long SD_Product_Arrive_Time = (long) 1635830400;
+		Double SD_Product_Price = 99999999.99;
+		Long SD_Product_Status = (long) 2;
+		Long SD_Buy_Request_Created_Date = (long) 1635830400;
+		Double SD_Buy_Request_Transportation_Price = 10.25;
+		String SD_Buy_Request_Location = "ประเทศไทย";
+		DataValidation.DATAVALID_DECLINED_REASON tmpReason = null;
 		try {
+			// PART3:
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:" + mainDbPath);
+			// เพื่อ Atomic DB
+			mainDbConn.setAutoCommit(false);
 			DatabaseMnm.runSQLcmds(null, sqlStms_0, true, false, null, null);
-			// PART 1:
-			String SD_User_Name_Admin = "nobody";
-			String SD_User_Password_Admin = "nopassword";
-			Long SD_User_Role_Admin = (long) 0;
-			String SD_User_Name = "kasertsart";
-			String SD_User_Password = "UNIVERSITY";
-			Long SD_User_Role = (long) 1;
-			String SD_Customer_Full_Name = "นามสมมุติ ไม่มีสกุล";
-			String SD_Customer_Address = "เลขที่ 50 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร กรุงเทพฯ 10900";
-			String SD_Customer_Telephone_Number = "+662942820045";
-			Long SD_Customer_Credit_Amount = (long) 500;
-			String SD_Selling_Request_ID = "AR0099AZ";
-			String SD_Selling_Request_Brand = "เกษตรศาสตร์";
-			String SD_Selling_Request_Model = "บางเขน";
-			String SD_Selling_Request_Product_Looks = "เก่งและดี";
-			Long SD_Selling_Request_Meet_Date = (long) 1635830400;
-			String SD_Selling_Request_Meet_Location = "เลขที่ 50 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร กรุงเทพฯ 10900";
-			Double SD_Selling_Request_Paid_Amount = 1000000.25;
-			Long SD_Selling_Request_Status = (long) 2;
-			String SD_Selling_Request_Repairment_Description = "ปรับปรุงครั้งใหญ่มาก ๆ";
-			String SD_Product_ID = "PD0099AZ";
-			Long SD_Product_Arrive_Time = (long) 1635830400;
-			Double SD_Product_Price = 99999999.99;
-			Long SD_Product_Status = (long) 2;
-			Long SD_Buy_Request_Created_Date = (long) 1635830400;
-			Double SD_Buy_Request_Transportation_Price = 10.25;
-			String SD_Buy_Request_Location = "ประเทศไทย";
-			DataValidation.DATAVALID_DECLINED_REASON tmpReason = null;
-			// PART 2A:
+			// PART 4A:
 			while (true) {
 				tmpReason = DataValidation.PerAttributeValidation.check__USER__User_Name(SD_User_Name);
 				// in case existed data LAMO
@@ -113,7 +117,7 @@ public class DatabaseMnm {
 				}
 				break;
 			}
-			// PART 2AA:
+			// PART 4B:
 			while (true) {
 				tmpReason = DataValidation.PerAttributeValidation.check__USER__User_Name(SD_User_Name_Admin);
 				// in case existed data LAMO
@@ -135,7 +139,7 @@ public class DatabaseMnm {
 				}
 				break;
 			}
-			// PART 2B:
+			// PART 4C:
 			while (true) {
 				tmpReason = DataValidation.PerAttributeValidation
 						.check__CUSTOMER__Customer_Full_Name(SD_Customer_Full_Name);
@@ -167,7 +171,7 @@ public class DatabaseMnm {
 				}
 				break;
 			}
-			// PART 2C:
+			// PART 4D:
 			while (true) {
 				tmpReason = DataValidation.PerAttributeValidation
 						.check__SELLING_REQUEST__Selling_Request_ID(SD_Selling_Request_ID);
@@ -235,8 +239,8 @@ public class DatabaseMnm {
 				}
 				break;
 			}
-			// PART 2D: (UNUSED)
-			// PART 2E:
+			// PART 4E:
+			// PART 4F:
 			while (true) {
 				tmpReason = DataValidation.PerAttributeValidation.check__PRODUCT__Product_ID(SD_Product_ID);
 				// in case existed data LAMO
@@ -273,7 +277,7 @@ public class DatabaseMnm {
 				}
 				break;
 			}
-			// PART 2F:
+			// PART 4G:
 			while (true) {
 				tmpReason = DataValidation.PerAttributeValidation.check__BUY_REQUEST__Product_ID(SD_Product_ID);
 				// in case existed data LAMO
@@ -312,7 +316,8 @@ public class DatabaseMnm {
 					} });
 				}
 			}
-			// [ZONE END]
+			// PART5:
+			mainDbConn.commit();
 		} catch (java.sql.SQLException e) {
 			throw e;
 		}
