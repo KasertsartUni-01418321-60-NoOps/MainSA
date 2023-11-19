@@ -89,6 +89,7 @@ public class DatabaseMnm {
 		String SD_Buy_Request_Location = "ประเทศไทย";
 		DataValidation.DATAVALID_DECLINED_REASON tmpReason = null;
 		try {
+			// TODO: check about NULLcheck
 			// PART3:
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:" + mainDbPath);
 			// เพื่อ Atomic DB
@@ -283,7 +284,7 @@ public class DatabaseMnm {
 			while (true) {
 				tmpReason = DataValidation.PerAttributeValidation.check__BUY_REQUEST__Product_ID(SD_Product_ID);
 				// in case existed data LAMO
-				if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK) {
+				if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
 					break;
 				} else if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
