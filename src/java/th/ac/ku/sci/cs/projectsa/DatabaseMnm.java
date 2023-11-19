@@ -34,7 +34,7 @@ public class DatabaseMnm {
 				"CREATE TABLE IF NOT EXISTS Selling_Request (Selling_Request_ID TEXT PRIMARY KEY, Customer_Full_Name TEXT NOT NULL, Selling_Request_Brand TEXT NOT NULL, Selling_Request_Model TEXT NOT NULL, Selling_Request_Product_Looks TEXT NOT NULL, Selling_Request_Meet_Date INTEGER NOT NULL, Selling_Request_Meet_Location TEXT NOT NULL, Selling_Request_Paid_Amount REAL, Selling_Request_Status INTEGER NOT NULL,  Selling_Request_Repairment_Description TEXT, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT;",
 				"CREATE TABLE IF NOT EXISTS Product (Product_ID TEXT PRIMARY KEY, Product_Arrive_Time INTEGER NOT NULL, Product_Price REAL NOT NULL, Product_Status INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL UNIQUE, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID))STRICT;",
 				"CREATE TABLE IF NOT EXISTS User (User_Name TEXT PRIMARY KEY, User_Password TEXT NOT NULL, User_Role INTEGER NOT NULL)STRICT;",
-				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT, Product_ID TEXT UNIQUE, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price REAL NOT NULL, Buy_Request_Location TEXT NOT NULL, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT;"
+				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT, Product_ID TEXT PRIMARY KEY, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price REAL NOT NULL, Buy_Request_Location TEXT NOT NULL, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT;"
 		};
 		String[] sqlStms_1 = new String[] {
 				"INSERT INTO User (User_Name, User_Password, User_Role)"
@@ -1632,7 +1632,6 @@ public class DatabaseMnm {
 				}
 			}
 
-			// REMARK: ดูด้านล่างๆ
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Customer_Full_Name(
 					@Nullable String data) throws java.sql.SQLException {
@@ -1651,7 +1650,7 @@ public class DatabaseMnm {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
-					// (PART 3) Check is PK/FK-insertable
+					// (PART 3) Check is FK-insertable
 					if (DataValidation.SQLLevel.isThisValExisted(data, "Customer", "Customer_Full_Name")) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;
@@ -1661,10 +1660,6 @@ public class DatabaseMnm {
 				}
 			}
 
-			// REMARK: ผมวิเคราะห์มาแล้ว การตรวจสอบนี้จะตรวจสอบ Unique of PKแบบควบ ด้วย
-			// เพราะเรื่อง UNIQUE มันโดนตรวจสอบจาก UNIQUE of attribute ของ
-			// Buy_Request.Product_ID แล้วๆ
-			// > ฉะนั้นหากตรวจสอบอันนี้ผ่าน คือ PK unique ผ่านๆ
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Product_ID(@Nullable String data)
 					throws java.sql.SQLException {
@@ -1683,15 +1678,15 @@ public class DatabaseMnm {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
-					// (PART 3) Check is PK-insertable
+					// (PART 3) Check is FK-insertable
 					if (DataValidation.SQLLevel.isThisValExisted(data, "Product", "Product_ID")) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;
 					}
-					// (PART 4) Check is FK-insertable
+					// (PART 4) Check is PK-insertable
 					if (!DataValidation.SQLLevel.isThisValExisted(data, "Buy_Request", "Product_ID")) {
 					} else {
-						return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK;
+						return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;
 					}
 					// the code should reached here means it (data) is passed
 					return null;
