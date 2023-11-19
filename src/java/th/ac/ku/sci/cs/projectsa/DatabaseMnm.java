@@ -89,7 +89,6 @@ public class DatabaseMnm {
 		String SD_Buy_Request_Location = "ประเทศไทย";
 		DataValidation.DATAVALID_DECLINED_REASON tmpReason = null;
 		try {
-			// TODO: check about NULLcheck
 			// PART3:
 			DatabaseMnm.mainDbConn = java.sql.DriverManager.getConnection("jdbc:sqlite:" + mainDbPath);
 			// เพื่อ Atomic DB
