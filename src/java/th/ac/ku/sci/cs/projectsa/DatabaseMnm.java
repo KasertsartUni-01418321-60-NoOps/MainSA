@@ -16,7 +16,7 @@ public class DatabaseMnm {
 	// begin/rollback required.
 	public static void mainDbInit()
 			throws java.sql.SQLException, java.io.IOException, java.security.NoSuchAlgorithmException {
-		// PART:0 
+		// PART:0
 		java.nio.file.Path tmp_Path = java.nio.file.Paths.get("./data");
 		if (!java.nio.file.Files.exists(tmp_Path)) {
 			try {
@@ -34,7 +34,7 @@ public class DatabaseMnm {
 				"CREATE TABLE IF NOT EXISTS Selling_Request (Selling_Request_ID TEXT PRIMARY KEY, Customer_Full_Name TEXT NOT NULL, Selling_Request_Brand TEXT NOT NULL, Selling_Request_Model TEXT NOT NULL, Selling_Request_Product_Looks TEXT NOT NULL, Selling_Request_Meet_Date INTEGER NOT NULL, Selling_Request_Meet_Location TEXT NOT NULL, Selling_Request_Paid_Amount REAL, Selling_Request_Status INTEGER NOT NULL,  Selling_Request_Repairment_Description TEXT, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT;",
 				"CREATE TABLE IF NOT EXISTS Product (Product_ID TEXT PRIMARY KEY, Product_Arrive_Time INTEGER NOT NULL, Product_Price REAL NOT NULL, Product_Status INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL UNIQUE, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID))STRICT;",
 				"CREATE TABLE IF NOT EXISTS User (User_Name TEXT PRIMARY KEY, User_Password TEXT NOT NULL, User_Role INTEGER NOT NULL)STRICT;",
-				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT, Product_ID TEXT UNIQUE, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price REAL NOT NULL, Buy_Request_Location TEXT NOT NULL, PRIMARY KEY (Customer_Full_Name, Product_ID), FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT;"
+				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT, Product_ID TEXT PRIMARY KEY, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price REAL NOT NULL, Buy_Request_Location TEXT NOT NULL, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT;"
 		};
 		String[] sqlStms_1 = new String[] {
 				"INSERT INTO User (User_Name, User_Password, User_Role)"
@@ -50,8 +50,7 @@ public class DatabaseMnm {
 		};
 		// UNUSED
 		String[] sqlStms_4 = new String[] {
-				
-				
+
 		};
 		String[] sqlStms_5 = new String[] {
 				"INSERT INTO Product (Product_ID, Product_Arrive_Time, Product_Price, Product_Status, Selling_Request_ID)"
@@ -112,7 +111,7 @@ public class DatabaseMnm {
 				if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				} else {
-					DatabaseMnm.runSQLcmds(null, sqlStms_1, true, false,null,
+					DatabaseMnm.runSQLcmds(null, sqlStms_1, true, false, null,
 							new Object[][] { { SD_User_Name, Misc.passwordHash(SD_User_Password), SD_User_Role } });
 				}
 				break;
@@ -134,8 +133,9 @@ public class DatabaseMnm {
 				if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				} else {
-					DatabaseMnm.runSQLcmds(null, sqlStms_1, true, false,null,
-							new Object[][] { { SD_User_Name_Admin, Misc.passwordHash(SD_User_Password_Admin), SD_User_Role_Admin } });
+					DatabaseMnm.runSQLcmds(null, sqlStms_1, true, false, null,
+							new Object[][] { { SD_User_Name_Admin, Misc.passwordHash(SD_User_Password_Admin),
+									SD_User_Role_Admin } });
 				}
 				break;
 			}
@@ -164,7 +164,7 @@ public class DatabaseMnm {
 				if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				} else {
-					DatabaseMnm.runSQLcmds(null, sqlStms_2, true, false,null,
+					DatabaseMnm.runSQLcmds(null, sqlStms_2, true, false, null,
 							new Object[][] { { SD_Customer_Full_Name,
 									DataTransformation.NullableTransform(SD_Customer_Address, String.class),
 									SD_Customer_Telephone_Number, SD_Customer_Credit_Amount } });
@@ -222,11 +222,12 @@ public class DatabaseMnm {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				}
 				tmpReason = DataValidation.PerAttributeValidation
-						.check__SELLING_REQUEST__Selling_Request_Repairment_Description(SD_Selling_Request_Repairment_Description);
+						.check__SELLING_REQUEST__Selling_Request_Repairment_Description(
+								SD_Selling_Request_Repairment_Description);
 				if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				} else {
-					DatabaseMnm.runSQLcmds(null, sqlStms_3, true,false, null, new Object[][] { { SD_Selling_Request_ID,
+					DatabaseMnm.runSQLcmds(null, sqlStms_3, true, false, null, new Object[][] { { SD_Selling_Request_ID,
 							SD_Customer_Full_Name, SD_Selling_Request_Brand, SD_Selling_Request_Model,
 							SD_Selling_Request_Product_Looks, SD_Selling_Request_Meet_Date,
 							SD_Selling_Request_Meet_Location,
@@ -234,7 +235,8 @@ public class DatabaseMnm {
 									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[0],
 									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[1]),
 							SD_Selling_Request_Status,
-							DataTransformation.NullableTransform(SD_Selling_Request_Repairment_Description, String.class)
+							DataTransformation.NullableTransform(SD_Selling_Request_Repairment_Description,
+									String.class)
 					} });
 				}
 				break;
@@ -267,13 +269,13 @@ public class DatabaseMnm {
 				if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				} else {
-					DatabaseMnm.runSQLcmds(null, sqlStms_5, true, false,null,
+					DatabaseMnm.runSQLcmds(null, sqlStms_5, true, false, null,
 							new Object[][] { { SD_Product_ID, SD_Product_Arrive_Time,
 									DataTransformation.doubleLengthCropping(SD_Product_Price,
 											DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[0],
 											DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[1]),
 									SD_Product_Status, SD_Selling_Request_ID,
-									} });
+							} });
 				}
 				break;
 			}
@@ -281,7 +283,7 @@ public class DatabaseMnm {
 			while (true) {
 				tmpReason = DataValidation.PerAttributeValidation.check__BUY_REQUEST__Product_ID(SD_Product_ID);
 				// in case existed data LAMO
-				if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK) {
+				if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
 					break;
 				} else if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
@@ -306,13 +308,13 @@ public class DatabaseMnm {
 				if (tmpReason != null) {
 					throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
 				} else {
-					DatabaseMnm.runSQLcmds(null, sqlStms_6, true,false, null, new Object[][] { { SD_Customer_Full_Name,
+					DatabaseMnm.runSQLcmds(null, sqlStms_6, true, false, null, new Object[][] { { SD_Customer_Full_Name,
 							SD_Product_ID, SD_Buy_Request_Created_Date,
 							DataTransformation.doubleLengthCroppingAndNullableTransform(
 									SD_Buy_Request_Transportation_Price,
 									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[0],
 									DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[1]),
-							SD_Buy_Request_Location			
+							SD_Buy_Request_Location
 					} });
 				}
 			}
@@ -410,36 +412,55 @@ public class DatabaseMnm {
 			if (tmp1) {
 				if (skipGetResultSet) {
 					if (keepStatementOpen == null) {
-						try{tmp_stm.close();} catch (Throwable e0) {System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")+ "Statement closing have exception. Stacktrace is below:");e0.printStackTrace();}
+						try {
+							tmp_stm.close();
+						} catch (Throwable e0) {
+							System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")
+									+ "Statement closing have exception. Stacktrace is below:");
+							e0.printStackTrace();
+						}
 						return new Object[] { true, null, null };
 					} else {
-						if (keepStatementOpen != null && keepStatementOpen== false) {
-							try{tmp_stm.close();} catch (Throwable e0) {System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")+ "Statement closing have exception. Stacktrace is below:");e0.printStackTrace();}
+						if (keepStatementOpen != null && keepStatementOpen == false) {
+							try {
+								tmp_stm.close();
+							} catch (Throwable e0) {
+								System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")
+										+ "Statement closing have exception. Stacktrace is below:");
+								e0.printStackTrace();
+							}
 						}
 						return new Object[] { true, null, tmp_stm };
 					}
 				} else {
-					Object tmp=tmp_stm.getResultSet();
+					Object tmp = tmp_stm.getResultSet();
 					if (TableInsteadOfResultSet) {
-						tmp=convertResultSetToTable((java.sql.ResultSet)tmp);
+						tmp = convertResultSetToTable((java.sql.ResultSet) tmp);
 					}
-					if (keepStatementOpen != null &&keepStatementOpen ==true) {
+					if (keepStatementOpen != null && keepStatementOpen == true) {
 						return new Object[] { true, tmp, tmp_stm };
 					} else {
 						if (TableInsteadOfResultSet) {
-							try{tmp_stm.close();} catch (Throwable e0) {System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")+ "Statement closing have exception. Stacktrace is below:");e0.printStackTrace();}
-							if (keepStatementOpen != null &&keepStatementOpen==false) {
+							try {
+								tmp_stm.close();
+							} catch (Throwable e0) {
+								System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")
+										+ "Statement closing have exception. Stacktrace is below:");
+								e0.printStackTrace();
+							}
+							if (keepStatementOpen != null && keepStatementOpen == false) {
 								return new Object[] { true, tmp, tmp_stm };
 							} else {
-								return new Object[] { true, tmp, null};
+								return new Object[] { true, tmp, null };
 							}
 						}
-						// in this case, cannot close Statement, because to retrive data later from resultset lamo, so...
+						// in this case, cannot close Statement, because to retrive data later from
+						// resultset lamo, so...
 						else {
-							if (keepStatementOpen != null &&keepStatementOpen==false) {
+							if (keepStatementOpen != null && keepStatementOpen == false) {
 								return new Object[] { true, tmp, tmp_stm };
 							} else {
-								return new Object[] { true, tmp, null};
+								return new Object[] { true, tmp, null };
 							}
 						}
 					}
@@ -450,21 +471,45 @@ public class DatabaseMnm {
 				int tmp2 = tmp_stm.getUpdateCount();
 				if (tmp2 == -1) {
 					if (keepStatementOpen == null) {
-						try{tmp_stm.close();} catch (Throwable e0) {System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")+ "Statement closing have exception. Stacktrace is below:");e0.printStackTrace();}
+						try {
+							tmp_stm.close();
+						} catch (Throwable e0) {
+							System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")
+									+ "Statement closing have exception. Stacktrace is below:");
+							e0.printStackTrace();
+						}
 						return new Object[] { null, null, null };
 					} else {
-						if (keepStatementOpen != null &&keepStatementOpen == false) {
-							try{tmp_stm.close();} catch (Throwable e0) {System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")+ "Statement closing have exception. Stacktrace is below:");e0.printStackTrace();}
+						if (keepStatementOpen != null && keepStatementOpen == false) {
+							try {
+								tmp_stm.close();
+							} catch (Throwable e0) {
+								System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")
+										+ "Statement closing have exception. Stacktrace is below:");
+								e0.printStackTrace();
+							}
 						}
 						return new Object[] { null, null, tmp_stm };
 					}
 				} else {
 					if (keepStatementOpen == null) {
-						try{tmp_stm.close();} catch (Throwable e0) {System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")+ "Statement closing have exception. Stacktrace is below:");e0.printStackTrace();}
+						try {
+							tmp_stm.close();
+						} catch (Throwable e0) {
+							System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")
+									+ "Statement closing have exception. Stacktrace is below:");
+							e0.printStackTrace();
+						}
 						return new Object[] { false, tmp2, null };
 					} else {
-						if (keepStatementOpen != null &&keepStatementOpen == false) {
-							try{tmp_stm.close();} catch (Throwable e0) {System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")+ "Statement closing have exception. Stacktrace is below:");e0.printStackTrace();}
+						if (keepStatementOpen != null && keepStatementOpen == false) {
+							try {
+								tmp_stm.close();
+							} catch (Throwable e0) {
+								System.err.println(Main.clReportHeader("DatabaseMnm:runSQLcmd", "ERR")
+										+ "Statement closing have exception. Stacktrace is below:");
+								e0.printStackTrace();
+							}
 						}
 						return new Object[] { false, tmp2, tmp_stm };
 					}
@@ -480,7 +525,8 @@ public class DatabaseMnm {
 	}
 
 	// entire exception handling info: mode=no
-	public static Object[][] runSQLcmds(java.sql.Connection dbConn, String[] sqlStms, boolean skipGetResultSet,boolean TableInsteadOfResultSet, 
+	public static Object[][] runSQLcmds(java.sql.Connection dbConn, String[] sqlStms, boolean skipGetResultSet,
+			boolean TableInsteadOfResultSet,
 			Boolean keepStatementOpen, Object[][] paramsOfEachStms) throws java.sql.SQLException {
 		if (dbConn == null) {
 			dbConn = DatabaseMnm.mainDbConn;
@@ -490,7 +536,8 @@ public class DatabaseMnm {
 			paramsOfEachStms = new Object[sqlStms.length][];
 		}
 		for (int i = 0; i < sqlStms.length; i++) {
-			retVal[i] = runSQLcmd(dbConn, sqlStms[i], skipGetResultSet,TableInsteadOfResultSet, keepStatementOpen, paramsOfEachStms[i]);
+			retVal[i] = runSQLcmd(dbConn, sqlStms[i], skipGetResultSet, TableInsteadOfResultSet, keepStatementOpen,
+					paramsOfEachStms[i]);
 		}
 		return retVal;
 	}
@@ -743,9 +790,10 @@ public class DatabaseMnm {
 	public static void demo_printOurInitTableLAMO() throws java.sql.SQLException {
 		java.sql.ResultSet tmpResultSet = null;
 		Table tmpTable = null;
-		String[] tableNames = new String[] { "USER", "CUSTOMER", "PRODUCT", "BUY_REQUEST", "SELLING_REQUEST",};
+		String[] tableNames = new String[] { "USER", "CUSTOMER", "PRODUCT", "BUY_REQUEST", "SELLING_REQUEST", };
 		for (String tableName : tableNames) {
-			tmpResultSet = (java.sql.ResultSet) (DatabaseMnm.runSQLcmd(null, "SELECT * FROM " + tableName, false,false, null,
+			tmpResultSet = (java.sql.ResultSet) (DatabaseMnm.runSQLcmd(null, "SELECT * FROM " + tableName, false, false,
+					null,
 					null)[1]);
 			tmpTable = convertResultSetToTable(tmpResultSet);
 			demo_printTableLAMO(tmpTable);
@@ -763,7 +811,7 @@ public class DatabaseMnm {
 	// lamo
 	public static class DataSpec {
 		// [Zone:Constants]
-		
+
 		// for attribute that have range (that "required" range checking ถ้าไม่ required
 		// ก็เช่น ใช้ >0 หรือ >=0 ได้)
 		// > วิธีนี้เพื่อลดการ HARDCODE LAMO
@@ -775,10 +823,9 @@ public class DatabaseMnm {
 		public final static double RANGE_MAX__Product_Price = 99999999.99;
 		public final static double RANGE_MIN__Buy_Request_Transportation_Price = 0;
 		public final static double RANGE_MAX__Buy_Request_Transportation_Price = 99999.99;
-		
+
 		// for attribute that limit range by digit limiting
 		// > วิธีนี้เพื่อลดการ HARDCODE LAMO
-
 
 		// REMARK: สำหรับ REAL attribute, ค่าMin คือ digitCount หน้าทศนิยม และค่าMax คือ
 		// digitCount หลังทศนิยม
@@ -1019,7 +1066,7 @@ public class DatabaseMnm {
 					@NotNull String colName) throws java.sql.SQLException {
 				java.sql.ResultSet tmp_rs = (java.sql.ResultSet) runSQLcmd(null,
 						"SELECT count(" + colName + ") FROM " + tableName + " WHERE " + colName + "=?",
-						false,false, null, new Object[] { val })[1];
+						false, false, null, new Object[] { val })[1];
 				Table tmp_table = convertResultSetToTable(tmp_rs);
 				Object tmp_val_tmp = tmp_table.cols[0].vals.get(0);
 				Long tmp_val = convertIntegerAlikeSQLColToLong(tmp_val_tmp, tmp_table.cols[0].javaType);
@@ -1270,7 +1317,7 @@ public class DatabaseMnm {
 				} else {
 					// (PART 0.5) transform into doubleLengthCropping
 					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price");
-					data=DataTransformation.doubleLengthCropping(data, lenSpec[0], lenSpec[1],true);
+					data = DataTransformation.doubleLengthCropping(data, lenSpec[0], lenSpec[1], true);
 					// (PART 1): Check length
 					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0], lenSpec[1])) {
 					} else {
@@ -1341,7 +1388,6 @@ public class DatabaseMnm {
 					return null;
 				}
 			}
-
 
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_ID(
@@ -1523,7 +1569,7 @@ public class DatabaseMnm {
 				} else {
 					// (PART 0.5) transform into doubleLengthCropping
 					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount");
-					data=DataTransformation.doubleLengthCropping(data, lenSpec[0], lenSpec[1],true);
+					data = DataTransformation.doubleLengthCropping(data, lenSpec[0], lenSpec[1], true);
 					// (PART 1): Check length
 					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0], lenSpec[1])) {
 					} else {
@@ -1562,7 +1608,7 @@ public class DatabaseMnm {
 					return null;
 				}
 			}
-			
+
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Repairment_Description(
 					@Nullable String data) {
@@ -1586,8 +1632,6 @@ public class DatabaseMnm {
 				}
 			}
 
-
-			// REMARK: ดูด้านล่างๆ
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Customer_Full_Name(
 					@Nullable String data) throws java.sql.SQLException {
@@ -1606,7 +1650,7 @@ public class DatabaseMnm {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
-					// (PART 3) Check is PK/FK-insertable
+					// (PART 3) Check is FK-insertable
 					if (DataValidation.SQLLevel.isThisValExisted(data, "Customer", "Customer_Full_Name")) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;
@@ -1616,10 +1660,6 @@ public class DatabaseMnm {
 				}
 			}
 
-			// REMARK: ผมวิเคราะห์มาแล้ว การตรวจสอบนี้จะตรวจสอบ Unique of PKแบบควบ ด้วย
-			// เพราะเรื่อง UNIQUE มันโดนตรวจสอบจาก UNIQUE of attribute ของ
-			// Buy_Request.Product_ID แล้วๆ
-			// > ฉะนั้นหากตรวจสอบอันนี้ผ่าน คือ PK unique ผ่านๆ
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Product_ID(@Nullable String data)
 					throws java.sql.SQLException {
@@ -1638,15 +1678,15 @@ public class DatabaseMnm {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
-					// (PART 3) Check is PK-insertable
+					// (PART 3) Check is FK-insertable
 					if (DataValidation.SQLLevel.isThisValExisted(data, "Product", "Product_ID")) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL;
 					}
-					// (PART 4) Check is FK-insertable
+					// (PART 4) Check is PK-insertable
 					if (!DataValidation.SQLLevel.isThisValExisted(data, "Buy_Request", "Product_ID")) {
 					} else {
-						return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_FK;
+						return DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK;
 					}
 					// the code should reached here means it (data) is passed
 					return null;
@@ -1685,7 +1725,7 @@ public class DatabaseMnm {
 				} else {
 					// (PART 0.5) transform into doubleLengthCropping
 					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price");
-					data=DataTransformation.doubleLengthCropping(data, lenSpec[0], lenSpec[1],true);
+					data = DataTransformation.doubleLengthCropping(data, lenSpec[0], lenSpec[1], true);
 					// (PART 1): Check length
 					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0], lenSpec[1])) {
 					} else {
@@ -1725,10 +1765,11 @@ public class DatabaseMnm {
 			}
 
 		}
+
 		public static class ForMoreBussinessConstraint {
 			public static boolean checkDateAsEpochTimeIsNotPast(Long val) {
-				Long tmpt_long = java.time.LocalDate.now().toEpochDay()*86400+43200-1;
-				return val>=tmpt_long;
+				Long tmpt_long = java.time.LocalDate.now().toEpochDay() * 86400 + 43200 - 1;
+				return val >= tmpt_long;
 			}
 		}
 	}
@@ -1743,7 +1784,6 @@ public class DatabaseMnm {
 			}
 		}
 
-		
 		public static double doubleLengthCropping(double data, int maxFront, int maxRear) {
 			return doubleLengthCropping(data, maxFront, maxRear, false);
 		}

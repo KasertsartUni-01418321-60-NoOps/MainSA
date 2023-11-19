@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 
 public class UICtrl_Homepage {
 	private static boolean misct_bool_1=false; 
+	@FXML private Button  button_Misc1; 
 	public void funcTestOFCaughtException(String[] args) {
 	}
 
@@ -24,6 +25,7 @@ public class UICtrl_Homepage {
 				button_Accounting.setDisable(true);
 				button_ContactsList.setDisable(true);
 				button_SellHist.setDisable(true);
+				button_Misc1.setDisable(true);
 			}
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
@@ -78,13 +80,8 @@ public class UICtrl_Homepage {
 	}
 		@FXML private void onpressed_Button_Misc1() {
 		try{
-			if (misct_bool_1==false) {
-				MIDIPlayer.shutdown();
-				misct_bool_1=true;
-			} else {
-				MIDIPlayer.main();
-				misct_bool_1=false;
-			}
+			MIDIPlayer.shutdown();
+			button_Misc1.setVisible(false);
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
 			throw e;

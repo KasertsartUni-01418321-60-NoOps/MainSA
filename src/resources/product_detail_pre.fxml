@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<<<<<<< HEAD
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextArea?>
+=======
+>>>>>>> 3e00eb91cfe6c1979c7f9330f573964c8c0e5811
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_ProductDetail">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_ProductDetail">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รายละเอียดสินค้า">
@@ -25,54 +28,75 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Text>
+<<<<<<< HEAD
       <TextField fx:id="productID" layoutX="131.0" layoutY="90.0" prefHeight="40.0" prefWidth="176.0">
+=======
+      <TextField fx:id="textField_PdID" layoutX="131.0" layoutY="90.0" prefHeight="40.0" prefWidth="176.0">
+>>>>>>> 3e00eb91cfe6c1979c7f9330f573964c8c0e5811
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Text layoutX="549.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่น :">
+      <Text layoutX="396.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่น :">
          <font>
             <Font size="18.0" />
          </font></Text>
+<<<<<<< HEAD
       <TextField fx:id="modelText" layoutX="587.0" layoutY="90.0" prefHeight="40.0" prefWidth="185.0">
+=======
+      <TextField fx:id="textField_Brand" layoutX="81.0" layoutY="205.0" prefHeight="40.0" prefWidth="305.0">
+>>>>>>> 3e00eb91cfe6c1979c7f9330f573964c8c0e5811
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Text layoutX="33.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รายละเอียดการซ่อม :">
+      <Text layoutX="482.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาสินค้า :">
          <font>
             <Font size="18.0" />
          </font></Text>
+<<<<<<< HEAD
       <Text layoutX="493.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาสินค้า :">
          <font>
             <Font size="18.0" />
          </font></Text>
       <TextField fx:id="priceText" layoutX="588.0" layoutY="199.0" prefHeight="40.0" prefWidth="146.0">
+=======
+      <TextField fx:id="textField_PdPrice" layoutX="577.0" layoutY="260.0" prefHeight="40.0" prefWidth="146.0">
+>>>>>>> 3e00eb91cfe6c1979c7f9330f573964c8c0e5811
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Text layoutX="743.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="บาท">
+      <Text layoutX="732.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="บาท">
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Text layoutX="328.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อ :">
+      <Text layoutX="33.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อ :">
          <font>
             <Font size="18.0" />
          </font></Text>
+<<<<<<< HEAD
       <TextField fx:id="brandText" layoutX="375.0" layoutY="90.0" prefHeight="40.0" prefWidth="166.0">
+=======
+      <TextField fx:id="textField_Model" layoutX="438.0" layoutY="205.0" prefHeight="40.0" prefWidth="305.0">
+>>>>>>> 3e00eb91cfe6c1979c7f9330f573964c8c0e5811
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Text layoutX="31.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID สัญญาซื้อ :">
+      <Text layoutX="339.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID สัญญาซื้อ :">
          <font>
             <Font size="18.0" />
          </font></Text>
+<<<<<<< HEAD
       <TextField fx:id="purchaseID" layoutX="154.0" layoutY="144.0" prefHeight="40.0" prefWidth="152.0">
+=======
+      <TextField fx:id="textField_SrID" layoutX="462.0" layoutY="90.0" prefHeight="40.0" prefWidth="152.0">
+>>>>>>> 3e00eb91cfe6c1979c7f9330f573964c8c0e5811
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Text layoutX="328.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID สัญญาขาย :">
+      <Text layoutX="33.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานะ :">
          <font>
             <Font size="18.0" />
          </font></Text>
+<<<<<<< HEAD
       <TextField fx:id="quotationID" layoutX="447.0" layoutY="144.0" prefHeight="40.0" prefWidth="152.0">
          <font>
             <Font size="18.0" />
@@ -87,5 +111,26 @@
          </font></Button>
       <ChoiceBox fx:id="changeStatus" layoutX="131.0" layoutY="199.0" prefHeight="40.0" prefWidth="176.0" />
       <TextArea fx:id="maintanaceID" layoutX="35.0" layoutY="283.0" prefHeight="270.0" prefWidth="446.0" />
+=======
+      <Button fx:id="button_MainAction" layoutX="346.0" layoutY="522.0" mnemonicParsing="false" onAction="#onMainAction_Button" prefHeight="40.0" prefWidth="305.0" text="สร้างสัญญาขาย">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <TextField fx:id="textField_PdStatus" layoutX="110.0" layoutY="144.0" prefHeight="40.0" prefWidth="374.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Text layoutX="525.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="วันที่เข้าคลัง :">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="textField_PdArriveDate" layoutX="624.0" layoutY="144.0" prefHeight="40.0" prefWidth="152.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+>>>>>>> 3e00eb91cfe6c1979c7f9330f573964c8c0e5811
    </children>
 </AnchorPane>

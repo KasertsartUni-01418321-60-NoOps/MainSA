@@ -93,9 +93,9 @@ public class UICtrl_BuyHistory {
         srListView.getItems().clear();
         String orderQuery=null;
         if (mode<=0) {
-            orderQuery="ORDER BY SR.Selling_Request_Meet_Date DESC, SR.Selling_Request_Status, COALESCE(PD.Product_Status, -1)";
+            orderQuery="ORDER BY SR.Selling_Request_Meet_Date DESC, ROWID DESC";
         } else {
-            orderQuery="ORDER BY SR.Selling_Request_Status, COALESCE(PD.Product_Status, -1), SR.Selling_Request_Meet_Date DESC";
+            orderQuery="ORDER BY SR.Selling_Request_Status, COALESCE(PD.Product_Status, -1), SR.Selling_Request_Meet_Date DESC, ROWID DESC";
         }
         DatabaseMnm.Table tmpc_SQLTable = null;
         try {
