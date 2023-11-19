@@ -62,29 +62,5 @@ public class UICtrl_CustomerData {
             throw e;
         }
     }
-    // <UNUSED>
-    // private void helper_listViewBSR_Update(String custName) throws java.sql.SQLException{
-    //     DatabaseMnm.Table tmpc_SQLTable = null;
-    //     try {
-    //         tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
-    //                 null,
-    //                 "SELECT Selling_Reuqest_ID,Product_ID FROM Customer NATURAL JOIN Selling_Request NATURAL JOIN Buy_Request WHERE Customer_Full_Name=?",
-    //                 false,
-    //                 true,
-    //                 null,
-    //                 new Object[] {custName}
-    //         )[1]);
-    //     } catch (java.sql.SQLException e) {
-    //         MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
-    //                 "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
-    //         throw e;
-    //     }
-    //     int tmpl_0=tmpc_SQLTable.cols[0].vals.size();
-    //     ListViewRowDataWrapper<String>[] tmpc_SQLTable__listViewRowDataWrapper = new ListViewRowDataWrapper<String>[tmpl_0];
-    //     for (int tmpc_int =0; tmpc_int<tmpl_0; tmpc_int++) {
-    //         String tmpt_str=(String)(tmpc_SQLTable.cols[0].vals.get(tmpc_int));
-    //         tmpc_SQLTable__listViewRowDataWrapper[tmpc_int]=new ListViewRowDataWrapper<String>(tmpt_str, tmpt_str);
-    //     }
-    //     custListView.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
-    // }
+
 }
