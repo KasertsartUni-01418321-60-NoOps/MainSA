@@ -3,18 +3,15 @@ package th.ac.ku.sci.cs.projectsa.uictrl;
 import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec;
-import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataTransformation;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 
 import com.github.saacsos.FXRouter;
 
 import javafx.fxml.*;
-import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 public class UICtrl_CheckItems {
@@ -217,8 +214,6 @@ public class UICtrl_CheckItems {
             tmpk_data = Double.parseDouble(spinnerDouble_Price.getEditor().getText());
         } catch (NumberFormatException e) {
             spinnerDouble_Price.getEditor().setText(spinnerDouble_Price.getValue().toString());
-            // TODO: delete this dEbug later
-            System.out.println("FAIL");
             return;
         }
         // Optionally, round the entered value
@@ -227,8 +222,7 @@ public class UICtrl_CheckItems {
         // Set the rounded value back to the spinner
         spinnerDouble_Price.getEditor().setText(tmpk_data.toString());
         spinnerDouble_Price.getValueFactory().setValue(tmpk_data);
-        // TODO: delete this dEbug later
-        System.out.println("GOOD:"+tmpk_data.toString());
+        
     }
 
     private void onSave_Button__Helper1() {
