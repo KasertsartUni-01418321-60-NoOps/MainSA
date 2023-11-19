@@ -5,6 +5,7 @@ import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.Table;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 import javafx.fxml.*;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.*;
 
 public class UICtrl_ProductDetail {
@@ -14,11 +15,9 @@ public class UICtrl_ProductDetail {
     @FXML private TextField textField_PdStatus,textField_PdPrice,textField_PdArriveDate;
     @FXML private Button button_MainAction;
 
-    @FXML private void initialize() throws Throwable {
+    @FXML private void initialize() throws java.sql.SQLException {
         try {
-            // TODO: debug
-            String pdID="PD0099AZ";
-            // String pdID =((ListViewRowDataWrapper<String>) ((Object[])com.github.saacsos.FXRouter.getData())[1]).ref;
+            String pdID =((ListViewRowDataWrapper<String>) ((Object[])com.github.saacsos.FXRouter.getData())[1]).ref;
             DatabaseMnm.Table tmpc_SQLTable = null;
             try {
                 tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
@@ -73,29 +72,63 @@ public class UICtrl_ProductDetail {
             throw e;
         }
     } 
-    // TODO: depend on where we come from..., default to quotation
+
     @FXML private void onBack_Button() throws java.io.IOException {
         try {
-            Main.switchToSpecificPagename("buy_history");
+            Main.switchToSpecificPagename("warehouse");
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
         }
     }
 
-    @FXML private void onMainAction_Button() throws java.io.IOException {
+    @FXML private void onMainAction_Button() throws java.io.IOException,java.sql.SQLException {
         try {
-            // 0: this class
-            // 1: (Object[])com.github.saacsos.FXRouter.getData())[1] (ListViewRowDataWrapper<String> ของ SR_ID)
-            // 2: Array ของข้อมูล ดังนี้ Brand/Model/CustName
-            Main.switchToSpecificPagename(
-                "check_items",
-                new Object[] {
-                    this.getClass(),
-                    ((Object[])com.github.saacsos.FXRouter.getData())[1],
-                    new Object[] {textField_Brand.getText(),textField_Model.getText(),textField_Brand.getText()}
+            int tmpt_int=0;
+            // ก็คือเราจะแก้สถานะผ่าน SQL แล้วโหลดหน้านี้ใหม่เลยๆ
+            if (stateTransitionMode!=0) {
+                if (stateTransitionMode==1) {
+                    tmpt_int=3;
+                } else {
+                    tmpt_int=1;
                 }
-            );
+                try{
+                    DatabaseMnm.runSQLcmd(
+                        null,
+                        "UPDATE Product SET Product_Status=? WHERE Product_ID=? ;",
+                        true,
+                        false,
+                        null,
+                        new Object[] {
+                            tmpt_int,
+                            textField_PdID.getText()
+                        }
+                    );
+                    DatabaseMnm.mainDbConn.commit();
+                } catch (java.sql.SQLException e) {
+                    MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
+                    "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
+                    throw e;
+                };
+                Main.switchToSpecificPagename(
+                    "product_detail",
+                    new Object[] {
+                        // จำลองว่ามาจาก page "warehouse"
+                        UICtrl_Warehouse.class,
+                        textField_PdID.getText(),
+                    }
+                );
+            }
+            // TODO: check if controlflow cause bug
+            else {
+                Main.switchToSpecificPagename(
+                    "quotation",
+                    new Object[] {
+                        this.getClass(),
+                        textField_PdID.getText(),
+                    }
+                );
+            }
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
