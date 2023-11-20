@@ -13,6 +13,18 @@ public class UICtrl_CreateCustomer {
 	private TextField textField_customerName,textField_customerPhone;
     @FXML
     private TextArea textField_customerLocation;
+    @FXML private CheckBox checkboxCustAddr;
+
+@FXML void initialize() {
+    try {
+        checkboxCustAddr.setOnAction(event -> {
+                textField_customerLocation.setDisable(!checkboxCustAddr.isSelected());
+        });
+    } catch (Throwable e) {
+        MyExceptionHandling.handleFatalException(e);
+        throw e;
+    }
+}
 
     @FXML 
     private void onPressed_Button_CreateCustomer() throws java.io.IOException, java.sql.SQLException {
@@ -20,6 +32,9 @@ public class UICtrl_CreateCustomer {
 			String formval_customerName = textField_customerName.getText();
 			String formval_customerPhone = textField_customerPhone.getText();
             String formval_customerLocation = textField_customerLocation.getText();
+            if (!checkboxCustAddr.isSelected()) {
+                formval_customerLocation=null;
+            }
             // [VALIDZONE]
             DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON tmpReason;
             tmpReason = DataValidation.PerAttributeValidation
