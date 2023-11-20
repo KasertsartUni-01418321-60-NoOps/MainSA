@@ -1,14 +1,11 @@
 package th.ac.ku.sci.cs.projectsa.uictrl;
 
-// TODO: แก้เสร็จแล้ว ลบ unused import
 import javafx.fxml.FXML;
 import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Product;
-import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Selling_Request;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 
 import javafx.event.EventHandler;
-import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -87,7 +84,6 @@ public class UICtrl_Warehouse {
             throw e;
         }
     }
-    // TODO: data to throw
     @FXML private void onPressed_Button_addProduct() throws java.io.IOException {
         try {
             Main.switchToSpecificPagename("add_item");
