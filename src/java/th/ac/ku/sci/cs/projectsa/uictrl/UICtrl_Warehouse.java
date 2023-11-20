@@ -32,6 +32,7 @@ public class UICtrl_Warehouse {
                 tmpt_lvrdwInt
             );
             comboBox_filterType.setValue(tmpt_lvrdwInt);
+            // TODO: fatla try-catch
             comboBox_filterType.setOnAction(event -> {
                 boolean tmpt_bool;
                 if (comboBox_filterType.getValue().ref==0) {

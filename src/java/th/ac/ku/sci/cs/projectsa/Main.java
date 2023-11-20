@@ -127,6 +127,7 @@ public class Main extends javafx.application.Application {
             // in case of fatal
             if (MyExceptionHandling.isFatal) {
             } else {
+                // TODO: fatal try-catch 
                 Main.exitThread.submit(() -> {
                     System.exit(0);
                 });
