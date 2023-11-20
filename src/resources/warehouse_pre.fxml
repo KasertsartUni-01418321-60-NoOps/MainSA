@@ -25,12 +25,12 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <ListView fx:id="productListView" layoutX="41.0" layoutY="213.0" prefHeight="300.0" prefWidth="718.0" />
+      <ListView fx:id="listView_productList" layoutX="41.0" layoutY="213.0" prefHeight="300.0" prefWidth="718.0" />
       <Text layoutX="41.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ค้าหาโดย :">
          <font>
             <Font size="18.0" />
          </font></Text>
-      <ComboBox fx:id="choice" layoutX="129.0" layoutY="78.0" prefHeight="40.0" prefWidth="159.0" />
+      <ComboBox fx:id="comboBox_filterType" layoutX="129.0" layoutY="78.0" prefHeight="40.0" prefWidth="159.0" />
       <Button layoutX="288.0" layoutY="125.0" mnemonicParsing="false" text="ค้นหา">
          <font>
             <Font size="18.0" />
