@@ -14,17 +14,25 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 
 public class UICtrl_Warehouse {
-    @FXML private ListView<ListViewRowDataWrapper<String>> srListView;
+    @FXML private ListView<ListViewRowDataWrapper<String>> pdListView;
     @FXML private ComboBox<ListViewRowDataWrapper<Integer>> comboBox_filterType;
+    @FXML private TextField textField_filter;
     @FXML
     private void initialize() throws java.sql.SQLException{
         try {
-            if (((DatabaseMnm.DataSpec.STATUS_User)Main.globalVar.get("loggedinUser_Role"))==DatabaseMnm.DataSpec.STATUS_User.Employee) {
-                button_CreatePurchase.setDisable(true);
-            }
-            button_sortByDate.setDisable(true);
-			helper_listViewUpdate(-1);
-            srListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            comboBox_filterType.getItems().add(
+                new ListViewRowDataWrapper<Integer>(-1, "ยี่ห้อ")
+            );
+            comboBox_filterType.getItems().add(
+                new ListViewRowDataWrapper<Integer>(1, "รุ่นสินค้า")
+            );
+            ListViewRowDataWrapper<Integer> tmpt_lvrdwInt = new ListViewRowDataWrapper<Integer>(0, "สถานะของสินค้า");
+            comboBox_filterType.getItems().add(
+                tmpt_lvrdwInt
+            );
+            comboBox_filterType.setValue(tmpt_lvrdwInt);
+			helper_listViewUpdate(0,null);
+            pdListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
                     try {
@@ -37,7 +45,7 @@ public class UICtrl_Warehouse {
                 }
             });
             // SAME AS ABOVE LAMO
-            srListView.setOnKeyPressed(event -> {
+            pdListView.setOnKeyPressed(event -> {
                 try {
                     if (event.getCode() == KeyCode.ENTER) {
                         helper_changePageForViewDataOfRow();
@@ -60,17 +68,19 @@ public class UICtrl_Warehouse {
             throw e;
         }
     }
-    @FXML private void onCreatePurchase_Button() throws java.io.IOException {
+    // TODO: data to throw
+    @FXML private void onPressed_Button_addProduct() throws java.io.IOException {
         try {
-            Main.switchToSpecificPagename("buy_from_vender");
+            Main.switchToSpecificPagename("add_item");
         } catch (Throwable e) {
-            MyExceptionHandling.handleFatalException(e);
+			MyExceptionHandling.handleFatalException(e);
             throw e;
         }
     }
     
-    @FXML private void onpressed_Button_sortByPdStatus() throws java.sql.SQLException {
+    @FXML private void onPressed_Button_Search() throws java.sql.SQLException {
         try {
+            if ()
             helper_listViewUpdate(1);
             button_sortByDate.setDisable(false);
             button_sortByPdStatus.setDisable(true);
@@ -79,18 +89,9 @@ public class UICtrl_Warehouse {
             throw e;
         }
     }
-    @FXML private void onpressed_Button_sortByDate() throws java.sql.SQLException {
-        try {
-            helper_listViewUpdate(-1);
-            button_sortByDate.setDisable(true);
-            button_sortByPdStatus.setDisable(false);
-        } catch (Throwable e) {
-            MyExceptionHandling.handleFatalException(e);
-            throw e;
-        }
-    }
-    private void helper_listViewUpdate(int mode) throws java.sql.SQLException {
-        srListView.getItems().clear();
+    // mode={0:pdStatus,-1:pdBrand,1:pdModel}
+    private void helper_listViewUpdate(int mode, String fStr) throws java.sql.SQLException {
+        pdListView.getItems().clear();
         String orderQuery=null;
         if (mode<=0) {
             orderQuery="ORDER BY SR.Selling_Request_Meet_Date DESC, ROWID DESC";
@@ -154,12 +155,12 @@ public class UICtrl_Warehouse {
                 new ListViewRowDataWrapper<String>(tmpk_Selling_Request_ID, tmpk_repr)
             );
         }
-        srListView.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
+        pdListView.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
     }
     private void helper_changePageForViewDataOfRow() throws java.io.IOException {
-        ListViewRowDataWrapper<String> tmpt_lvrdw = srListView.getSelectionModel().getSelectedItem();
+        ListViewRowDataWrapper<String> tmpt_lvrdw = pdListView.getSelectionModel().getSelectedItem();
         if (tmpt_lvrdw!=null) {
-        Main.switchToSpecificPagename("buy_data",new Object[] {this.getClass(),tmpt_lvrdw});
+        Main.switchToSpecificPagename("product_detail",new Object[] {this.getClass(),tmpt_lvrdw});
         }
     }
 }

@@ -31,11 +31,11 @@
             <Font size="18.0" />
          </font></Text>
       <ComboBox fx:id="comboBox_filterType" layoutX="129.0" layoutY="78.0" prefHeight="40.0" prefWidth="159.0" />
-      <Button layoutX="288.0" layoutY="125.0" mnemonicParsing="false" text="ค้นหา">
+      <Button onAction="#onPressed_Button_Search" layoutX="288.0" layoutY="125.0" mnemonicParsing="false" text="ค้นหา">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <TextField layoutX="129.0" layoutY="125.0" prefHeight="25.0" prefWidth="159.0">
+      <TextField fx:id="textField_filter" layoutX="129.0" layoutY="125.0" prefHeight="25.0" prefWidth="159.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
