@@ -29,7 +29,6 @@ public class UICtrl_Homepage {
 			DatabaseMnm.DataSpec.STATUS_User currentUserRole =(DatabaseMnm.DataSpec.STATUS_User)Main.globalVar.get("loggedinUser_Role");
 			if (currentUserRole==DatabaseMnm.DataSpec.STATUS_User.Employer) {
 			} else { 
-				button_Accounting.setDisable(true);
 				button_ContactsList.setDisable(true);
 				button_SellHist.setDisable(true);
 				button_Misc1.setDisable(true);
@@ -76,15 +75,7 @@ public class UICtrl_Homepage {
 			throw e;
 		}
 	}
-	@FXML private Button button_Accounting;
-	@FXML private void onPressed_Button_Accounting()  throws java.io.IOException{
-		try{
-			try {Main.switchToSpecificPagename("money_accounting");} catch (java.io.IOException e1) {throw e1;}
-		} catch (Throwable e) {
-			MyExceptionHandling.handleFatalException(e);
-			throw e;
-		}
-	}
+
 		@FXML private void onpressed_Button_Misc1() {
 		try{
 			if (misct_pint_1==0) { 
