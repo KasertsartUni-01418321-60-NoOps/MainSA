@@ -12,11 +12,15 @@ import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 public class UICtrl_Warehouse {
     @FXML private ListView<ListViewRowDataWrapper<String>> pdListView;
     @FXML private ComboBox<ListViewRowDataWrapper<Integer>> comboBox_filterType;
+    @FXML private Text text_filterStr,text_filterCheckbox;
     @FXML private TextField textField_filter;
+    @FXML private CheckBox checkBoxPdStatus1,checkBoxPdStatus2,checkBoxPdStatus3,checkBoxPdStatus4;
+
     @FXML
     private void initialize() throws java.sql.SQLException{
         try {
@@ -31,6 +35,13 @@ public class UICtrl_Warehouse {
                 tmpt_lvrdwInt
             );
             comboBox_filterType.setValue(tmpt_lvrdwInt);
+            comboBox_filterType.setOnAction(event -> {
+                if (comboBox_filterType.getValue().ref==0) {
+
+                } else {
+
+                }
+            });
 			helper_listViewUpdate(0,null);
             pdListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
@@ -80,10 +91,8 @@ public class UICtrl_Warehouse {
     
     @FXML private void onPressed_Button_Search() throws java.sql.SQLException {
         try {
-            if ()
-            helper_listViewUpdate(1);
-            button_sortByDate.setDisable(false);
-            button_sortByPdStatus.setDisable(true);
+            int tmpt_pint = comboBox_filterType.getValue().ref;
+            helper_listViewUpdate(tmpt_pint,textField_filter.getText());
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
@@ -92,11 +101,15 @@ public class UICtrl_Warehouse {
     // mode={0:pdStatus,-1:pdBrand,1:pdModel}
     private void helper_listViewUpdate(int mode, String fStr) throws java.sql.SQLException {
         pdListView.getItems().clear();
-        String orderQuery=null;
-        if (mode<=0) {
-            orderQuery="ORDER BY SR.Selling_Request_Meet_Date DESC, ROWID DESC";
-        } else {
-            orderQuery="ORDER BY SR.Selling_Request_Status, COALESCE(PD.Product_Status, -1), SR.Selling_Request_Meet_Date DESC, ROWID DESC";
+        String whereQuery="";
+        if (fStr!=null) {
+            if (mode==-1) {
+                orderQuery="ORDER BY SR.Selling_Request_Meet_Date DESC, ROWID DESC";
+            } else if (mode==1) {
+                orderQuery="ORDER BY SR.Selling_Request_Status, COALESCE(PD.Product_Status, -1), SR.Selling_Request_Meet_Date DESC, ROWID DESC";
+            } else {
+
+            }
         }
         DatabaseMnm.Table tmpc_SQLTable = null;
         try {
