@@ -26,7 +26,7 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <ListView fx:id="listView_productList" layoutX="41.0" layoutY="213.0" prefHeight="300.0" prefWidth="718.0" />
+      <ListView fx:id="pdListView" layoutX="41.0" layoutY="213.0" prefHeight="300.0" prefWidth="718.0" />
       <Text layoutX="41.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ค้าหาโดย :">
          <font>
             <Font size="18.0" />
