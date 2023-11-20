@@ -17,7 +17,7 @@ public class UICtrl_ProductDetail {
 
     @FXML private void initialize() throws java.sql.SQLException {
         try {
-            String pdID =((ListViewRowDataWrapper<String>) ((Object[])com.github.saacsos.FXRouter.getData())[1]).ref;
+            String pdID =((String) ((Object[])com.github.saacsos.FXRouter.getData())[1]);
             DatabaseMnm.Table tmpc_SQLTable = null;
             try {
                 tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
@@ -33,7 +33,6 @@ public class UICtrl_ProductDetail {
                         "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
                 throw e;
             }
-            // TODO:
             textField_PdID.setText(pdID);
             textField_SrID.setText((String)(tmpc_SQLTable.cols[3].vals.get(0)));
             textField_Brand.setText((String)(tmpc_SQLTable.cols[4].vals.get(0)));
@@ -123,7 +122,6 @@ public class UICtrl_ProductDetail {
                     }
                 );
             }
-            // TODO: check if controlflow cause bug
             else {
                 Main.switchToSpecificPagename(
                     "quotation",
