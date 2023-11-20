@@ -107,6 +107,7 @@ public class UICtrl_CheckItems {
 
     @FXML private void onSave_Button() throws java.sql.SQLException, java.io.IOException {
         try {
+            helper_refreshSpinnerDouble_1();
             // [PART: Valid]
             DataValidation.DATAVALID_DECLINED_REASON tmpReason;
             tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Brand(textField_Brand.getText());
