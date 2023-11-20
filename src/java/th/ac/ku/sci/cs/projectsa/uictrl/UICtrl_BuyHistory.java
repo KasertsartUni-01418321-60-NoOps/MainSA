@@ -93,15 +93,15 @@ public class UICtrl_BuyHistory {
         srListView.getItems().clear();
         String orderQuery=null;
         if (mode<=0) {
-            orderQuery="ORDER BY SR.Selling_Request_Meet_Date DESC, ROWID DESC";
+            orderQuery="ORDER BY SR.Selling_Request_Meet_Date DESC, rowid DESC";
         } else {
-            orderQuery="ORDER BY SR.Selling_Request_Status, COALESCE(PD.Product_Status, -1), SR.Selling_Request_Meet_Date DESC, ROWID DESC";
+            orderQuery="ORDER BY SR.Selling_Request_Status, COALESCE(PD.Product_Status, -1), SR.Selling_Request_Meet_Date DESC, rowid DESC";
         }
         DatabaseMnm.Table tmpc_SQLTable = null;
         try {
             tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
                     null,
-                    "SELECT SR.Selling_Request_ID,SR.Customer_Full_Name,SR.Selling_Request_Brand,SR.Selling_Request_Model,SR.Selling_Request_Status,PD.Product_Status,SR.Selling_Request_Meet_Date FROM Selling_Request AS SR LEFT JOIN Product AS PD ON SR.Selling_Request_ID = PD.Selling_Request_ID "+orderQuery,
+                    "SELECT SR.Selling_Request_ID,SR.Customer_Full_Name,SR.Selling_Request_Brand,SR.Selling_Request_Model,SR.Selling_Request_Status,PD.Product_Status,SR.Selling_Request_Meet_Date,PD.Product_ID FROM Selling_Request AS SR LEFT JOIN Product AS PD ON SR.Selling_Request_ID = PD.Selling_Request_ID "+orderQuery,
                     false,
                     true,
                     null,
@@ -149,7 +149,12 @@ public class UICtrl_BuyHistory {
                 tmpc_SQLTable.cols[6].vals.get(tmpc_int),tmpc_SQLTable.cols[6].javaType
             );
             String tmpk_dateStr= (java.time.Instant.ofEpochSecond(tmpu_epochTimeData)).atZone(java.time.ZoneOffset.UTC).toLocalDate().toString();
-            String tmpk_repr="(นัดตรวจสอบสภาพเมื่อ "+tmpk_dateStr+") ["+tmpk_Selling_Request_ID+": "+tmpt_str_1+"] โดยคุณ \""+tmpk_Customer_Full_Name+"\" (ยี่ห้อ/รุ่น: "+tmpk_Selling_Request_Brand+"/"+tmpk_Selling_Request_Model+")";
+            String tmpk_pdID= (String)(tmpc_SQLTable.cols[7].vals.get(tmpc_int));
+            String tmpt_str_2="";
+            if (tmpk_pdID!=null) {
+                tmpt_str_2=" "+"(ID สินค้า: "+tmpk_pdID+")"+" ";
+            }
+            String tmpk_repr="(นัดตรวจสอบสภาพเมื่อ "+tmpk_dateStr+") ["+tmpk_Selling_Request_ID+": "+tmpt_str_1+tmpt_str_2+"] โดยคุณ \""+tmpk_Customer_Full_Name+"\" (ยี่ห้อ/รุ่น: "+tmpk_Selling_Request_Brand+"/"+tmpk_Selling_Request_Model+")";
             tmpc_SQLTable__listViewRowDataWrapper.add(
                 new ListViewRowDataWrapper<String>(tmpk_Selling_Request_ID, tmpk_repr)
             );
