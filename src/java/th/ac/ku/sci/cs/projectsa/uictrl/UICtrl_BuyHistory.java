@@ -139,7 +139,7 @@ public class UICtrl_BuyHistory {
             if (tmpk_Selling_Request_Status==STATUS_Selling_Request.WaitForCheck) {tmpt_str_1=Misc.ThaiStr_DataSpec_Status_SR[0];}
             else if (tmpk_Selling_Request_Status==STATUS_Selling_Request.Acceapted) {
                 if (tmpk_Product_Status==null) {tmpt_str_1="รอนำสินค้าเข้าคลัง";}
-                else if (tmpk_Product_Status==STATUS_Product.NotYetSale) {tmpt_str_1="นำสินค้าเข้าคลังแล้ว/"+Misc.ThaiStr_DataSpec_Status_pd[0];}
+                else if (tmpk_Product_Status==STATUS_Product.NotYetSale) {tmpt_str_1=Misc.ThaiStr_DataSpec_Status_pd[0];}
                 else if (tmpk_Product_Status==STATUS_Product.ForSale) {tmpt_str_1=Misc.ThaiStr_DataSpec_Status_pd[1];}
                 else if (tmpk_Product_Status==STATUS_Product.SaledAndWaitForSend) {tmpt_str_1=Misc.ThaiStr_DataSpec_Status_pd[2];}
                 else {tmpt_str_1=Misc.ThaiStr_DataSpec_Status_pd[3];}
