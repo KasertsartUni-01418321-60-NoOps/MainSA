@@ -17,9 +17,12 @@ public class UICtrl_CreateCustomer {
 
 @FXML void initialize() {
     try {
-        // TODO: fatal try0catch
         checkboxCustAddr.setOnAction(event -> {
-                textField_customerLocation.setDisable(!checkboxCustAddr.isSelected());
+                try {
+                    textField_customerLocation.setDisable(!checkboxCustAddr.isSelected());
+                } catch (Throwable e) { 
+                    MyExceptionHandling.handleFatalException(e);
+                }
         });
     } catch (Throwable e) {
         MyExceptionHandling.handleFatalException(e);

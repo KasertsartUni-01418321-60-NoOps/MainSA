@@ -32,21 +32,24 @@ public class UICtrl_Warehouse {
                 tmpt_lvrdwInt
             );
             comboBox_filterType.setValue(tmpt_lvrdwInt);
-            // TODO: fatla try-catch
             comboBox_filterType.setOnAction(event -> {
-                boolean tmpt_bool;
-                if (comboBox_filterType.getValue().ref==0) {
-                    tmpt_bool=false;
-                } else {
-                    tmpt_bool=true;
+                try{
+                    boolean tmpt_bool;
+                    if (comboBox_filterType.getValue().ref==0) {
+                        tmpt_bool=false;
+                    } else {
+                        tmpt_bool=true;
+                    }
+                    text_filterStr.setVisible(tmpt_bool);
+                    text_filterCheckbox.setVisible(!tmpt_bool);
+                    textField_filter.setVisible(tmpt_bool);
+                    checkBoxPdStatus1.setVisible(!tmpt_bool);
+                    checkBoxPdStatus2.setVisible(!tmpt_bool);
+                    checkBoxPdStatus3.setVisible(!tmpt_bool);
+                    checkBoxPdStatus4.setVisible(!tmpt_bool);
+                } catch (Throwable e) {
+                    MyExceptionHandling.handleFatalException(e);
                 }
-                text_filterStr.setVisible(tmpt_bool);
-                text_filterCheckbox.setVisible(!tmpt_bool);
-                textField_filter.setVisible(tmpt_bool);
-                checkBoxPdStatus1.setVisible(!tmpt_bool);
-                checkBoxPdStatus2.setVisible(!tmpt_bool);
-                checkBoxPdStatus3.setVisible(!tmpt_bool);
-                checkBoxPdStatus4.setVisible(!tmpt_bool);
             });
 			helper_listViewUpdate(0,new boolean[] {true,true,true,true});
             pdListView.setOnMouseClicked(new EventHandler<MouseEvent>() {

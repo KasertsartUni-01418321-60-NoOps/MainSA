@@ -127,10 +127,13 @@ public class Main extends javafx.application.Application {
             // in case of fatal
             if (MyExceptionHandling.isFatal) {
             } else {
-                // TODO: fatal try-catch 
-                Main.exitThread.submit(() -> {
-                    System.exit(0);
-                });
+                try {
+                    Main.exitThread.submit(() -> {
+                        System.exit(0);
+                    });
+                } catch (Throwable e ) {
+                    MyExceptionHandling.handleFatalExitException(e, "MainApp|JavaFXApp|ShutdownSystem|StopFunction");
+                }
             }
         } catch (Throwable e) {
             // due to this method is called by MyExceptionHandling.handleFatalException, so
