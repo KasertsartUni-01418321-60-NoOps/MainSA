@@ -32,7 +32,7 @@
             <Font size="18.0" />
          </font></Text>
       <ComboBox fx:id="comboBox_filterType" layoutX="129.0" layoutY="78.0" prefHeight="40.0" prefWidth="159.0" />
-      <Button layoutX="300.0" layoutY="79.0" mnemonicParsing="false" onAction="#onPressed_Button_Search" text="ค้นหา">
+      <Button layoutX="300.0" layoutY="79.0" mnemonicParsing="false" onAction="#onPressed_Button_Search" text="โหลดผลกรองใหม่">
          <font>
             <Font size="18.0" />
          </font></Button>
