@@ -66,6 +66,10 @@ public class UICtrl_ProductDetail {
                 button_MainAction.setText("เปลี่ยนสถานะให้เป็น \"ส่งแล้ว\"");
             } else {
                 textField_PdStatus.setText(Misc.ThaiStr_DataSpec_Status_pd[1]);
+                DatabaseMnm.DataSpec.STATUS_User currentUserRole =(DatabaseMnm.DataSpec.STATUS_User)Main.globalVar.get("loggedinUser_Role");
+			    if (currentUserRole==DatabaseMnm.DataSpec.STATUS_User.Employee) {
+                    button_MainAction.setDisable(true);
+                }
             }
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
