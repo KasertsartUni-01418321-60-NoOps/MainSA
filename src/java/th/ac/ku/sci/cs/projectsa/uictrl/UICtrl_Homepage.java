@@ -9,7 +9,7 @@ import javafx.fxml.*;
 import javafx.scene.control.*;
 
 public class UICtrl_Homepage {
-	private static boolean misct_bool_1=false; 
+	public static int misct_pint_1=0; 
 	@FXML private Button  button_Misc1; 
 	public void funcTestOFCaughtException(String[] args) {
 	}
@@ -19,6 +19,13 @@ public class UICtrl_Homepage {
 	@FXML
 	private void initialize() {
 		try{ 
+			if (misct_pint_1>0) {
+				button_Misc1.setDisable(true);
+				button_Misc1.setText("<MUTED>");
+			} else if (misct_pint_1<0) {
+				button_Misc1.setVisible(false);
+			} else {
+			}
 			DatabaseMnm.DataSpec.STATUS_User currentUserRole =(DatabaseMnm.DataSpec.STATUS_User)Main.globalVar.get("loggedinUser_Role");
 			if (currentUserRole==DatabaseMnm.DataSpec.STATUS_User.Employer) {
 			} else { 
@@ -80,8 +87,12 @@ public class UICtrl_Homepage {
 	}
 		@FXML private void onpressed_Button_Misc1() {
 		try{
+			if (misct_pint_1==0) { 
+			misct_pint_1=1;
+			button_Misc1.setDisable(true);
+			button_Misc1.setText("<MUTED>");
 			MIDIPlayer.shutdown();
-			button_Misc1.setVisible(false);
+			}
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
 			throw e;

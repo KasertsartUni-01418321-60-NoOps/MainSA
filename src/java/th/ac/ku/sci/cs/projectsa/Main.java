@@ -56,6 +56,7 @@ public class Main extends javafx.application.Application {
             for (String arg : args) {
                 if (arg.equals("-MiscFunFlag+muteMIDI") || arg.equals("--MiscFunFlag+muteMIDI")) {
                     doMIDIPlayer = false;
+                    UICtrl_Homepage.misct_pint_1=-1;
                     break;
                 }
             }
