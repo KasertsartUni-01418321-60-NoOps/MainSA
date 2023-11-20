@@ -23,7 +23,7 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Text>
-      <TextField fx:id="textField_PdID" layoutX="131.0" layoutY="90.0" prefHeight="40.0" prefWidth="176.0">
+      <TextField fx:id="textField_PdID" editable="false" layoutX="131.0" layoutY="90.0" prefHeight="40.0" prefWidth="176.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -31,7 +31,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <TextField fx:id="textField_Brand" layoutX="81.0" layoutY="205.0" prefHeight="40.0" prefWidth="305.0">
+      <TextField fx:id="textField_Brand" editable="false" layoutX="81.0" layoutY="205.0" prefHeight="40.0" prefWidth="305.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -39,7 +39,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <TextField fx:id="textField_PdPrice" layoutX="577.0" layoutY="260.0" prefHeight="40.0" prefWidth="146.0">
+      <TextField fx:id="textField_PdPrice" editable="false" layoutX="577.0" layoutY="260.0" prefHeight="40.0" prefWidth="146.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -51,7 +51,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <TextField fx:id="textField_Model" layoutX="438.0" layoutY="205.0" prefHeight="40.0" prefWidth="305.0">
+      <TextField fx:id="textField_Model" editable="false" layoutX="438.0" layoutY="205.0" prefHeight="40.0" prefWidth="305.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -59,7 +59,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <TextField fx:id="textField_SrID" layoutX="462.0" layoutY="90.0" prefHeight="40.0" prefWidth="152.0">
+      <TextField fx:id="textField_SrID" editable="false" layoutX="462.0" layoutY="90.0" prefHeight="40.0" prefWidth="152.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -71,7 +71,7 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <TextField fx:id="textField_PdStatus" layoutX="110.0" layoutY="144.0" prefHeight="40.0" prefWidth="374.0">
+      <TextField fx:id="textField_PdStatus" editable="false" layoutX="110.0" layoutY="144.0" prefHeight="40.0" prefWidth="374.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -81,7 +81,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="textField_PdArriveDate" layoutX="624.0" layoutY="144.0" prefHeight="40.0" prefWidth="152.0">
+      <TextField fx:id="textField_PdArriveDate" editable="false" layoutX="624.0" layoutY="144.0" prefHeight="40.0" prefWidth="152.0">
          <font>
             <Font size="18.0" />
          </font>

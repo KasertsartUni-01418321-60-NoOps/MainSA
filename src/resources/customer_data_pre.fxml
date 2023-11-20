@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_CustomerData">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_CustomerData">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ข้อมูลลูกค้า">
@@ -43,17 +43,17 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="textField_Name" layoutX="186.0" layoutY="115.0">
+      <TextField fx:id="textField_Name" editable="false" layoutX="186.0" layoutY="115.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextField fx:id="textField_Tel" layoutX="186.0" layoutY="190.0">
+      <TextField fx:id="textField_Tel" editable="false" layoutX="186.0" layoutY="190.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <TextArea fx:id="textArea_Addr" layoutX="187.0" layoutY="273.0" prefHeight="110.0" prefWidth="454.0">
+      <TextArea fx:id="textArea_Addr" editable="false" layoutX="187.0" layoutY="273.0" prefHeight="110.0" prefWidth="454.0">
          <font>
             <Font size="18.0" />
          </font>
