@@ -37,7 +37,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Spinner fx:id="sellPrice" layoutX="227.0" layoutY="496.0" prefHeight="40.0" prefWidth="150.0" />
+      <Spinner fx:id="spinnerDouble_Price" layoutX="227.0" layoutY="496.0" prefHeight="40.0" prefWidth="150.0" />
       <TextArea fx:id="rpDetail" layoutX="132.0" layoutY="186.0" prefHeight="274.0" prefWidth="536.0">
          <font>
             <Font size="18.0" />
