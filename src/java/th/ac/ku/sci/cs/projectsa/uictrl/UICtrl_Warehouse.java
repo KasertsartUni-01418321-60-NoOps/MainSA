@@ -15,10 +15,7 @@ import javafx.scene.input.MouseEvent;
 
 public class UICtrl_Warehouse {
     @FXML private ListView<ListViewRowDataWrapper<String>> srListView;
-    @FXML private Button button_sortByDate;
-    @FXML private Button button_sortByPdStatus;
-    @FXML private Button button_CreatePurchase;
-    @FXML private ComboBox<List
+    @FXML private ComboBox<ListViewRowDataWrapper<Integer>> comboBox_filterType;
     @FXML
     private void initialize() throws java.sql.SQLException{
         try {
@@ -54,6 +51,7 @@ public class UICtrl_Warehouse {
             throw e;
         }
     }
+
     @FXML private void onBack_Button() throws java.io.IOException  {
         try {
             Main.switchToSpecificPagename("homepage");
