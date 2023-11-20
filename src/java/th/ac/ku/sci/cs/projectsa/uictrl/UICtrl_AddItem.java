@@ -69,11 +69,12 @@ public class UICtrl_AddItem {
                     }
                     String tmpk_rpmDesc= (String)(tmpc_SQLTable.cols[0].vals.get(0));
                     if (tmpk_rpmDesc==null){
-                        rpDetail.set
+                        rpDetail.setDisable(true);
+                        rpDetail.setText("<การตรวจสอบสินค้าของสัญญาซื้อนี้ ไม่มีการซ่อม>");
                     } else {
-
+                        rpDetail.setDisable(false);
+                        rpDetail.setText(tmpk_rpmDesc);
                     }
-
                 } catch (Throwable e) {
                     MyExceptionHandling.handleFatalException(e);
                 }
@@ -94,102 +95,82 @@ public class UICtrl_AddItem {
     }
 
     @FXML private void onpressed_Button_Save() throws java.io.IOException,java.sql.SQLException {
-        // try {
-        //     // Note that this always got from DB, so no validation
-        //     String formval_custName=null;
-        //     try {formval_custName = comboBox_custName.getSelectionModel().getSelectedItem().ref;}
-        //     catch (NullPointerException e) {
-        //         helper2();
-        //         return;
-        //     }
-        //     String formval_brand = textField_brand.getText();
-        //     String formval_model = textField_model.getText();
-        //     Long formval_meetDate= datePicker_MeetDate.getValue().toEpochDay()*86400+43200-1;
-        //     String formval_custLoc = textArea_MeetLoc.getText();
-        //     String formval_productLooks = textArea_PdLooks.getText();
-        //     // [VALIDZONE]
-        //     DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON tmpReason;
-        //     // DISABLED: due to above reason
-        //     // DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON tmpReason;
-        //     // tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Customer_Full_Name(formval_custName);
-        //     // if (tmpReason ==DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON.VALUE_NOT_EXISTED_AT_REFERENCED_COL) {
-        //     //     helper2();
-        //     //     return;
-        //     // } else if (tmpReason != null) {
-        //     //     helper1();
-        //     //     return;
-        //     // }
-        //     tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Brand(formval_brand);
-        //     if (tmpReason != null) {
-        //         helper1();
-        //         return;
-        //     }
-        //     tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Model(formval_model);
-        //     if (tmpReason != null) {
-        //         helper1();
-        //         return;
-        //     }
-        //     tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Meet_Date(formval_meetDate);
-        //     if (tmpReason != null) {
-        //         helper1();
-        //         return;
-        //     }
-        //     if (!DatabaseMnm.DataValidation.ForMoreBussinessConstraint.checkDateAsEpochTimeIsNotPast(formval_meetDate)) {
-        //         helper3();
-        //         return;
-        //     }
-        //     tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Meet_Location(formval_custLoc);
-        //     if (tmpReason != null) {
-        //         helper1();
-        //         return;
-        //     }
-        //     tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Product_Looks(formval_productLooks);
-        //     if (tmpReason != null) {
-        //         helper1();
-        //         return;
-        //     }
-        //     // [END VALID ZONE]
-        //     String tmpt_str = null;
-        //     while (true) {
-        //         tmpt_str= Misc.generateRandomID();
-        //         tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_ID(tmpt_str);
-        //         if (tmpReason==DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
-        //             continue;
-        //         } else if (tmpReason!=null) {
-        //             throw new MyExceptionHandling.UserRuntimeException("Code should not be unreachable here.");
-        //         } else { break;}
-        //     }
-        //     try{
-        //         DatabaseMnm.runSQLcmd(
-        //             null,
-        //             "INSERT INTO Selling_Request VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);",
-        //             true,
-        //             false,
-        //             null,
-        //             new Object[] {
-        //                 tmpt_str,
-        //                 formval_custName,
-        //                 formval_brand,
-        //                 formval_model,
-        //                 formval_productLooks,
-        //                 formval_meetDate,
-        //                 formval_custLoc,
-        //                 Double.class,
-        //                 (long)0,
-        //                 String.class
-        //             }
-        //         );
-        //         DatabaseMnm.mainDbConn.commit();
-        //     } catch (java.sql.SQLException e) {
-        //         MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
-        //         "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
-        //         throw e;
-        //     };
-        //     Main.switchToSpecificPagename("buy_history");
-        // } catch (Throwable e) {
-        //     MyExceptionHandling.handleFatalException(e);
-        //     throw e;
-        // }
+        try {
+            helper_refreshSpinnerDouble_1();
+            // Note that this always got from DB, so no validation
+            String formval_srID=null;
+            try {formval_srID = selectedSRID.getSelectionModel().getSelectedItem().ref;}
+            catch (NullPointerException e) {
+                helper2();
+                return;
+            }
+            String formval_rpDetail = rpDetail.getText();
+            if (rpDetail.isDisable()) {
+                formval_rpDetail=null;
+            }
+            Double formval_PdPRice = spinnerDouble_Price.getValue();
+            // [VALIDZONE]
+            DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON tmpReason;
+            tmpReason = DataValidation.PerAttributeValidation.check__SELLING_REQUEST__Selling_Request_Repairment_Description(formval_rpDetail);
+            if (tmpReason != null) {
+                helper1();
+                return;
+            }
+            tmpReason = DataValidation.PerAttributeValidation.check__PRODUCT__Product_Price(formval_PdPRice);
+            if (tmpReason != null) {
+                helper1();
+                return;
+            }
+            // [END VALID ZONE]
+            String tmpt_str = null;
+            while (true) {
+                tmpt_str= Misc.generateRandomID();
+                tmpReason = DataValidation.PerAttributeValidation.check__PRODUCT__Product_ID(tmpt_str);
+                if (tmpReason==DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+                    continue;
+                } else if (tmpReason!=null) {
+                    throw new MyExceptionHandling.UserRuntimeException("Code should not be unreachable here.");
+                } else { break;}
+            }
+            try{
+                DatabaseMnm.runSQLcmd(
+                    null,
+                    "INSERT INTO Product VALUES (?, ?, ?, ?, ?);",
+                    true,
+                    false,
+                    null,
+                    new Object[] {
+                        tmpt_str,
+                        java.time.LocalDate.now().toEpochDay() * 86400 + 43200 - 1,
+                        formval_PdPRice,
+                        (long)0,
+                        formval_srID
+                    }
+                );
+                if (formval_rpDetail!=null) {
+                    DatabaseMnm.runSQLcmd(
+                    null,
+                    "UPDATE Selling_Request SET Selling_Request_Repairment_Description=? WHERE Selling_Request_ID=?;",
+                    true,
+                    false,
+                    null,
+                    new Object[] {
+                        formval_rpDetail,
+                        formval_srID
+                    }
+                    );
+                }
+                DatabaseMnm.mainDbConn.commit();
+            } catch (java.sql.SQLException e) {
+                MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
+                "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
+                throw e;
+            };
+            Main.switchToSpecificPagename("warehouse");
+        } catch (Throwable e) {
+            MyExceptionHandling.handleFatalException(e);
+            throw e;
+        }
     }
     private void helper1() {
         Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเพิ่มข้อมูลผิดพลาด",
