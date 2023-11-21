@@ -933,7 +933,7 @@ public class DatabaseMnm {
 			// if max==null, then no max limit
 
 			public static boolean checkLongDigitLength(long data, int min, @Nullable Integer max) {
-				String tmp = Long.toString(data);
+				String tmp = Long.toString(Math.abs(data));
 				return checkStrLength(tmp, min, max);
 			}
 
