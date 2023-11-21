@@ -1768,10 +1768,9 @@ public class DatabaseMnm {
 
 		}
 
-		// TODO: BIGC
 		public static class ForMoreBussinessConstraint {
 			public static boolean checkDateAsEpochTimeIsNotPast(Long val) {
-				Long tmpt_long = java.time.LocalDate.now().toEpochDay() * 86400 + 43200 - 1;
+				Long tmpt_long = java.time.LocalDate.now().toEpochDay();
 				return val >= tmpt_long;
 			}
 		}
