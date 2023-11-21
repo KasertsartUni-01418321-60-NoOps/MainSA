@@ -19,7 +19,7 @@ public class UICtrl_SellHistory {
     @FXML private ComboBox<ListViewRowDataWrapper<Integer>> comboBox_StatusFilter;
     @FXML private DatePicker datePicker_DateFilter;
     @FXML
-    // TODO:
+
     private void initialize() throws java.sql.SQLException{
         try {
             ListViewRowDataWrapper<Integer> tmpt_lvrdwInt =new ListViewRowDataWrapper<Integer>(0,"ทุกสถานะ");
@@ -27,8 +27,6 @@ public class UICtrl_SellHistory {
             comboBox_StatusFilter.getItems().add(new ListViewRowDataWrapper<Integer>(-1,"เฉพาะสถานะ \"รอการจัดส่ง\""));
             comboBox_StatusFilter.getItems().add(new ListViewRowDataWrapper<Integer>(1,"เฉพาะสถานะ \"ส่งแล้ว\""));
             comboBox_StatusFilter.setValue(tmpt_lvrdwInt);
-            // this done helper_listViewUpdate for us
-            onpressed_EveryDay_Button();
             brListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -51,6 +49,14 @@ public class UICtrl_SellHistory {
                     MyExceptionHandling.handleFatalException(e);
                 }
             });
+            comboBox_StatusFilter.setOnAction(event -> {
+               try {helper_listViewUpdate();} catch (Throwable e) { MyExceptionHandling.handleFatalException(e);}
+            });
+            datePicker_DateFilter.setOnAction(event -> {
+               try {helper_listViewUpdate();} catch (Throwable e) { MyExceptionHandling.handleFatalException(e);}
+            });
+            // this done helper_listViewUpdate for us
+            onpressed_EveryDay_Button();
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
@@ -70,28 +76,22 @@ public class UICtrl_SellHistory {
         helper_listViewUpdate();
     }
 
-    // TODO:
     // mode: {-1:OnlyWaitSending, 0:Both, 1:OnlySent}
     private void helper_listViewUpdate() throws java.sql.SQLException {
         int mode=comboBox_StatusFilter.getValue().ref;
-        // TODO: [DATE SYS CHANGED START]
         LocalDate date= datePicker_DateFilter.getValue();
         Long dateRawVal;
         if (date==null) {
             dateRawVal=null;
         } else {
-            dateRawVal=date.toEpochDay()*86400+43200-1;
+            dateRawVal=date.toEpochDay();
         }
-        // TODO: [DATE SYS CHANGED END]
         brListView.getItems().clear();
-        // TODO: [DATE SYS CHANGED START]
         String whereQuery="WHERE (" +
                 "(Product_Status = 2 AND ?) OR " +
-                "(Product_Status = 3 AND ?) ) AND "+
-                ((dateRawVal!=null)?"(BR.Buy_Request_Created_Date=?)":"");
-        // TODO: [DATE SYS CHANGED END]
+                "(Product_Status = 3 AND ?) )"+
+                ((dateRawVal!=null)?" AND  (BR.Buy_Request_Created_Date=?)":"");
         Object[] SQLParams;
-        // TODO: [DATE SYS CHANGED START]
         if (dateRawVal==null) {
             SQLParams=new Object[] {null,null};
         }
@@ -108,12 +108,11 @@ public class UICtrl_SellHistory {
             SQLParams[0]=new Long(1);
             SQLParams[1]=new Long(1);
         }
-        // TODO: [DATE SYS CHANGED END]
         DatabaseMnm.Table tmpc_SQLTable = null;
         try {
             tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
                     null,
-                    "SELECT BR.Customer_Full_Name BR.Product_ID BR.Buy_Request_Created_Date SR.Selling_Request_Brand SR.Selling_Request_Model PD.Product_Status FROM Buy_Request AS BR LEFT JOIN Product AS PD ON BR.Product_ID = PD.Product_ID LEFT JOIN  Selling_Request AS SR ON PD.Selling_Request_ID = SR.Selling_Request_ID "+whereQuery+" ORDER BY CASE WHEN PD.Product_Status = 2 THEN 0 ELSE 1 END, BR.Buy_Request_Created_Date DESC, BR.rowid DESC;",
+                    "SELECT BR.Customer_Full_Name, BR.Product_ID, BR.Buy_Request_Created_Date, SR.Selling_Request_Brand, SR.Selling_Request_Model, PD.Product_Status FROM Buy_Request AS BR LEFT JOIN Product AS PD ON BR.Product_ID = PD.Product_ID LEFT JOIN  Selling_Request AS SR ON PD.Selling_Request_ID = SR.Selling_Request_ID "+whereQuery+" ORDER BY CASE WHEN PD.Product_Status = 2 THEN 0 ELSE 1 END, BR.Buy_Request_Created_Date DESC, BR.rowid DESC;",
                     false,
                     true,
                     null,
@@ -127,27 +126,24 @@ public class UICtrl_SellHistory {
         int tmpl_0=tmpc_SQLTable.cols[0].vals.size();
         java.util.List<ListViewRowDataWrapper<String>> tmpc_SQLTable__listViewRowDataWrapper = new java.util.ArrayList<ListViewRowDataWrapper<String>>(tmpl_0);
         for (int tmpc_int =0; tmpc_int<tmpl_0; tmpc_int++) {
-            // TODO: START
             // 0: BR.Customer_Full_Name
+            String tmpk_CustName=(String)(tmpc_SQLTable.cols[0].vals.get(tmpc_int)); 
             // 1: BR.Product_ID 
             String tmpk_PDID=(String)(tmpc_SQLTable.cols[1].vals.get(tmpc_int)); 
-            // TODO: [DATE SYS CHANGED START]
             // 2: BR.Buy_Request_Created_Date
             Long tmpu_epochTimeData = DatabaseMnm.convertIntegerAlikeSQLColToLong(
                 tmpc_SQLTable.cols[2].vals.get(tmpc_int),tmpc_SQLTable.cols[2].javaType
             );
-            String tmpk_PDArriveDate= (java.time.Instant.ofEpochSecond(tmpu_epochTimeData)).atZone(java.time.ZoneOffset.UTC).toLocalDate().toString();
-            // TODO: [DATE SYS CHANGED END]
+            String tmpk_BRDate= LocalDate.ofEpochDay(tmpu_epochTimeData).toString();
             // 3: SR.Selling_Request_Brand
+            String tmpk_Brand=(String)(tmpc_SQLTable.cols[3].vals.get(tmpc_int)); 
             // 4: SR.Selling_Request_Model
+            String tmpk_Model=(String)(tmpc_SQLTable.cols[4].vals.get(tmpc_int)); 
             // 5: PD.Product_Status 
-            // P2
-            
-            // P3
             DatabaseMnm.DataSpec.STATUS_Product tmpk_PDStatus_javaType=DatabaseMnm.DataSpec.STATUS_Product.values()[
                 DatabaseMnm.convertIntegerAlikeSQLColToLong(
-                    tmpc_SQLTable.cols[2].vals.get(tmpc_int),
-                    tmpc_SQLTable.cols[2].javaType
+                    tmpc_SQLTable.cols[5].vals.get(tmpc_int),
+                    tmpc_SQLTable.cols[5].javaType
                 ).intValue()
             ];
             String tmpk_PDStatus=null;
@@ -155,14 +151,7 @@ public class UICtrl_SellHistory {
             else if (tmpk_PDStatus_javaType==STATUS_Product.ForSale) {tmpk_PDStatus=Misc.ThaiStr_DataSpec_Status_pd[1];}
             else if (tmpk_PDStatus_javaType==STATUS_Product.SaledAndWaitForSend) {tmpk_PDStatus=Misc.ThaiStr_DataSpec_Status_pd[2];}
             else {tmpk_PDStatus=Misc.ThaiStr_DataSpec_Status_pd[3];}
-            // P4
-            String tmpk_Brand=(String)(tmpc_SQLTable.cols[3].vals.get(tmpc_int));
-            // P5
-            String tmpk_Model=(String)(tmpc_SQLTable.cols[4].vals.get(tmpc_int));
-            // P6
-            String tmpk_SRID=(String)(tmpc_SQLTable.cols[5].vals.get(tmpc_int));
-            // TODO: End
-            String tmpk_repr="(มาถึงเมื่อ "+tmpk_PDArriveDate+") ["+tmpk_PDID+": "+tmpk_PDStatus+"] จากคำสั่งซื้อ "+tmpk_SRID+" (ยี่ห้อ/รุ่น: "+tmpk_Brand+"/"+tmpk_Model+")";
+            String tmpk_repr="(จองขายไว้เมื่อ "+tmpk_BRDate+") [สินค้ารหัส:"+tmpk_PDID+": "+tmpk_PDStatus+"] จองโดยคุณ \""+tmpk_CustName+"\" (ยี่ห้อ/รุ่น: "+tmpk_Brand+"/"+tmpk_Model+")";
             tmpc_SQLTable__listViewRowDataWrapper.add(
                 new ListViewRowDataWrapper<String>(tmpk_PDID, tmpk_repr)
             );
