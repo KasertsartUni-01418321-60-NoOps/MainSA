@@ -5,6 +5,8 @@ import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Product;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 
+import java.time.LocalDate;
+
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -172,7 +174,7 @@ public class UICtrl_Warehouse {
             Long tmpu_epochTimeData = DatabaseMnm.convertIntegerAlikeSQLColToLong(
                 tmpc_SQLTable.cols[1].vals.get(tmpc_int),tmpc_SQLTable.cols[1].javaType
             );
-            String tmpk_PDArriveDate= (java.time.Instant.ofEpochSecond(tmpu_epochTimeData)).atZone(java.time.ZoneOffset.UTC).toLocalDate().toString();
+            String tmpk_PDArriveDate= LocalDate.ofEpochDay(tmpu_epochTimeData).toString();
             // P3
             DatabaseMnm.DataSpec.STATUS_Product tmpk_PDStatus_javaType=DatabaseMnm.DataSpec.STATUS_Product.values()[
                 DatabaseMnm.convertIntegerAlikeSQLColToLong(

@@ -6,6 +6,8 @@ import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Product;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Selling_Request;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 
+import java.time.LocalDate;
+
 import javafx.event.EventHandler;
 import javafx.fxml.*;
 import javafx.scene.control.*;
@@ -148,7 +150,7 @@ public class UICtrl_BuyHistory {
             Long tmpu_epochTimeData = DatabaseMnm.convertIntegerAlikeSQLColToLong(
                 tmpc_SQLTable.cols[6].vals.get(tmpc_int),tmpc_SQLTable.cols[6].javaType
             );
-            String tmpk_dateStr= (java.time.Instant.ofEpochSecond(tmpu_epochTimeData)).atZone(java.time.ZoneOffset.UTC).toLocalDate().toString();
+            String tmpk_dateStr= LocalDate.ofEpochDay(tmpu_epochTimeData).toString();
             String tmpk_pdID= (String)(tmpc_SQLTable.cols[7].vals.get(tmpc_int));
             String tmpt_str_2="";
             if (tmpk_pdID!=null) {

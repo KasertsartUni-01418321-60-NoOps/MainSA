@@ -5,6 +5,9 @@ import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Product;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Selling_Request;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
+
+import java.time.LocalDate;
+
 import javafx.fxml.*;
 import javafx.scene.control.*;
 
@@ -57,7 +60,7 @@ public class UICtrl_BuyData {
             Long tmpu_epochTimeData = DatabaseMnm.convertIntegerAlikeSQLColToLong(
                 tmpc_SQLTable.cols[5].vals.get(0),tmpc_SQLTable.cols[5].javaType
             );
-            tmpt_str = (java.time.Instant.ofEpochSecond(tmpu_epochTimeData)).atZone(java.time.ZoneOffset.UTC).toLocalDate().toString();
+            tmpt_str = LocalDate.ofEpochDay(tmpu_epochTimeData).toString();
             textField_MeetDate.setText(tmpt_str);
             textArea_MeetLoc.setText((String)(tmpc_SQLTable.cols[6].vals.get(0)));
             Double tmpu_paidAmount = DatabaseMnm.convertRealAlikeSQLColToDouble(

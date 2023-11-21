@@ -143,7 +143,7 @@ public class UICtrl_AddItem {
                     null,
                     new Object[] {
                         tmpt_str,
-                        java.time.LocalDate.now().toEpochDay() * 86400 + 43200 - 1,
+                        java.time.LocalDate.now().toEpochDay(),
                         formval_PdPRice,
                         (long)0,
                         formval_srID

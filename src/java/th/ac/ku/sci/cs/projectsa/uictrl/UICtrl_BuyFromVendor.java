@@ -46,7 +46,7 @@ public class UICtrl_BuyFromVendor {
             }
             String formval_brand = textField_brand.getText();
             String formval_model = textField_model.getText();
-            Long formval_meetDate= datePicker_MeetDate.getValue().toEpochDay()*86400+43200-1;
+            Long formval_meetDate= datePicker_MeetDate.getValue().toEpochDay();
             String formval_custLoc = textArea_MeetLoc.getText();
             String formval_productLooks = textArea_PdLooks.getText();
             // [VALIDZONE]

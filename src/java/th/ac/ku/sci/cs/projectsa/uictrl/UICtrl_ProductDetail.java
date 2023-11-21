@@ -4,6 +4,9 @@ import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.Table;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
+
+import java.time.LocalDate;
+
 import javafx.fxml.*;
 import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.*;
@@ -41,7 +44,7 @@ public class UICtrl_ProductDetail {
                 tmpc_SQLTable.cols[0].vals.get(0),tmpc_SQLTable.cols[0].javaType
                 );
             String tmpt_str;
-            tmpt_str = (java.time.Instant.ofEpochSecond(tmpu_epochTimeData)).atZone(java.time.ZoneOffset.UTC).toLocalDate().toString();
+            tmpt_str = LocalDate.ofEpochDay(tmpu_epochTimeData).toString();
             textField_PdArriveDate.setText(tmpt_str);
             Double tmpu_moneyAmount = DatabaseMnm.convertRealAlikeSQLColToDouble(
                 tmpc_SQLTable.cols[1].vals.get(0),tmpc_SQLTable.cols[1].javaType
