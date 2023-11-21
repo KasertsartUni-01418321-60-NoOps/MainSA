@@ -74,6 +74,7 @@ public class UICtrl_SellHistory {
     // mode: {-1:OnlyWaitSending, 0:Both, 1:OnlySent}
     private void helper_listViewUpdate() throws java.sql.SQLException {
         int mode=comboBox_StatusFilter.getValue().ref;
+        // TODO: [DATE SYS CHANGED START]
         LocalDate date= datePicker_DateFilter.getValue();
         Long dateRawVal;
         if (date==null) {
@@ -81,12 +82,16 @@ public class UICtrl_SellHistory {
         } else {
             dateRawVal=date.toEpochDay()*86400+43200-1;
         }
+        // TODO: [DATE SYS CHANGED END]
         brListView.getItems().clear();
+        // TODO: [DATE SYS CHANGED START]
         String whereQuery="WHERE (" +
                 "(Product_Status = 2 AND ?) OR " +
                 "(Product_Status = 3 AND ?) ) AND "+
                 ((dateRawVal!=null)?"(BR.Buy_Request_Created_Date=?)":"");
+        // TODO: [DATE SYS CHANGED END]
         Object[] SQLParams;
+        // TODO: [DATE SYS CHANGED START]
         if (dateRawVal==null) {
             SQLParams=new Object[] {null,null};
         }
@@ -103,6 +108,7 @@ public class UICtrl_SellHistory {
             SQLParams[0]=new Long(1);
             SQLParams[1]=new Long(1);
         }
+        // TODO: [DATE SYS CHANGED END]
         DatabaseMnm.Table tmpc_SQLTable = null;
         try {
             tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
@@ -125,11 +131,13 @@ public class UICtrl_SellHistory {
             // 0: BR.Customer_Full_Name
             // 1: BR.Product_ID 
             String tmpk_PDID=(String)(tmpc_SQLTable.cols[1].vals.get(tmpc_int)); 
+            // TODO: [DATE SYS CHANGED START]
             // 2: BR.Buy_Request_Created_Date
             Long tmpu_epochTimeData = DatabaseMnm.convertIntegerAlikeSQLColToLong(
                 tmpc_SQLTable.cols[2].vals.get(tmpc_int),tmpc_SQLTable.cols[2].javaType
             );
             String tmpk_PDArriveDate= (java.time.Instant.ofEpochSecond(tmpu_epochTimeData)).atZone(java.time.ZoneOffset.UTC).toLocalDate().toString();
+            // TODO: [DATE SYS CHANGED END]
             // 3: SR.Selling_Request_Brand
             // 4: SR.Selling_Request_Model
             // 5: PD.Product_Status 
