@@ -156,7 +156,7 @@ public class UICtrl_BuyHistory {
             if (tmpk_pdID!=null) {
                 tmpt_str_2=" "+"(ID สินค้า: "+tmpk_pdID+")"+" ";
             }
-            String tmpk_repr="(นัดตรวจสอบสภาพเมื่อ "+tmpk_dateStr+") ["+tmpk_Selling_Request_ID+": "+tmpt_str_1+tmpt_str_2+"] โดยคุณ \""+tmpk_Customer_Full_Name+"\" (ยี่ห้อ/รุ่น: "+tmpk_Selling_Request_Brand+"/"+tmpk_Selling_Request_Model+")";
+            String tmpk_repr="(นัดตรวจสอบสภาพเมื่อ "+tmpk_dateStr+") ["+tmpk_Selling_Request_ID+": "+tmpt_str_1+tmpt_str_2+"] โดยคุณ \""+tmpk_Customer_Full_Name+"\" (ยี่ห้อ/รุ่น: \""+tmpk_Selling_Request_Brand+"\"/\""+tmpk_Selling_Request_Model+"\")";
             tmpc_SQLTable__listViewRowDataWrapper.add(
                 new ListViewRowDataWrapper<String>(tmpk_Selling_Request_ID, tmpk_repr)
             );

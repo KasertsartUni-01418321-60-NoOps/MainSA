@@ -193,7 +193,7 @@ public class UICtrl_Warehouse {
             String tmpk_Model=(String)(tmpc_SQLTable.cols[4].vals.get(tmpc_int));
             // P6
             String tmpk_SRID=(String)(tmpc_SQLTable.cols[5].vals.get(tmpc_int));
-            String tmpk_repr="(มาถึงเมื่อ "+tmpk_PDArriveDate+") ["+tmpk_PDID+": "+tmpk_PDStatus+"] จากคำสั่งซื้อ "+tmpk_SRID+" (ยี่ห้อ/รุ่น: "+tmpk_Brand+"/"+tmpk_Model+")";
+            String tmpk_repr="(มาถึงเมื่อ "+tmpk_PDArriveDate+") ["+tmpk_PDID+": "+tmpk_PDStatus+"] จากคำสั่งซื้อ "+tmpk_SRID+" (ยี่ห้อ/รุ่น: \""+tmpk_Brand+"\"/\""+tmpk_Model+"\")";
             tmpc_SQLTable__listViewRowDataWrapper.add(
                 new ListViewRowDataWrapper<String>(tmpk_PDID, tmpk_repr)
             );

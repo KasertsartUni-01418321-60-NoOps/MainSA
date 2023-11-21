@@ -151,7 +151,7 @@ public class UICtrl_SellHistory {
             else if (tmpk_PDStatus_javaType==STATUS_Product.ForSale) {tmpk_PDStatus=Misc.ThaiStr_DataSpec_Status_pd[1];}
             else if (tmpk_PDStatus_javaType==STATUS_Product.SaledAndWaitForSend) {tmpk_PDStatus=Misc.ThaiStr_DataSpec_Status_pd[2];}
             else {tmpk_PDStatus=Misc.ThaiStr_DataSpec_Status_pd[3];}
-            String tmpk_repr="(จองขายไว้เมื่อ "+tmpk_BRDate+") [สินค้ารหัส:"+tmpk_PDID+": "+tmpk_PDStatus+"] จองโดยคุณ \""+tmpk_CustName+"\" (ยี่ห้อ/รุ่น: "+tmpk_Brand+"/"+tmpk_Model+")";
+            String tmpk_repr="(จองขายไว้เมื่อ "+tmpk_BRDate+") [สินค้ารหัส:"+tmpk_PDID+": "+tmpk_PDStatus+"] จองโดยคุณ \""+tmpk_CustName+"\" (ยี่ห้อ/รุ่น: \""+tmpk_Brand+"\"/\""+tmpk_Model+"\")";
             tmpc_SQLTable__listViewRowDataWrapper.add(
                 new ListViewRowDataWrapper<String>(tmpk_PDID, tmpk_repr)
             );
