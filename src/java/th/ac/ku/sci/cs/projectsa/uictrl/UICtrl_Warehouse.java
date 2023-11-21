@@ -152,7 +152,7 @@ public class UICtrl_Warehouse {
         try {
             tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
                     null,
-                    "SELECT PD.Product_ID, PD.Product_Arrive_Time, PD.Product_Status, SR.Selling_Request_Brand, SR.Selling_Request_Model, PD.Selling_Request_ID FROM Product AS PD LEFT JOIN Selling_Request AS SR ON PD.Selling_Request_ID = SR.Selling_Request_ID "+whereQuery+" ORDER BY CASE WHEN PD.Product_Status = 2 THEN 0 WHEN PD.Product_Status = 0 THEN 1 ELSE 2 END, PD.rowid DESC;",
+                    "SELECT PD.Product_ID, PD.Product_Arrive_Time, PD.Product_Status, SR.Selling_Request_Brand, SR.Selling_Request_Model, PD.Selling_Request_ID FROM Product AS PD LEFT JOIN Selling_Request AS SR ON PD.Selling_Request_ID = SR.Selling_Request_ID "+whereQuery+" ORDER BY CASE WHEN PD.Product_Status = 2 THEN 0 WHEN PD.Product_Status = 0 THEN 1 ELSE 2 END, PD.Product_Arrive_Time DESC, PD.rowid DESC;",
                     false,
                     true,
                     null,

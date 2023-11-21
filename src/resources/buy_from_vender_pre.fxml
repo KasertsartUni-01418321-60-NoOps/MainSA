@@ -55,7 +55,7 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Text>
-      <DatePicker  fx:id="datePicker_MeetDate" layoutX="538.0" layoutY="95.0" prefHeight="40.0" prefWidth="202.0" />
+      <DatePicker  fx:id="datePicker_MeetDate" editable="false" layoutX="538.0" layoutY="95.0" prefHeight="40.0" prefWidth="202.0" />
       <Text layoutX="29.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="บันทึกสภาพสินค้า :">
          <font>
             <Font size="18.0" />

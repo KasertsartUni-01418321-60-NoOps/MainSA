@@ -18,6 +18,8 @@ public class UICtrl_AddItem {
 
     @FXML private void initialize() throws java.sql.SQLException {
         try{
+
+            rpDetail.setDisable(true);
             spinnerDouble_Price.setEditable(true);
             spinnerDouble_Price.setValueFactory(new DoubleSpinnerValueFactory(DatabaseMnm.DataSpec.RANGE_MIN__Product_Price, DatabaseMnm.DataSpec.RANGE_MAX__Product_Price, Misc.choosenDefaultValueFor_PaidAmount_AtAddItemPAge, Misc.choosenStepValueFor_PaidAmount_AtAddItemPAge));
             spinnerDouble_Price.getEditor().focusedProperty().addListener((observable, oldValue, newValue) -> {
