@@ -845,7 +845,7 @@ public class DatabaseMnm {
 			MINMAX_LENGTH_OF_ATTRIBS.put("User_Password", new Integer[] { 1, 32 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("User_Role", new Integer[] { 1, 1 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_ID", new Integer[] { 8, 8 });
-			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Arrive_Time", new Integer[] { 10, 10 });
+			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Arrive_Time", new Integer[] { 1, null });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Price", new Integer[] { 8, 2 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Status", new Integer[] { 1, 1 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_ID", new Integer[] { 8, 8 });
@@ -854,14 +854,14 @@ public class DatabaseMnm {
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Brand", new Integer[] { 1, 64 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Model", new Integer[] { 1, 128 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Product_Looks", new Integer[] { 1, 1024 });
-			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Meet_Date", new Integer[] { 10, 10 });
+			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Meet_Date", new Integer[] { 1, null });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Meet_Location", new Integer[] { 1, 512 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Paid_Amount", new Integer[] { 8, 2 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Status", new Integer[] { 1, 1 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Repairment_Description", new Integer[] { 1, 1024 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Full_Name", new Integer[] { 1, 192 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_ID", new Integer[] { 8, 8 });
-			MINMAX_LENGTH_OF_ATTRIBS.put("Buy_Request_Created_Date", new Integer[] { 10, 10 });
+			MINMAX_LENGTH_OF_ATTRIBS.put("Buy_Request_Created_Date", new Integer[] { 1, null });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Buy_Request_Transportation_Price", new Integer[] { 5, 2 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Buy_Request_Location", new Integer[] { 1, 512 });
 		}
@@ -1301,7 +1301,7 @@ public class DatabaseMnm {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
 					}
 					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkLongIsPositive(data)) {
+					if (DataValidation.JavaTypeLevel.checkLongNotNegative(data)) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
 					}
@@ -1530,7 +1530,7 @@ public class DatabaseMnm {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
 					}
 					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkLongIsPositive(data)) {
+					if (DataValidation.JavaTypeLevel.checkLongNotNegative(data)) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
 					}
@@ -1709,7 +1709,7 @@ public class DatabaseMnm {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
 					}
 					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkLongIsPositive(data)) {
+					if (DataValidation.JavaTypeLevel.checkLongNotNegative(data)) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
 					}
@@ -1768,6 +1768,7 @@ public class DatabaseMnm {
 
 		}
 
+		// TODO: BIGC
 		public static class ForMoreBussinessConstraint {
 			public static boolean checkDateAsEpochTimeIsNotPast(Long val) {
 				Long tmpt_long = java.time.LocalDate.now().toEpochDay() * 86400 + 43200 - 1;
