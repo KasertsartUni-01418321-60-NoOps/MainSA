@@ -10,7 +10,7 @@ import javafx.scene.control.*;
 
 public class UICtrl_Homepage {
 	public static int misct_pint_1=0; 
-	@FXML private Button  button_Misc1; 
+	@FXML private Button  button_Misc1,button_Misc2; 
 	public void funcTestOFCaughtException(String[] args) {
 	}
 
@@ -32,6 +32,7 @@ public class UICtrl_Homepage {
 				button_ContactsList.setDisable(true);
 				button_SellHist.setDisable(true);
 				button_Misc1.setDisable(true);
+				button_Misc2.setDisable(true);
 			}
 		} catch (Throwable e) {
 			MyExceptionHandling.handleFatalException(e);
