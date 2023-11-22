@@ -110,13 +110,6 @@ public class Main extends javafx.application.Application {
 
             {
                 com.github.saacsos.FXRouter.goTo("login");
-                // TODO: EASY [DEBUG START]
-                try {
-                    com.github.saacsos.FXRouter.goTo(args[0]);
-                } catch (Exception e) {
-                    com.github.saacsos.FXRouter.goTo("login");
-                }
-                // [DEBUG END]
             } catch (java.io.IOException e) {
                 throw e;
             }
@@ -187,9 +180,6 @@ public class Main extends javafx.application.Application {
     // entire exception handling info: mode=no
     public static void switchToSpecificPagename(String pageName, Object obj) throws java.io.IOException {
         try {
-            // TODO: [DEBUG START]
-            System.out.println(pageName);
-            // [DEBUG END]
             com.github.saacsos.FXRouter.goTo(pageName, obj);
         } catch (java.io.IOException e) {
             throw e;
@@ -199,9 +189,6 @@ public class Main extends javafx.application.Application {
     // entire exception handling info: mode=no
     public static void switchToSpecificPagename(String pageName) throws java.io.IOException {
         try {
-            // TODO: [DEBUG START]
-            System.out.println(pageName);
-            // [DEBUG END]
             com.github.saacsos.FXRouter.goTo(pageName);
         } catch (java.io.IOException e) {
             throw e;

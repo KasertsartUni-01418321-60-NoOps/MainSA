@@ -40,26 +40,6 @@ public class DatabaseMnm {
 				"INSERT INTO User (User_Name, User_Password, User_Role)"
 						+ "VALUES (?, ?, ?);"
 		};
-		String[] sqlStms_2 = new String[] {
-				"INSERT INTO Customer (Customer_Full_Name, Customer_Address, Customer_Telephone_Number, Customer_Credit_Amount)"
-						+ "VALUES (?, ?, ?, ?);"
-		};
-		String[] sqlStms_3 = new String[] {
-				"INSERT INTO Selling_Request (Selling_Request_ID, Customer_Full_Name, Selling_Request_Brand, Selling_Request_Model, Selling_Request_Product_Looks, Selling_Request_Meet_Date, Selling_Request_Meet_Location, Selling_Request_Paid_Amount, Selling_Request_Status,Selling_Request_Repairment_Description )"
-						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?);"
-		};
-		// UNUSED
-		String[] sqlStms_4 = new String[] {
-
-		};
-		String[] sqlStms_5 = new String[] {
-				"INSERT INTO Product (Product_ID, Product_Arrive_Time, Product_Price, Product_Status, Selling_Request_ID)"
-						+ "VALUES (?, ?, ?, ?, ?);"
-		};
-		String[] sqlStms_6 = new String[] {
-				"INSERT INTO Buy_Request (Customer_Full_Name, Product_ID, Buy_Request_Created_Date, Buy_Request_Transportation_Price, Buy_Request_Location)"
-						+ "VALUES (?,?,?,?,?);"
-		};
 		// PART:2
 		String SD_User_Name_Admin = "nobody";
 		String SD_User_Password_Admin = "nopassword";

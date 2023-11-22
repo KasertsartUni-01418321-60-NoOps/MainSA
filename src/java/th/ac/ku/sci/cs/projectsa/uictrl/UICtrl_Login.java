@@ -17,17 +17,6 @@ public class UICtrl_Login {
 	public void funcTestOFCaughtException(String[] args) {
 	}
 
-	// Exception Handling Mode: Fatal (but not yet until code is put here lamo)
-	@FXML
-	private void initialize() {
-		// [DEBUG ZONE]
-		// TODO: EASY after debug we can remove this lamo
-		// REMKAR: this is temporary, so no need to do exception handling at this code
-		textField_userName.setText("nobody");
-		passwordField_passWord.setText("nopassword");
-		// [END ZONE]
-	}
-
 	// Exception Handling Mode: Fatal
 	@FXML
 	private void onPressed_Button_Login()

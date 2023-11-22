@@ -3,13 +3,11 @@ package th.ac.ku.sci.cs.projectsa.uictrl;
 import javafx.fxml.FXML;
 import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Product;
-import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataSpec.STATUS_Selling_Request;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 
 import java.time.LocalDate;
 
 import javafx.event.EventHandler;
-import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
