@@ -35,7 +35,7 @@
          </font>
       </Button>
       <Button fx:id="button_Misc1" layoutX="468.0" layoutY="22.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc1" prefHeight="31.0" prefWidth="118.0" styleClass="NEGHIGHLIGHT" text="ปิดเสียง!" />
-      <Button layoutX="592.0" layoutY="22.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc2" styleClass="NEGHIGHLIGHT" text="พังโปรแกรม" />
+      <Button fx:id="button_Misc2" layoutX="592.0" layoutY="22.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc2" styleClass="NEGHIGHLIGHT" text="พังโปรแกรม" />
       <Button layoutX="689.0" layoutY="22.0" mnemonicParsing="false" onAction="#onpressed_Button_Logout" styleClass="NEGHIGHLIGHT" text="ออกจากระบบ" />
    </children>
 </AnchorPane>
