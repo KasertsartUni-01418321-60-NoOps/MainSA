@@ -1033,6 +1033,12 @@ public class DatabaseMnm {
 				return java.util.regex.Pattern.compile(regexPattern).matcher(data).matches();
 			}
 
+			// copy from above lamo
+			public static boolean checkStrIsGeneralValid_ButIncludeNewline(@NotNull String data) {
+				String regexPattern = "^[\\n -~\\u0E01-\\u0E39\\u0E3F-\\u0E4D\\u0E50-\\u0E59]*$";
+				return java.util.regex.Pattern.compile(regexPattern).matcher(data).matches();
+			}
+
 			public static boolean checkStrIsValidUserName(@NotNull String data) {
 				String regexPattern = "^[A-Za-z0-9]{1,32}$";
 				return java.util.regex.Pattern.compile(regexPattern).matcher(data).matches();
@@ -1131,7 +1137,7 @@ public class DatabaseMnm {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
 					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {
+					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid_ButIncludeNewline(data)) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
@@ -1507,7 +1513,7 @@ public class DatabaseMnm {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
 					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {
+					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid_ButIncludeNewline(data)) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
@@ -1553,7 +1559,7 @@ public class DatabaseMnm {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
 					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {
+					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid_ButIncludeNewline(data)) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
@@ -1625,7 +1631,7 @@ public class DatabaseMnm {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
 					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {
+					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid_ButIncludeNewline(data)) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
@@ -1757,7 +1763,7 @@ public class DatabaseMnm {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
 					}
 					// (PART 2): Check string conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid(data)) {
+					if (DataValidation.JavaTypeLevel.checkStrIsGeneralValid_ButIncludeNewline(data)) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
