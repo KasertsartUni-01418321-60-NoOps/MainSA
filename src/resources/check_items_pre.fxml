@@ -2,20 +2,20 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.control.Spinner?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_CheckItems">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_CheckItems">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ตรวจสอบสินค้า">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Text>
       <Button layoutX="662.0" layoutY="523.0" mnemonicParsing="false" onAction="#onBack_Button" prefWidth="100.0" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ">
@@ -50,7 +50,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Spinner fx:id="spinnerDouble_Price" layoutX="142.0" layoutY="426.0" prefHeight="25.0" prefWidth="114.0"/>
+      <Spinner fx:id="spinnerDouble_Price" layoutX="142.0" layoutY="426.0" prefHeight="25.0" prefWidth="114.0" />
       <Text layoutX="279.0" layoutY="453.0" strokeType="OUTSIDE" strokeWidth="0.0" text="บาท">
          <font>
             <Font size="18.0" />
@@ -61,7 +61,7 @@
          </font></Text>
       <ComboBox fx:id="comboBox_creditAction" layoutX="142.0" layoutY="474.0" prefHeight="40.0" prefWidth="114.0">
       </ComboBox>
-      <Button  onAction="#onSave_Button" layoutX="532.0" layoutY="523.0" mnemonicParsing="false" prefWidth="100.0" styleClass="POSHIGHLIGHT" text="บันทึก">
+      <Button layoutX="532.0" layoutY="523.0" mnemonicParsing="false" onAction="#onSave_Button" prefWidth="100.0" styleClass="POSHIGHLIGHT" text="บันทึก">
          <font>
             <Font size="18.0" />
          </font></Button>

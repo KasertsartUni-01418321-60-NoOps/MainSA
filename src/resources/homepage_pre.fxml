@@ -11,27 +11,27 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="75.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
       <Text layoutX="21.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MENU">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Text>
       <Button fx:id="button_ContactsList" layoutX="114.0" layoutY="372.0" mnemonicParsing="false" onAction="#onPressed_Button_ContactsList" prefHeight="91.0" prefWidth="200.0" text="รายชื่อลูกค้า">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Button>
       <Button fx:id="button_Warehouse" layoutX="114.0" layoutY="164.0" mnemonicParsing="false" onAction="#onPressed_Button_Warehouse" prefHeight="91.0" prefWidth="200.0" text="รายการสินค้า">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Button>
       <Button fx:id="button_BuyHist" layoutX="511.0" layoutY="164.0" mnemonicParsing="false" onAction="#onPressed_Button_BuyHist" prefHeight="91.0" prefWidth="200.0" text="ประวัติการซื้อ">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Button>
       <Button fx:id="button_SellHist" layoutX="511.0" layoutY="372.0" mnemonicParsing="false" onAction="#onPressed_Button_SellHist" prefHeight="91.0" prefWidth="200.0" text="ประวัติการขาย">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Button>
       <Button fx:id="button_Misc1" layoutX="547.0" layoutY="25.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc1" styleClass="NEGHIGHLIGHT" text="MUTE!" />

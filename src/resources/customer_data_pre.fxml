@@ -13,7 +13,7 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ข้อมูลลูกค้า">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Text>
       <Button layoutX="662.0" layoutY="523.0" mnemonicParsing="false" onAction="#onBack_Button" prefWidth="100.0" styleClass="NEGHIGHLIGHT" text="ย้อนกลับ">
@@ -28,9 +28,9 @@
          <font>
             <Font size="24.0" />
          </font></TextField>
-      <Text layoutX="61.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อ-นามสกุล :">
+      <Text layoutX="28.0" layoutY="144.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อ-นามสกุล :">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Text>
       <Text layoutX="90.0" layoutY="217.0" strokeType="OUTSIDE" strokeWidth="0.0" text="เบอร์โทร :">
