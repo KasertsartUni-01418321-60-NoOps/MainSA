@@ -8,7 +8,7 @@ import th.ac.ku.sci.cs.projectsa.*;
 
 public class Main extends javafx.application.Application {
     public static String[] args = null;
-    public static java.util.Map<String,Object> globalVar = new java.util.HashMap<>();
+    public static java.util.Map<String, Object> globalVar = new java.util.HashMap<>();
     public static java.util.concurrent.ExecutorService exitThread = java.util.concurrent.Executors
             .newSingleThreadExecutor();
 
@@ -16,10 +16,13 @@ public class Main extends javafx.application.Application {
     }
 
     // entire exception handling info: mode=fatal
-    public static void main(String[] args) throws java.io.UnsupportedEncodingException,java.sql.SQLException,java.io.IOException,java.security.NoSuchAlgorithmException {
+    public static void main(String[] args) throws java.io.UnsupportedEncodingException, java.sql.SQLException,
+            java.io.IOException, java.security.NoSuchAlgorithmException {
         boolean isFriendlyException = false;
         try {
-            String jarParentDirectoryPath = (new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath())).getParentFile().getAbsolutePath();
+            String jarParentDirectoryPath = (new File(
+                    Main.class.getProtectionDomain().getCodeSource().getLocation().getPath())).getParentFile()
+                    .getAbsolutePath();
             System.setProperty("user.dir", jarParentDirectoryPath);
             System.setProperty("file.encoding", "UTF-8");
             try {
@@ -56,7 +59,7 @@ public class Main extends javafx.application.Application {
             for (String arg : args) {
                 if (arg.equals("-MiscFunFlag+muteMIDI") || arg.equals("--MiscFunFlag+muteMIDI")) {
                     doMIDIPlayer = false;
-                    UICtrl_Homepage.misct_pint_1=-1;
+                    UICtrl_Homepage.misct_pint_1 = -1;
                     break;
                 }
             }
@@ -68,11 +71,13 @@ public class Main extends javafx.application.Application {
                 DatabaseMnm.mainDbInit();
             } catch (java.sql.SQLException e1) {
                 isFriendlyException = true;
-                MyExceptionHandling.handleFatalException_simplev1(e1, true,"MainApp|DatabaseMnm", null,null,"<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>" );
+                MyExceptionHandling.handleFatalException_simplev1(e1, true, "MainApp|DatabaseMnm", null, null,
+                        "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
                 throw e1;
             } catch (java.io.IOException e1) {
                 isFriendlyException = true;
-                MyExceptionHandling.handleFatalException_simplev1(e1, true,"MainApp|DatabaseMnm", null,null,"<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของการเข้าถึงไฟล์ระบบฐานข้อมูลฯ<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>" );
+                MyExceptionHandling.handleFatalException_simplev1(e1, true, "MainApp|DatabaseMnm", null, null,
+                        "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของการเข้าถึงไฟล์ระบบฐานข้อมูลฯ<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
                 throw e1;
             }
             launch(args);
@@ -93,10 +98,11 @@ public class Main extends javafx.application.Application {
             primaryStage.setResizable(false);
             primaryStage.setMaximized(false);
             com.github.saacsos.FXRouter.bind(this, primaryStage,
-                    "ระบบหลังบ้านบริการซื้อขายเครื่องซักผ้าอุตสาหกรรมมือสอง", 800,600);
-            for (String pageName : new String[] { "homepage", "login", "add_item", "buy_from_vender","buy_history","check_items",
+                    "ระบบหลังบ้านบริการซื้อขายเครื่องซักผ้าอุตสาหกรรมมือสอง", 800, 600);
+            for (String pageName : new String[] { "homepage", "login", "add_item", "buy_from_vender", "buy_history",
+                    "check_items",
                     "create_customer", "customer_data", "customer_list", "quotation",
-                    "sell_history", "warehouse" ,"buy_data","product_detail","sell_data"}) {
+                    "sell_history", "warehouse", "buy_data", "product_detail", "sell_data" }) {
                 // do not put leading slash for jarfile resource for this line of code
                 com.github.saacsos.FXRouter.when(pageName, "resources/" + pageName + "_pre.fxml");
             }
@@ -105,8 +111,11 @@ public class Main extends javafx.application.Application {
             {
                 com.github.saacsos.FXRouter.goTo("login");
                 // TODO: EASY [DEBUG START]
-                try {com.github.saacsos.FXRouter.goTo(args[0]);}
-                catch (Exception e) {com.github.saacsos.FXRouter.goTo("login");}
+                try {
+                    com.github.saacsos.FXRouter.goTo(args[0]);
+                } catch (Exception e) {
+                    com.github.saacsos.FXRouter.goTo("login");
+                }
                 // [DEBUG END]
             } catch (java.io.IOException e) {
                 throw e;
@@ -128,9 +137,11 @@ public class Main extends javafx.application.Application {
             if (MyExceptionHandling.isFatal) {
             } else {
                 Main.exitThread.submit(() -> {
-                    try{System.exit(0);}
-                    catch (Throwable e ) {
-                        MyExceptionHandling.handleFatalExitException(e, "MainApp|JavaFXApp|ShutdownSystem|StopFunction");
+                    try {
+                        System.exit(0);
+                    } catch (Throwable e) {
+                        MyExceptionHandling.handleFatalExitException(e,
+                                "MainApp|JavaFXApp|ShutdownSystem|StopFunction");
                     }
                 });
             }
@@ -148,7 +159,6 @@ public class Main extends javafx.application.Application {
         }
     }
 
-    
     // entire exception handling info: mode=no
     public static javafx.application.Application getPrimaryApp() {
         javafx.application.Application retVal = null;
@@ -199,17 +209,20 @@ public class Main extends javafx.application.Application {
     }
 
     // entire exception handling info: mode=no
-    public static void showAlertBox(javafx.stage.Stage stage, javafx.scene.control.Alert.AlertType alertType, String wintitle, String title, String desc, boolean waitForClose) {
+    public static void showAlertBox(javafx.stage.Stage stage, javafx.scene.control.Alert.AlertType alertType,
+            String wintitle, String title, String desc, boolean waitForClose) {
         javafx.scene.control.Alert alert = new javafx.scene.control.Alert(alertType);
         alert.initOwner(stage);
         alert.initModality(javafx.stage.Modality.WINDOW_MODAL);
         alert.setTitle(wintitle);
         alert.setHeaderText(title);
         alert.setContentText(desc);
-        if (waitForClose) {alert.showAndWait();}
-        else {alert.show();}
+        if (waitForClose) {
+            alert.showAndWait();
+        } else {
+            alert.show();
+        }
     }
-
 
 }
 

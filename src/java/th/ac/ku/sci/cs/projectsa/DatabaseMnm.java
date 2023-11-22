@@ -69,7 +69,8 @@ public class DatabaseMnm {
 		Long SD_User_Role = (long) 1;
 		// [Sample Code, so commented]
 		// String SD_Customer_Full_Name = "นามสมมุติ ไม่มีสกุล";
-		// String SD_Customer_Address = "เลขที่ 50 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร กรุงเทพฯ 10900";
+		// String SD_Customer_Address = "เลขที่ 50 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร
+		// กรุงเทพฯ 10900";
 		// String SD_Customer_Telephone_Number = "+662942820045";
 		// Long SD_Customer_Credit_Amount = (long) 500;
 		// String SD_Selling_Request_ID = "AR0099AZ";
@@ -77,7 +78,8 @@ public class DatabaseMnm {
 		// String SD_Selling_Request_Model = "บางเขน";
 		// String SD_Selling_Request_Product_Looks = "เก่งและดี";
 		// Long SD_Selling_Request_Meet_Date = (long) 1635830400;
-		// String SD_Selling_Request_Meet_Location = "เลขที่ 50 ถนนงามวงศ์วาน แขวงลาดยาว เขตจตุจักร กรุงเทพฯ 10900";
+		// String SD_Selling_Request_Meet_Location = "เลขที่ 50 ถนนงามวงศ์วาน แขวงลาดยาว
+		// เขตจตุจักร กรุงเทพฯ 10900";
 		// Double SD_Selling_Request_Paid_Amount = 1000000.25;
 		// Long SD_Selling_Request_Status = (long) 2;
 		// String SD_Selling_Request_Repairment_Description = "ปรับปรุงครั้งใหญ่มาก ๆ";
@@ -143,182 +145,216 @@ public class DatabaseMnm {
 			// [Sample Code, so commented]
 			// // PART 4C:
 			// while (true) {
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__CUSTOMER__Customer_Full_Name(SD_Customer_Full_Name);
-			// 	// in case existed data LAMO
-			// 	if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
-			// 		break;
-			// 	} else if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__CUSTOMER__Customer_Address(SD_Customer_Address);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__CUSTOMER__Customer_Credit_Amount(SD_Customer_Credit_Amount);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__CUSTOMER__Customer_Telephone_Number(SD_Customer_Telephone_Number);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	} else {
-			// 		DatabaseMnm.runSQLcmds(null, sqlStms_2, true, false, null,
-			// 				new Object[][] { { SD_Customer_Full_Name,
-			// 						DataTransformation.NullableTransform(SD_Customer_Address, String.class),
-			// 						SD_Customer_Telephone_Number, SD_Customer_Credit_Amount } });
-			// 	}
-			// 	break;
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__CUSTOMER__Customer_Full_Name(SD_Customer_Full_Name);
+			// // in case existed data LAMO
+			// if (tmpReason ==
+			// DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+			// break;
+			// } else if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__CUSTOMER__Customer_Address(SD_Customer_Address);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__CUSTOMER__Customer_Credit_Amount(SD_Customer_Credit_Amount);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__CUSTOMER__Customer_Telephone_Number(SD_Customer_Telephone_Number);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// } else {
+			// DatabaseMnm.runSQLcmds(null, sqlStms_2, true, false, null,
+			// new Object[][] { { SD_Customer_Full_Name,
+			// DataTransformation.NullableTransform(SD_Customer_Address, String.class),
+			// SD_Customer_Telephone_Number, SD_Customer_Credit_Amount } });
+			// }
+			// break;
 			// }
 			// // PART 4D:
 			// while (true) {
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__SELLING_REQUEST__Selling_Request_ID(SD_Selling_Request_ID);
-			// 	// in case existed data LAMO
-			// 	if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
-			// 		break;
-			// 	} else if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__SELLING_REQUEST__Customer_Full_Name(SD_Customer_Full_Name);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__SELLING_REQUEST__Selling_Request_Brand(SD_Selling_Request_Brand);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__SELLING_REQUEST__Selling_Request_Model(SD_Selling_Request_Model);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__SELLING_REQUEST__Selling_Request_Product_Looks(SD_Selling_Request_Product_Looks);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__SELLING_REQUEST__Selling_Request_Meet_Date(SD_Selling_Request_Meet_Date);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__SELLING_REQUEST__Selling_Request_Meet_Location(SD_Selling_Request_Meet_Location);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__SELLING_REQUEST__Selling_Request_Paid_Amount(SD_Selling_Request_Paid_Amount);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__SELLING_REQUEST__Selling_Request_Status(SD_Selling_Request_Status);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__SELLING_REQUEST__Selling_Request_Repairment_Description(
-			// 					SD_Selling_Request_Repairment_Description);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	} else {
-			// 		DatabaseMnm.runSQLcmds(null, sqlStms_3, true, false, null, new Object[][] { { SD_Selling_Request_ID,
-			// 				SD_Customer_Full_Name, SD_Selling_Request_Brand, SD_Selling_Request_Model,
-			// 				SD_Selling_Request_Product_Looks, SD_Selling_Request_Meet_Date,
-			// 				SD_Selling_Request_Meet_Location,
-			// 				DataTransformation.doubleLengthCroppingAndNullableTransform(SD_Selling_Request_Paid_Amount,
-			// 						DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[0],
-			// 						DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[1]),
-			// 				SD_Selling_Request_Status,
-			// 				DataTransformation.NullableTransform(SD_Selling_Request_Repairment_Description,
-			// 						String.class)
-			// 		} });
-			// 	}
-			// 	break;
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__SELLING_REQUEST__Selling_Request_ID(SD_Selling_Request_ID);
+			// // in case existed data LAMO
+			// if (tmpReason ==
+			// DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+			// break;
+			// } else if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__SELLING_REQUEST__Customer_Full_Name(SD_Customer_Full_Name);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__SELLING_REQUEST__Selling_Request_Brand(SD_Selling_Request_Brand);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__SELLING_REQUEST__Selling_Request_Model(SD_Selling_Request_Model);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__SELLING_REQUEST__Selling_Request_Product_Looks(SD_Selling_Request_Product_Looks);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__SELLING_REQUEST__Selling_Request_Meet_Date(SD_Selling_Request_Meet_Date);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__SELLING_REQUEST__Selling_Request_Meet_Location(SD_Selling_Request_Meet_Location);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__SELLING_REQUEST__Selling_Request_Paid_Amount(SD_Selling_Request_Paid_Amount);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__SELLING_REQUEST__Selling_Request_Status(SD_Selling_Request_Status);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__SELLING_REQUEST__Selling_Request_Repairment_Description(
+			// SD_Selling_Request_Repairment_Description);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// } else {
+			// DatabaseMnm.runSQLcmds(null, sqlStms_3, true, false, null, new Object[][] { {
+			// SD_Selling_Request_ID,
+			// SD_Customer_Full_Name, SD_Selling_Request_Brand, SD_Selling_Request_Model,
+			// SD_Selling_Request_Product_Looks, SD_Selling_Request_Meet_Date,
+			// SD_Selling_Request_Meet_Location,
+			// DataTransformation.doubleLengthCroppingAndNullableTransform(SD_Selling_Request_Paid_Amount,
+			// DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[0],
+			// DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount")[1]),
+			// SD_Selling_Request_Status,
+			// DataTransformation.NullableTransform(SD_Selling_Request_Repairment_Description,
+			// String.class)
+			// } });
+			// }
+			// break;
 			// }
 			// // PART 4E:
 			// // PART 4F:
 			// while (true) {
-			// 	tmpReason = DataValidation.PerAttributeValidation.check__PRODUCT__Product_ID(SD_Product_ID);
-			// 	// in case existed data LAMO
-			// 	if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
-			// 		break;
-			// 	} else if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__PRODUCT__Product_Arrive_Time(SD_Product_Arrive_Time);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation.check__PRODUCT__Product_Price(SD_Product_Price);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation.check__PRODUCT__Product_Status(SD_Product_Status);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__PRODUCT__Selling_Request_ID(SD_Selling_Request_ID);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	} else {
-			// 		DatabaseMnm.runSQLcmds(null, sqlStms_5, true, false, null,
-			// 				new Object[][] { { SD_Product_ID, SD_Product_Arrive_Time,
-			// 						DataTransformation.doubleLengthCropping(SD_Product_Price,
-			// 								DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[0],
-			// 								DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[1]),
-			// 						SD_Product_Status, SD_Selling_Request_ID,
-			// 				} });
-			// 	}
-			// 	break;
+			// tmpReason =
+			// DataValidation.PerAttributeValidation.check__PRODUCT__Product_ID(SD_Product_ID);
+			// // in case existed data LAMO
+			// if (tmpReason ==
+			// DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+			// break;
+			// } else if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__PRODUCT__Product_Arrive_Time(SD_Product_Arrive_Time);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason =
+			// DataValidation.PerAttributeValidation.check__PRODUCT__Product_Price(SD_Product_Price);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason =
+			// DataValidation.PerAttributeValidation.check__PRODUCT__Product_Status(SD_Product_Status);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__PRODUCT__Selling_Request_ID(SD_Selling_Request_ID);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// } else {
+			// DatabaseMnm.runSQLcmds(null, sqlStms_5, true, false, null,
+			// new Object[][] { { SD_Product_ID, SD_Product_Arrive_Time,
+			// DataTransformation.doubleLengthCropping(SD_Product_Price,
+			// DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[0],
+			// DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price")[1]),
+			// SD_Product_Status, SD_Selling_Request_ID,
+			// } });
+			// }
+			// break;
 			// }
 			// // PART 4G:
 			// while (true) {
-			// 	tmpReason = DataValidation.PerAttributeValidation.check__BUY_REQUEST__Product_ID(SD_Product_ID);
-			// 	// in case existed data LAMO
-			// 	if (tmpReason == DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
-			// 		break;
-			// 	} else if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__BUY_REQUEST__Customer_Full_Name(SD_Customer_Full_Name);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__BUY_REQUEST__Buy_Request_Created_Date(SD_Buy_Request_Created_Date);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__BUY_REQUEST__Buy_Request_Transportation_Price(SD_Buy_Request_Transportation_Price);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	}
-			// 	tmpReason = DataValidation.PerAttributeValidation
-			// 			.check__BUY_REQUEST__Buy_Request_Location(SD_Buy_Request_Location);
-			// 	if (tmpReason != null) {
-			// 		throw new MyExceptionHandling.UserRuntimeException("Reason:" + tmpReason.toString());
-			// 	} else {
-			// 		DatabaseMnm.runSQLcmds(null, sqlStms_6, true, false, null, new Object[][] { { SD_Customer_Full_Name,
-			// 				SD_Product_ID, SD_Buy_Request_Created_Date,
-			// 				DataTransformation.doubleLengthCroppingAndNullableTransform(
-			// 						SD_Buy_Request_Transportation_Price,
-			// 						DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[0],
-			// 						DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[1]),
-			// 				SD_Buy_Request_Location
-			// 		} });
-			// 	}
+			// tmpReason =
+			// DataValidation.PerAttributeValidation.check__BUY_REQUEST__Product_ID(SD_Product_ID);
+			// // in case existed data LAMO
+			// if (tmpReason ==
+			// DataValidation.DATAVALID_DECLINED_REASON.REPEATED_VAL_OF_COL_PK) {
+			// break;
+			// } else if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__BUY_REQUEST__Customer_Full_Name(SD_Customer_Full_Name);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__BUY_REQUEST__Buy_Request_Created_Date(SD_Buy_Request_Created_Date);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__BUY_REQUEST__Buy_Request_Transportation_Price(SD_Buy_Request_Transportation_Price);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// }
+			// tmpReason = DataValidation.PerAttributeValidation
+			// .check__BUY_REQUEST__Buy_Request_Location(SD_Buy_Request_Location);
+			// if (tmpReason != null) {
+			// throw new MyExceptionHandling.UserRuntimeException("Reason:" +
+			// tmpReason.toString());
+			// } else {
+			// DatabaseMnm.runSQLcmds(null, sqlStms_6, true, false, null, new Object[][] { {
+			// SD_Customer_Full_Name,
+			// SD_Product_ID, SD_Buy_Request_Created_Date,
+			// DataTransformation.doubleLengthCroppingAndNullableTransform(
+			// SD_Buy_Request_Transportation_Price,
+			// DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[0],
+			// DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price")[1]),
+			// SD_Buy_Request_Location
+			// } });
+			// }
 			// }
 			// PART5:
 			mainDbConn.commit();

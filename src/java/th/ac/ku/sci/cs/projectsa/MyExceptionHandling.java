@@ -10,22 +10,22 @@ public class MyExceptionHandling {
 
 	// entire exception handling info: mode=no (because it would be recurisve
 	// lamolamolamo)
-	public static void handleFatalException_simplev1(Throwable e, boolean doGUI, String scope, String DescOfCUI, String TitleOfGUI,String DescOfGUI) {
+	public static void handleFatalException_simplev1(Throwable e, boolean doGUI, String scope, String DescOfCUI,
+			String TitleOfGUI, String DescOfGUI) {
 		if (scope == null) {
 			scope = "MainApp";
 		}
 		// followed from reportFatalExceptionInGUI
-		if (TitleOfGUI==null) {
-			TitleOfGUI="ความผิดพลาดร้ายแรง";
+		if (TitleOfGUI == null) {
+			TitleOfGUI = "ความผิดพลาดร้ายแรง";
 		}
 		MyExceptionHandling.handleFatalException_altv1(e, true, new String[] {
-			Main.clReportHeader(scope, "FATAL"), DescOfCUI,
-			TitleOfGUI+" (เมื่อ " + Misc.getISODateTimeString() + " | ตรงส่วนของ \""
-					+ scope + "\")",
-			DescOfGUI });
+				Main.clReportHeader(scope, "FATAL"), DescOfCUI,
+				TitleOfGUI + " (เมื่อ " + Misc.getISODateTimeString() + " | ตรงส่วนของ \""
+						+ scope + "\")",
+				DescOfGUI });
 	}
 
-	
 	// entire exception handling info: mode=no (because it would be recurisve
 	// lamolamolamo)
 	public static void handleFatalException_altv1(Throwable e, boolean doGUI, String[] titleAndMainTextOfCUIAndGUI) {
@@ -82,8 +82,9 @@ public class MyExceptionHandling {
 			}
 			String tmp1 = "Application has below fatal exception on app-shutdown system:";
 			String tmp2 = "ความผิดพลาดร้ายแรงขณะปิดโปรแกรม";
-			String tmp3="โปรแกรมพบปํญหาร้ายแรงในระบบการปิดโปรแกรม ข้อมูลตามด้านล่าง:";
-			MyExceptionHandling.handleFatalException_simplev1(e,(!MyExceptionHandling.isFatal),scope,tmp1,tmp2,tmp3);
+			String tmp3 = "โปรแกรมพบปํญหาร้ายแรงในระบบการปิดโปรแกรม ข้อมูลตามด้านล่าง:";
+			MyExceptionHandling.handleFatalException_simplev1(e, (!MyExceptionHandling.isFatal), scope, tmp1, tmp2,
+					tmp3);
 		} catch (Throwable e0) {
 			// do nothing so that main exception could be throw lamo
 		}
@@ -107,7 +108,8 @@ public class MyExceptionHandling {
 	private static void reportFatalExceptionInGUI(Throwable e, String title, String mainText) {
 		try {
 			if (title == null) {
-				title = "ความผิดพลาดร้ายแรง (เมื่อ " + Misc.getISODateTimeString() + " | ตรงส่วนของ \""+"MainApp"+"\")";
+				title = "ความผิดพลาดร้ายแรง (เมื่อ " + Misc.getISODateTimeString() + " | ตรงส่วนของ \"" + "MainApp"
+						+ "\")";
 			}
 			if (mainText == null) {
 				mainText = appFatalHeader;
@@ -168,21 +170,24 @@ public class MyExceptionHandling {
 	// follow default constructors
 	public static class UserException extends Exception {
 
-		
-		private boolean isMiscInfoSet=false;
-		private Object[] miscInfo=null;
-		
+		private boolean isMiscInfoSet = false;
+		private Object[] miscInfo = null;
+
 		public boolean isMiscInfoSet() {
 			return isMiscInfoSet;
 		}
+
 		public Object[] getMiscInfo() {
 			return miscInfo;
 		}
+
 		public void setMiscInfo(Object[] miscInfo) {
 			if (isMiscInfoSet) {
 				throw new UserRuntimeException("Cannot set already-set miscInfo of UserException-alike exception.");
+			} else {
+				this.miscInfo = miscInfo;
+				this.isMiscInfoSet = true;
 			}
-			else {this.miscInfo = miscInfo;this.isMiscInfoSet=true;}
 		}
 
 		// entire exception handling info: mode=no
@@ -213,21 +218,26 @@ public class MyExceptionHandling {
 
 	// follow default constructors
 	public static class UserRuntimeException extends RuntimeException {
-		private boolean isMiscInfoSet=false;
-		private Object[] miscInfo=null;
-		
+		private boolean isMiscInfoSet = false;
+		private Object[] miscInfo = null;
+
 		public boolean isMiscInfoSet() {
 			return isMiscInfoSet;
 		}
+
 		public Object[] getMiscInfo() {
 			return miscInfo;
 		}
+
 		public void setMiscInfo(Object[] miscInfo) {
 			if (isMiscInfoSet) {
 				throw new UserRuntimeException("Cannot set already-set miscInfo of UserException-alike exception.");
+			} else {
+				this.miscInfo = miscInfo;
+				this.isMiscInfoSet = true;
 			}
-			else {this.miscInfo = miscInfo;this.isMiscInfoSet=true;}
 		}
+
 		// entire exception handling info: mode=no
 		public UserRuntimeException() {
 			super();
