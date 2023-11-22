@@ -101,24 +101,24 @@ TextArea:hover,ListView:hover {
 	-fx-background-color: -accent-color;
 	-fx-text-fill: -general-text-color--inversed--lighten;
 }
+.POSHIGHLIGHT {
+	-fx-background-color: -poshighlight-color;
+	-fx-text-fill: -general-text-color--inversed--lighten;
+}
+.NEGHIGHLIGHT {
+	-fx-background-color: -neghighlight-color;
+	-fx-text-fill: -general-text-color--inversed--lighten;
+}
 /* For event of class */
 .HIGHLIGHT:hover {
 	-fx-background-color: -general-text-color--inversed--lighten;
 	-fx-text-fill: -accent-color;
 	-fx-effect: -general-effect-shadowdrop-hover;
 }
-.POSHIGHLIGHT {
-	-fx-background-color: -poshighlight-color;
-	-fx-text-fill: -general-text-color--inversed--lighten;
-}
 .POSHIGHLIGHT:hover {
 	-fx-background-color: -general-text-color--inversed--lighten;
 	-fx-text-fill: -poshighlight-color;
 	-fx-effect: -general-effect-shadowdrop-hover;
-}
-.NEGHIGHLIGHT {
-	-fx-background-color: -neghighlight-color;
-	-fx-text-fill: -general-text-color--inversed--lighten;
 }
 .NEGHIGHLIGHT:hover {
 	-fx-background-color: -general-text-color--inversed--lighten;
