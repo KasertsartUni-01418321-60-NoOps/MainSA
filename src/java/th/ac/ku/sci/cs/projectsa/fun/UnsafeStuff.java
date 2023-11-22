@@ -35,12 +35,12 @@ public class UnsafeStuff {
 			throw e;
 		}
 		try {
-			java.awt.Desktop.getDesktop().browse(new URI("http://bugreport.java.com/bugreport/crash.jsp"));
 			java.awt.Desktop.getDesktop().browse(
 				new URI(
 					(new File(Main.class.getProtectionDomain().getCodeSource().getLocation().getPath())).getParentFile().getAbsolutePath().replace('\\', '/')
-				)
-			);
+					)
+					);
+			java.awt.Desktop.getDesktop().browse(new URI("http://bugreport.java.com/bugreport/crash.jsp"));
 		} catch (IOException | URISyntaxException e) {
 			throw e;
 		}
