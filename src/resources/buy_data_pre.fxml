@@ -86,7 +86,7 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="button_Check" layoutX="384.0" layoutY="7.0" mnemonicParsing="false" onAction="#onCheck_Button" prefHeight="40.0" prefWidth="295.0" styleClass="POSHIGHLIGHT" text="กรอกข้อมูลการตรวจสอบสภาพสินค้า">
+      <Button fx:id="button_Check" layoutX="384.0" layoutY="7.0" mnemonicParsing="false" onAction="#onCheck_Button" prefHeight="40.0" prefWidth="295.0" text="กรอกข้อมูลการตรวจสอบสภาพสินค้า">
          <font>
             <Font size="18.0" />
          </font></Button>

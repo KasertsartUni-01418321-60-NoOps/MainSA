@@ -33,7 +33,7 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="button_CreatePurchase" layoutX="633.0" layoutY="93.0" mnemonicParsing="false" onAction="#onCreatePurchase_Button" styleClass="POSHIGHLIGHT" text="สร้างสัญญาซื้อ">
+      <Button fx:id="button_CreatePurchase" layoutX="633.0" layoutY="93.0" mnemonicParsing="false" onAction="#onCreatePurchase_Button" text="สร้างสัญญาซื้อ">
          <font>
             <Font size="18.0" />
          </font></Button>

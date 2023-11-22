@@ -28,7 +28,7 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button layoutX="630.0" layoutY="101.0" mnemonicParsing="false" onAction="#creatNewCustomer_Button" prefHeight="25.0" prefWidth="132.0" styleClass="POSHIGHLIGHT" text="สร้างลูกค้าใหม่">
+      <Button layoutX="630.0" layoutY="101.0" mnemonicParsing="false" onAction="#creatNewCustomer_Button" prefHeight="25.0" prefWidth="132.0" text="สร้างลูกค้าใหม่">
          <font>
             <Font size="18.0" />
          </font></Button>
