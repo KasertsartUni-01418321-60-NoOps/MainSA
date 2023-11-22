@@ -219,7 +219,7 @@ public class UICtrl_AddItem {
             return;
         }
         // Optionally, round the entered value
-        Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount");
+        Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price");
         tmpk_data=DatabaseMnm.DataTransformation.doubleLengthCropping(tmpk_data, lenSpec[0], lenSpec[1],false);
         // Set the rounded value back to the spinner
         spinnerDouble_Price.getEditor().setText(tmpk_data.toString());
