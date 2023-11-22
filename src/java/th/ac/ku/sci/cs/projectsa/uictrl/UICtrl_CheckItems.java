@@ -181,7 +181,7 @@ public class UICtrl_CheckItems {
                     false,
                     null,
                     new Object[] {
-                        tmpt_int,
+                        tmpt_int,tmpt_int,tmpt_int,
                         (String)(
                             (
                                 (Object[])(
