@@ -41,11 +41,11 @@ public class DatabaseMnm {
 						+ "VALUES (?, ?, ?);"
 		};
 		// PART:2
-		String SD_User_Name_Admin = "nobody";
-		String SD_User_Password_Admin = "nopassword";
+		String SD_User_Name_Admin = "admin";
+		String SD_User_Password_Admin = "T2f2{2Z6b[(|&J2z";
 		Long SD_User_Role_Admin = (long) 0;
-		String SD_User_Name = "kasertsart";
-		String SD_User_Password = "UNIVERSITY";
+		String SD_User_Name = "emp";
+		String SD_User_Password = "$H6=5_+7+ZkEA}o0";
 		Long SD_User_Role = (long) 1;
 		// [Sample Code, so commented]
 		// String SD_Customer_Full_Name = "นามสมมุติ ไม่มีสกุล";
