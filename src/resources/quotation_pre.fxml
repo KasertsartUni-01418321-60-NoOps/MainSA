@@ -25,7 +25,7 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <TextArea fx:id="textField_Loc" layoutX="105.0" layoutY="238.0" prefHeight="192.0" prefWidth="622.0">
+      <TextArea fx:id="textArea_Loc" layoutX="105.0" layoutY="238.0" prefHeight="192.0" prefWidth="622.0">
          <font>
             <Font size="18.0" />
          </font></TextArea>
@@ -46,7 +46,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button disable="true" layoutX="512.0" layoutY="447.0" mnemonicParsing="false" onAction="#onpressed_DefaultLocButton" prefHeight="39.0" prefWidth="206.0" text="ดึงที่อยู่ปริยายของลูกค้า">
+      <Button fx:id="button_defaultLoc" disable="true" layoutX="512.0" layoutY="447.0" mnemonicParsing="false" onAction="#onpressed_DefaultLocButton" prefHeight="39.0" prefWidth="206.0" text="ดึงที่อยู่ปริยายของลูกค้า">
          <font>
             <Font size="18.0" />
          </font>
