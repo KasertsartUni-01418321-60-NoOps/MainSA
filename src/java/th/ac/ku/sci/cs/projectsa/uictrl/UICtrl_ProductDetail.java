@@ -62,6 +62,10 @@ public class UICtrl_ProductDetail {
                 textField_PdStatus.setText(Misc.ThaiStr_DataSpec_Status_pd[0]);
                 stateTransitionMode=-1;
                 button_MainAction.setText("เปลี่ยนสถานะให้เป็น \"พร้อมขาย\"");
+                DatabaseMnm.DataSpec.STATUS_User currentUserRole =(DatabaseMnm.DataSpec.STATUS_User)Main.globalVar.get("loggedinUser_Role");
+                if (currentUserRole==DatabaseMnm.DataSpec.STATUS_User.Employee) {
+                    button_MainAction.setDisable(true);
+                }
             } else if (tmpt_statusSR==DatabaseMnm.DataSpec.STATUS_Product.SaledAndWaitForSend) {
                 textField_PdStatus.setText(Misc.ThaiStr_DataSpec_Status_pd[2]);
                 stateTransitionMode=1;
