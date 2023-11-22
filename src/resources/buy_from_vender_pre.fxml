@@ -69,7 +69,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Button disable="true" layoutX="29.0" layoutY="523.0" mnemonicParsing="false" onAction="#onpressed_DefaultLocButton" prefHeight="39.0" prefWidth="206.0" text="ดึงที่อยู่ปริยายของลูกค้า">
+      <Button fx:id="button_defaultLoc" disable="true" layoutX="29.0" layoutY="523.0" mnemonicParsing="false" onAction="#onpressed_DefaultLocButton" prefHeight="39.0" prefWidth="206.0" text="ดึงที่อยู่ปริยายของลูกค้า">
          <font>
             <Font size="18.0" />
          </font>

@@ -15,12 +15,42 @@ public class UICtrl_BuyFromVendor {
     @FXML private TextArea textArea_MeetLoc;
     @FXML private TextArea textArea_PdLooks;
     @FXML private DatePicker datePicker_MeetDate;
+    @FXML private Button button_defaultLoc;
+    private String custLoc=null;
 
     @FXML private void initialize() throws java.sql.SQLException{
         try{
             comboBox_custName_Helper1();
             datePicker_MeetDate.setValue(java.time.LocalDate.now().plusDays(1));
-            
+            comboBox_custName.setOnAction(event -> {
+                try{
+                    DatabaseMnm.Table tmpc_SQLTable = null;
+                    try {
+                        tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
+                                null,
+                                "SELECT Customer_Address FROM Customer WHERE Customer_Full_Name=?",
+                                false,
+                                true,
+                                null,
+                                new Object[] {
+                                    comboBox_custName.getValue().ref
+                                }
+                        )[1]);
+                    } catch (java.sql.SQLException e) {
+                        MyExceptionHandling.handleFatalException_simplev1(e, true, "MainApp|DatabaseMnm", null, null,
+                                "<html>โปรแกรมเกิดข้อผิดพลาดร้ายแรง โดยเป็นปัญหาของระบบฐานข้อมูลแบบ SQL ซึ่งทำงานไม่ถูกต้องตามที่คาดหวังไว้<br/>โดยสาเหตุอาจจะมาจากฝั่งของผู้ใช้หรือของบั๊กโปรแกรม โปรดตรวจสอบความถูกต้องของไฟล์โปรแกรมและข้อมูลและตรวจสอบว่าโปรแกรมสามารถเข้าถึงไฟล์ได้อย่างถูกต้อง<br/>โดยข้อมูลของปัญหาได้ถูกระบุไว้ด้านล่างนี้:</html>");
+                        throw e;
+                    }
+                    custLoc=(String)(tmpc_SQLTable.cols[0].vals.get(0));
+                    if  (custLoc==null) {
+                        button_defaultLoc.setDisable(true);
+                    } else {
+                        button_defaultLoc.setDisable(false);
+                    }
+                } catch (Throwable e) {
+                    MyExceptionHandling.handleFatalException(e);
+                }
+            });
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
@@ -171,6 +201,9 @@ public class UICtrl_BuyFromVendor {
             );
         }
         comboBox_custName.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
+    }
+    @FXML private void onpressed_DefaultLocButton() {
+        textArea_MeetLoc.setText(custLoc);
     }
 }
 
