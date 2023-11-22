@@ -100,6 +100,7 @@ public class UICtrl_AddItem {
         try {
             helper_refreshSpinnerDouble_1();
             // Note that this always got from DB, so no validation
+            // REMARK: for FK check, the comboBox_srID_Helper1 done for us
             String formval_srID=null;
             try {formval_srID = selectedSRID.getSelectionModel().getSelectedItem().ref;}
             catch (NullPointerException e) {
