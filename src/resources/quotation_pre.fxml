@@ -52,6 +52,6 @@
          </font>
       </Button>
       <Spinner fx:id="spinner_Price" editable="true" layoutX="213.0" layoutY="452.0" />
-      <ComboBox fx:id="comboBox_CustName" layoutX="128.0" layoutY="123.0" prefHeight="31.0" prefWidth="296.0" />
+      <ComboBox fx:id="comboBox_custName" layoutX="128.0" layoutY="123.0" prefHeight="31.0" prefWidth="296.0" />
    </children>
 </AnchorPane>
