@@ -9,33 +9,33 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_Homepage">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="75.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
-      <Text layoutX="21.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MENU">
+      <Text layoutX="21.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="หน้าหลัก">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <Button fx:id="button_ContactsList" layoutX="114.0" layoutY="372.0" mnemonicParsing="false" onAction="#onPressed_Button_ContactsList" prefHeight="91.0" prefWidth="200.0" text="รายชื่อลูกค้า">
+      <Button fx:id="button_ContactsList" layoutX="110.0" layoutY="418.0" mnemonicParsing="false" onAction="#onPressed_Button_ContactsList" prefHeight="91.0" prefWidth="224.0" text="รายชื่อลูกค้า">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="button_Warehouse" layoutX="114.0" layoutY="164.0" mnemonicParsing="false" onAction="#onPressed_Button_Warehouse" prefHeight="91.0" prefWidth="200.0" text="รายการสินค้า">
+      <Button fx:id="button_Warehouse" layoutX="110.0" layoutY="166.0" mnemonicParsing="false" onAction="#onPressed_Button_Warehouse" prefHeight="91.0" prefWidth="224.0" text="คลังสินค้า">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="button_BuyHist" layoutX="511.0" layoutY="164.0" mnemonicParsing="false" onAction="#onPressed_Button_BuyHist" prefHeight="91.0" prefWidth="200.0" text="ประวัติการซื้อ">
+      <Button fx:id="button_BuyHist" layoutX="474.0" layoutY="166.0" mnemonicParsing="false" onAction="#onPressed_Button_BuyHist" prefHeight="91.0" prefWidth="224.0" text="ประวัติสัญญาซื้อ">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="button_SellHist" layoutX="511.0" layoutY="372.0" mnemonicParsing="false" onAction="#onPressed_Button_SellHist" prefHeight="91.0" prefWidth="200.0" text="ประวัติการขาย">
+      <Button fx:id="button_SellHist" layoutX="474.0" layoutY="418.0" mnemonicParsing="false" onAction="#onPressed_Button_SellHist" prefHeight="91.0" prefWidth="224.0" text="ประวัติสัญญาขาย">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Button>
-      <Button fx:id="button_Misc1" layoutX="547.0" layoutY="25.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc1" styleClass="NEGHIGHLIGHT" text="MUTE!" />
-      <Button layoutX="627.0" layoutY="25.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc2" styleClass="NEGHIGHLIGHT" text="CrashJVM" />
-      <Button layoutX="724.0" layoutY="25.0" mnemonicParsing="false" onAction="#onpressed_Button_Logout" styleClass="NEGHIGHLIGHT" text="Logout" />
+      <Button fx:id="button_Misc1" layoutX="468.0" layoutY="22.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc1" prefHeight="31.0" prefWidth="118.0" styleClass="NEGHIGHLIGHT" text="ปิดเสียง!" />
+      <Button layoutX="592.0" layoutY="22.0" mnemonicParsing="false" onAction="#onpressed_Button_Misc2" styleClass="NEGHIGHLIGHT" text="พังโปรแกรม" />
+      <Button layoutX="689.0" layoutY="22.0" mnemonicParsing="false" onAction="#onpressed_Button_Logout" styleClass="NEGHIGHLIGHT" text="ออกจากระบบ" />
    </children>
 </AnchorPane>

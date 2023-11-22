@@ -20,7 +20,7 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Text layoutX="42.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" text="จำนวนเครดิต :">
+      <Text layoutX="42.0" layoutY="477.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ปริมาณเครดิต :">
          <font>
             <Font size="24.0" />
          </font></Text>
@@ -38,7 +38,7 @@
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="118.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ที่อยู่ :">
+      <Text layoutX="92.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ที่อยู่ปริยาย :">
          <font>
             <Font size="18.0" />
          </font>

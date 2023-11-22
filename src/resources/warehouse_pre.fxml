@@ -13,7 +13,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_Warehouse">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
-      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รายการสินค้า (คลังสินค้า)">
+      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="คลังสินค้า">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -22,7 +22,7 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button layoutX="599.0" layoutY="165.0" mnemonicParsing="false" onAction="#onPressed_Button_addProduct" prefHeight="40.0" prefWidth="159.0" styleClass="POSHIGHLIGHT" text="เพิ่มสินค้า">
+      <Button layoutX="599.0" layoutY="165.0" mnemonicParsing="false" onAction="#onPressed_Button_addProduct" prefHeight="40.0" prefWidth="159.0" styleClass="POSHIGHLIGHT" text="เพิ่มสินค้าเข้าคลัง">
          <font>
             <Font size="18.0" />
          </font></Button>

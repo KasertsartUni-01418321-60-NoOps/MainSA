@@ -10,7 +10,7 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_BuyHistory">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
-      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ประวัติการซื้อ">
+      <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ประวัติสัญญาซื้อ">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
@@ -25,11 +25,11 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Button fx:id="button_sortByDate" layoutX="120.0" layoutY="93.0" mnemonicParsing="false" onAction="#onpressed_Button_sortByDate" text="วันที่ล่าสุด">
+      <Button fx:id="button_sortByDate" layoutX="120.0" layoutY="93.0" mnemonicParsing="false" onAction="#onpressed_Button_sortByDate" text="วันที่ของการนัด">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Button fx:id="button_sortByPdStatus" layoutX="223.0" layoutY="93.0" mnemonicParsing="false" onAction="#onpressed_Button_sortByPdStatus" text="สถานะสินค้า">
+      <Button fx:id="button_sortByPdStatus" layoutX="261.0" layoutY="93.0" mnemonicParsing="false" onAction="#onpressed_Button_sortByPdStatus" text="สถานะสัญญาและสินค้า">
          <font>
             <Font size="18.0" />
          </font></Button>

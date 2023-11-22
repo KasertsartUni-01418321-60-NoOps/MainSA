@@ -21,7 +21,7 @@ public class UICtrl_Homepage {
 		try{ 
 			if (misct_pint_1>0) {
 				button_Misc1.setDisable(true);
-				button_Misc1.setText("<MUTED>");
+				button_Misc1.setText("<เสียงเงียบแล้ว>");
 			} else if (misct_pint_1<0) {
 				button_Misc1.setVisible(false);
 			} else {
@@ -81,7 +81,7 @@ public class UICtrl_Homepage {
 			if (misct_pint_1==0) { 
 			misct_pint_1=1;
 			button_Misc1.setDisable(true);
-			button_Misc1.setText("<MUTED>");
+			button_Misc1.setText("<เสียงเงียบแล้ว>");
 			MIDIPlayer.shutdown();
 			}
 		} catch (Throwable e) {

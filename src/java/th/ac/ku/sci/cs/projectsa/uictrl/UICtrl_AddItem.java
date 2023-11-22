@@ -72,7 +72,7 @@ public class UICtrl_AddItem {
                     String tmpk_rpmDesc= (String)(tmpc_SQLTable.cols[0].vals.get(0));
                     if (tmpk_rpmDesc==null){
                         rpDetail.setDisable(true);
-                        rpDetail.setText("<การตรวจสอบสินค้าของสัญญาซื้อนี้ ไม่มีการซ่อม>");
+                        rpDetail.setText("<สินค้าของสัญญาซื้อนี้ ไม่มีการซ่อม>");
                     } else {
                         rpDetail.setDisable(false);
                         rpDetail.setText(tmpk_rpmDesc);
