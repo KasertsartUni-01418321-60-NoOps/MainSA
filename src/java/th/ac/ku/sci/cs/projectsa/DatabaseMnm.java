@@ -1,7 +1,5 @@
 package th.ac.ku.sci.cs.projectsa;
 
-import th.ac.ku.sci.cs.projectsa.uictrl.*;
-import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.NotNull;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation.Nullable;
 

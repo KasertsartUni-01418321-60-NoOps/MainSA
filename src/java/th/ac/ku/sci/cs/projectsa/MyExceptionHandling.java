@@ -1,8 +1,5 @@
 package th.ac.ku.sci.cs.projectsa;
 
-import th.ac.ku.sci.cs.projectsa.uictrl.*;
-import th.ac.ku.sci.cs.projectsa.*;
-
 public class MyExceptionHandling {
 	public static final String appFatalHeader_en = "Application has fatal exception occured, below is problem information:";
 	public static final String appFatalHeader = "โปรแกรมเกิดข้อผิดพลาดร้ายแรง ข้อมูลปัญหาได้ถูกระบุไว้ด้านล่างนี้:";

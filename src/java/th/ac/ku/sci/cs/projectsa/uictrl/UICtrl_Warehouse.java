@@ -11,7 +11,6 @@ import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.text.Text;
 
 public class UICtrl_Warehouse {
     @FXML
