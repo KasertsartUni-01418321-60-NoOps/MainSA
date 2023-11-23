@@ -17,45 +17,14 @@ public class UICtrl_Warehouse {
     @FXML
     private ListView<ListViewRowDataWrapper<String>> pdListView;
     @FXML
-    private ComboBox<ListViewRowDataWrapper<Integer>> comboBox_filterType;
-    @FXML
-    private Text text_filterStr, text_filterCheckbox;
-    @FXML
-    private TextField textField_filter;
+    private TextField textField_filterBrand, textField_filterModel;
     @FXML
     private CheckBox checkBoxPdStatus1, checkBoxPdStatus2, checkBoxPdStatus3, checkBoxPdStatus4;
 
     @FXML
     private void initialize() throws java.sql.SQLException {
         try {
-            comboBox_filterType.getItems().add(
-                    new ListViewRowDataWrapper<Integer>(-1, "ยี่ห้อ"));
-            comboBox_filterType.getItems().add(
-                    new ListViewRowDataWrapper<Integer>(1, "รุ่นสินค้า"));
-            ListViewRowDataWrapper<Integer> tmpt_lvrdwInt = new ListViewRowDataWrapper<Integer>(0, "สถานะของสินค้า");
-            comboBox_filterType.getItems().add(
-                    tmpt_lvrdwInt);
-            comboBox_filterType.setValue(tmpt_lvrdwInt);
-            comboBox_filterType.setOnAction(event -> {
-                try {
-                    boolean tmpt_bool;
-                    if (comboBox_filterType.getValue().ref == 0) {
-                        tmpt_bool = false;
-                    } else {
-                        tmpt_bool = true;
-                    }
-                    text_filterStr.setVisible(tmpt_bool);
-                    text_filterCheckbox.setVisible(!tmpt_bool);
-                    textField_filter.setVisible(tmpt_bool);
-                    checkBoxPdStatus1.setVisible(!tmpt_bool);
-                    checkBoxPdStatus2.setVisible(!tmpt_bool);
-                    checkBoxPdStatus3.setVisible(!tmpt_bool);
-                    checkBoxPdStatus4.setVisible(!tmpt_bool);
-                } catch (Throwable e) {
-                    MyExceptionHandling.handleFatalException(e);
-                }
-            });
-            helper_listViewUpdate(0, new boolean[] { true, true, true, true });
+            helper_listViewUpdate();
             pdListView.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent event) {
@@ -107,55 +76,33 @@ public class UICtrl_Warehouse {
     @FXML
     private void onPressed_Button_Search() throws java.sql.SQLException {
         try {
-            int tmpt_pint = comboBox_filterType.getValue().ref;
-            if (tmpt_pint == 0) {
-                boolean[] tmpt_pbool_arr = new boolean[] {
-                        checkBoxPdStatus1.isSelected(),
-                        checkBoxPdStatus2.isSelected(),
-                        checkBoxPdStatus3.isSelected(),
-                        checkBoxPdStatus4.isSelected()
-                };
-                helper_listViewUpdate(tmpt_pint, tmpt_pbool_arr);
-            } else {
-                helper_listViewUpdate(tmpt_pint, textField_filter.getText());
-            }
+            helper_listViewUpdate();
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
         }
     }
 
-    // mode={0:pdStatus,-1:pdBrand,1:pdModel}
-    private void helper_listViewUpdate(int mode, Object fObj) throws java.sql.SQLException {
-        String fStr = null;
-        boolean[] fBoolArr = null;
-        if (mode == 0) {
-            fBoolArr = (boolean[]) fObj;
-        } else {
-            fStr = (String) fObj;
-        }
+    private void helper_listViewUpdate() throws java.sql.SQLException {
+        String[] fStr = new String[] { textField_filterBrand.getText(), textField_filterModel.getText() };
+        boolean[] fBoolArr = new boolean[] {
+                checkBoxPdStatus1.isSelected(),
+                checkBoxPdStatus2.isSelected(),
+                checkBoxPdStatus3.isSelected(),
+                checkBoxPdStatus4.isSelected()
+        };
         pdListView.getItems().clear();
         String whereQuery = "";
         Object[] SQLParams = null;
-        if (mode == -1) {
-            whereQuery = "WHERE SR.Selling_Request_Brand LIKE ?";
-            SQLParams = new Object[] { "%" + fStr + "%" };
-        } else if (mode == 1) {
-            whereQuery = "WHERE SR.Selling_Request_Model LIKE ?";
-            SQLParams = new Object[] { "%" + fStr + "%" };
-        } else {
-            whereQuery = "WHERE " +
-                    "(Product_Status = 0 AND ?) OR " +
-                    "(Product_Status = 1 AND ?) OR " +
-                    "(Product_Status = 2 AND ?) OR " +
-                    "(Product_Status = 3 AND ?)";
-            SQLParams = new Object[] {
-                    fBoolArr[0] ? 1 : 0,
-                    fBoolArr[1] ? 1 : 0,
-                    fBoolArr[2] ? 1 : 0,
-                    fBoolArr[3] ? 1 : 0
-            };
-        }
+        whereQuery = "WHERE (SR.Selling_Request_Brand LIKE ?) AND (SR.Selling_Request_Model LIKE ?) AND ( (Product_Status = 0 AND ?) OR (Product_Status = 1 AND ?) OR (Product_Status = 2 AND ?) OR (Product_Status = 3 AND ?) )";
+        SQLParams = new Object[] {
+                "%" + fStr[0] + "%",
+                "%" + fStr[1] + "%",
+                fBoolArr[0] ? 1 : 0,
+                fBoolArr[1] ? 1 : 0,
+                fBoolArr[2] ? 1 : 0,
+                fBoolArr[3] ? 1 : 0,
+        };
         DatabaseMnm.Table tmpc_SQLTable = null;
         try {
             tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
