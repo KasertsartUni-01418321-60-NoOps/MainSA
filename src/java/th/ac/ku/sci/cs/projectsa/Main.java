@@ -4,8 +4,6 @@ import th.ac.ku.sci.cs.projectsa.uictrl.*;
 
 import java.io.File;
 
-import th.ac.ku.sci.cs.projectsa.*;
-
 public class Main extends javafx.application.Application {
     public static String[] args = null;
     public static java.util.Map<String, Object> globalVar = new java.util.HashMap<>();

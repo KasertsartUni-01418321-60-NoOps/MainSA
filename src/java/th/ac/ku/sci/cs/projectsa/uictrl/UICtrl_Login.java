@@ -1,6 +1,5 @@
 package th.ac.ku.sci.cs.projectsa.uictrl;
 
-import th.ac.ku.sci.cs.projectsa.uictrl.*;
 import th.ac.ku.sci.cs.projectsa.*;
 import javafx.fxml.*;
 import javafx.scene.control.*;
