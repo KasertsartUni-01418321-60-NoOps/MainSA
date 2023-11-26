@@ -137,7 +137,7 @@ public class UICtrl_Homepage {
 	@FXML
 	private void onpressed_Button_Logout() throws java.io.IOException {
 		try {
-			Main.globalVar.remove("loggedinUserPartialTable");
+			Main.globalVar.remove("loggedinUser_Role");
 			try {
 				Main.switchToSpecificPagename("login");
 			} catch (java.io.IOException e1) {
