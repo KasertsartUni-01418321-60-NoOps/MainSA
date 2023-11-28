@@ -94,13 +94,13 @@ public class UICtrl_CreateCustomer {
 
     private void onPressed_Button_CreateCustomer__Helper1() {
         Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเพิ่มข้อมูลผิดพลาด",
-                "ไม่สามารถเพ่ิมข้อมูลลูกค้าได้ เนื่องจากกรอกข้อมูลลูกค้าผิดรูปแบบ", null, false);
+                "ไม่สามารถเพิ่มข้อมูลลูกค้าได้ เนื่องจากกรอกข้อมูลลูกค้าผิดรูปแบบ", null, false);
     }
 
     // เหมือนแบบบน แต่แจ้งว่า existed Customer LAMO
     private void onPressed_Button_CreateCustomer__Helper2() {
         Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเพิ่มข้อมูลผิดพลาด",
-                "ไม่สามารถเพ่ิมข้อมูลลูกค้าได้ เนื่องจากมีชื่อลูกค้านี้อยู่แล้ว", null, false);
+                "ไม่สามารถเพิ่มข้อมูลลูกค้าได้ เนื่องจากมีชื่อลูกค้านี้อยู่แล้ว", null, false);
     }
 
     @FXML

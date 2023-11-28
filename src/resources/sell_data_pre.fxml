@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_SellData">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_SellData">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ข้อมูลสัญญาขาย">
@@ -32,20 +32,20 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Text layoutX="302.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ค่าจัดส่ง">
+      <Text layoutX="524.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ค่าจัดส่ง">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="24.0" />
          </font></Text>
       <Text layoutX="27.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานะ :">
          <font>
             <Font name="System Bold" size="24.0" />
          </font></Text>
 
-      <TextField fx:id="textField_ID" editable="false" layoutX="110.0" layoutY="75.0" prefHeight="39.0" prefWidth="159.0">
+      <TextField fx:id="textField_ID" editable="false" layoutX="120.0" layoutY="75.0" prefHeight="40.0" prefWidth="203.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="textField_CustName" editable="false" layoutX="367.0" layoutY="75.0" prefHeight="39.0" prefWidth="349.0">
+      <TextField fx:id="textField_CustName" editable="false" layoutX="454.0" layoutY="75.0" prefHeight="40.0" prefWidth="326.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -53,23 +53,23 @@
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="textField_Brand" editable="false" layoutX="71.0" layoutY="190.0" prefHeight="40.0" prefWidth="302.0">
+      <TextField fx:id="textField_Brand" editable="false" layoutX="119.0" layoutY="190.0" prefHeight="40.0" prefWidth="254.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="textField_Model" editable="false" layoutX="441.0" layoutY="191.0" prefHeight="39.0" prefWidth="319.0">
+      <TextField fx:id="textField_Model" editable="false" layoutX="453.0" layoutY="191.0" prefHeight="40.0" prefWidth="326.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextArea fx:id="textArea_Loc" editable="false" layoutX="110.0" layoutY="241.0" prefHeight="119.0" prefWidth="677.0">
+      <TextArea fx:id="textArea_Loc" editable="false" layoutX="119.0" layoutY="241.0" prefHeight="119.0" prefWidth="658.0">
          <font>
             <Font size="18.0" />
          </font></TextArea>
-      <TextField fx:id="textField_TPrice" editable="false" layoutX="367.0" layoutY="376.0" prefHeight="39.0" prefWidth="147.0">
+      <TextField fx:id="textField_TPrice" editable="false" layoutX="628.0" layoutY="376.0" prefHeight="39.0" prefWidth="147.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <TextField fx:id="textField_Status" editable="false" layoutX="119.0" layoutY="136.0" prefHeight="39.0" prefWidth="327.0">
+      <TextField fx:id="textField_Status" editable="false" layoutX="119.0" layoutY="136.0" prefHeight="40.0" prefWidth="254.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
@@ -78,22 +78,22 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Text layoutX="22.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="วันที่สัญญา:">
+      <Text layoutX="22.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="วันที่สัญญา:">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text layoutX="280.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า :">
+      <Text layoutX="367.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ชื่อลูกค้า :">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <Text layoutX="279.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคารวมฯ :">
+      <Text layoutX="500.0" layoutY="465.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคารวมฯ">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <TextField fx:id="textField_PaidAmount" editable="false" layoutX="368.0" layoutY="436.0" prefHeight="39.0" prefWidth="147.0">
+      <TextField fx:id="textField_PaidAmount" editable="false" layoutX="629.0" layoutY="436.0" prefHeight="39.0" prefWidth="147.0">
          <font>
             <Font size="18.0" />
          </font>

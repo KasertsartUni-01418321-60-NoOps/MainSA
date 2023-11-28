@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/8.0.391" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_ProductDetail">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="resources/Main.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="th.ac.ku.sci.cs.projectsa.uictrl.UICtrl_ProductDetail">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eaf598" height="53.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
       <Text layoutX="14.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รายละเอียดสินค้า">
@@ -19,51 +19,51 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Text layoutX="33.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID สินค้า :">
+      <Text layoutX="52.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID สินค้า :">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Text>
-      <TextField fx:id="textField_PdID" editable="false" layoutX="131.0" layoutY="90.0" prefHeight="40.0" prefWidth="176.0">
+      <TextField fx:id="textField_PdID" editable="false" layoutX="180.0" layoutY="116.0" prefHeight="40.0" prefWidth="207.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Text layoutX="396.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่น :">
+      <Text layoutX="136.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="รุ่น :">
          <font>
             <Font size="18.0" />
          </font></Text>
-      <TextField fx:id="textField_Brand" editable="false" layoutX="81.0" layoutY="205.0" prefHeight="40.0" prefWidth="305.0">
+      <TextField fx:id="textField_Brand" editable="false" layoutX="179.0" layoutY="244.0" prefHeight="40.0" prefWidth="207.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Text layoutX="482.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาสินค้า :">
+      <Text layoutX="518.0" layoutY="362.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ราคาสินค้า :">
          <font>
-            <Font size="18.0" />
+            <Font size="25.0" />
          </font></Text>
-      <TextField fx:id="textField_PdPrice" editable="false" layoutX="577.0" layoutY="260.0" prefHeight="40.0" prefWidth="146.0">
+      <TextField fx:id="textField_PdPrice" editable="false" layoutX="518.0" layoutY="382.0" prefHeight="40.0" prefWidth="207.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Text layoutX="732.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="บาท">
+      <Text layoutX="732.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="บาท">
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Text layoutX="33.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อ :">
+      <Text layoutX="126.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ยี่ห้อ :">
          <font>
             <Font size="18.0" />
          </font></Text>
-      <TextField fx:id="textField_Model" editable="false" layoutX="438.0" layoutY="205.0" prefHeight="40.0" prefWidth="305.0">
+      <TextField fx:id="textField_Model" editable="false" layoutX="179.0" layoutY="295.0" prefHeight="40.0" prefWidth="207.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Text layoutX="339.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID สัญญาซื้อ :">
+      <Text layoutX="52.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID สัญญาซื้อ :">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font></Text>
-      <TextField fx:id="textField_SrID" editable="false" layoutX="462.0" layoutY="90.0" prefHeight="40.0" prefWidth="152.0">
+      <TextField fx:id="textField_SrID" editable="false" layoutX="180.0" layoutY="167.0" prefHeight="40.0" prefWidth="207.0">
          <font>
             <Font size="18.0" />
          </font></TextField>
-      <Text layoutX="33.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานะ :">
+      <Text layoutX="100.0" layoutY="408.0" strokeType="OUTSIDE" strokeWidth="0.0" text="สถานะ :">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Text>
@@ -71,17 +71,17 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <TextField fx:id="textField_PdStatus" editable="false" layoutX="110.0" layoutY="144.0" prefHeight="40.0" prefWidth="374.0">
+      <TextField fx:id="textField_PdStatus" editable="false" layoutX="180.0" layoutY="382.0" prefHeight="40.0" prefWidth="207.0">
          <font>
             <Font size="18.0" />
          </font>
       </TextField>
-      <Text layoutX="525.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="วันที่เข้าคลัง :">
+      <Text layoutX="420.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="วันที่เข้าคลัง :">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <TextField fx:id="textField_PdArriveDate" editable="false" layoutX="624.0" layoutY="144.0" prefHeight="40.0" prefWidth="152.0">
+      <TextField fx:id="textField_PdArriveDate" editable="false" layoutX="518.0" layoutY="116.0" prefHeight="40.0" prefWidth="207.0">
          <font>
             <Font size="18.0" />
          </font>
