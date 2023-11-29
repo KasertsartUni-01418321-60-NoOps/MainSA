@@ -37,42 +37,46 @@ public class UICtrl_BuyHistory {
             srListView.setCellFactory(param -> new ListCell<ListViewRowDataWrapper<String>>() {
                 @Override
                 protected void updateItem(ListViewRowDataWrapper<String> item, boolean empty) {
-                    super.updateItem(item, empty);
-    
-                    if (empty || item == null) {
-                        setText(null);
-                        setBackground(null);
-                    } else {
-                        setText(item.toString());
-                        int tmpt_int = (int)item.params[0];
-                        int[] tmpt_arr_int = Misc.javafxListViewCellRowBgColorBasedOnPdType[tmpt_int];
-                        setBackground(new Background(new BackgroundFill(
-                            Color.rgb(tmpt_arr_int[0],tmpt_arr_int[1],tmpt_arr_int[2]),
-                            null, null)));
-                        tmpt_arr_int = Misc.getHighestContrastFGColor(tmpt_arr_int);
-                        setTextFill(Color.rgb(tmpt_arr_int[0],tmpt_arr_int[1],tmpt_arr_int[2]));
-                        // copy จากข้างบนมาเลยๆ
-                        selectedProperty().addListener((observable, oldValue, newValue) -> {
-                            int tmpt_int_1=0;
-                            int[] tmpt_arr_int_1=null;
-                            if (isSelected()) {
-                                tmpt_int_1 = (int)item.params[0];
-                                tmpt_arr_int_1 = Misc.javafxListViewCellRowBgColorBasedOnPdType[tmpt_int_1];
-                                setBackground(new Background(new BackgroundFill(
-                                    Color.rgb(255-tmpt_arr_int_1[0],255-tmpt_arr_int_1[1],255-tmpt_arr_int_1[2]),
-                                    null, null)));
-                                tmpt_arr_int_1 = Misc.getHighestContrastFGColor(tmpt_arr_int_1);
-                                setTextFill(Color.rgb(255-tmpt_arr_int_1[0],255-tmpt_arr_int_1[1],255-tmpt_arr_int_1[2]));
-                            } else {
-                                tmpt_int_1 = (int)item.params[0];
-                                tmpt_arr_int_1 = Misc.javafxListViewCellRowBgColorBasedOnPdType[tmpt_int_1];
-                                setBackground(new Background(new BackgroundFill(
-                                    Color.rgb(tmpt_arr_int_1[0],tmpt_arr_int_1[1],tmpt_arr_int_1[2]),
-                                    null, null)));
-                                tmpt_arr_int_1 = Misc.getHighestContrastFGColor(tmpt_arr_int_1);
-                                setTextFill(Color.rgb(tmpt_arr_int_1[0],tmpt_arr_int_1[1],tmpt_arr_int_1[2]));
-                            }
-                        });
+                    try{
+                        super.updateItem(item, empty);
+        
+                        if (empty || item == null) {
+                            setText(null);
+                            setBackground(null);
+                        } else {
+                            setText(item.toString());
+                            int tmpt_int = (int)item.params[0];
+                            int[] tmpt_arr_int = Misc.javafxListViewCellRowBgColorBasedOnPdType[tmpt_int];
+                            setBackground(new Background(new BackgroundFill(
+                                Color.rgb(tmpt_arr_int[0],tmpt_arr_int[1],tmpt_arr_int[2]),
+                                null, null)));
+                            tmpt_arr_int = Misc.getHighestContrastFGColor(tmpt_arr_int);
+                            setTextFill(Color.rgb(tmpt_arr_int[0],tmpt_arr_int[1],tmpt_arr_int[2]));
+                            // copy จากข้างบนมาเลยๆ
+                            selectedProperty().addListener((observable, oldValue, newValue) -> {
+                                int tmpt_int_1=0;
+                                int[] tmpt_arr_int_1=null;
+                                if (isSelected()) {
+                                    tmpt_int_1 = (int)item.params[0];
+                                    tmpt_arr_int_1 = Misc.javafxListViewCellRowBgColorBasedOnPdType[tmpt_int_1];
+                                    setBackground(new Background(new BackgroundFill(
+                                        Color.rgb(255-tmpt_arr_int_1[0],255-tmpt_arr_int_1[1],255-tmpt_arr_int_1[2]),
+                                        null, null)));
+                                    tmpt_arr_int_1 = Misc.getHighestContrastFGColor(tmpt_arr_int_1);
+                                    setTextFill(Color.rgb(255-tmpt_arr_int_1[0],255-tmpt_arr_int_1[1],255-tmpt_arr_int_1[2]));
+                                } else {
+                                    tmpt_int_1 = (int)item.params[0];
+                                    tmpt_arr_int_1 = Misc.javafxListViewCellRowBgColorBasedOnPdType[tmpt_int_1];
+                                    setBackground(new Background(new BackgroundFill(
+                                        Color.rgb(tmpt_arr_int_1[0],tmpt_arr_int_1[1],tmpt_arr_int_1[2]),
+                                        null, null)));
+                                    tmpt_arr_int_1 = Misc.getHighestContrastFGColor(tmpt_arr_int_1);
+                                    setTextFill(Color.rgb(tmpt_arr_int_1[0],tmpt_arr_int_1[1],tmpt_arr_int_1[2]));
+                                }
+                            });
+                        }
+                    } catch (Throwable e) { 
+                        MyExceptionHandling.handleFatalException(e);
                     }
                 }
             });
