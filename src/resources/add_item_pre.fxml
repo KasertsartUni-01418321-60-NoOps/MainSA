@@ -2,8 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
@@ -37,11 +37,11 @@
          <font>
             <Font size="18.0" />
          </font></Text>
-      <Spinner fx:id="spinnerDouble_Price" layoutX="227.0" layoutY="496.0" prefHeight="40.0" prefWidth="150.0" />
       <TextArea fx:id="rpDetail" disable="true" layoutX="132.0" layoutY="186.0" prefHeight="274.0" prefWidth="536.0">
          <font>
             <Font size="18.0" />
          </font></TextArea>
       <ComboBox fx:id="selectedSRID" layoutX="170.0" layoutY="93.0" prefHeight="31.0" prefWidth="224.0" />
+      <TextField fx:id="spinnerDouble_Price" layoutX="227.0" layoutY="496.0" prefHeight="40.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
