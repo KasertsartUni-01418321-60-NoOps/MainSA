@@ -1353,6 +1353,11 @@ public class DatabaseMnm {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
+					// (PART 3): Check long condition
+					long tmpt_long=Long.parseLong(data);
+					if (DataValidation.JavaTypeLevel.checkLongIsPositive(tmpt_long)) {} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+					}
 					// the code should reached here means it (data) is passed
 					return null;
 				}
@@ -1603,6 +1608,11 @@ public class DatabaseMnm {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
+					// (PART 3): Check long condition
+					long tmpt_long=Long.parseLong(data);
+					if (DataValidation.JavaTypeLevel.checkLongIsPositive(tmpt_long)) {} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+					}
 					// the code should reached here means it (data) is passed
 					return null;
 				}
@@ -1756,6 +1766,11 @@ public class DatabaseMnm {
 					if (DataValidation.JavaTypeLevel.checkStrIsNotNegInteger(data)) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
+					}
+					// (PART 3): Check long condition
+					long tmpt_long=Long.parseLong(data);
+					if (DataValidation.JavaTypeLevel.checkDoubleNotNegative(tmpt_long)) {} else {
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
 					}
 					// the code should reached here means it (data) is passed
 					return null;
