@@ -8,9 +8,18 @@ public class Misc {
     public static final double choosenDefaultValueFor_PaidAmount_AtCheckItemPAge = 25000;
     public static final double choosenDefaultValueFor_PaidAmount_AtAddItemPAge = 30000;
     public static final double choosenDefaultValueFor_TPrice_AtQuotationPAge = 1000;
-    public static double choosenStepValueFor_PaidAmount_AtCheckItemPAge = 100;
-    public static double choosenStepValueFor_PaidAmount_AtAddItemPAge = 100;
+    public static final double choosenStepValueFor_PaidAmount_AtCheckItemPAge = 100;
+    public static final double choosenStepValueFor_PaidAmount_AtAddItemPAge = 100;
     public static final double choosenStepValueFor_TPrice_AtQuotationPAge = 100;
+    public static final int[][] javafxListViewCellRowBgColorBasedOnPdType= new int[][] {
+        {255, 255, 224},
+        {240, 128, 128},
+        {0, 73, 62},
+        {32, 178, 170},
+        {173, 216, 230  },
+        {255, 255, 224},
+        {144, 238, 144}
+    };
 
     public static String[] rickrollLyrics = new String[] {
             "We're no strangers to love",
@@ -109,13 +118,43 @@ public class Misc {
         return new String(retval);
     }
 
+    private double getHighestContrastFGColor_helper2(int[] color) {
+        double r = color[0];
+        double g = color[1];
+        double b = color[2];
+        r = r <= 10 ? r / 255.0 : Math.pow(((r / 255.0 + 0.055) / 1.055), 2.4);
+        g = g <= 10 ? g / 255.0 : Math.pow(((g / 255.0 + 0.055) / 1.055), 2.4);
+        b = b <= 10 ? b / 255.0 : Math.pow(((b / 255.0 + 0.055) / 1.055), 2.4);
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    }
+    
+    private double getHighestContrastFGColor_helper1(int[] background, int[] foreground) {
+        double luminance_bg = getHighestContrastFGColor_helper2(background);
+        double luminance_fg = getHighestContrastFGColor_helper2(foreground);
+        return (Math.max(luminance_bg, luminance_fg) + 0.05) / (Math.min(luminance_bg, luminance_fg) + 0.05);
+    }
+    
+    public int[] getHighestContrastFGColor(int[] rgb) {
+        int[] white = new int[] {255, 255, 255};
+        int[] black = new int[] {0, 0, 0};
+        double contrast_with_white = getHighestContrastFGColor_helper1(rgb, white);
+        double contrast_with_black = getHighestContrastFGColor_helper1(rgb, black);
+        return contrast_with_white > contrast_with_black  ? white : black;
+    }
+
     public static class ListViewRowDataWrapper<T> {
         public final T ref;
         public final String repr;
+        public final Object[] params;
 
-        public ListViewRowDataWrapper(T ref, String repr) {
+        public ListViewRowDataWrapper(T ref, String repr, Object[] params) {
             this.ref = ref;
             this.repr = repr;
+            this.params=params;
+        }
+
+        public ListViewRowDataWrapper(T ref, String repr) {
+            this(ref,repr,null);
         }
 
         @Override
