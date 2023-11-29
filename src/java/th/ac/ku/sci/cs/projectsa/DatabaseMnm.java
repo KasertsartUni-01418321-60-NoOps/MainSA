@@ -1593,7 +1593,7 @@ public class DatabaseMnm {
 					return null;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price");
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount");
 					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
@@ -1747,7 +1747,7 @@ public class DatabaseMnm {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
 					// (PART 1): Check length
-					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price");
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price");
 					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
