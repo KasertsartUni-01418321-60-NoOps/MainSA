@@ -3,7 +3,11 @@ package th.ac.ku.sci.cs.projectsa.uictrl;
 import th.ac.ku.sci.cs.projectsa.*;
 import th.ac.ku.sci.cs.projectsa.DatabaseMnm.DataValidation;
 import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
+
+import java.time.LocalDate;
+
 import javafx.fxml.*;
+import javafx.scene.chart.PieChart.Data;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 
@@ -29,6 +33,25 @@ public class UICtrl_BuyFromVendor {
         try {
             comboBox_custName_Helper1();
             datePicker_MeetDate.setValue(java.time.LocalDate.now().plusDays(1));
+            datePicker_MeetDate.setOnAction(event -> {
+                try {
+                    // copy checking code from below
+                    DataValidation.DATAVALID_DECLINED_REASON tmpReason;
+                    Long formval_meetDate = datePicker_MeetDate.getValue().toEpochDay();
+                    tmpReason = DataValidation.PerAttributeValidation
+                        .check__SELLING_REQUEST__Selling_Request_Meet_Date(formval_meetDate);
+                    if (tmpReason != null) {
+                        helper1();
+                        return;
+                    }
+                    if (!DatabaseMnm.DataValidation.ForMoreBussinessConstraint
+                            .checkDateAsEpochTimeIsNotPastOrTooFuture(formval_meetDate)) {
+                        helper3();
+                        return;
+                    }
+                }
+                catch (Throwable e) {MyExceptionHandling.handleFatalException(e);}
+            });
             comboBox_custName.setOnAction(event -> {
                 try {
                     DatabaseMnm.Table tmpc_SQLTable = null;
