@@ -1042,6 +1042,11 @@ public class DatabaseMnm {
 				return false;
 			}
 
+			public static boolean checkStrIsInteger(@NotNull String data) {
+				String regexPattern = "([0-9])+";
+				return java.util.regex.Pattern.compile(regexPattern).matcher(data).matches();
+			}
+
 			public static boolean checkStrIsGeneralValid(@NotNull String data) {
 				String regexPattern = "^[ -~\\u0E01-\\u0E39\\u0E3F-\\u0E4D\\u0E50-\\u0E59]*$";
 				return java.util.regex.Pattern.compile(regexPattern).matcher(data).matches();
