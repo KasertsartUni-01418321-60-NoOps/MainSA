@@ -7,7 +7,6 @@ import th.ac.ku.sci.cs.projectsa.Misc.ListViewRowDataWrapper;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory;
 import javafx.scene.input.KeyEvent;
 
 public class UICtrl_AddItem {
@@ -16,46 +15,12 @@ public class UICtrl_AddItem {
     @FXML
     private TextArea rpDetail;
     @FXML
-    private Spinner<Double> spinnerDouble_Price;
+    private TextField spinnerDouble_Price;
 
     @FXML
     private void initialize() throws java.sql.SQLException {
         try {
-
             rpDetail.setDisable(true);
-            spinnerDouble_Price.setEditable(true);
-            spinnerDouble_Price.setValueFactory(new DoubleSpinnerValueFactory(
-                    DatabaseMnm.DataSpec.RANGE_MIN__Product_Price, DatabaseMnm.DataSpec.RANGE_MAX__Product_Price,
-                    Misc.choosenDefaultValueFor_PaidAmount_AtAddItemPAge,
-                    Misc.choosenStepValueFor_PaidAmount_AtAddItemPAge));
-            spinnerDouble_Price.getEditor().focusedProperty().addListener((observable, oldValue, newValue) -> {
-                try {
-                    if (!newValue) { // If the spinner editor loses focus
-                        helper_refreshSpinnerDouble_1();
-                    }
-                } catch (Throwable e) {
-                    MyExceptionHandling.handleFatalException(e);
-                }
-            });
-            spinnerDouble_Price.getEditor().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-                try {
-                    if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
-                        helper_refreshSpinnerDouble_1();
-                        event.consume();
-                    } else if (event.getCode() == javafx.scene.input.KeyCode.UP) {
-                        helper_refreshSpinnerDouble_1(); // incase mal-value
-                        spinnerDouble_Price.increment();
-                        event.consume();
-
-                    } else if (event.getCode() == javafx.scene.input.KeyCode.DOWN) {
-                        helper_refreshSpinnerDouble_1(); // incase mal-value
-                        spinnerDouble_Price.decrement();
-                        event.consume();
-                    }
-                } catch (Throwable e) {
-                    MyExceptionHandling.handleFatalException(e);
-                }
-            });
             comboBox_srID_Helper1();
             selectedSRID.setOnAction(event -> {
                 try {
@@ -105,7 +70,6 @@ public class UICtrl_AddItem {
     @FXML
     private void onpressed_Button_Save() throws java.io.IOException, java.sql.SQLException {
         try {
-            helper_refreshSpinnerDouble_1();
             // Note that this always got from DB, so no validation
             // REMARK: for FK check, the comboBox_srID_Helper1 done for us
             String formval_srID = null;
@@ -119,7 +83,6 @@ public class UICtrl_AddItem {
             if (rpDetail.isDisable()) {
                 formval_rpDetail = null;
             }
-            Double formval_PdPRice = spinnerDouble_Price.getValue();
             // [VALIDZONE]
             DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON tmpReason;
             tmpReason = DataValidation.PerAttributeValidation
@@ -128,12 +91,13 @@ public class UICtrl_AddItem {
                 helper1();
                 return;
             }
-            tmpReason = DataValidation.PerAttributeValidation.check__PRODUCT__Product_Price(formval_PdPRice);
+            tmpReason = DataValidation.PerAttributeValidation.check__PRODUCT__Product_Price(spinnerDouble_Price.getText());
             if (tmpReason != null) {
                 helper1();
                 return;
             }
             // [END VALID ZONE]
+            Long formval_PdPRice = Long.parseLong(spinnerDouble_Price.getText());
             String tmpt_str = null;
             while (true) {
                 tmpt_str = Misc.generateRandomID();
@@ -221,22 +185,5 @@ public class UICtrl_AddItem {
                     new ListViewRowDataWrapper<String>(tmpt_str, tmpt_str));
         }
         selectedSRID.getItems().addAll(tmpc_SQLTable__listViewRowDataWrapper);
-    }
-
-    private void helper_refreshSpinnerDouble_1() {
-        Double tmpk_data = null;
-        try {
-            tmpk_data = Double.parseDouble(spinnerDouble_Price.getEditor().getText());
-        } catch (NumberFormatException e) {
-            spinnerDouble_Price.getEditor().setText(spinnerDouble_Price.getValue().toString());
-            return;
-        }
-        // Optionally, round the entered value
-        Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price");
-        tmpk_data = DatabaseMnm.DataTransformation.doubleLengthCropping(tmpk_data, lenSpec[0], lenSpec[1], false);
-        // Set the rounded value back to the spinner
-        spinnerDouble_Price.getEditor().setText(tmpk_data.toString());
-        spinnerDouble_Price.getValueFactory().setValue(tmpk_data);
-
     }
 }

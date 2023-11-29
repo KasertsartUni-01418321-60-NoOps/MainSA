@@ -1042,7 +1042,7 @@ public class DatabaseMnm {
 				return false;
 			}
 
-			public static boolean checkStrIsInteger(@NotNull String data) {
+			public static boolean checkStrIsNotNegInteger(@NotNull String data) {
 				String regexPattern = "([0-9])+";
 				return java.util.regex.Pattern.compile(regexPattern).matcher(data).matches();
 			}
@@ -1349,7 +1349,7 @@ public class DatabaseMnm {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
 					}
 					// (PART 2): Check str conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsInteger(data)) {
+					if (DataValidation.JavaTypeLevel.checkStrIsNotNegInteger(data)) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
@@ -1599,7 +1599,7 @@ public class DatabaseMnm {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
 					}
 					// (PART 2): Check str conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsInteger(data)) {
+					if (DataValidation.JavaTypeLevel.checkStrIsNotNegInteger(data)) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
@@ -1753,7 +1753,7 @@ public class DatabaseMnm {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
 					}
 					// (PART 2): Check str conditions
-					if (DataValidation.JavaTypeLevel.checkStrIsInteger(data)) {
+					if (DataValidation.JavaTypeLevel.checkStrIsNotNegInteger(data)) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}

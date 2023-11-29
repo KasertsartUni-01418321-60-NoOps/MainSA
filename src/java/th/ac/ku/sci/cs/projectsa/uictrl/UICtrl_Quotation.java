@@ -12,7 +12,6 @@ import com.github.saacsos.FXRouter;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory;
 import javafx.scene.input.KeyEvent;
 
 public class UICtrl_Quotation {
@@ -21,7 +20,7 @@ public class UICtrl_Quotation {
     @FXML
     private TextArea textArea_Loc;
     @FXML
-    private Spinner<Double> spinner_Price;
+    private TextField spinner_Price;
     @FXML
     private Button button_defaultLoc;
     private String custLoc = null, pdID = null;
@@ -59,41 +58,7 @@ public class UICtrl_Quotation {
                     MyExceptionHandling.handleFatalException(e);
                 }
             });
-            // SEP
-            spinner_Price.setEditable(true);
-            spinner_Price.setValueFactory(
-                    new DoubleSpinnerValueFactory(DatabaseMnm.DataSpec.RANGE_MIN__Buy_Request_Transportation_Price,
-                            DatabaseMnm.DataSpec.RANGE_MAX__Buy_Request_Transportation_Price,
-                            Misc.choosenDefaultValueFor_TPrice_AtQuotationPAge,
-                            Misc.choosenStepValueFor_TPrice_AtQuotationPAge));
-            spinner_Price.getEditor().focusedProperty().addListener((observable, oldValue, newValue) -> {
-                try {
-                    if (!newValue) { // If the spinner editor loses focus
-                        helper_refreshSpinnerDouble_1();
-                    }
-                } catch (Throwable e) {
-                    MyExceptionHandling.handleFatalException(e);
-                }
-            });
-            spinner_Price.getEditor().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-                try {
-                    if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
-                        helper_refreshSpinnerDouble_1();
-                        event.consume();
-                    } else if (event.getCode() == javafx.scene.input.KeyCode.UP) {
-                        helper_refreshSpinnerDouble_1(); // incase mal-value
-                        spinner_Price.increment();
-                        event.consume();
-
-                    } else if (event.getCode() == javafx.scene.input.KeyCode.DOWN) {
-                        helper_refreshSpinnerDouble_1(); // incase mal-value
-                        spinner_Price.decrement();
-                        event.consume();
-                    }
-                } catch (Throwable e) {
-                    MyExceptionHandling.handleFatalException(e);
-                }
-            });
+            
         } catch (Throwable e) {
             MyExceptionHandling.handleFatalException(e);
             throw e;
@@ -130,8 +95,6 @@ public class UICtrl_Quotation {
             }
             Long formval_Date = LocalDate.now().toEpochDay();
             String formval_Loc = textArea_Loc.getText();
-            helper_refreshSpinnerDouble_1();
-            Double formval_tprice = spinner_Price.getValue();
             // [VALIDZONE]
             DatabaseMnm.DataValidation.DATAVALID_DECLINED_REASON tmpReason;
             tmpReason = DataValidation.PerAttributeValidation.check__BUY_REQUEST__Buy_Request_Location(formval_Loc);
@@ -140,12 +103,13 @@ public class UICtrl_Quotation {
                 return;
             }
             tmpReason = DataValidation.PerAttributeValidation
-                    .check__BUY_REQUEST__Buy_Request_Transportation_Price(formval_tprice);
+                    .check__BUY_REQUEST__Buy_Request_Transportation_Price(spinner_Price.getText());
             if (tmpReason != null) {
                 helper1();
                 return;
             }
             // [END VALID ZONE]
+            Long formval_tprice = Long.parseLong(spinner_Price.getText());
             try {
                 DatabaseMnm.runSQLcmd(
                         null,
@@ -194,22 +158,6 @@ public class UICtrl_Quotation {
                 "ไม่สามารถเพ่ิมข้อมูลสัญญาขายได้", "เนื่องจากชื่อลูกค้ายังไม่ได้ถูกเลือก", false);
     }
 
-    private void helper_refreshSpinnerDouble_1() {
-        Double tmpk_data = null;
-        try {
-            tmpk_data = Double.parseDouble(spinner_Price.getEditor().getText());
-        } catch (NumberFormatException e) {
-            spinner_Price.getEditor().setText(spinner_Price.getValue().toString());
-            return;
-        }
-        // Optionally, round the entered value
-        Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price");
-        tmpk_data = DatabaseMnm.DataTransformation.doubleLengthCropping(tmpk_data, lenSpec[0], lenSpec[1], false);
-        // Set the rounded value back to the spinner
-        spinner_Price.getEditor().setText(tmpk_data.toString());
-        spinner_Price.getValueFactory().setValue(tmpk_data);
-
-    }
 
     private void comboBox_custName_Helper1() throws java.sql.SQLException {
         DatabaseMnm.Table tmpc_SQLTable = null;

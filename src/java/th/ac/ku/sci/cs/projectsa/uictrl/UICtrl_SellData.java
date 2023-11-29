@@ -81,15 +81,15 @@ public class UICtrl_SellData {
             }
             textField_Status.setText(tmpk_Status);
             // 6 BR.Buy_Request_Transportation_Price
-            Double tmpu_paidAmount = DatabaseMnm.convertRealAlikeSQLColToDouble(
+            Long tmpu_paidAmount = DatabaseMnm.convertIntegerAlikeSQLColToLong(
                     tmpc_SQLTable.cols[6].vals.get(0), tmpc_SQLTable.cols[6].javaType);
-            tmpt_str = (new java.text.DecimalFormat("0.00")).format(tmpu_paidAmount);
+            tmpt_str = tmpu_paidAmount.toString();
             textField_TPrice.setText(tmpt_str);
             // 8 (7 is next) PD.Product_Price
-            Double tmpt_double = tmpu_paidAmount;
-            tmpu_paidAmount = DatabaseMnm.convertRealAlikeSQLColToDouble(
+            Long tmpt_long = tmpu_paidAmount;
+            tmpu_paidAmount = DatabaseMnm.convertIntegerAlikeSQLColToLong(
                     tmpc_SQLTable.cols[8].vals.get(0), tmpc_SQLTable.cols[8].javaType);
-            tmpt_str = (new java.text.DecimalFormat("0.00")).format(tmpu_paidAmount + tmpt_double);
+            tmpt_str = ((Long)(tmpu_paidAmount + tmpt_long)).toString();
             textField_PaidAmount.setText(tmpt_str);
             // 7 BR.Buy_Request_Location
             tmpt_str = (String) (tmpc_SQLTable.cols[7].vals.get(0));

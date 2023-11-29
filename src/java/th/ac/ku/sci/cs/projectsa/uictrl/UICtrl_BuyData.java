@@ -72,10 +72,10 @@ public class UICtrl_BuyData {
             tmpt_str = LocalDate.ofEpochDay(tmpu_epochTimeData).toString();
             textField_MeetDate.setText(tmpt_str);
             textArea_MeetLoc.setText((String) (tmpc_SQLTable.cols[6].vals.get(0)));
-            Double tmpu_paidAmount = DatabaseMnm.convertRealAlikeSQLColToDouble(
+            Long tmpu_paidAmount = DatabaseMnm.convertIntegerAlikeSQLColToLong(
                     tmpc_SQLTable.cols[7].vals.get(0), tmpc_SQLTable.cols[7].javaType);
             if (tmpu_paidAmount != null) {
-                tmpt_str = (new java.text.DecimalFormat("0.00")).format(tmpu_paidAmount);
+                tmpt_str = tmpu_paidAmount.toString();
                 textField_PaidAmount.setText(tmpt_str);
             } else {
                 textField_PaidAmount.setText("<ไม่มีค่า>");

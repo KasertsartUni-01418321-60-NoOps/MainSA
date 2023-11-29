@@ -10,7 +10,6 @@ import com.github.saacsos.FXRouter;
 import javafx.fxml.*;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.SpinnerValueFactory.DoubleSpinnerValueFactory;
 import javafx.scene.input.KeyEvent;
 
 public class UICtrl_CheckItems {
@@ -23,7 +22,7 @@ public class UICtrl_CheckItems {
     @FXML
     private TextArea textArea_rpmDesc;
     @FXML
-    private Spinner<Double> spinnerDouble_Price;
+    private TextField spinnerDouble_Price;
     @FXML
     private ComboBox<ListViewRowDataWrapper<Integer>> comboBox_Action;
     @FXML
@@ -32,41 +31,6 @@ public class UICtrl_CheckItems {
     @FXML
     private void initialize() {
         try {
-            spinnerDouble_Price.setEditable(true);
-            spinnerDouble_Price.setValueFactory(
-                    new DoubleSpinnerValueFactory(DatabaseMnm.DataSpec.RANGE_MIN__Selling_Request_Paid_Amount,
-                            DatabaseMnm.DataSpec.RANGE_MAX__Selling_Request_Paid_Amount,
-                            Misc.choosenDefaultValueFor_PaidAmount_AtCheckItemPAge,
-                            Misc.choosenStepValueFor_PaidAmount_AtCheckItemPAge));
-            spinnerDouble_Price.getEditor().focusedProperty().addListener((observable, oldValue, newValue) -> {
-                try {
-                    if (!newValue) { // If the spinner editor loses focus
-                        helper_refreshSpinnerDouble_1();
-                    }
-                } catch (Throwable e) {
-                    MyExceptionHandling.handleFatalException(e);
-                }
-            });
-            spinnerDouble_Price.getEditor().addEventFilter(KeyEvent.KEY_PRESSED, event -> {
-                try {
-                    if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
-                        helper_refreshSpinnerDouble_1();
-                        event.consume();
-                    } else if (event.getCode() == javafx.scene.input.KeyCode.UP) {
-                        helper_refreshSpinnerDouble_1(); // incase mal-value
-                        spinnerDouble_Price.increment();
-                        event.consume();
-
-                    } else if (event.getCode() == javafx.scene.input.KeyCode.DOWN) {
-                        helper_refreshSpinnerDouble_1(); // incase mal-value
-                        spinnerDouble_Price.decrement();
-                        event.consume();
-                    }
-                } catch (Throwable e) {
-                    MyExceptionHandling.handleFatalException(e);
-                }
-            });
-            // SEP
             ListViewRowDataWrapper<Integer> tmpu_default_lvrdw_int;
             tmpu_default_lvrdw_int = new ListViewRowDataWrapper<Integer>(1, "รับซื้อ/ซ่อมด้วย");
             comboBox_Action.getItems().add(tmpu_default_lvrdw_int);
@@ -121,7 +85,6 @@ public class UICtrl_CheckItems {
     @FXML
     private void onSave_Button() throws java.sql.SQLException, java.io.IOException {
         try {
-            helper_refreshSpinnerDouble_1();
             // [PART: Valid]
             DataValidation.DATAVALID_DECLINED_REASON tmpReason;
             tmpReason = DataValidation.PerAttributeValidation
@@ -138,7 +101,7 @@ public class UICtrl_CheckItems {
             }
             if (selectedOption != 0) {
                 tmpReason = DataValidation.PerAttributeValidation
-                        .check__SELLING_REQUEST__Selling_Request_Paid_Amount(spinnerDouble_Price.getValue());
+                        .check__SELLING_REQUEST__Selling_Request_Paid_Amount(spinnerDouble_Price.getText());
                 if (tmpReason != null) {
                     onSave_Button__Helper1();
                     return;
@@ -154,12 +117,12 @@ public class UICtrl_CheckItems {
             }
             // [PART: Update SR]
             String SR_ID = ((ListViewRowDataWrapper<String>) ((Object[]) FXRouter.getData())[1]).ref;
-            Object SR_Price = Double.class;
+            Object SR_Price = Long.class;
             Object SR_rpm = String.class;
             int tmpt_int = 1;
             if (comboBox_Action.getValue().ref != 0) {
                 tmpt_int = 2;
-                SR_Price = spinnerDouble_Price.getValue();
+                SR_Price = Long.parseLong(spinnerDouble_Price.getText());
             }
             if (comboBox_Action.getValue().ref == 1) {
                 SR_rpm = textArea_rpmDesc.getText();
@@ -218,23 +181,6 @@ public class UICtrl_CheckItems {
             MyExceptionHandling.handleFatalException(e);
             throw e;
         }
-    }
-
-    private void helper_refreshSpinnerDouble_1() {
-        Double tmpk_data = null;
-        try {
-            tmpk_data = Double.parseDouble(spinnerDouble_Price.getEditor().getText());
-        } catch (NumberFormatException e) {
-            spinnerDouble_Price.getEditor().setText(spinnerDouble_Price.getValue().toString());
-            return;
-        }
-        // Optionally, round the entered value
-        Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount");
-        tmpk_data = DatabaseMnm.DataTransformation.doubleLengthCropping(tmpk_data, lenSpec[0], lenSpec[1], false);
-        // Set the rounded value back to the spinner
-        spinnerDouble_Price.getEditor().setText(tmpk_data.toString());
-        spinnerDouble_Price.getValueFactory().setValue(tmpk_data);
-
     }
 
     private void onSave_Button__Helper1() {

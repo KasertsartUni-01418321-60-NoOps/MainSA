@@ -45,9 +45,9 @@ public class UICtrl_ProductDetail {
             String tmpt_str;
             tmpt_str = LocalDate.ofEpochDay(tmpu_epochTimeData).toString();
             textField_PdArriveDate.setText(tmpt_str);
-            Double tmpu_moneyAmount = DatabaseMnm.convertRealAlikeSQLColToDouble(
+            Long tmpu_moneyAmount = DatabaseMnm.convertIntegerAlikeSQLColToLong(
                     tmpc_SQLTable.cols[1].vals.get(0), tmpc_SQLTable.cols[1].javaType);
-            tmpt_str = (new java.text.DecimalFormat("0.00")).format(tmpu_moneyAmount);
+            tmpt_str = tmpu_moneyAmount.toString();
             textField_PdPrice.setText(tmpt_str);
             int tmpt_int = DatabaseMnm.convertIntegerAlikeSQLColToLong(
                     tmpc_SQLTable.cols[2].vals.get(0), tmpc_SQLTable.cols[2].javaType).intValue();
