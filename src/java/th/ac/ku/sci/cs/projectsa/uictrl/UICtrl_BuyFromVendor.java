@@ -198,7 +198,7 @@ public class UICtrl_BuyFromVendor {
 
     private void helper3() {
         Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเพิ่มข้อมูลผิดพลาด",
-                "ไม่สามารถเพ่ิมข้อมูลสัญญาชื้อได้", "เนื่องจากวันที่ไม่ใช่วันนี้หรือเวลาในอนาคต", false);
+                "ไม่สามารถเพ่ิมข้อมูลสัญญาชื้อได้", "เนื่องจากวันที่ไม่ใช่วันนี้หรือเวลาในอนาคตในช่วง 6 เดือน (180 นับจากปฏิทิน)", false);
     }
 
     private void comboBox_custName_Helper1() throws java.sql.SQLException {
