@@ -16,6 +16,7 @@ public class UICtrl_AddItem {
     private TextArea rpDetail;
     @FXML
     private TextField spinnerDouble_Price;
+    private long buyPrice=0;
 
     @FXML
     private void initialize() throws java.sql.SQLException {
@@ -29,7 +30,7 @@ public class UICtrl_AddItem {
                     try {
                         tmpc_SQLTable = (DatabaseMnm.Table) (DatabaseMnm.runSQLcmd(
                                 null,
-                                "SELECT SR.Selling_Request_Repairment_Description FROM Selling_Request AS SR WHERE SR.Selling_Request_ID=?",
+                                "SELECT SR.Selling_Request_Repairment_Description, SR.Selling_Request_Paid_Amount FROM Selling_Request AS SR WHERE SR.Selling_Request_ID=?",
                                 false,
                                 true,
                                 null,
@@ -47,6 +48,10 @@ public class UICtrl_AddItem {
                         rpDetail.setDisable(false);
                         rpDetail.setText(tmpk_rpmDesc);
                     }
+                    buyPrice=(Long) DatabaseMnm.convertIntegerAlikeSQLColToLong(
+                        tmpc_SQLTable.cols[1].vals.get(0),
+                        tmpc_SQLTable.cols[1].javaType
+                    );
                 } catch (Throwable e) {
                     MyExceptionHandling.handleFatalException(e);
                 }
@@ -96,8 +101,12 @@ public class UICtrl_AddItem {
                 helper1();
                 return;
             }
-            // [END VALID ZONE]
             Long formval_PdPRice = Long.parseLong(spinnerDouble_Price.getText());
+            if (formval_PdPRice<=buyPrice) {
+                helper3();
+                return;
+            }
+            // [END VALID ZONE]
             String tmpt_str = null;
             while (true) {
                 tmpt_str = Misc.generateRandomID();
@@ -159,6 +168,11 @@ public class UICtrl_AddItem {
     private void helper2() {
         Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเพิ่มข้อมูลผิดพลาด",
                 "ไม่สามารถเพ่ิมข้อมูลสินค้าเข้าคลังได้", "เนื่องจาก ID สัญญาซื้อ ยังไม่ได้ถูกเลือก", false);
+    }
+
+    private void helper3() {
+        Main.showAlertBox(Main.getPrimaryStage(), AlertType.ERROR, "การเพิ่มข้อมูลผิดพลาด",
+                "ไม่สามารถเพ่ิมข้อมูลสินค้าเข้าคลังได้", "เนื่องจากราคาขายไม่เกินราคาซื้อ", false);
     }
 
     private void comboBox_srID_Helper1() throws java.sql.SQLException {
