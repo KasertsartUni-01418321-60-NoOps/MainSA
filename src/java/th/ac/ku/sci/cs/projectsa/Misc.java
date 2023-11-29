@@ -12,9 +12,9 @@ public class Misc {
     public static final double choosenStepValueFor_PaidAmount_AtAddItemPAge = 100;
     public static final double choosenStepValueFor_TPrice_AtQuotationPAge = 100;
     public static final int[][] javafxListViewCellRowBgColorBasedOnPdType= new int[][] {
-        {255, 255, 224},
+        {44, 44, 44},
         {240, 128, 128},
-        {0, 73, 62},
+        {0, 79, 62},
         {32, 178, 170},
         {173, 216, 230  },
         {255, 255, 224},
@@ -118,7 +118,7 @@ public class Misc {
         return new String(retval);
     }
 
-    private double getHighestContrastFGColor_helper2(int[] color) {
+    private static  double getHighestContrastFGColor_helper2(int[] color) {
         double r = color[0];
         double g = color[1];
         double b = color[2];
@@ -128,13 +128,13 @@ public class Misc {
         return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     }
     
-    private double getHighestContrastFGColor_helper1(int[] background, int[] foreground) {
+    private static  double getHighestContrastFGColor_helper1(int[] background, int[] foreground) {
         double luminance_bg = getHighestContrastFGColor_helper2(background);
         double luminance_fg = getHighestContrastFGColor_helper2(foreground);
         return (Math.max(luminance_bg, luminance_fg) + 0.05) / (Math.min(luminance_bg, luminance_fg) + 0.05);
     }
     
-    public int[] getHighestContrastFGColor(int[] rgb) {
+    public static int[] getHighestContrastFGColor(int[] rgb) {
         int[] white = new int[] {255, 255, 255};
         int[] black = new int[] {0, 0, 0};
         double contrast_with_white = getHighestContrastFGColor_helper1(rgb, white);
