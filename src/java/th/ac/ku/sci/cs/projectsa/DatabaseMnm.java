@@ -29,10 +29,10 @@ public class DatabaseMnm {
 		String[] sqlStms_0 = new String[] {
 				setFKCheckQuery,
 				"CREATE TABLE IF NOT EXISTS Customer (Customer_Full_Name TEXT PRIMARY KEY, Customer_Address TEXT, Customer_Telephone_Number TEXT NOT NULL, Customer_Credit_Amount INTEGER NOT NULL) STRICT;",
-				"CREATE TABLE IF NOT EXISTS Selling_Request (Selling_Request_ID TEXT PRIMARY KEY, Customer_Full_Name TEXT NOT NULL, Selling_Request_Brand TEXT NOT NULL, Selling_Request_Model TEXT NOT NULL, Selling_Request_Product_Looks TEXT NOT NULL, Selling_Request_Meet_Date INTEGER NOT NULL, Selling_Request_Meet_Location TEXT NOT NULL, Selling_Request_Paid_Amount REAL, Selling_Request_Status INTEGER NOT NULL,  Selling_Request_Repairment_Description TEXT, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT;",
-				"CREATE TABLE IF NOT EXISTS Product (Product_ID TEXT PRIMARY KEY, Product_Arrive_Time INTEGER NOT NULL, Product_Price REAL NOT NULL, Product_Status INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL UNIQUE, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID))STRICT;",
+				"CREATE TABLE IF NOT EXISTS Selling_Request (Selling_Request_ID TEXT PRIMARY KEY, Customer_Full_Name TEXT NOT NULL, Selling_Request_Brand TEXT NOT NULL, Selling_Request_Model TEXT NOT NULL, Selling_Request_Product_Looks TEXT NOT NULL, Selling_Request_Meet_Date INTEGER NOT NULL, Selling_Request_Meet_Location TEXT NOT NULL, Selling_Request_Paid_Amount INTEGER, Selling_Request_Status INTEGER NOT NULL,  Selling_Request_Repairment_Description TEXT, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name))STRICT;",
+				"CREATE TABLE IF NOT EXISTS Product (Product_ID TEXT PRIMARY KEY, Product_Arrive_Time INTEGER NOT NULL, Product_Price INTEGER NOT NULL, Product_Status INTEGER NOT NULL, Selling_Request_ID TEXT NOT NULL UNIQUE, FOREIGN KEY (Selling_Request_ID) REFERENCES SELLING_REQUEST(Selling_Request_ID))STRICT;",
 				"CREATE TABLE IF NOT EXISTS User (User_Name TEXT PRIMARY KEY, User_Password TEXT NOT NULL, User_Role INTEGER NOT NULL)STRICT;",
-				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT NOT NULL, Product_ID TEXT PRIMARY KEY, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price REAL NOT NULL, Buy_Request_Location TEXT NOT NULL, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT;"
+				"CREATE TABLE IF NOT EXISTS Buy_Request	 (Customer_Full_Name TEXT NOT NULL, Product_ID TEXT PRIMARY KEY, Buy_Request_Created_Date INTEGER NOT NULL, Buy_Request_Transportation_Price INTEGER NOT NULL, Buy_Request_Location TEXT NOT NULL, FOREIGN KEY (Customer_Full_Name) REFERENCES CUSTOMER(Customer_Full_Name), FOREIGN KEY (Product_ID) REFERENCES PRODUCT(Product_ID))STRICT;"
 		};
 		String[] sqlStms_1 = new String[] {
 				"INSERT INTO User (User_Name, User_Password, User_Role)"
@@ -833,12 +833,12 @@ public class DatabaseMnm {
 		// > วิธีนี้เพื่อลดการ HARDCODE LAMO
 		public final static long RANGE_MIN__Customer_Credit_Amount = -500;
 		public final static long RANGE_MAX__Customer_Credit_Amount = 500;
-		public final static double RANGE_MIN__Selling_Request_Paid_Amount = 0.01;
-		public final static double RANGE_MAX__Selling_Request_Paid_Amount = 99999999.99;
-		public final static double RANGE_MIN__Product_Price = 0.01;
-		public final static double RANGE_MAX__Product_Price = 99999999.99;
-		public final static double RANGE_MIN__Buy_Request_Transportation_Price = 0;
-		public final static double RANGE_MAX__Buy_Request_Transportation_Price = 99999.99;
+		public final static long RANGE_MIN__Selling_Request_Paid_Amount = 1;
+		public final static long RANGE_MAX__Selling_Request_Paid_Amount = 999999;
+		public final static long RANGE_MIN__Product_Price = 1;
+		public final static long RANGE_MAX__Product_Price = 999999;
+		public final static long RANGE_MIN__Buy_Request_Transportation_Price = 0;
+		public final static long RANGE_MAX__Buy_Request_Transportation_Price = 9999;
 
 		// for attribute that limit range by digit limiting
 		// > วิธีนี้เพื่อลดการ HARDCODE LAMO
@@ -860,7 +860,7 @@ public class DatabaseMnm {
 			MINMAX_LENGTH_OF_ATTRIBS.put("User_Role", new Integer[] { 1, 1 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_ID", new Integer[] { 8, 8 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Arrive_Time", new Integer[] { 1, null });
-			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Price", new Integer[] { 8, 2 });
+			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Price", new Integer[] { 1,6 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_Status", new Integer[] { 1, 1 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_ID", new Integer[] { 8, 8 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_ID", new Integer[] { 8, 8 });
@@ -870,13 +870,13 @@ public class DatabaseMnm {
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Product_Looks", new Integer[] { 1, 1024 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Meet_Date", new Integer[] { 1, null });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Meet_Location", new Integer[] { 1, 512 });
-			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Paid_Amount", new Integer[] { 8, 2 });
+			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Paid_Amount", new Integer[] { 1, 6 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Status", new Integer[] { 1, 1 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Selling_Request_Repairment_Description", new Integer[] { 1, 1024 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Customer_Full_Name", new Integer[] { 1, 192 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Product_ID", new Integer[] { 8, 8 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Buy_Request_Created_Date", new Integer[] { 1, null });
-			MINMAX_LENGTH_OF_ATTRIBS.put("Buy_Request_Transportation_Price", new Integer[] { 5, 2 });
+			MINMAX_LENGTH_OF_ATTRIBS.put("Buy_Request_Transportation_Price", new Integer[] { 1, 4 });
 			MINMAX_LENGTH_OF_ATTRIBS.put("Buy_Request_Location", new Integer[] { 1, 512 });
 		}
 
@@ -1332,23 +1332,21 @@ public class DatabaseMnm {
 
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__PRODUCT__Product_Price(
-					@Nullable Double data) {
+					@Nullable String data) {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
-					// (PART 0.5) transform into doubleLengthCropping
-					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price");
-					data = DataTransformation.doubleLengthCropping(data, lenSpec[0], lenSpec[1], true);
 					// (PART 1): Check length
-					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0], lenSpec[1])) {
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
 					}
-					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkDoubleIsPositive(data)) {
+					// (PART 2): Check str conditions
+					if (DataValidation.JavaTypeLevel.checkStrIsInteger(data)) {
 					} else {
-						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
 					// the code should reached here means it (data) is passed
 					return null;
@@ -1584,29 +1582,27 @@ public class DatabaseMnm {
 
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Paid_Amount(
-					@Nullable Double data) {
+					@Nullable String data) {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return null;
 				} else {
-					// (PART 0.5) transform into doubleLengthCropping
-					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Selling_Request_Paid_Amount");
-					data = DataTransformation.doubleLengthCropping(data, lenSpec[0], lenSpec[1], true);
 					// (PART 1): Check length
-					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0], lenSpec[1])) {
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
 					}
-					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkDoubleIsPositive(data)) {
+					// (PART 2): Check str conditions
+					if (DataValidation.JavaTypeLevel.checkStrIsInteger(data)) {
 					} else {
-						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
 					// the code should reached here means it (data) is passed
 					return null;
 				}
 			}
-
+			
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__SELLING_REQUEST__Selling_Request_Status(
 					@Nullable Long data) {
@@ -1740,23 +1736,21 @@ public class DatabaseMnm {
 
 			@Nullable
 			public static DataValidation.DATAVALID_DECLINED_REASON check__BUY_REQUEST__Buy_Request_Transportation_Price(
-					@Nullable Double data) {
+					@Nullable String data) {
 				// (PART 0): check if it is null
 				if (data == null) {
 					return DataValidation.DATAVALID_DECLINED_REASON.ISNULL;
 				} else {
-					// (PART 0.5) transform into doubleLengthCropping
-					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Buy_Request_Transportation_Price");
-					data = DataTransformation.doubleLengthCropping(data, lenSpec[0], lenSpec[1], true);
 					// (PART 1): Check length
-					if (DataValidation.JavaTypeLevel.checkDoubleDigitLength(data, lenSpec[0], lenSpec[1])) {
+					Integer[] lenSpec = DataSpec.MINMAX_LENGTH_OF_ATTRIBS.get("Product_Price");
+					if (DataValidation.JavaTypeLevel.checkStrLength(data, lenSpec[0], lenSpec[1])) {
 					} else {
 						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_LENGTH;
 					}
-					// (PART 2): Check long conditions
-					if (DataValidation.JavaTypeLevel.checkDoubleNotNegative(data)) {
+					// (PART 2): Check str conditions
+					if (DataValidation.JavaTypeLevel.checkStrIsInteger(data)) {
 					} else {
-						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_RANGE;
+						return DataValidation.DATAVALID_DECLINED_REASON.INVALID_FORMAT;
 					}
 					// the code should reached here means it (data) is passed
 					return null;
