@@ -123,7 +123,7 @@ public class UICtrl_BuyFromVendor {
                 return;
             }
             if (!DatabaseMnm.DataValidation.ForMoreBussinessConstraint
-                    .checkDateAsEpochTimeIsNotPast(formval_meetDate)) {
+                    .checkDateAsEpochTimeIsNotPastOrTooFuture(formval_meetDate)) {
                 helper3();
                 return;
             }

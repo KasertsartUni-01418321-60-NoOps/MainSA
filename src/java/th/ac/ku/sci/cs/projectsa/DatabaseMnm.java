@@ -1788,9 +1788,9 @@ public class DatabaseMnm {
 		}
 
 		public static class ForMoreBussinessConstraint {
-			public static boolean checkDateAsEpochTimeIsNotPast(Long val) {
+			public static boolean checkDateAsEpochTimeIsNotPastOrTooFuture(Long val) {
 				Long tmpt_long = java.time.LocalDate.now().toEpochDay();
-				return val >= tmpt_long;
+				return val >= tmpt_long && val <=tmpt_long+180;
 			}
 		}
 	}
